@@ -18,12 +18,12 @@ namespace PoisonIvy.AniListAPI.Helpers
         private static readonly string MangaUrl = "manga/";
         private static readonly string StudioUrl = "studio/";
         private static readonly string SearchUrl = "search/";
-        private static readonly string CharacterUrlSuffix = "/characters";
-        private static readonly string CharacterUrl = "characters/";
+        private static readonly string CharacterUrlSuffix = "/character";
+        private static readonly string CharacterUrl = "character/";
         private static readonly string StaffUrlSuffix = "/staff";
         private static readonly string StaffUrl = "staff/";
-        private static readonly string ActorsUrlSuffix = "/actors";
-        private static readonly string ActorsUrl = "actors/";
+        private static readonly string ActorsUrlSuffix = "/actor";
+        private static readonly string ActorsUrl = "actor/";
         private static readonly string AiringUrl = "/airing";
         private static readonly string PageUrl = "/page";
         private static readonly string BrowseUrl = "browse/";
