@@ -447,6 +447,11 @@ namespace PoisonIvy.AniListAPI
                 value = value.Replace(",\"synonyms\":[]", string.Empty);
             }
 
+            if (value.Contains(",\"score_distribution\":[]"))
+            {
+                value = value.Replace(",\"score_distribution\":[]", string.Empty);
+            }
+
             return value;
         }
 
