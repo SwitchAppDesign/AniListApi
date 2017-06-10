@@ -37,7 +37,7 @@ namespace PoisonIvy.AniListAPI.Models
                 ImageUrlMedium = dto.image_url_med,
                 ImageUrlLarge = dto.image_url_lge,
                 ImageUrlBanner = dto.image_url_banner,
-                Genres = dto.genres.Select(x => x.GetEnumValue<Genres>()).ToList(),
+                Genres = dto.genres?.Select(x => x.GetEnumValue<Genres>()).ToList(),
                 Synonyms = dto.synonyms,
                 YoutubeId = dto.youtube_id,
                 Hashtag = dto.hashtag,
