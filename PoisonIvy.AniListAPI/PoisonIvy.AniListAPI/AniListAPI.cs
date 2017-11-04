@@ -408,10 +408,10 @@ namespace PoisonIvy.AniListAPI
 
             string value = await response.Content.ReadAsStringAsync();
 
-            if (value.Contains("error"))
-            {
-                return null;
-            }
+            //if (value.Contains("error"))
+            //{
+            //    return null;
+            //}
 
             if (value == "[]")
             {
