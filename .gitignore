@@ -242,3 +242,5 @@ ModelManifest.xml
 .fake/
 packages
 Properties
+/PoisonIvy.AniListAPI/PoisonIvy.AniListAPI/nuget
+/PoisonIvy.AniListAPI/SwitchAppDesign.AniListAPI/nuget

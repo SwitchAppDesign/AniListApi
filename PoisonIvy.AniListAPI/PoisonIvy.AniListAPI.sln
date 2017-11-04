@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoisonIvy.AniListAPI", "PoisonIvy.AniListAPI\PoisonIvy.AniListAPI.csproj", "{D3EAAD31-9271-4B2C-BF68-354C28A1D95B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwitchAppDesign.AniListAPI", "SwitchAppDesign.AniListAPI\SwitchAppDesign.AniListAPI.csproj", "{EC476108-549A-41A6-8D73-C4C3FD67E755}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +17,15 @@ Global
 		{D3EAAD31-9271-4B2C-BF68-354C28A1D95B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3EAAD31-9271-4B2C-BF68-354C28A1D95B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3EAAD31-9271-4B2C-BF68-354C28A1D95B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC476108-549A-41A6-8D73-C4C3FD67E755}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC476108-549A-41A6-8D73-C4C3FD67E755}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC476108-549A-41A6-8D73-C4C3FD67E755}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC476108-549A-41A6-8D73-C4C3FD67E755}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DEBF68A0-31AD-465C-9F16-41DE654355DD}
 	EndGlobalSection
 EndGlobal
