@@ -96,7 +96,15 @@ namespace PoisonIvy.AniListAPI.Helpers
 
         public static Dictionary<int, Seasons?> GetSeasonType(string season)
         {
-            var currentYear = int.Parse(DateTime.UtcNow.Year.ToString().Substring(1, 3));
+            if (season.Length > 3)
+            {
+                return null;
+            }
+
+            if (int.TryParse(DateTime.UtcNow.Year.ToString().Substring(1, 3), out var currentYear))
+            {
+                return null;
+            };
 
             if (!int.TryParse($"{season.Substring(0, 2)}", out var yearNumber))
             {
