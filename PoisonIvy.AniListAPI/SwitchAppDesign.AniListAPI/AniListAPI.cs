@@ -428,7 +428,7 @@ namespace PoisonIvy.AniListAPI
 
         private async Task<T> GenericPostAsync<T>(string url, HttpContent content, bool isVerifyInstance = false)
         {
-            HttpResponseMessage response = await _client.PostAsync(url, content);
+            var response = await _client.PostAsync(url, content);
 
             //This check is due to the token timeout that may occur while the app is running.
             if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
@@ -446,9 +446,9 @@ namespace PoisonIvy.AniListAPI
 
             response.EnsureSuccessStatusCode();
 
-            string value = await response.Content.ReadAsStringAsync();
+            var value = await response.Content.ReadAsStringAsync();
 
-            T responseObj = JsonConvert.DeserializeObject<T>(value);
+            var responseObj = JsonConvert.DeserializeObject<T>(value);
 
             return responseObj;
         }
@@ -456,7 +456,7 @@ namespace PoisonIvy.AniListAPI
         private async Task<T> GenericGetAsync<T>(string url, bool isVerifyInstance = false)
             where T : class
         {
-            HttpResponseMessage response = await _client.GetAsync(url);
+            var response = await _client.GetAsync(url);
 
             if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
@@ -478,9 +478,9 @@ namespace PoisonIvy.AniListAPI
                 return null;
             }
 
-            string value = await response.Content.ReadAsStringAsync();
+            var value = await response.Content.ReadAsStringAsync();
 
-            if (value.Contains("error"))
+            if (value.Contains("error") && value.Contains("No Results"))
             {
                 return null;
             }

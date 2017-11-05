@@ -7,21 +7,21 @@ namespace PoisonIvy.AniListAPI
 {
     public interface IAniListApi
     {
-        Task<List<Series>> SearchSeries(string searchPhrase);
-        Task<Series> GetSeries(long anilistAnimeid);
-        Task<SeriesPage> GetSeriesPage(long anilistAnimeid);
-        Task<Dictionary<long, SeriesPage>> GetListOfSeriesPages(IEnumerable<long> anilistSeriesIds);
-        Task<Dictionary<string, long>> GetAnimeAiringTimes(long anilistAnimeId);
-        Task<List<Character>> SearchCharacters(string searchPhrase);
-        Task<Character> GetCharacter(long anilistCharacterId);
-        Task<List<Staff>> SearchStaff(long anilistCharacterId);
-        Task<Staff> GetStaff(long anilistCharacterId);
-        Task<List<Actor>> SearchActor(long anilistCharacterId);
-        Task<Actor> GetActor(long anilistCharacterId);
-        Task<List<Studio>> SearchStudios(long anilistCharacterId);
-        Task<Studio> GetStudio(long anilistCharacterId);
-        Task<List<Series>> BrowseSeries(BrowseCriteria criteria);
-        Task<Dictionary<MediaTypes, List<Series>>> BrowseSeasons(Seasons? season);
-        Task<List<string>> GetGenreList();
+        Task<List<Series>> SearchSeriesAsync(string searchPhrase);
+        Task<Series> GetSeriesAsync(long anilistAnimeid);
+        Task<SeriesPage> GetSeriesPageAsync(long anilistAnimeid);
+        Task<Dictionary<long, SeriesPage>> GetListOfSeriesPagesAsync(IEnumerable<long> anilistSeriesIds);
+        Task<Dictionary<string, long>> GetAnimeAiringTimesAsync(long anilistAnimeId);
+        Task<List<Character>> SearchCharactersAsync(string searchPhrase);
+        Task<Character> GetCharacterAsync(long anilistCharacterId);
+        Task<List<Staff>> SearchStaffAsync(string searchPhrase);
+        Task<Staff> GetStaffAsync(long anilistStaffId);
+        Task<List<Actor>> SearchActorAsync(string searchPhrase);
+        Task<Actor> GetActorAsync(long anilistActorId);
+        Task<List<Studio>> SearchStudiosAsync(string searchPhrase);
+        Task<Studio> GetStudioAsync(long anilistStudioId);
+        Task<List<Series>> BrowseSeriesAsync(BrowseCriteria criteria);
+        Task<Dictionary<MediaTypes, List<Series>>> BrowseSeasonsAsync(Seasons? season);
+        Task<List<string>> GetGenreListAsync();
     }
 }

@@ -45,16 +45,21 @@ namespace PoisonIvy.AniListAPI
             _authClientSecret = clientSecret;
             _authGrantType = grantType;
 
-            return await Login();
+            return await LoginAsync();
         }
 
-        public async Task<List<Series>> SearchSeries(string searchPhrase)
+        /// <summary>
+        /// Gets a list of series.
+        /// </summary>
+        /// <param name="searchPhrase">The search used to find series.</param>
+        /// <returns>Returns a list of series.</returns>
+        public async Task<List<Series>> SearchSeriesAsync(string searchPhrase)
         {
             var url = HttpUtility.HtmlEncode(AniListApiHelper.GetUrl(AnilistTypes.Anime, QueryType.Search, searchPhrase));
 
             try
             {
-                var rawSeries = await GenericGet<List<SeriesDTO>>(url);
+                var rawSeries = await GenericGetAsync<List<SeriesDTO>>(url);
 
                 return rawSeries?.Select(Series.ConstructFromDto).ToList();
             }
@@ -64,13 +69,18 @@ namespace PoisonIvy.AniListAPI
             }
         }
 
-        public async Task<Series> GetSeries(long anilistAnimeid)
+        /// <summary>
+        /// Gets a single series.
+        /// </summary>
+        /// <param name="anilistAnimeid">The AniList numeric based identifier.</param>
+        /// <returns>Returns a single series.</returns>
+        public async Task<Series> GetSeriesAsync(long anilistAnimeid)
         {
             var url = AniListApiHelper.GetUrl(AnilistTypes.Anime, QueryType.Single, anilistAnimeid);
 
             try
             {
-                var rawAnime = await GenericGet<SeriesDTO>(url);
+                var rawAnime = await GenericGetAsync<SeriesDTO>(url);
                 return rawAnime != null ? Series.ConstructFromDto(rawAnime) : null;
             }
             catch (Exception e)
@@ -79,13 +89,18 @@ namespace PoisonIvy.AniListAPI
             }
         }
 
-        public async Task<SeriesPage> GetSeriesPage(long anilistAnimeid)
+        /// <summary>
+        /// Gets a single series page.
+        /// </summary>
+        /// <param name="anilistAnimeid">The AniList numeric based identifier.</param>
+        /// <returns>Returns a single AniList series page.</returns>
+        public async Task<SeriesPage> GetSeriesPageAsync(long anilistAnimeid)
         {
             var url = AniListApiHelper.GetUrl(AnilistTypes.Anime, QueryType.Page, anilistAnimeid);
 
             try
             {
-                var rawAnime = await GenericGet<SeriesPageDTO>(url);
+                var rawAnime = await GenericGetAsync<SeriesPageDTO>(url);
                 return rawAnime != null ? SeriesPage.ConstructFromDto(rawAnime) : null;
             }
             catch (Exception e)
@@ -94,7 +109,12 @@ namespace PoisonIvy.AniListAPI
             }
         }
 
-        public async Task<Dictionary<long, SeriesPage>> GetListOfSeriesPages(IEnumerable<long> anilistSeriesIds)
+        /// <summary>
+        /// Gets a dictionary of series pages.
+        /// </summary>
+        /// <param name="anilistSeriesIds">A list of AniList numeric based identifiers.</param>
+        /// <returns>Returns a dictionary of series pages where the key is the numeric based AniList identifier.</returns>
+        public async Task<Dictionary<long, SeriesPage>> GetListOfSeriesPagesAsync(IEnumerable<long> anilistSeriesIds)
         {
             var result = new Dictionary<long, SeriesPage>();
             var seriesIds = anilistSeriesIds.ToList();
@@ -110,7 +130,7 @@ namespace PoisonIvy.AniListAPI
 
                 try
                 {
-                    var rawAnime = await GenericGet<SeriesPageDTO>(url);
+                    var rawAnime = await GenericGetAsync<SeriesPageDTO>(url);
 
                     if (rawAnime != null)
                     {
@@ -126,13 +146,18 @@ namespace PoisonIvy.AniListAPI
             return result;
         }
 
-        public async Task<Dictionary<string, long>> GetAnimeAiringTimes(long anilistAnimeId)
+        /// <summary>
+        /// Gets a dictionary of airing times.
+        /// </summary>
+        /// <param name="anilistAnimeId">The AniList numeric based identifier.</param>
+        /// <returns>Returns a dictionary of airing times. The key is the episode number. The value is the UNIX timestamp.</returns>
+        public async Task<Dictionary<string, long>> GetAnimeAiringTimesAsync(long anilistAnimeId)
         {
             var url = AniListApiHelper.GetUrl(AnilistTypes.Anime, QueryType.Airing, anilistAnimeId);
 
             try
             {
-                return await GenericGet<Dictionary<string, long>>(url);
+                return await GenericGetAsync<Dictionary<string, long>>(url);
             }
             catch (Exception e)
             {
@@ -140,13 +165,18 @@ namespace PoisonIvy.AniListAPI
             }
         }
 
-        public async Task<List<Character>> SearchCharacters(string searchPhrase)
+        /// <summary>
+        /// Gets a list of characters.
+        /// </summary>
+        /// <param name="searchPhrase">The string search phrase to search on.</param>
+        /// <returns>Returns a list of characters.</returns>
+        public async Task<List<Character>> SearchCharactersAsync(string searchPhrase)
         {
             var url = HttpUtility.HtmlEncode(AniListApiHelper.GetUrl(AnilistTypes.Character, QueryType.Search, searchPhrase));
 
             try
             {
-                var rawCharacters = await GenericGet<List<CharacterDTO>>(url);
+                var rawCharacters = await GenericGetAsync<List<CharacterDTO>>(url);
 
                 return rawCharacters?.Select(Character.ConstructFromDto).ToList();
             }
@@ -156,13 +186,18 @@ namespace PoisonIvy.AniListAPI
             }
         }
 
-        public async Task<Character> GetCharacter(long anilistCharacterId)
+        /// <summary>
+        /// Gets a single character.
+        /// </summary>
+        /// <param name="anilistCharacterId">The AniList numeric based identifier.</param>
+        /// <returns>Returns a single character.</returns>
+        public async Task<Character> GetCharacterAsync(long anilistCharacterId)
         {
             var url = HttpUtility.HtmlEncode(AniListApiHelper.GetUrl(AnilistTypes.Character, QueryType.Single, anilistCharacterId));
 
             try
             {
-                var rawCharacters = await GenericGet<CharacterDTO>(url);
+                var rawCharacters = await GenericGetAsync<CharacterDTO>(url);
 
                 return Character.ConstructFromDto(rawCharacters);
             }
@@ -172,13 +207,18 @@ namespace PoisonIvy.AniListAPI
             }
         }
 
-        public async Task<List<Staff>> SearchStaff(long anilistCharacterId)
+        /// <summary>
+        /// Gets a list of staff.
+        /// </summary>
+        /// <param name="searchPhrase">The search phrase to search on.</param>
+        /// <returns>returns a list of staff.</returns>
+        public async Task<List<Staff>> SearchStaffAsync(string searchPhrase)
         {
-            var url = HttpUtility.HtmlEncode(AniListApiHelper.GetUrl(AnilistTypes.Character, QueryType.Single, anilistCharacterId));
+            var url = HttpUtility.HtmlEncode(AniListApiHelper.GetUrl(AnilistTypes.Staff, QueryType.Search, searchPhrase));
 
             try
             {
-                var rawStaff = await GenericGet<List<StaffDTO>>(url);
+                var rawStaff = await GenericGetAsync<List<StaffDTO>>(url);
 
                 return rawStaff?.Select(Staff.ConstructFromDto).ToList();
             }
@@ -188,13 +228,18 @@ namespace PoisonIvy.AniListAPI
             }
         }
 
-        public async Task<Staff> GetStaff(long anilistCharacterId)
+        /// <summary>
+        /// Gets a single staff member.
+        /// </summary>
+        /// <param name="anilistStaffId">The AniList numeric based identifier.</param>
+        /// <returns>Returns a single staff member.</returns>
+        public async Task<Staff> GetStaffAsync(long anilistStaffId)
         {
-            var url = HttpUtility.HtmlEncode(AniListApiHelper.GetUrl(AnilistTypes.Character, QueryType.Single, anilistCharacterId));
+            var url = HttpUtility.HtmlEncode(AniListApiHelper.GetUrl(AnilistTypes.Staff, QueryType.Single, anilistStaffId));
 
             try
             {
-                var rawStaff = await GenericGet<StaffDTO>(url);
+                var rawStaff = await GenericGetAsync<StaffDTO>(url);
 
                 return Staff.ConstructFromDto(rawStaff);
             }
@@ -204,13 +249,18 @@ namespace PoisonIvy.AniListAPI
             }
         }
 
-        public async Task<List<Actor>> SearchActor(long anilistCharacterId)
+        /// <summary>
+        /// Gets a list of actors.
+        /// </summary>
+        /// <param name="searchPhrase">The search phrase to search on.</param>
+        /// <returns>Returns a list of actors.</returns>
+        public async Task<List<Actor>> SearchActorAsync(string searchPhrase)
         {
-            var url = HttpUtility.HtmlEncode(AniListApiHelper.GetUrl(AnilistTypes.Character, QueryType.Single, anilistCharacterId));
+            var url = HttpUtility.HtmlEncode(AniListApiHelper.GetUrl(AnilistTypes.Actor, QueryType.Search, searchPhrase));
 
             try
             {
-                var rawActors = await GenericGet<List<ActorDTO>>(url);
+                var rawActors = await GenericGetAsync<List<ActorDTO>>(url);
 
                 return rawActors?.Select(Actor.ConstructFromDto).ToList();
             }
@@ -220,13 +270,18 @@ namespace PoisonIvy.AniListAPI
             }
         }
 
-        public async Task<Actor> GetActor(long anilistCharacterId)
+        /// <summary>
+        /// Gets a single actor.
+        /// </summary>
+        /// <param name="anilistActorId">The AniList numeric based identifier.</param>
+        /// <returns>Returns a single actor.</returns>
+        public async Task<Actor> GetActorAsync(long anilistActorId)
         {
-            var url = HttpUtility.HtmlEncode(AniListApiHelper.GetUrl(AnilistTypes.Character, QueryType.Single, anilistCharacterId));
+            var url = HttpUtility.HtmlEncode(AniListApiHelper.GetUrl(AnilistTypes.Actor, QueryType.Single, anilistActorId));
 
             try
             {
-                var rawActor = await GenericGet<ActorDTO>(url);
+                var rawActor = await GenericGetAsync<ActorDTO>(url);
 
                 return Actor.ConstructFromDto(rawActor);
             }
@@ -236,13 +291,18 @@ namespace PoisonIvy.AniListAPI
             }
         }
 
-        public async Task<List<Studio>> SearchStudios(long anilistCharacterId)
+        /// <summary>
+        /// Gets a list of studios.
+        /// </summary>
+        /// <param name="searchPhrase">The search phrase to search on.</param>
+        /// <returns>Returns a list of studios.</returns>
+        public async Task<List<Studio>> SearchStudiosAsync(string searchPhrase)
         {
-            var url = HttpUtility.HtmlEncode(AniListApiHelper.GetUrl(AnilistTypes.Character, QueryType.Single, anilistCharacterId));
+            var url = HttpUtility.HtmlEncode(AniListApiHelper.GetUrl(AnilistTypes.Studio, QueryType.Search, searchPhrase));
 
             try
             {
-                var rawStudio = await GenericGet<List<StudioDTO>>(url);
+                var rawStudio = await GenericGetAsync<List<StudioDTO>>(url);
 
                 return rawStudio?.Select(Studio.ConstructFromDto).ToList();
             }
@@ -252,13 +312,18 @@ namespace PoisonIvy.AniListAPI
             }
         }
 
-        public async Task<Studio> GetStudio(long anilistCharacterId)
+        /// <summary>
+        /// Gets a single studio.
+        /// </summary>
+        /// <param name="anilistStudioId">The AniList numeric based identifier.</param>
+        /// <returns>Returns a single studio.</returns>
+        public async Task<Studio> GetStudioAsync(long anilistStudioId)
         {
-            var url = HttpUtility.HtmlEncode(AniListApiHelper.GetUrl(AnilistTypes.Character, QueryType.Single, anilistCharacterId));
+            var url = HttpUtility.HtmlEncode(AniListApiHelper.GetUrl(AnilistTypes.Studio, QueryType.Single, anilistStudioId));
 
             try
             {
-                var rawStudio = await GenericGet<StudioDTO>(url);
+                var rawStudio = await GenericGetAsync<StudioDTO>(url);
 
                 return Studio.ConstructFromDto(rawStudio);
             }
@@ -268,13 +333,18 @@ namespace PoisonIvy.AniListAPI
             }
         }
 
-        public async Task<List<Series>> BrowseSeries(BrowseCriteria criteria)
+        /// <summary>
+        /// Get a list of series using more in depth search criteria.
+        /// </summary>
+        /// <param name="criteria">The criteria used to search on.</param>
+        /// <returns>Returns a list of series.</returns>
+        public async Task<List<Series>> BrowseSeriesAsync(BrowseCriteria criteria)
         {
             var url = HttpUtility.HtmlEncode(AniListApiHelper.GetUrl(AnilistTypes.BrowseAnime, null, criteria));
 
             try
             {
-                var rawAnime = await GenericGet<List<SeriesDTO>>(url);
+                var rawAnime = await GenericGetAsync<List<SeriesDTO>>(url);
 
                 return rawAnime?.Select(Series.ConstructFromDto).ToList();
             }
@@ -285,11 +355,11 @@ namespace PoisonIvy.AniListAPI
         }
 
         /// <summary>
-        /// Returns a dictionary of series for the specified season grouped by type.
+        /// Gets a dictionary of series for the specified season grouped by media type.
         /// </summary>
-        /// <param name="season">Season type to fetch series for (pass in null for current season).</param>
-        /// <returns></returns>
-        public async Task<Dictionary<MediaTypes, List<Series>>> BrowseSeasons(Seasons? season)
+        /// <param name="season">Season type to fetch series for (specify nothing to get current season).</param>
+        /// <returns>Returns a dictionary of series group by media type.</returns>
+        public async Task<Dictionary<MediaTypes, List<Series>>> BrowseSeasonsAsync(Seasons? season = null)
         {
             var criteria = new BrowseCriteria()
             {
@@ -303,8 +373,7 @@ namespace PoisonIvy.AniListAPI
 
             try
             {
-                var rawAnime = await GenericGet<List<SeriesDTO>>(url);
-                var test = rawAnime?.Select(Series.ConstructFromDto).ToList();
+                var rawAnime = await GenericGetAsync<List<SeriesDTO>>(url);
                 return rawAnime?.GroupBy(x => x.type.GetEnumValue<MediaTypes>(), (key, series) => series.Select(Series.ConstructFromDto).ToList()).ToDictionary(x => x.FirstOrDefault().Type.Value, x => x);
             }
             catch (Exception e)
@@ -313,13 +382,17 @@ namespace PoisonIvy.AniListAPI
             }
         }
 
-        public async Task<List<string>> GetGenreList()
+        /// <summary>
+        /// Gets a list of all genres used on anilist.
+        /// </summary>
+        /// <returns>A list of string based genres</returns>
+        public async Task<List<string>> GetGenreListAsync()
         {
             var url = HttpUtility.HtmlEncode(AniListApiHelper.GetUrl(AnilistTypes.GenreList, QueryType.Search, null));
 
             try
             {
-                var rawGenreList = await GenericGet<List<string>>(url);
+                var rawGenreList = await GenericGetAsync<List<string>>(url);
 
                 return rawGenreList;
             }
@@ -330,7 +403,7 @@ namespace PoisonIvy.AniListAPI
         }
 
         #region The Dark Side
-        private async Task<bool> Login()
+        private async Task<bool> LoginAsync()
         {
             var paramaters = new List<KeyValuePair<string, string>>()
             {
@@ -343,7 +416,7 @@ namespace PoisonIvy.AniListAPI
 
             try
             {
-                _authTicket = await GenericPost<Authentication>(url, null);
+                _authTicket = await GenericPostAsync<Authentication>(url, null);
                 UpdateAuthHeader();
             }
             catch (Exception ex)
@@ -354,49 +427,45 @@ namespace PoisonIvy.AniListAPI
             return true;
         }
 
-        private async Task<T> GenericPost<T>(string url, HttpContent content, bool isVerifyInstance = false)
+        private async Task<T> GenericPostAsync<T>(string url, HttpContent content, bool isVerifyInstance = false)
         {
-            HttpResponseMessage response = await _client.PostAsync(url, content);
+            var response = await _client.PostAsync(url, content);
 
             //This check is due to the token timeout that may occur while the app is running.
             if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
-                if (!isVerifyInstance)
-                {
-                    await Login();
-                    return await GenericPost<T>(url, content, true);
-                }
-                else
+                if (isVerifyInstance)
                 {
                     throw new Exception("Unauthorized access. Please validate the login details.");
                 }
+
+                await LoginAsync();
+                return await GenericPostAsync<T>(url, content, true);
             }
 
             response.EnsureSuccessStatusCode();
 
-            string value = await response.Content.ReadAsStringAsync();
+            var value = await response.Content.ReadAsStringAsync();
 
-            T responseObj = JsonConvert.DeserializeObject<T>(value);
+            var responseObj = JsonConvert.DeserializeObject<T>(value);
 
             return responseObj;
         }
 
-        private async Task<T> GenericGet<T>(string url, bool isVerifyInstance = false)
+        private async Task<T> GenericGetAsync<T>(string url, bool isVerifyInstance = false)
             where T : class
         {
-            HttpResponseMessage response = await _client.GetAsync(url);
+            var response = await _client.GetAsync(url);
 
             if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
-                if (!isVerifyInstance)
-                {
-                    await Login();
-                    return await GenericGet<T>(url, true);
-                }
-                else
+                if (isVerifyInstance)
                 {
                     throw new Exception("Unauthorized access. Please validate the login details.");
                 }
+
+                await LoginAsync();
+                return await GenericGetAsync<T>(url, true);
             }
 
             response.EnsureSuccessStatusCode();
@@ -406,7 +475,12 @@ namespace PoisonIvy.AniListAPI
                 return null;
             }
 
-            string value = await response.Content.ReadAsStringAsync();
+            var value = await response.Content.ReadAsStringAsync();
+
+            if (value.Contains("error") && value.Contains("No Results"))
+            {
+                return null;
+            }
 
             if (value == "[]")
             {
@@ -475,11 +549,13 @@ namespace PoisonIvy.AniListAPI
             {
                 return Seasons.Spring; ;
             }
-            else if (currentMonth >= 6 && currentMonth < 9)
+
+            if (currentMonth >= 6 && currentMonth < 9)
             {
                 return Seasons.Summer;
             }
-            else if (currentMonth >= 9 && currentMonth < 12)
+
+            if (currentMonth >= 9 && currentMonth < 12)
             {
                 return Seasons.Fall;
             }
