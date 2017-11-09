@@ -25,7 +25,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Models
             return this;
         }
 
-        public void SetValue(T value)
+        private void SetValue(T value)
         {
             Value = value;
         }

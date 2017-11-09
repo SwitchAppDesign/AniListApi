@@ -8,12 +8,9 @@ using SwitchAppDesign.AniListAPI.v2.Utility;
 
 namespace SwitchAppDesign.AniListAPI.v2.Arguments
 {
-    public class MediaQueryArguments
+    internal class MediaQueryArguments
     {
-        private static MediaQueryArguments _instance;
-        public static MediaQueryArguments Instance => _instance ?? (_instance = new MediaQueryArguments());
-
-        private MediaQueryArguments()
+        public MediaQueryArguments()
         {
             InitializeProperties();
         }
@@ -26,7 +23,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return Id.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<int> Id { get; set; }
 
         /// <summary>
         /// Filter by the media id's MyAnimeList id.
@@ -36,7 +32,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return IdMyAnimeList.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<int> IdMyAnimeList { get; set; }
 
         /// <summary>
         /// Filter by the start date of the media.
@@ -46,7 +41,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return StartDate.GetQueryArgumentAndSetValue(value.GetFuzzyDateInt());
         }
 
-        private GraphQLQueryArgument<FuzzyDateInt> StartDate { get; set; }
 
         /// <summary>
         /// Filter by the end date of the media.
@@ -56,7 +50,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return EndDate.GetQueryArgumentAndSetValue(value.GetFuzzyDateInt());
         }
 
-        private GraphQLQueryArgument<FuzzyDateInt> EndDate { get; set; }
 
         /// <summary>
         /// Filter by the season the media was released in.
@@ -66,8 +59,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return Season.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<MediaSeason> Season { get; set; }
-
         /// <summary>
         /// The year of the season (Winter 2017 would also include December 2016 releases). Requires season argument.
         /// </summary>
@@ -76,7 +67,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return SeasonYear.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<int> SeasonYear { get; set; }
 
         /// <summary>
         /// Filter by the media's type.
@@ -86,7 +76,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return Type.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<MediaType> Type { get; set; }
 
         /// <summary>
         /// Filter by the media's format.
@@ -96,7 +85,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return Format.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<MediaFormat> Format { get; set; }
 
         /// <summary>
         /// Filter by the media's current release status.
@@ -106,7 +94,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return Status.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<MediaStatus> Status { get; set; }
 
         /// <summary>
         /// Filter by amount of episodes the media has.
@@ -116,7 +103,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return Episodes.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<int> Episodes { get; set; }
 
         /// <summary>
         /// Filter by the media's episode length.
@@ -126,7 +112,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return Duration.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<int> Duration { get; set; }
 
         /// <summary>
         /// Filter by the media's chapter count.
@@ -136,7 +121,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return Chapters.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<int> Chapters { get; set; }
 
         /// <summary>
         /// Filter by the media's volume count.
@@ -146,7 +130,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return Volumes.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<int> Volumes { get; set; }
 
         /// <summary>
         /// Filter by if the media's intended for 18+ adult audiences.
@@ -156,7 +139,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return IsAdult.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<bool> IsAdult { get; set; }
 
         /// <summary>
         /// Filter by the media's genres.
@@ -166,7 +148,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return Genre.GetQueryArgumentAndSetValue(value.GetDescription());
         }
 
-        private GraphQLQueryArgument<string> Genre { get; set; }
 
         /// <summary>
         /// Filter by the media's tags.
@@ -176,7 +157,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return Tag.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<string> Tag { get; set; }
 
         /// <summary>
         /// Filter by the media's tags with in a tag category.
@@ -186,7 +166,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return TagCategory.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<string> TagCategory { get; set; }
 
         /// <summary>
         /// Filter by the media on the authenticated user's lists.
@@ -196,7 +175,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return OnList.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<bool> OnList { get; set; }
 
         /// <summary>
         /// Filter by the media's average score
@@ -206,7 +184,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return AverageScore.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<int> AverageScore { get; set; }
 
         /// <summary>
         /// Filter by the number of users with this media on their list
@@ -216,7 +193,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return Popularity.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<int> Popularity { get; set; }
 
         /// <summary>
         /// Filter by search query
@@ -226,7 +202,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return Search.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<string> Search { get; set; }
 
         /// <summary>
         /// Filter by the media id where media id is not equal to value.
@@ -236,7 +211,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return IdNot.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<int> IdNot { get; set; }
 
         /// <summary>
         /// Filter by the media id where media is in the given collection.
@@ -246,7 +220,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return IdIn.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<IEnumerable<int>> IdIn { get; set; }
 
         /// <summary>
         /// Filter by the media id where media is not in the given collection.
@@ -256,7 +229,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return IdNotIn.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<IEnumerable<int>> IdNotIn { get; set; }
 
         /// <summary>
         /// Filter by the media id's MyAnimeList id where MyAnimeList id is not equal to value.
@@ -266,7 +238,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return IdMyAnimeListNot.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<int> IdMyAnimeListNot { get; set; }
 
         /// <summary>
         /// Filter by the media id's MyAnimeList id where MyAnimeList is in the given collection.
@@ -276,7 +247,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return IdMyAnimeListIn.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<IEnumerable<int>> IdMyAnimeListIn { get; set; }
 
         /// <summary>
         /// Filter by the media id's MyAnimeList id where MyAnimeList is not in the given collection.
@@ -286,7 +256,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return IdMyAnimeListNotIn.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<IEnumerable<int>> IdMyAnimeListNotIn { get; set; }
 
         /// <summary>
         /// Filter by the start date of the media where start date is greater than the given value.
@@ -296,7 +265,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return StartDateGreater.GetQueryArgumentAndSetValue(value.GetFuzzyDateInt());
         }
 
-        private GraphQLQueryArgument<FuzzyDateInt> StartDateGreater { get; set; }
 
         /// <summary>
         /// Filter by the start date of the media where start date is lesser than the given value.
@@ -306,7 +274,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return StartDateLesser.GetQueryArgumentAndSetValue(value.GetFuzzyDateInt());
         }
 
-        private GraphQLQueryArgument<FuzzyDateInt> StartDateLesser { get; set; }
 
         /// <summary>
         /// Filter by the start date of the media where start date is like the given fuzzy date in string form as a wildcard search 
@@ -317,7 +284,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return StartDateLike.GetQueryArgumentAndSetValue(value.GetFuzzyDateWildcardString());
         }
 
-        private GraphQLQueryArgument<string> StartDateLike { get; set; }
 
         /// <summary>
         /// Filter by the end date of the media where end date is greater than the given value.
@@ -327,7 +293,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return EndDateGreater.GetQueryArgumentAndSetValue(value.GetFuzzyDateInt());
         }
 
-        private GraphQLQueryArgument<FuzzyDateInt> EndDateGreater { get; set; }
 
         /// <summary>
         /// Filter by the end date of the media where end date is lesser than the given value.
@@ -337,7 +302,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return EndDateLesser.GetQueryArgumentAndSetValue(value.GetFuzzyDateInt());
         }
 
-        private GraphQLQueryArgument<FuzzyDateInt> EndDateLesser { get; set; }
 
         /// <summary>
         /// Filter by the end date of the media where end date is like the given fuzzy date in string form as a wildcard search 
@@ -348,7 +312,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return EndDateLike.GetQueryArgumentAndSetValue(value.GetFuzzyDateWildcardString());
         }
 
-        private GraphQLQueryArgument<string> EndDateLike { get; set; }
+
 
         /// <summary>
         /// Filter by amount of episodes the media has where total episodes is greater than the given value.
@@ -358,7 +322,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return EpisodesGreater.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<int> EpisodesGreater { get; set; }
 
         /// <summary>
         /// Filter by amount of episodes the media has where total episodes is lesser than the given value.
@@ -368,7 +331,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return EpisodesLesser.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<int> EpisodesLesser { get; set; }
 
         /// <summary>
         /// Filter by the media's episode length where total duration is greater than the given value.
@@ -378,7 +340,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return DurationGreater.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<int> DurationGreater { get; set; }
 
         /// <summary>
         /// Filter by the media's episode length where total duration is lesser than the given value.
@@ -388,7 +349,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return DurationLesser.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<int> DurationLesser { get; set; }
 
         /// <summary>
         /// Filter by the media's chapter count where total chapters is greater than the given value.
@@ -398,7 +358,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return ChaptersGreater.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<int> ChaptersGreater { get; set; }
 
         /// <summary>
         /// Filter by the media's chapter count where total chapters is lesser than the given value.
@@ -408,7 +367,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return ChaptersLesser.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<int> ChaptersLesser { get; set; }
 
         /// <summary>
         /// Filter by the media's volume count where total volumes is greater than the given value.
@@ -418,7 +376,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return VolumesGreater.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<int> VolumesGreater { get; set; }
 
         /// <summary>
         /// Filter by the media's volume count where total volumes is lesser than the given value.
@@ -428,7 +385,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return VolumesLesser.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<int> VolumesLesser { get; set; }
 
         /// <summary>
         /// Filter by the media's genres where genre is in the given collection.
@@ -438,7 +394,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return GenreIn.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<IEnumerable<string>> GenreIn { get; set; }
 
         /// <summary>
         /// Filter by the media's genres where genre is not in the given collection.
@@ -448,7 +403,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return GenreNotIn.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<IEnumerable<string>> GenreNotIn { get; set; }
 
         /// <summary>
         /// Filter by the media's tags where tags is in the given collection.
@@ -458,7 +412,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return TagIn.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<IEnumerable<string>> TagIn { get; set; }
 
         /// <summary>
         /// Filter by the media's tags where tags is not in the given collection.
@@ -468,7 +421,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return TagNotIn.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<IEnumerable<string>> TagNotIn { get; set; }
 
         /// <summary>
         /// Filter by the media's tags with in a tag category where tag category is in the given collection.
@@ -478,7 +430,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return TagCategoryIn.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<IEnumerable<string>> TagCategoryIn { get; set; }
 
         /// <summary>
         /// Filter by the media's tags with in a tag category where tag category is not in the given collection.
@@ -488,7 +439,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return TagCategoryNotIn.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<IEnumerable<string>> TagCategoryNotIn { get; set; }
 
         /// <summary>
         /// Filter by the media's average score is not equal to the given value.
@@ -498,7 +448,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return AverageScoreNot.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<int> AverageScoreNot { get; set; }
 
         /// <summary>
         /// Filter by the media's average score where average score is greater than the given value.
@@ -508,7 +457,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return AverageScoreGreater.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<int> AverageScoreGreater { get; set; }
 
         /// <summary>
         /// Filter by the media's average score where average score is lesser than the given value.
@@ -518,7 +466,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return AverageScoreLesser.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<int> AverageScoreLesser { get; set; }
 
         /// <summary>
         /// Filter by the number of users with this media on their list where popularity is not equal to the given value.
@@ -528,7 +475,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return PopularityNot.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<int> PopularityNot { get; set; }
 
         /// <summary>
         /// Filter by the number of users with this media on their list where popularity is greater than the given value.
@@ -538,7 +484,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return PopularityGreater.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<int> PopularityGreater { get; set; }
 
         /// <summary>
         /// Filter by the number of users with this media on their list where popularity is lesser than the given value.
@@ -548,17 +493,69 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             return PopularityLesser.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<int> PopularityLesser { get; set; }
 
         /// <summary>
         /// The order the results will be returned in
         /// </summary>
-        public GraphQLQueryArgument<IEnumerable<string>> SortArgument(IEnumerable<string> value)
+        public GraphQLQueryArgument<IEnumerable<MediaSort>> SortArgument(IEnumerable<MediaSort> value)
         {
             return Sort.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<IEnumerable<string>> Sort { get; set; }
+        private GraphQLQueryArgument<int> Id { get; set; }
+        private GraphQLQueryArgument<int> IdMyAnimeList { get; set; }
+        private GraphQLQueryArgument<FuzzyDateInt> StartDate { get; set; }
+        private GraphQLQueryArgument<FuzzyDateInt> EndDate { get; set; }
+        private GraphQLQueryArgument<MediaSeason> Season { get; set; }
+        private GraphQLQueryArgument<int> SeasonYear { get; set; }
+        private GraphQLQueryArgument<MediaType> Type { get; set; }
+        private GraphQLQueryArgument<MediaFormat> Format { get; set; }
+        private GraphQLQueryArgument<MediaStatus> Status { get; set; }
+        private GraphQLQueryArgument<int> Episodes { get; set; }
+        private GraphQLQueryArgument<int> Duration { get; set; }
+        private GraphQLQueryArgument<int> Chapters { get; set; }
+        private GraphQLQueryArgument<int> Volumes { get; set; }
+        private GraphQLQueryArgument<bool> IsAdult { get; set; }
+        private GraphQLQueryArgument<string> Genre { get; set; }
+        private GraphQLQueryArgument<string> Tag { get; set; }
+        private GraphQLQueryArgument<string> TagCategory { get; set; }
+        private GraphQLQueryArgument<bool> OnList { get; set; }
+        private GraphQLQueryArgument<int> AverageScore { get; set; }
+        private GraphQLQueryArgument<int> Popularity { get; set; }
+        private GraphQLQueryArgument<string> Search { get; set; }
+        private GraphQLQueryArgument<int> IdNot { get; set; }
+        private GraphQLQueryArgument<IEnumerable<int>> IdIn { get; set; }
+        private GraphQLQueryArgument<IEnumerable<int>> IdNotIn { get; set; }
+        private GraphQLQueryArgument<int> IdMyAnimeListNot { get; set; }
+        private GraphQLQueryArgument<IEnumerable<int>> IdMyAnimeListIn { get; set; }
+        private GraphQLQueryArgument<IEnumerable<int>> IdMyAnimeListNotIn { get; set; }
+        private GraphQLQueryArgument<FuzzyDateInt> StartDateGreater { get; set; }
+        private GraphQLQueryArgument<FuzzyDateInt> StartDateLesser { get; set; }
+        private GraphQLQueryArgument<string> StartDateLike { get; set; }
+        private GraphQLQueryArgument<FuzzyDateInt> EndDateGreater { get; set; }
+        private GraphQLQueryArgument<FuzzyDateInt> EndDateLesser { get; set; }
+        private GraphQLQueryArgument<string> EndDateLike { get; set; }
+        private GraphQLQueryArgument<int> EpisodesGreater { get; set; }
+        private GraphQLQueryArgument<int> EpisodesLesser { get; set; }
+        private GraphQLQueryArgument<int> DurationGreater { get; set; }
+        private GraphQLQueryArgument<int> DurationLesser { get; set; }
+        private GraphQLQueryArgument<int> ChaptersGreater { get; set; }
+        private GraphQLQueryArgument<int> ChaptersLesser { get; set; }
+        private GraphQLQueryArgument<int> VolumesGreater { get; set; }
+        private GraphQLQueryArgument<int> VolumesLesser { get; set; }
+        private GraphQLQueryArgument<IEnumerable<string>> GenreIn { get; set; }
+        private GraphQLQueryArgument<IEnumerable<string>> GenreNotIn { get; set; }
+        private GraphQLQueryArgument<IEnumerable<string>> TagIn { get; set; }
+        private GraphQLQueryArgument<IEnumerable<string>> TagNotIn { get; set; }
+        private GraphQLQueryArgument<IEnumerable<string>> TagCategoryIn { get; set; }
+        private GraphQLQueryArgument<IEnumerable<string>> TagCategoryNotIn { get; set; }
+        private GraphQLQueryArgument<int> AverageScoreNot { get; set; }
+        private GraphQLQueryArgument<int> AverageScoreGreater { get; set; }
+        private GraphQLQueryArgument<int> AverageScoreLesser { get; set; }
+        private GraphQLQueryArgument<int> PopularityNot { get; set; }
+        private GraphQLQueryArgument<int> PopularityGreater { get; set; }
+        private GraphQLQueryArgument<int> PopularityLesser { get; set; }
+        private GraphQLQueryArgument<IEnumerable<MediaSort>> Sort { get; set; }
 
 
         private void InitializeProperties()
@@ -616,7 +613,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Arguments
             PopularityNot = new GraphQLQueryArgument<int>("popularity_not");
             PopularityGreater = new GraphQLQueryArgument<int>("popularity_greater");
             PopularityLesser = new GraphQLQueryArgument<int>("popularity_lesser");
-            Sort = new GraphQLQueryArgument<IEnumerable<string>>("sort");
+            Sort = new GraphQLQueryArgument<IEnumerable<MediaSort>>("sort");
         }
     }
 }
