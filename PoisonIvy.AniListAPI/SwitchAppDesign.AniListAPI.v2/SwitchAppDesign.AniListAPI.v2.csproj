@@ -4,8 +4,17 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netstandard2.0\SwitchAppDesign.AniListAPI.v2.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Graph\Fields\" />
+    <Folder Include="Graph\QueryBuilders\" />
   </ItemGroup>
 
 </Project>
