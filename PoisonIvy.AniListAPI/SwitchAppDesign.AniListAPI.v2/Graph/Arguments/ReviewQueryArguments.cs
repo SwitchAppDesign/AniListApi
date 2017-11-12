@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 using SwitchAppDesign.AniListAPI.v2.Models;
 using SwitchAppDesign.AniListAPI.v2.Types;
 
@@ -60,6 +61,30 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
             return Sort.GetQueryArgumentAndSetValue(value);
         }
 
+        /// <summary>
+        /// The review limit.
+        /// </summary>
+        public GraphQLQueryArgument<int> LimitQueryArgument(int value)
+        {
+            return Limit.GetQueryArgumentAndSetValue(value);
+        }
+
+        /// <summary>
+        /// The page number.
+        /// </summary>
+        public GraphQLQueryArgument<int> PageQueryArgument(int value)
+        {
+            return Page.GetQueryArgumentAndSetValue(value);
+        }
+
+        /// <summary>
+        /// The amount of entries per page (Max 25).
+        /// </summary>
+        public GraphQLQueryArgument<int> SortQueryArgument(int value)
+        {
+            return PerPage.GetQueryArgumentAndSetValue(value);
+        }
+
         private GraphQLQueryArgument<int> Id { get; set; }
         private GraphQLQueryArgument<int> MediaId { get; set; }
         private GraphQLQueryArgument<int> UserId { get; set; }
@@ -67,14 +92,23 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         private GraphQLQueryArgument<string> Search { get; set; }
         private GraphQLQueryArgument<IEnumerable<ReviewSort>> Sort { get; set; }
 
+        // Special Query Arguments for use in other queries
+        private GraphQLQueryArgument<int> Limit { get; set; }
+        private GraphQLQueryArgument<int> Page { get; set; }
+        private GraphQLQueryArgument<int> PerPage { get; set; }
+
         private void InitializeProperties()
         {
-            Id = new GraphQLQueryArgument<int>("id");
-            MediaId = new GraphQLQueryArgument<int>("mediaId");
-            UserId = new GraphQLQueryArgument<int>("userId");
-            MediaType = new GraphQLQueryArgument<MediaType>("mediaType");
-            Search = new GraphQLQueryArgument<string>("search");
-            Sort = new GraphQLQueryArgument<IEnumerable<ReviewSort>>("sort");
+            Id = new GraphQLQueryArgument<int>("id", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Review }));
+            MediaId = new GraphQLQueryArgument<int>("mediaId", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Review }));
+            UserId = new GraphQLQueryArgument<int>("userId", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Review }));
+            MediaType = new GraphQLQueryArgument<MediaType>("mediaType", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Review }));
+            Search = new GraphQLQueryArgument<string>("search", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Review }));
+            Sort = new GraphQLQueryArgument<IEnumerable<ReviewSort>>("sort", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Review }));
+
+            Limit = new GraphQLQueryArgument<int>("limit", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Media }));
+            Page = new GraphQLQueryArgument<int>("page", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Media }));
+            PerPage = new GraphQLQueryArgument<int>("perPage", new QueryArgumentRules(false, 25, null, new List<AniListQueryType> { AniListQueryType.Media }));
         }
     }
 }

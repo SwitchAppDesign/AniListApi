@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 using SwitchAppDesign.AniListAPI.v2.Utility;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Common
 {
-    public static class GraphHelper
+    internal static class GraphHelper
     {
-        public static string GetGraphQLType(PropertyInfo prop)
+        /// <summary>
+        /// Gets the graph query variable type from the given property.
+        /// </summary>
+        public static string GetGraphQLVariableType(PropertyInfo prop)
         {
             if (prop.PropertyType.IsArray)
             {

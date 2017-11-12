@@ -4,30 +4,51 @@ using SwitchAppDesign.AniListAPI.v2.Graph.Common;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
-	internal class Favourites
+	internal class FavouritesQueryFields
 	{
-		public Favourites()
+		public FavouritesQueryFields()
 		{
 			InitializeProperties();
 		}
 
-		public GraphQLQueryField AnimeQueryField { get; private set; }
+		public GraphQLQueryField AnimeQueryField()
+		{
+			return Anime;
+		}
 
-		public GraphQLQueryField MangaQueryField { get; private set; }
+		public GraphQLQueryField MangaQueryField()
+		{
+			return Manga;
+		}
 
-		public GraphQLQueryField CharactersQueryField { get; private set; }
+		public GraphQLQueryField CharactersQueryField()
+		{
+			return Characters;
+		}
 
-		public GraphQLQueryField StaffQueryField { get; private set; }
+		public GraphQLQueryField StaffQueryField()
+		{
+			return Staff;
+		}
 
-		public GraphQLQueryField StudiosQueryField { get; private set; }
+		public GraphQLQueryField StudiosQueryField()
+		{
+			return Studios;
+		}
+
+		private GraphQLQueryField Anime { get; set; }
+		private GraphQLQueryField Manga { get; set; }
+		private GraphQLQueryField Characters { get; set; }
+		private GraphQLQueryField Staff { get; set; }
+		private GraphQLQueryField Studios { get; set; }
 
 		private void InitializeProperties()
 		{
-			AnimeQueryField = new GraphQLQueryField("anime", new FieldRules(false));
-			MangaQueryField = new GraphQLQueryField("manga", new FieldRules(false));
-			CharactersQueryField = new GraphQLQueryField("characters", new FieldRules(false));
-			StaffQueryField = new GraphQLQueryField("staff", new FieldRules(false));
-			StudiosQueryField = new GraphQLQueryField("studios", new FieldRules(false));
+			Anime = new GraphQLQueryField("anime", new FieldRules(false));
+			Manga = new GraphQLQueryField("manga", new FieldRules(false));
+			Characters = new GraphQLQueryField("characters", new FieldRules(false));
+			Staff = new GraphQLQueryField("staff", new FieldRules(false));
+			Studios = new GraphQLQueryField("studios", new FieldRules(false));
 		}
 	}
 }

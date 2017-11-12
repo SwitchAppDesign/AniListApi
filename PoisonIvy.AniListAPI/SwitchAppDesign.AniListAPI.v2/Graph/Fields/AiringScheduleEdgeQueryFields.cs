@@ -4,24 +4,33 @@ using SwitchAppDesign.AniListAPI.v2.Graph.Common;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
-	internal class AiringScheduleEdge
+	internal class AiringScheduleEdgeQueryFields
 	{
-		public AiringScheduleEdge()
+		public AiringScheduleEdgeQueryFields()
 		{
 			InitializeProperties();
 		}
 
-		public GraphQLQueryField NodeQueryField { get; private set; }
+		public GraphQLQueryField NodeQueryField()
+		{
+			return Node;
+		}
 
 		/// <summary>
 		/// The id of the connection
 		/// </summary>
-		public GraphQLQueryField IdQueryField { get; private set; }
+		public GraphQLQueryField IdQueryField()
+		{
+			return Id;
+		}
+
+		private GraphQLQueryField Node { get; set; }
+		private GraphQLQueryField Id { get; set; }
 
 		private void InitializeProperties()
 		{
-			NodeQueryField = new GraphQLQueryField("node", new FieldRules(false));
-			IdQueryField = new GraphQLQueryField("id", new FieldRules(false));
+			Node = new GraphQLQueryField("node", new FieldRules(false));
+			Id = new GraphQLQueryField("id", new FieldRules(false));
 		}
 	}
 }

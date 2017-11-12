@@ -1,4 +1,6 @@
-﻿using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+﻿using System.Collections.Generic;
+using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 using SwitchAppDesign.AniListAPI.v2.Models;
 using SwitchAppDesign.AniListAPI.v2.Types;
 
@@ -32,8 +34,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
 
         private void InitializeProperties()
         {
-            Type = new GraphQLQueryArgument<NotificationType>("type");
-            ResetNotificationCount = new GraphQLQueryArgument<bool>("resetNotificationCount");
+            Type = new GraphQLQueryArgument<NotificationType>("type", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Notification }));
+            ResetNotificationCount = new GraphQLQueryArgument<bool>("resetNotificationCount", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Notification }));
         }
     }
 }

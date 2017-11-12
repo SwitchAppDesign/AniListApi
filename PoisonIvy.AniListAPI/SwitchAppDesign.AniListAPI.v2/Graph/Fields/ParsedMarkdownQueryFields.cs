@@ -4,18 +4,23 @@ using SwitchAppDesign.AniListAPI.v2.Graph.Common;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
-    internal class ParsedMarkdown
-    {
-        public ParsedMarkdown()
-        {
-            InitializeProperties();
-        }
+	internal class ParsedMarkdownQueryFields
+	{
+		public ParsedMarkdownQueryFields()
+		{
+			InitializeProperties();
+		}
 
-        public GraphQLQueryField HtmlQueryField { get; private set; }
+		public GraphQLQueryField HtmlQueryField()
+		{
+			return Html;
+		}
 
-        private void InitializeProperties()
-        {
-            HtmlQueryField = new GraphQLQueryField("html", new FieldRules(false));
-        }
-    }
+		private GraphQLQueryField Html { get; set; }
+
+		private void InitializeProperties()
+		{
+			Html = new GraphQLQueryField("html", new FieldRules(false));
+		}
+	}
 }

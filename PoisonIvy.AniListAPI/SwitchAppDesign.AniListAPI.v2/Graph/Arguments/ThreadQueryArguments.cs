@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 using SwitchAppDesign.AniListAPI.v2.Models;
 using SwitchAppDesign.AniListAPI.v2.Types;
 
@@ -96,15 +97,15 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
 
         private void InitializeProperties()
         {
-            Id = new GraphQLQueryArgument<int>("id");
-            UserId = new GraphQLQueryArgument<int>("userId");
-            ReplyUserId = new GraphQLQueryArgument<int>("replyUserId");
-            Subscribed = new GraphQLQueryArgument<bool>("subscribed");
-            CategoryId = new GraphQLQueryArgument<int>("categoryId");
-            MediaCategoryId = new GraphQLQueryArgument<int>("mediaCategoryId");
-            Search = new GraphQLQueryArgument<string>("search");
-            IdIn = new GraphQLQueryArgument<IEnumerable<int>>("id_in");
-            Sort = new GraphQLQueryArgument<IEnumerable<ThreadSort>>("sort");
+            Id = new GraphQLQueryArgument<int>("id", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Thread }));
+            UserId = new GraphQLQueryArgument<int>("userId", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Thread }));
+            ReplyUserId = new GraphQLQueryArgument<int>("replyUserId", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Thread }));
+            Subscribed = new GraphQLQueryArgument<bool>("subscribed", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Thread }));
+            CategoryId = new GraphQLQueryArgument<int>("categoryId", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Thread }));
+            MediaCategoryId = new GraphQLQueryArgument<int>("mediaCategoryId", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Thread }));
+            Search = new GraphQLQueryArgument<string>("search", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Thread }));
+            IdIn = new GraphQLQueryArgument<IEnumerable<int>>("id_in", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Thread }));
+            Sort = new GraphQLQueryArgument<IEnumerable<ThreadSort>>("sort", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Thread }));
         }
     }
 }

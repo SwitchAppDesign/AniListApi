@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 using SwitchAppDesign.AniListAPI.v2.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
@@ -222,29 +223,29 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
 
         private void InitializeProperties()
         {
-            Id = new GraphQLQueryArgument<int>("id");
-            UserId = new GraphQLQueryArgument<int>("userId");
-            MessengerId = new GraphQLQueryArgument<int>("messangerId");
-            Type = new GraphQLQueryArgument<ActivityType>("type");
-            IsFollowing = new GraphQLQueryArgument<bool>("isFollowing");
-            HasReplies = new GraphQLQueryArgument<bool>("hasReplies");
-            HasRepliesOrTypeText = new GraphQLQueryArgument<bool>("hasRepliesOrTypeText");
-            CreatedAt = new GraphQLQueryArgument<int>("createdAt");
-            IdNot = new GraphQLQueryArgument<int>("id_not");
-            IdIn = new GraphQLQueryArgument<IEnumerable<int>>("id_in");
-            IdNotIn = new GraphQLQueryArgument<IEnumerable<int>>("id_not_in");
-            UserIdNot = new GraphQLQueryArgument<int>("userId_not");
-            UserIdIn = new GraphQLQueryArgument<IEnumerable<int>>("userId_in");
-            UserIdNotIn = new GraphQLQueryArgument<IEnumerable<int>>("userId_not_in");
-            MessengerIdNot = new GraphQLQueryArgument<int>("messengerId_not");
-            MessengerIdIn = new GraphQLQueryArgument<IEnumerable<int>>("messengerId_in");
-            MessengerIdNotIn = new GraphQLQueryArgument<IEnumerable<int>>("messengerId_not_in");
-            TypeNot = new GraphQLQueryArgument<ActivityType>("type_not");
-            TypeIn = new GraphQLQueryArgument<IEnumerable<ActivityType>>("type_in");
-            TypeNotIn = new GraphQLQueryArgument<IEnumerable<ActivityType>>("type_not_in");
-            CreatedAtGreater = new GraphQLQueryArgument<int>("createdAt_greater");
-            CreatedAtLesser = new GraphQLQueryArgument<int>("createdAt_lesser");
-            Sort = new GraphQLQueryArgument<IEnumerable<ActivitySort>>("sort");
+            Id = new GraphQLQueryArgument<int>("id", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            UserId = new GraphQLQueryArgument<int>("userId", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            MessengerId = new GraphQLQueryArgument<int>("messangerId", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            Type = new GraphQLQueryArgument<ActivityType>("type", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            IsFollowing = new GraphQLQueryArgument<bool>("isFollowing", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            HasReplies = new GraphQLQueryArgument<bool>("hasReplies", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            HasRepliesOrTypeText = new GraphQLQueryArgument<bool>("hasRepliesOrTypeText", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            CreatedAt = new GraphQLQueryArgument<int>("createdAt", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            IdNot = new GraphQLQueryArgument<int>("id_not", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            IdIn = new GraphQLQueryArgument<IEnumerable<int>>("id_in", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            IdNotIn = new GraphQLQueryArgument<IEnumerable<int>>("id_not_in", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            UserIdNot = new GraphQLQueryArgument<int>("userId_not", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            UserIdIn = new GraphQLQueryArgument<IEnumerable<int>>("userId_in", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            UserIdNotIn = new GraphQLQueryArgument<IEnumerable<int>>("userId_not_in", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            MessengerIdNot = new GraphQLQueryArgument<int>("messengerId_not", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            MessengerIdIn = new GraphQLQueryArgument<IEnumerable<int>>("messengerId_in", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            MessengerIdNotIn = new GraphQLQueryArgument<IEnumerable<int>>("messengerId_not_in", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            TypeNot = new GraphQLQueryArgument<ActivityType>("type_not", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            TypeIn = new GraphQLQueryArgument<IEnumerable<ActivityType>>("type_in", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            TypeNotIn = new GraphQLQueryArgument<IEnumerable<ActivityType>>("type_not_in", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            CreatedAtGreater = new GraphQLQueryArgument<int>("createdAt_greater", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            CreatedAtLesser = new GraphQLQueryArgument<int>("createdAt_lesser", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            Sort = new GraphQLQueryArgument<IEnumerable<ActivitySort>>("sort", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
         }
     }
 }

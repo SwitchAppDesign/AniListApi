@@ -4,18 +4,23 @@ using SwitchAppDesign.AniListAPI.v2.Graph.Common;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
-    internal class ReviewEdge
-    {
-        public ReviewEdge()
-        {
-            InitializeProperties();
-        }
+	internal class ReviewEdgeQueryFields
+	{
+		public ReviewEdgeQueryFields()
+		{
+			InitializeProperties();
+		}
 
-        public GraphQLQueryField NodeQueryField { get; private set; }
+		public GraphQLQueryField NodeQueryField()
+		{
+			return Node;
+		}
 
-        private void InitializeProperties()
-        {
-            NodeQueryField = new GraphQLQueryField("node", new FieldRules(false));
-        }
-    }
+		private GraphQLQueryField Node { get; set; }
+
+		private void InitializeProperties()
+		{
+			Node = new GraphQLQueryField("node", new FieldRules(false));
+		}
+	}
 }

@@ -16,7 +16,8 @@ namespace ApiTestConsoleApp_Core.ClassBuilder
         private const string PropertySuffix = "QueryField";
         private const string ModelNamespace = "SwitchAppDesign.AniListAPI.v2.Models";
         private const string FieldClassNamespace = "SwitchAppDesign.AniListAPI.v2.Graph.Fields";
-        private const string OutputDir = @"C:\PrivateDev\Private Repos\AniListApi\PoisonIvy.AniListAPI\SwitchAppDesign.AniListAPI.v2\Graph\Fields";
+        //private const string OutputDir = @"C:\PrivateDev\Private Repos\AniListApi\PoisonIvy.AniListAPI\SwitchAppDesign.AniListAPI.v2\Graph\Fields";
+        private const string OutputDir = @"D:\PrivateDev\Private Repos\AniListApi\PoisonIvy.AniListAPI\SwitchAppDesign.AniListAPI.v2\Graph\Fields";
 
         private static StringBuilder _builder;
         private static Type _type;
@@ -51,6 +52,7 @@ namespace ApiTestConsoleApp_Core.ClassBuilder
 
                     AddUsings();
                     AddNameSpaceAndClass();
+                    BuildPropertGetters();
                     BuildProperties();
                     BuildPropertyInitializers();
                     EndClass();
@@ -74,17 +76,17 @@ namespace ApiTestConsoleApp_Core.ClassBuilder
             _builder.AppendLine($"namespace {FieldClassNamespace}");
             _builder.AppendLine("{");
 
-            _builder.AppendLine($"\tinternal class {_type.Name}");
+            _builder.AppendLine($"\tinternal class {_type.Name}QueryFields");
             _builder.AppendLine("\t{");
 
-            _builder.AppendLine($"\t\tpublic {_type.Name}()");
+            _builder.AppendLine($"\t\tpublic {_type.Name}QueryFields()");
             _builder.AppendLine("\t\t{");
             _builder.AppendLine("\t\t\tInitializeProperties();");
             _builder.AppendLine("\t\t}");
             _builder.AppendLine("");
         }
 
-        private static void BuildProperties()
+        private static void BuildPropertGetters()
         {
             foreach (var prop in _type.GetProperties())
             {
@@ -97,11 +99,23 @@ namespace ApiTestConsoleApp_Core.ClassBuilder
                         _builder.AppendLine($"\t\t/// {propSummary}");
                         _builder.AppendLine("\t\t/// </summary>");
                     }
-                }
 
-                _builder.AppendLine($"\t\tpublic GraphQLQueryField {prop.Name.ToPascalCase()}{PropertySuffix} {{ get; private set; }}");
-                _builder.AppendLine("");
+                    _builder.AppendLine($"\t\tpublic GraphQLQueryField {prop.Name.ToPascalCase()}{PropertySuffix}()");
+                    _builder.AppendLine("\t\t{");
+                    _builder.AppendLine($"\t\t\treturn {prop.Name.ToPascalCase()};");
+                    _builder.AppendLine("\t\t}");
+                    _builder.AppendLine("");
+                }
             }
+        }
+
+        private static void BuildProperties()
+        {
+            foreach (var prop in _type.GetProperties())
+            {
+                _builder.AppendLine($"\t\tprivate GraphQLQueryField {prop.Name.ToPascalCase()} {{ get; set; }}");
+            }
+            _builder.AppendLine("");
         }
 
         private static void BuildPropertyInitializers()
@@ -111,7 +125,7 @@ namespace ApiTestConsoleApp_Core.ClassBuilder
 
             foreach (var prop in _type.GetProperties())
             {
-                _builder.AppendLine($"\t\t\t{prop.Name.ToPascalCase()}{PropertySuffix} = new GraphQLQueryField(\"{prop.Name}\", new FieldRules(false));");
+                _builder.AppendLine($"\t\t\t{prop.Name.ToPascalCase()} = new GraphQLQueryField(\"{prop.Name}\", new FieldRules(false));");
             }
 
             _builder.AppendLine("\t\t}");

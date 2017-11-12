@@ -4,45 +4,66 @@ using SwitchAppDesign.AniListAPI.v2.Graph.Common;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
-    internal class Studio
-    {
-        public Studio()
-        {
-            InitializeProperties();
-        }
+	internal class StudioQueryFields
+	{
+		public StudioQueryFields()
+		{
+			InitializeProperties();
+		}
 
-        /// <summary>
-        /// The id of the studio
-        /// </summary>
-        public GraphQLQueryField IdQueryField { get; private set; }
+		/// <summary>
+		/// The id of the studio
+		/// </summary>
+		public GraphQLQueryField IdQueryField()
+		{
+			return Id;
+		}
 
-        /// <summary>
-        /// The name of the studio
-        /// </summary>
-        public GraphQLQueryField NameQueryField { get; private set; }
+		/// <summary>
+		/// The name of the studio
+		/// </summary>
+		public GraphQLQueryField NameQueryField()
+		{
+			return Name;
+		}
 
-        /// <summary>
-        /// The media the studio has worked on
-        /// </summary>
-        public GraphQLQueryField MediaQueryField { get; private set; }
+		/// <summary>
+		/// The media the studio has worked on
+		/// </summary>
+		public GraphQLQueryField MediaQueryField()
+		{
+			return Media;
+		}
 
-        /// <summary>
-        /// The url for the studio page on the AniList website
-        /// </summary>
-        public GraphQLQueryField SiteUrlQueryField { get; private set; }
+		/// <summary>
+		/// The url for the studio page on the AniList website
+		/// </summary>
+		public GraphQLQueryField SiteUrlQueryField()
+		{
+			return SiteUrl;
+		}
 
-        /// <summary>
-        /// If the studio is marked as favourite by the currently authenticated user
-        /// </summary>
-        public GraphQLQueryField IsFavouriteQueryField { get; private set; }
+		/// <summary>
+		/// If the studio is marked as favourite by the currently authenticated user
+		/// </summary>
+		public GraphQLQueryField IsFavouriteQueryField()
+		{
+			return IsFavourite;
+		}
 
-        private void InitializeProperties()
-        {
-            IdQueryField = new GraphQLQueryField("id", new FieldRules(false));
-            NameQueryField = new GraphQLQueryField("name", new FieldRules(false));
-            MediaQueryField = new GraphQLQueryField("media", new FieldRules(false));
-            SiteUrlQueryField = new GraphQLQueryField("siteUrl", new FieldRules(false));
-            IsFavouriteQueryField = new GraphQLQueryField("isFavourite", new FieldRules(false));
-        }
-    }
+		private GraphQLQueryField Id { get; set; }
+		private GraphQLQueryField Name { get; set; }
+		private GraphQLQueryField Media { get; set; }
+		private GraphQLQueryField SiteUrl { get; set; }
+		private GraphQLQueryField IsFavourite { get; set; }
+
+		private void InitializeProperties()
+		{
+			Id = new GraphQLQueryField("id", new FieldRules(false));
+			Name = new GraphQLQueryField("name", new FieldRules(false));
+			Media = new GraphQLQueryField("media", new FieldRules(false));
+			SiteUrl = new GraphQLQueryField("siteUrl", new FieldRules(false));
+			IsFavourite = new GraphQLQueryField("isFavourite", new FieldRules(false));
+		}
+	}
 }

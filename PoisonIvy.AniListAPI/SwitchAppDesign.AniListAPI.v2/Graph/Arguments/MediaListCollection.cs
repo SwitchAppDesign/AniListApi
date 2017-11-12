@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 using SwitchAppDesign.AniListAPI.v2.Models;
 using SwitchAppDesign.AniListAPI.v2.Types;
 
@@ -143,20 +144,20 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
 
         private void InitializeProperties()
         {
-            UserId = new GraphQLQueryArgument<int>("userId");
-            UserName = new GraphQLQueryArgument<string>("userName");
-            Type = new GraphQLQueryArgument<MediaType>("type");
-            Notes = new GraphQLQueryArgument<string>("notes");
-            StartedAt = new GraphQLQueryArgument<FuzzyDateInt>("startedAt");
-            CompletedAt = new GraphQLQueryArgument<FuzzyDateInt>("completedAt");
-            NotesLike = new GraphQLQueryArgument<string>("notes_like");
-            StartedAtGreater = new GraphQLQueryArgument<FuzzyDateInt>("startedAt_greater");
-            StartedAtLesser = new GraphQLQueryArgument<FuzzyDateInt>("startedAt_lesser");
-            StartedAtLike = new GraphQLQueryArgument<string>("startedAt_like");
-            CompletedAtGreater = new GraphQLQueryArgument<FuzzyDateInt>("completedAt_greater");
-            CompletedAtLesser = new GraphQLQueryArgument<FuzzyDateInt>("completedAt_lesser");
-            CompletedAtLike = new GraphQLQueryArgument<string>("completedAt_like");
-            Sort = new GraphQLQueryArgument<IEnumerable<MediaListSort>>("sort");
+            UserId = new GraphQLQueryArgument<int>("userId", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
+            UserName = new GraphQLQueryArgument<string>("userName", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
+            Type = new GraphQLQueryArgument<MediaType>("type", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
+            Notes = new GraphQLQueryArgument<string>("notes", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
+            StartedAt = new GraphQLQueryArgument<FuzzyDateInt>("startedAt", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
+            CompletedAt = new GraphQLQueryArgument<FuzzyDateInt>("completedAt", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
+            NotesLike = new GraphQLQueryArgument<string>("notes_like", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
+            StartedAtGreater = new GraphQLQueryArgument<FuzzyDateInt>("startedAt_greater", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
+            StartedAtLesser = new GraphQLQueryArgument<FuzzyDateInt>("startedAt_lesser", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
+            StartedAtLike = new GraphQLQueryArgument<string>("startedAt_like", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
+            CompletedAtGreater = new GraphQLQueryArgument<FuzzyDateInt>("completedAt_greater", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
+            CompletedAtLesser = new GraphQLQueryArgument<FuzzyDateInt>("completedAt_lesser", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
+            CompletedAtLike = new GraphQLQueryArgument<string>("completedAt_like", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
+            Sort = new GraphQLQueryArgument<IEnumerable<MediaListSort>>("sort", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
         }
     }
 }

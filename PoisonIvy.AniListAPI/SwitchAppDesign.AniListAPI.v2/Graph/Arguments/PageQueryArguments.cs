@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 using SwitchAppDesign.AniListAPI.v2.Models;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
@@ -33,8 +35,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
 
         private void InitializeProperties()
         {
-            Page = new GraphQLQueryArgument<int>("page");
-            PerPage = new GraphQLQueryArgument<int>("perPage");
+            Page = new GraphQLQueryArgument<int>("page", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Page }));
+            PerPage = new GraphQLQueryArgument<int>("perPage", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Page }));
         }
     }
 }

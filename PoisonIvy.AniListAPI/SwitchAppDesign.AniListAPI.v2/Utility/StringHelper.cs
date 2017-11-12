@@ -4,9 +4,11 @@ using System.Text;
 
 namespace SwitchAppDesign.AniListAPI.v2.Utility
 {
-    public static class StringHelper
+    internal static class StringHelper
     {
-        // Convert the string to Pascal case.
+        /// <summary>
+        /// Converts a string to Pascal case.
+        /// </summary>
         public static string ToPascalCase(this string the_string)
         {
             // If there are 0 or 1 characters, just return the string.
@@ -31,7 +33,9 @@ namespace SwitchAppDesign.AniListAPI.v2.Utility
             return result;
         }
 
-        // Convert the string to camel case.
+        /// <summary>
+        /// Converts a string to camel case.
+        /// </summary>
         public static string ToCamelCase(this string the_string)
         {
             // If there are 0 or 1 characters, just return the string.
@@ -56,8 +60,9 @@ namespace SwitchAppDesign.AniListAPI.v2.Utility
         }
 
 
-        // Capitalize the first character and add a space before
-        // each capitalized letter (except the first character).
+        /// <summary>
+        /// Capitalizes the first character and adds a space before each capitalized letter (except the first character).
+        /// </summary>
         public static string ToProperCase(this string the_string)
         {
             // If there are 0 or 1 characters, just return the string.
@@ -75,6 +80,14 @@ namespace SwitchAppDesign.AniListAPI.v2.Utility
             }
 
             return result;
+        }
+    }
+
+    internal static class TypeHelper
+    {
+        public static bool IsInteger(this Type type)
+        {
+            return type == typeof(int);
         }
     }
 }

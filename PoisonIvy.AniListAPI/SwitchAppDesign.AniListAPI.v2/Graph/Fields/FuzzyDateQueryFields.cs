@@ -4,15 +4,16 @@ using SwitchAppDesign.AniListAPI.v2.Graph.Common;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
-    internal class FuzzyDate
-    {
-        public FuzzyDate()
-        {
-            InitializeProperties();
-        }
+	internal class FuzzyDateQueryFields
+	{
+		public FuzzyDateQueryFields()
+		{
+			InitializeProperties();
+		}
 
-        private void InitializeProperties()
-        {
-        }
-    }
+
+		private void InitializeProperties()
+		{
+		}
+	}
 }

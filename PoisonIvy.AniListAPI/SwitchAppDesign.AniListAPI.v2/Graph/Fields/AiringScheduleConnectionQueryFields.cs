@@ -4,24 +4,37 @@ using SwitchAppDesign.AniListAPI.v2.Graph.Common;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
-    internal class AiringScheduleConnection
-    {
-        public AiringScheduleConnection()
-        {
-            InitializeProperties();
-        }
+	internal class AiringScheduleConnectionQueryFields
+	{
+		public AiringScheduleConnectionQueryFields()
+		{
+			InitializeProperties();
+		}
 
-        public GraphQLQueryField EdgesQueryField { get; private set; }
+		public GraphQLQueryField EdgesQueryField()
+		{
+			return Edges;
+		}
 
-        public GraphQLQueryField NodesQueryField { get; private set; }
+		public GraphQLQueryField NodesQueryField()
+		{
+			return Nodes;
+		}
 
-        public GraphQLQueryField PageInfoQueryField { get; private set; }
+		public GraphQLQueryField PageInfoQueryField()
+		{
+			return PageInfo;
+		}
 
-        private void InitializeProperties()
-        {
-            EdgesQueryField = new GraphQLQueryField("edges", new FieldRules(false));
-            NodesQueryField = new GraphQLQueryField("nodes", new FieldRules(false));
-            PageInfoQueryField = new GraphQLQueryField("pageInfo", new FieldRules(false));
-        }
-    }
+		private GraphQLQueryField Edges { get; set; }
+		private GraphQLQueryField Nodes { get; set; }
+		private GraphQLQueryField PageInfo { get; set; }
+
+		private void InitializeProperties()
+		{
+			Edges = new GraphQLQueryField("edges", new FieldRules(false));
+			Nodes = new GraphQLQueryField("nodes", new FieldRules(false));
+			PageInfo = new GraphQLQueryField("pageInfo", new FieldRules(false));
+		}
+	}
 }

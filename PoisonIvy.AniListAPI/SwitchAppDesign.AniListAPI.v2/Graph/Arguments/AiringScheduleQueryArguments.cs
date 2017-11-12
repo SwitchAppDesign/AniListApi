@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 using SwitchAppDesign.AniListAPI.v2.Models;
 using SwitchAppDesign.AniListAPI.v2.Types;
 
@@ -202,27 +203,36 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         private GraphQLQueryArgument<int> AiringAtLesser { get; set; }
         private GraphQLQueryArgument<IEnumerable<AiringSort>> Sort { get; set; }
 
+        // Special Query Arguments for use in other queries
+        private GraphQLQueryArgument<int> Page { get; set; }
+        private GraphQLQueryArgument<int> PerPage { get; set; }
+
         private void InitializeProperties()
         {
-            Id = new GraphQLQueryArgument<int>("id");
-            MediaId = new GraphQLQueryArgument<int>("mediaId");
-            Episode = new GraphQLQueryArgument<int>("episode");
-            AiringAt = new GraphQLQueryArgument<int>("airingAt");
-            NotYetAired = new GraphQLQueryArgument<bool>("notYetAired");
-            IdNot = new GraphQLQueryArgument<int>("id_not");
-            IdIn = new GraphQLQueryArgument<IEnumerable<int>>("id_in");
-            IdNotIn = new GraphQLQueryArgument<IEnumerable<int>>("id_not_in");
-            MediaIdNot = new GraphQLQueryArgument<int>("mediaId_not");
-            MediaIdIn = new GraphQLQueryArgument<IEnumerable<int>>("mediaId_in");
-            MediaIdNotIn = new GraphQLQueryArgument<IEnumerable<int>>("mediaId_not_in");
-            EpisodeNot = new GraphQLQueryArgument<int>("episode_not");
-            EpisodeIn = new GraphQLQueryArgument<IEnumerable<int>>("episode_in");
-            EpisodeNotIn = new GraphQLQueryArgument<IEnumerable<int>>("episode_not_in");
-            EpisodeGreater = new GraphQLQueryArgument<int>("episode_greater");
-            EpisodeLesser = new GraphQLQueryArgument<int>("episode_lesser");
-            AiringAtGreater = new GraphQLQueryArgument<int>("airingAt_greater");
-            AiringAtLesser = new GraphQLQueryArgument<int>("airingAt_lesser");
-            Sort = new GraphQLQueryArgument<IEnumerable<AiringSort>>("sort");
+            Id = new GraphQLQueryArgument<int>("id", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
+            MediaId = new GraphQLQueryArgument<int>("mediaId", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
+            Episode = new GraphQLQueryArgument<int>("episode", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
+            AiringAt = new GraphQLQueryArgument<int>("airingAt", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
+            NotYetAired = new GraphQLQueryArgument<bool>("notYetAired", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.AiringSchedule, AniListQueryType.Media }));
+            IdNot = new GraphQLQueryArgument<int>("id_not", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
+            IdIn = new GraphQLQueryArgument<IEnumerable<int>>("id_in", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
+            IdNotIn = new GraphQLQueryArgument<IEnumerable<int>>("id_not_in", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
+            MediaIdNot = new GraphQLQueryArgument<int>("mediaId_not", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
+            MediaIdIn = new GraphQLQueryArgument<IEnumerable<int>>("mediaId_in", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
+            MediaIdNotIn = new GraphQLQueryArgument<IEnumerable<int>>("mediaId_not_in", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
+            EpisodeNot = new GraphQLQueryArgument<int>("episode_not", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
+            EpisodeIn = new GraphQLQueryArgument<IEnumerable<int>>("episode_in", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
+            EpisodeNotIn = new GraphQLQueryArgument<IEnumerable<int>>("episode_not_in", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
+            EpisodeGreater = new GraphQLQueryArgument<int>("episode_greater", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
+            EpisodeLesser = new GraphQLQueryArgument<int>("episode_lesser", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
+            AiringAtGreater = new GraphQLQueryArgument<int>("airingAt_greater", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
+            AiringAtLesser = new GraphQLQueryArgument<int>("airingAt_lesser", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
+            Sort = new GraphQLQueryArgument<IEnumerable<AiringSort>>("sort", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
+
+            Page = new GraphQLQueryArgument<int>("page", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Media }));
+            PerPage = new GraphQLQueryArgument<int>("perPage", new QueryArgumentRules(false, 25, null, new List<AniListQueryType> { AniListQueryType.Media }));
         }
+
+
     }
 }

@@ -4,24 +4,37 @@ using SwitchAppDesign.AniListAPI.v2.Graph.Common;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
-    internal class MediaStats
-    {
-        public MediaStats()
-        {
-            InitializeProperties();
-        }
+	internal class MediaStatsQueryFields
+	{
+		public MediaStatsQueryFields()
+		{
+			InitializeProperties();
+		}
 
-        public GraphQLQueryField ScoreDistributionQueryField { get; private set; }
+		public GraphQLQueryField ScoreDistributionQueryField()
+		{
+			return ScoreDistribution;
+		}
 
-        public GraphQLQueryField StatusDistributionQueryField { get; private set; }
+		public GraphQLQueryField StatusDistributionQueryField()
+		{
+			return StatusDistribution;
+		}
 
-        public GraphQLQueryField AiringProgressionQueryField { get; private set; }
+		public GraphQLQueryField AiringProgressionQueryField()
+		{
+			return AiringProgression;
+		}
 
-        private void InitializeProperties()
-        {
-            ScoreDistributionQueryField = new GraphQLQueryField("scoreDistribution", new FieldRules(false));
-            StatusDistributionQueryField = new GraphQLQueryField("statusDistribution", new FieldRules(false));
-            AiringProgressionQueryField = new GraphQLQueryField("airingProgression", new FieldRules(false));
-        }
-    }
+		private GraphQLQueryField ScoreDistribution { get; set; }
+		private GraphQLQueryField StatusDistribution { get; set; }
+		private GraphQLQueryField AiringProgression { get; set; }
+
+		private void InitializeProperties()
+		{
+			ScoreDistribution = new GraphQLQueryField("scoreDistribution", new FieldRules(false));
+			StatusDistribution = new GraphQLQueryField("statusDistribution", new FieldRules(false));
+			AiringProgression = new GraphQLQueryField("airingProgression", new FieldRules(false));
+		}
+	}
 }

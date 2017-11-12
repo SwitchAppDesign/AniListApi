@@ -4,27 +4,44 @@ using SwitchAppDesign.AniListAPI.v2.Graph.Common;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
-    internal class Name
-    {
-        public Name()
-        {
-            InitializeProperties();
-        }
+	internal class NameQueryFields
+	{
+		public NameQueryFields()
+		{
+			InitializeProperties();
+		}
 
-        public GraphQLQueryField FirstQueryField { get; private set; }
+		public GraphQLQueryField FirstQueryField()
+		{
+			return First;
+		}
 
-        public GraphQLQueryField LastQueryField { get; private set; }
+		public GraphQLQueryField LastQueryField()
+		{
+			return Last;
+		}
 
-        public GraphQLQueryField NativeQueryField { get; private set; }
+		public GraphQLQueryField NativeQueryField()
+		{
+			return Native;
+		}
 
-        public GraphQLQueryField AlternativeQueryField { get; private set; }
+		public GraphQLQueryField AlternativeQueryField()
+		{
+			return Alternative;
+		}
 
-        private void InitializeProperties()
-        {
-            FirstQueryField = new GraphQLQueryField("first", new FieldRules(false));
-            LastQueryField = new GraphQLQueryField("last", new FieldRules(false));
-            NativeQueryField = new GraphQLQueryField("native", new FieldRules(false));
-            AlternativeQueryField = new GraphQLQueryField("alternative", new FieldRules(false));
-        }
-    }
+		private GraphQLQueryField First { get; set; }
+		private GraphQLQueryField Last { get; set; }
+		private GraphQLQueryField Native { get; set; }
+		private GraphQLQueryField Alternative { get; set; }
+
+		private void InitializeProperties()
+		{
+			First = new GraphQLQueryField("first", new FieldRules(false));
+			Last = new GraphQLQueryField("last", new FieldRules(false));
+			Native = new GraphQLQueryField("native", new FieldRules(false));
+			Alternative = new GraphQLQueryField("alternative", new FieldRules(false));
+		}
+	}
 }

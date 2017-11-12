@@ -4,27 +4,36 @@ using SwitchAppDesign.AniListAPI.v2.Graph.Common;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
-    internal class ThreadCategory
-    {
-        public ThreadCategory()
-        {
-            InitializeProperties();
-        }
+	internal class ThreadCategoryQueryFields
+	{
+		public ThreadCategoryQueryFields()
+		{
+			InitializeProperties();
+		}
 
-        /// <summary>
-        /// The id of the category or media is of the media category.
-        /// </summary>
-        public GraphQLQueryField IdQueryField { get; private set; }
+		/// <summary>
+		/// The id of the category or media is of the media category.
+		/// </summary>
+		public GraphQLQueryField IdQueryField()
+		{
+			return Id;
+		}
 
-        /// <summary>
-        /// The name of the category.
-        /// </summary>
-        public GraphQLQueryField NameQueryField { get; private set; }
+		/// <summary>
+		/// The name of the category.
+		/// </summary>
+		public GraphQLQueryField NameQueryField()
+		{
+			return Name;
+		}
 
-        private void InitializeProperties()
-        {
-            IdQueryField = new GraphQLQueryField("id", new FieldRules(false));
-            NameQueryField = new GraphQLQueryField("name", new FieldRules(false));
-        }
-    }
+		private GraphQLQueryField Id { get; set; }
+		private GraphQLQueryField Name { get; set; }
+
+		private void InitializeProperties()
+		{
+			Id = new GraphQLQueryField("id", new FieldRules(false));
+			Name = new GraphQLQueryField("name", new FieldRules(false));
+		}
+	}
 }

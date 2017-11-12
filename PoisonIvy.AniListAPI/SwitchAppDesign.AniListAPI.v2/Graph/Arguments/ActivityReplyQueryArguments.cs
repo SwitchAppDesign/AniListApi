@@ -1,4 +1,6 @@
-﻿using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+﻿using System.Collections.Generic;
+using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 using SwitchAppDesign.AniListAPI.v2.Models;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
@@ -34,8 +36,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
 
         private void InitializeProperties()
         {
-            Id = new GraphQLQueryArgument<int>("id");
-            ActivityId = new GraphQLQueryArgument<int>("activityId");
+            Id = new GraphQLQueryArgument<int>("id", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.ActivityReply }));
+            ActivityId = new GraphQLQueryArgument<int>("activityId", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.ActivityReply }));
         }
     }
 }

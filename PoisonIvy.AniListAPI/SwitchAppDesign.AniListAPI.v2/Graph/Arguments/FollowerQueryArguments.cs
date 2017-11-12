@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 using SwitchAppDesign.AniListAPI.v2.Models;
 using SwitchAppDesign.AniListAPI.v2.Types;
 
@@ -33,8 +34,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
 
         private void InitializeProperties()
         {
-            UserId = new GraphQLQueryArgument<int?>("userId");
-            Sort = new GraphQLQueryArgument<IEnumerable<UserSort>>("sort");
+            UserId = new GraphQLQueryArgument<int?>("userId", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Follower }));
+            Sort = new GraphQLQueryArgument<IEnumerable<UserSort>>("sort", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Follower }));
         }
     }
 }

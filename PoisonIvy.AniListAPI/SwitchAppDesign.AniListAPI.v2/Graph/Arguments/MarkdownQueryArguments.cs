@@ -1,4 +1,6 @@
-﻿using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+﻿using System.Collections.Generic;
+using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 using SwitchAppDesign.AniListAPI.v2.Models;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
@@ -25,7 +27,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
 
         private void InitializeProperties()
         {
-            Markdown = new GraphQLQueryArgument<string>("markdown");
+            Markdown = new GraphQLQueryArgument<string>("markdown", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Markdown }));
         }
     }
 }

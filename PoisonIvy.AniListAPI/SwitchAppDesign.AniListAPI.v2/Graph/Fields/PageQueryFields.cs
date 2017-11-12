@@ -4,60 +4,117 @@ using SwitchAppDesign.AniListAPI.v2.Graph.Common;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
-    internal class Page
-    {
-        public Page()
-        {
-            InitializeProperties();
-        }
+	internal class PageQueryFields
+	{
+		public PageQueryFields()
+		{
+			InitializeProperties();
+		}
 
-        /// <summary>
-        /// The pagination information
-        /// </summary>
-        public GraphQLQueryField PageInfoQueryField { get; private set; }
+		/// <summary>
+		/// The pagination information
+		/// </summary>
+		public GraphQLQueryField PageInfoQueryField()
+		{
+			return PageInfo;
+		}
 
-        public GraphQLQueryField UsersQueryField { get; private set; }
+		public GraphQLQueryField UsersQueryField()
+		{
+			return Users;
+		}
 
-        public GraphQLQueryField MediaQueryField { get; private set; }
+		public GraphQLQueryField MediaQueryField()
+		{
+			return Media;
+		}
 
-        public GraphQLQueryField CharactersQueryField { get; private set; }
+		public GraphQLQueryField CharactersQueryField()
+		{
+			return Characters;
+		}
 
-        public GraphQLQueryField StaffQueryField { get; private set; }
+		public GraphQLQueryField StaffQueryField()
+		{
+			return Staff;
+		}
 
-        public GraphQLQueryField StudiosQueryField { get; private set; }
+		public GraphQLQueryField StudiosQueryField()
+		{
+			return Studios;
+		}
 
-        public GraphQLQueryField MediaListQueryField { get; private set; }
+		public GraphQLQueryField MediaListQueryField()
+		{
+			return MediaList;
+		}
 
-        public GraphQLQueryField AiringSchedulesQueryField { get; private set; }
+		public GraphQLQueryField AiringSchedulesQueryField()
+		{
+			return AiringSchedules;
+		}
 
-        public GraphQLQueryField FollowersQueryField { get; private set; }
+		public GraphQLQueryField FollowersQueryField()
+		{
+			return Followers;
+		}
 
-        public GraphQLQueryField FollowingsQueryField { get; private set; }
+		public GraphQLQueryField FollowingsQueryField()
+		{
+			return Followings;
+		}
 
-        public GraphQLQueryField ActivityRepliesQueryField { get; private set; }
+		public GraphQLQueryField ActivityRepliesQueryField()
+		{
+			return ActivityReplies;
+		}
 
-        public GraphQLQueryField ThreadsQueryField { get; private set; }
+		public GraphQLQueryField ThreadsQueryField()
+		{
+			return Threads;
+		}
 
-        public GraphQLQueryField ThreadCommentsQueryField { get; private set; }
+		public GraphQLQueryField ThreadCommentsQueryField()
+		{
+			return ThreadComments;
+		}
 
-        public GraphQLQueryField ReviewsQueryField { get; private set; }
+		public GraphQLQueryField ReviewsQueryField()
+		{
+			return Reviews;
+		}
 
-        private void InitializeProperties()
-        {
-            PageInfoQueryField = new GraphQLQueryField("pageInfo", new FieldRules(false));
-            UsersQueryField = new GraphQLQueryField("users", new FieldRules(false));
-            MediaQueryField = new GraphQLQueryField("media", new FieldRules(false));
-            CharactersQueryField = new GraphQLQueryField("characters", new FieldRules(false));
-            StaffQueryField = new GraphQLQueryField("staff", new FieldRules(false));
-            StudiosQueryField = new GraphQLQueryField("studios", new FieldRules(false));
-            MediaListQueryField = new GraphQLQueryField("mediaList", new FieldRules(false));
-            AiringSchedulesQueryField = new GraphQLQueryField("airingSchedules", new FieldRules(false));
-            FollowersQueryField = new GraphQLQueryField("followers", new FieldRules(false));
-            FollowingsQueryField = new GraphQLQueryField("followings", new FieldRules(false));
-            ActivityRepliesQueryField = new GraphQLQueryField("activityReplies", new FieldRules(false));
-            ThreadsQueryField = new GraphQLQueryField("threads", new FieldRules(false));
-            ThreadCommentsQueryField = new GraphQLQueryField("threadComments", new FieldRules(false));
-            ReviewsQueryField = new GraphQLQueryField("reviews", new FieldRules(false));
-        }
-    }
+		private GraphQLQueryField PageInfo { get; set; }
+		private GraphQLQueryField Users { get; set; }
+		private GraphQLQueryField Media { get; set; }
+		private GraphQLQueryField Characters { get; set; }
+		private GraphQLQueryField Staff { get; set; }
+		private GraphQLQueryField Studios { get; set; }
+		private GraphQLQueryField MediaList { get; set; }
+		private GraphQLQueryField AiringSchedules { get; set; }
+		private GraphQLQueryField Followers { get; set; }
+		private GraphQLQueryField Followings { get; set; }
+		private GraphQLQueryField ActivityReplies { get; set; }
+		private GraphQLQueryField Threads { get; set; }
+		private GraphQLQueryField ThreadComments { get; set; }
+		private GraphQLQueryField Reviews { get; set; }
+
+		private void InitializeProperties()
+		{
+			PageInfo = new GraphQLQueryField("pageInfo", new FieldRules(false));
+			Users = new GraphQLQueryField("users", new FieldRules(false));
+			Media = new GraphQLQueryField("media", new FieldRules(false));
+			Characters = new GraphQLQueryField("characters", new FieldRules(false));
+			Staff = new GraphQLQueryField("staff", new FieldRules(false));
+			Studios = new GraphQLQueryField("studios", new FieldRules(false));
+			MediaList = new GraphQLQueryField("mediaList", new FieldRules(false));
+			AiringSchedules = new GraphQLQueryField("airingSchedules", new FieldRules(false));
+			Followers = new GraphQLQueryField("followers", new FieldRules(false));
+			Followings = new GraphQLQueryField("followings", new FieldRules(false));
+			ActivityReplies = new GraphQLQueryField("activityReplies", new FieldRules(false));
+			Threads = new GraphQLQueryField("threads", new FieldRules(false));
+			ThreadComments = new GraphQLQueryField("threadComments", new FieldRules(false));
+			Reviews = new GraphQLQueryField("reviews", new FieldRules(false));
+		}
+	}
 }

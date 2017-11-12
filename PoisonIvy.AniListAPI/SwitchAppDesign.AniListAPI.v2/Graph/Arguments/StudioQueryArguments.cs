@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 using SwitchAppDesign.AniListAPI.v2.Models;
 using SwitchAppDesign.AniListAPI.v2.Types;
 
@@ -15,7 +16,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         /// <summary>
         /// Filter by the studio id.
         /// </summary>
-        private GraphQLQueryArgument<int> IdQueryArgument(int value)
+        public GraphQLQueryArgument<int> IdQueryArgument(int value)
         {
             return Id.GetQueryArgumentAndSetValue(value);
         }
@@ -23,7 +24,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         /// <summary>
         /// Filter by search query.
         /// </summary>
-        private GraphQLQueryArgument<string> SearchQueryArgument(string value)
+        public GraphQLQueryArgument<string> SearchQueryArgument(string value)
         {
             return Search.GetQueryArgumentAndSetValue(value);
         }
@@ -31,7 +32,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         /// <summary>
         /// Filter by the studio id where id is not equal to the given value.
         /// </summary>
-        private GraphQLQueryArgument<int> IdNotQueryArgument(int value)
+        public GraphQLQueryArgument<int> IdNotQueryArgument(int value)
         {
             return IdNot.GetQueryArgumentAndSetValue(value);
         }
@@ -39,7 +40,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         /// <summary>
         /// Filter by the studio id where id is not in the given collection.
         /// </summary>
-        private GraphQLQueryArgument<IEnumerable<int>> IdInQueryArgument(IEnumerable<int> value)
+        public GraphQLQueryArgument<IEnumerable<int>> IdInQueryArgument(IEnumerable<int> value)
         {
             return IdIn.GetQueryArgumentAndSetValue(value);
         }
@@ -47,17 +48,25 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         /// <summary>
         /// Filter by the studio id where id is not in the given collection.
         /// </summary>
-        private GraphQLQueryArgument<IEnumerable<int>> IdNotInQueryArgument(IEnumerable<int> value)
+        public GraphQLQueryArgument<IEnumerable<int>> IdNotInQueryArgument(IEnumerable<int> value)
         {
             return IdNotIn.GetQueryArgumentAndSetValue(value);
         }
 
         /// <summary>
-        /// The order the results will be returned in
+        /// The order the results will be returned in.
         /// </summary>
-        private GraphQLQueryArgument<IEnumerable<StudioSort>> SortQueryArgument(IEnumerable<StudioSort> value)
+        public GraphQLQueryArgument<IEnumerable<StudioSort>> SortQueryArgument(IEnumerable<StudioSort> value)
         {
             return Sort.GetQueryArgumentAndSetValue(value);
+        }
+
+        /// <summary>
+        /// Whether the studio is the main studio or not.
+        /// </summary>
+        public GraphQLQueryArgument<bool> IsMainQueryArgument(bool value)
+        {
+            return IsMain.GetQueryArgumentAndSetValue(value);
         }
 
         private GraphQLQueryArgument<int> Id { get; set; }
@@ -67,15 +76,19 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         private GraphQLQueryArgument<IEnumerable<int>> IdNotIn { get; set; }
         private GraphQLQueryArgument<IEnumerable<StudioSort>> Sort { get; set; }
 
+        // Special Query Arguments for use in other queries
+        private GraphQLQueryArgument<bool> IsMain { get; set; }
 
         private void InitializeProperties()
         {
-            Id = new GraphQLQueryArgument<int>("id");
-            Search = new GraphQLQueryArgument<string>("search");
-            IdNot = new GraphQLQueryArgument<int>("id_not");
-            IdIn = new GraphQLQueryArgument<IEnumerable<int>>("id_in");
-            IdNotIn = new GraphQLQueryArgument<IEnumerable<int>>("id_not_in");
-            Sort = new GraphQLQueryArgument<IEnumerable<StudioSort>>("sort");
+            Id = new GraphQLQueryArgument<int>("id", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Studio }));
+            Search = new GraphQLQueryArgument<string>("search", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Studio }));
+            IdNot = new GraphQLQueryArgument<int>("id_not", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Studio }));
+            IdIn = new GraphQLQueryArgument<IEnumerable<int>>("id_in", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Studio }));
+            IdNotIn = new GraphQLQueryArgument<IEnumerable<int>>("id_not_in", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Studio }));
+            Sort = new GraphQLQueryArgument<IEnumerable<StudioSort>>("sort", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Studio }));
+
+            IsMain = new GraphQLQueryArgument<bool>("isMain", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Media }));
         }
     }
 }

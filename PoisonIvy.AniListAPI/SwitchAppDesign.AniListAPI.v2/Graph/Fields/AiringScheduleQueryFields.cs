@@ -4,9 +4,9 @@ using SwitchAppDesign.AniListAPI.v2.Graph.Common;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
-	internal class AiringSchedule
+	internal class AiringScheduleQueryFields
 	{
-		public AiringSchedule()
+		public AiringScheduleQueryFields()
 		{
 			InitializeProperties();
 		}
@@ -14,41 +14,66 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The id of the airing schedule item
 		/// </summary>
-		public GraphQLQueryField IdQueryField { get; private set; }
+		public GraphQLQueryField IdQueryField()
+		{
+			return Id;
+		}
 
 		/// <summary>
 		/// Time the episode airs
 		/// </summary>
-		public GraphQLQueryField AiringAtQueryField { get; private set; }
+		public GraphQLQueryField AiringAtQueryField()
+		{
+			return AiringAt;
+		}
 
 		/// <summary>
 		/// Seconds until episode starts airing
 		/// </summary>
-		public GraphQLQueryField TimeUntilAiringQueryField { get; private set; }
+		public GraphQLQueryField TimeUntilAiringQueryField()
+		{
+			return TimeUntilAiring;
+		}
 
 		/// <summary>
 		/// The airing episode number
 		/// </summary>
-		public GraphQLQueryField EpisodeQueryField { get; private set; }
+		public GraphQLQueryField EpisodeQueryField()
+		{
+			return Episode;
+		}
 
 		/// <summary>
 		/// The associate media id of the airing episode
 		/// </summary>
-		public GraphQLQueryField MediaIdQueryField { get; private set; }
+		public GraphQLQueryField MediaIdQueryField()
+		{
+			return MediaId;
+		}
 
 		/// <summary>
 		/// The associate media id of the airing episode
 		/// </summary>
-		public GraphQLQueryField MediaQueryField { get; private set; }
+		public GraphQLQueryField MediaQueryField()
+		{
+			return Media;
+		}
+
+		private GraphQLQueryField Id { get; set; }
+		private GraphQLQueryField AiringAt { get; set; }
+		private GraphQLQueryField TimeUntilAiring { get; set; }
+		private GraphQLQueryField Episode { get; set; }
+		private GraphQLQueryField MediaId { get; set; }
+		private GraphQLQueryField Media { get; set; }
 
 		private void InitializeProperties()
 		{
-			IdQueryField = new GraphQLQueryField("id", new FieldRules(false));
-			AiringAtQueryField = new GraphQLQueryField("airingAt", new FieldRules(false));
-			TimeUntilAiringQueryField = new GraphQLQueryField("timeUntilAiring", new FieldRules(false));
-			EpisodeQueryField = new GraphQLQueryField("episode", new FieldRules(false));
-			MediaIdQueryField = new GraphQLQueryField("mediaId", new FieldRules(false));
-			MediaQueryField = new GraphQLQueryField("media", new FieldRules(false));
+			Id = new GraphQLQueryField("id", new FieldRules(false));
+			AiringAt = new GraphQLQueryField("airingAt", new FieldRules(false));
+			TimeUntilAiring = new GraphQLQueryField("timeUntilAiring", new FieldRules(false));
+			Episode = new GraphQLQueryField("episode", new FieldRules(false));
+			MediaId = new GraphQLQueryField("mediaId", new FieldRules(false));
+			Media = new GraphQLQueryField("media", new FieldRules(false));
 		}
 	}
 }

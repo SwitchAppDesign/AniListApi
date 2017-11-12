@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using SwitchAppDesign.AniListAPI.v2;
@@ -9,18 +10,19 @@ namespace ApiTestConsoleApp_Core
     {
         static void Main(string[] args)
         {
-            ClassBuilder.ArgumentFieldClassBuilder.BuildGraphFieldClassesForModels();
+            //ClassBuilder.ArgumentFieldClassBuilder.BuildGraphFieldClassesForModels();
 
-            //var type = typeof(Test);
+            var lst = new List<object>()
+            {
+                12,
+                "Hello"
+            };
 
-            //foreach (var prop in type.GetProperties())
-            //{
-            //    if (prop.PropertyType.IsArray)
-            //    {
-            //        var test = Nullable.GetUnderlyingType(prop.PropertyType.GetElementType());
-            //    }
-            //    //var test = Nullable.GetUnderlyingType(prop.PropertyType);
-            //}
+            foreach (var o in lst)
+            {
+                Console.WriteLine(o.GetType());
+            }
+
 
             Console.ReadKey();
         }
