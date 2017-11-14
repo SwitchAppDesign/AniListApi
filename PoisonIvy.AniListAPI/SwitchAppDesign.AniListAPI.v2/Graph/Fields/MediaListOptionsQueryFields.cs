@@ -1,54 +1,55 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class MediaListOptionsQueryFields
 	{
-		public MediaListOptionsQueryFields()
+		public MediaListOptionsQueryFields(AniListQueryType queryType)
 		{
-			InitializeProperties();
+			InitializeProperties(queryType);
 		}
 
-		public GraphQLQueryField ScoreFormatQueryField()
+		public GraphQueryField ScoreFormatQueryField()
 		{
 			return ScoreFormat;
 		}
 
-		public GraphQLQueryField RowOrderQueryField()
+		public GraphQueryField RowOrderQueryField()
 		{
 			return RowOrder;
 		}
 
-		public GraphQLQueryField UseLegacyListsQueryField()
+		public GraphQueryField UseLegacyListsQueryField()
 		{
 			return UseLegacyLists;
 		}
 
-		public GraphQLQueryField AnimeListQueryField()
+		public GraphQueryField AnimeListQueryField()
 		{
 			return AnimeList;
 		}
 
-		public GraphQLQueryField MangaListQueryField()
+		public GraphQueryField MangaListQueryField()
 		{
 			return MangaList;
 		}
 
-		private GraphQLQueryField ScoreFormat { get; set; }
-		private GraphQLQueryField RowOrder { get; set; }
-		private GraphQLQueryField UseLegacyLists { get; set; }
-		private GraphQLQueryField AnimeList { get; set; }
-		private GraphQLQueryField MangaList { get; set; }
+		private GraphQueryField ScoreFormat { get; set; }
+		private GraphQueryField RowOrder { get; set; }
+		private GraphQueryField UseLegacyLists { get; set; }
+		private GraphQueryField AnimeList { get; set; }
+		private GraphQueryField MangaList { get; set; }
 
-		private void InitializeProperties()
+		private void InitializeProperties(AniListQueryType queryType)
 		{
-			ScoreFormat = new GraphQLQueryField("scoreFormat", new FieldRules(false));
-			RowOrder = new GraphQLQueryField("rowOrder", new FieldRules(false));
-			UseLegacyLists = new GraphQLQueryField("useLegacyLists", new FieldRules(false));
-			AnimeList = new GraphQLQueryField("animeList", new FieldRules(false));
-			MangaList = new GraphQLQueryField("mangaList", new FieldRules(false));
+			ScoreFormat = new GraphQueryField("scoreFormat", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			RowOrder = new GraphQueryField("rowOrder", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			UseLegacyLists = new GraphQueryField("useLegacyLists", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			AnimeList = new GraphQueryField("animeList", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			MangaList = new GraphQueryField("mangaList", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
 		}
 	}
 }

@@ -5,17 +5,20 @@ using SwitchAppDesign.AniListAPI.v2.Models;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
 {
-    internal class StaffQueryArguments
+    /// <summary>
+    /// All available staff query arguments.
+    /// </summary>
+    public class StaffQueryArguments
     {
-        public  StaffQueryArguments()
+        internal StaffQueryArguments(AniListQueryType queryType)
         {
-            InitializeProperties();
+            InitializeProperties(queryType);
         }
 
         /// <summary>
         /// Filter by the staff id.
         /// </summary>
-        public GraphQLQueryArgument<int> IdQueryArgument(int value)
+        public GraphQueryArgument<int> IdQueryArgument(int value)
         {
             return Id.GetQueryArgumentAndSetValue(value);
         }
@@ -23,7 +26,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         /// <summary>
         /// Filter by search query.
         /// </summary>
-        public GraphQLQueryArgument<string> SearchQueryArgument(string value)
+        public GraphQueryArgument<string> SearchQueryArgument(string value)
         {
             return Search.GetQueryArgumentAndSetValue(value);
         }
@@ -31,7 +34,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         /// <summary>
         /// Filter by the staff id.
         /// </summary>
-        public GraphQLQueryArgument<int> IdNotQueryArgument(int value)
+        public GraphQueryArgument<int> IdNotQueryArgument(int value)
         {
             return IdNot.GetQueryArgumentAndSetValue(value);
         }
@@ -39,7 +42,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         /// <summary>
         /// Filter by the staff id.
         /// </summary>
-        public GraphQLQueryArgument<IEnumerable<int>> IdInQueryArgument(IEnumerable<int> value)
+        public GraphQueryArgument<IEnumerable<int>> IdInQueryArgument(IEnumerable<int> value)
         {
             return IdIn.GetQueryArgumentAndSetValue(value);
         }
@@ -47,7 +50,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         /// <summary>
         /// Filter by the staff id.
         /// </summary>
-        public GraphQLQueryArgument<IEnumerable<int>> IdNotInQueryArgument(IEnumerable<int> value)
+        public GraphQueryArgument<IEnumerable<int>> IdNotInQueryArgument(IEnumerable<int> value)
         {
             return IdNotIn.GetQueryArgumentAndSetValue(value);
         }
@@ -55,7 +58,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         /// <summary>
         /// The order the results will be returned in.
         /// </summary>
-        public GraphQLQueryArgument<IEnumerable<int>> SortQueryArgument(IEnumerable<int> value)
+        public GraphQueryArgument<IEnumerable<int>> SortQueryArgument(IEnumerable<int> value)
         {
             return Sort.GetQueryArgumentAndSetValue(value);
         }
@@ -63,7 +66,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         /// <summary>
         /// The page number.
         /// </summary>
-        public GraphQLQueryArgument<int> PageQueryArgument(int value)
+        public GraphQueryArgument<int> PageQueryArgument(int value)
         {
             return Page.GetQueryArgumentAndSetValue(value);
         }
@@ -71,33 +74,33 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         /// <summary>
         /// The amount of entries per page (Max 25).
         /// </summary>
-        public GraphQLQueryArgument<int> SortQueryArgument(int value)
+        public GraphQueryArgument<int> SortQueryArgument(int value)
         {
             return PerPage.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<int> Id { get; set; }
-        private GraphQLQueryArgument<string> Search { get; set; }
-        private GraphQLQueryArgument<int> IdNot { get; set; }
-        private GraphQLQueryArgument<IEnumerable<int>> IdIn { get; set; }
-        private GraphQLQueryArgument<IEnumerable<int>> IdNotIn { get; set; }
-        private GraphQLQueryArgument<IEnumerable<int>> Sort { get; set; }
+        private GraphQueryArgument<int> Id { get; set; }
+        private GraphQueryArgument<string> Search { get; set; }
+        private GraphQueryArgument<int> IdNot { get; set; }
+        private GraphQueryArgument<IEnumerable<int>> IdIn { get; set; }
+        private GraphQueryArgument<IEnumerable<int>> IdNotIn { get; set; }
+        private GraphQueryArgument<IEnumerable<int>> Sort { get; set; }
 
         // Special Query Arguments for use in other queries
-        private GraphQLQueryArgument<int> Page { get; set; }
-        private GraphQLQueryArgument<int> PerPage { get; set; }
+        private GraphQueryArgument<int> Page { get; set; }
+        private GraphQueryArgument<int> PerPage { get; set; }
 
-        private void InitializeProperties()
+        private void InitializeProperties(AniListQueryType queryType)
         {
-            Id = new GraphQLQueryArgument<int>("id", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Staff }));  
-            Search = new GraphQLQueryArgument<string>("search", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Staff }));  
-            IdNot = new GraphQLQueryArgument<int>("id_not", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Staff }));
-            IdIn = new GraphQLQueryArgument<IEnumerable<int>>("id_in", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Staff })); 
-            IdNotIn = new GraphQLQueryArgument<IEnumerable<int>>("id_not_in", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Staff }));
-            Sort = new GraphQLQueryArgument<IEnumerable<int>>("sort", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Staff }));
+            Id = new GraphQueryArgument<int>("id", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Staff }));  
+            Search = new GraphQueryArgument<string>("search", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Staff }));  
+            IdNot = new GraphQueryArgument<int>("id_not", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Staff }));
+            IdIn = new GraphQueryArgument<IEnumerable<int>>("id_in", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Staff })); 
+            IdNotIn = new GraphQueryArgument<IEnumerable<int>>("id_not_in", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Staff }));
+            Sort = new GraphQueryArgument<IEnumerable<int>>("sort", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Staff }));
 
-            Page = new GraphQLQueryArgument<int>("page", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Media }));
-            PerPage = new GraphQLQueryArgument<int>("perPage", new QueryArgumentRules(false, 25, null, new List<AniListQueryType> { AniListQueryType.Media }));
+            Page = new GraphQueryArgument<int>("page", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Media }));
+            PerPage = new GraphQueryArgument<int>("perPage", queryType, new QueryArgumentRules(false, 25, null, new List<AniListQueryType> { AniListQueryType.Media }));
         }
     }
 }

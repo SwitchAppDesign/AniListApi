@@ -7,17 +7,20 @@ using SwitchAppDesign.AniListAPI.v2.Models;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
 {
-    internal class PageQueryArguments
+    /// <summary>
+    /// All available page query arguments.
+    /// </summary>
+    public class PageQueryArguments
     {
-        public PageQueryArguments()
+        internal PageQueryArguments(AniListQueryType queryType)
         {
-            InitializeProperties();
+            InitializeProperties(queryType);
         }
 
         /// <summary>
         /// The page.
         /// </summary>
-        public GraphQLQueryArgument<int> PageQueryArgument(int value)
+        public GraphQueryArgument<int> PageQueryArgument(int value)
         {
             return Page.GetQueryArgumentAndSetValue(value);
         }
@@ -25,18 +28,18 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         /// <summary>
         /// The amount of entries per page, max 50
         /// </summary>
-        public GraphQLQueryArgument<int> PerPageQueryArgument(int value)
+        public GraphQueryArgument<int> PerPageQueryArgument(int value)
         {
             return PerPage.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<int> Page { get; set; }
-        private GraphQLQueryArgument<int> PerPage { get; set; }
+        private GraphQueryArgument<int> Page { get; set; }
+        private GraphQueryArgument<int> PerPage { get; set; }
 
-        private void InitializeProperties()
+        private void InitializeProperties(AniListQueryType queryType)
         {
-            Page = new GraphQLQueryArgument<int>("page", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Page }));
-            PerPage = new GraphQLQueryArgument<int>("perPage", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Page }));
+            Page = new GraphQueryArgument<int>("page", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Page }));
+            PerPage = new GraphQueryArgument<int>("perPage", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Page }));
         }
     }
 }

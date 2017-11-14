@@ -1,20 +1,21 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class UserStatsQueryFields
 	{
-		public UserStatsQueryFields()
+		public UserStatsQueryFields(AniListQueryType queryType)
 		{
-			InitializeProperties();
+			InitializeProperties(queryType);
 		}
 
 		/// <summary>
 		/// The amount of anime the user has watched in minutes
 		/// </summary>
-		public GraphQLQueryField WatchedTimeQueryField()
+		public GraphQueryField WatchedTimeQueryField()
 		{
 			return WatchedTime;
 		}
@@ -22,53 +23,53 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The amount of manga chapters the user has read
 		/// </summary>
-		public GraphQLQueryField ChaptersReadQueryField()
+		public GraphQueryField ChaptersReadQueryField()
 		{
 			return ChaptersRead;
 		}
 
-		public GraphQLQueryField ActivityHistoryQueryField()
+		public GraphQueryField ActivityHistoryQueryField()
 		{
 			return ActivityHistory;
 		}
 
-		public GraphQLQueryField AnimeStatusDistributionQueryField()
+		public GraphQueryField AnimeStatusDistributionQueryField()
 		{
 			return AnimeStatusDistribution;
 		}
 
-		public GraphQLQueryField MangaStatusDistributionQueryField()
+		public GraphQueryField MangaStatusDistributionQueryField()
 		{
 			return MangaStatusDistribution;
 		}
 
-		public GraphQLQueryField AnimeScoreDistributionQueryField()
+		public GraphQueryField AnimeScoreDistributionQueryField()
 		{
 			return AnimeScoreDistribution;
 		}
 
-		public GraphQLQueryField MangaScoreDistributionQueryField()
+		public GraphQueryField MangaScoreDistributionQueryField()
 		{
 			return MangaScoreDistribution;
 		}
 
-		private GraphQLQueryField WatchedTime { get; set; }
-		private GraphQLQueryField ChaptersRead { get; set; }
-		private GraphQLQueryField ActivityHistory { get; set; }
-		private GraphQLQueryField AnimeStatusDistribution { get; set; }
-		private GraphQLQueryField MangaStatusDistribution { get; set; }
-		private GraphQLQueryField AnimeScoreDistribution { get; set; }
-		private GraphQLQueryField MangaScoreDistribution { get; set; }
+		private GraphQueryField WatchedTime { get; set; }
+		private GraphQueryField ChaptersRead { get; set; }
+		private GraphQueryField ActivityHistory { get; set; }
+		private GraphQueryField AnimeStatusDistribution { get; set; }
+		private GraphQueryField MangaStatusDistribution { get; set; }
+		private GraphQueryField AnimeScoreDistribution { get; set; }
+		private GraphQueryField MangaScoreDistribution { get; set; }
 
-		private void InitializeProperties()
+		private void InitializeProperties(AniListQueryType queryType)
 		{
-			WatchedTime = new GraphQLQueryField("watchedTime", new FieldRules(false));
-			ChaptersRead = new GraphQLQueryField("chaptersRead", new FieldRules(false));
-			ActivityHistory = new GraphQLQueryField("activityHistory", new FieldRules(false));
-			AnimeStatusDistribution = new GraphQLQueryField("animeStatusDistribution", new FieldRules(false));
-			MangaStatusDistribution = new GraphQLQueryField("mangaStatusDistribution", new FieldRules(false));
-			AnimeScoreDistribution = new GraphQLQueryField("animeScoreDistribution", new FieldRules(false));
-			MangaScoreDistribution = new GraphQLQueryField("mangaScoreDistribution", new FieldRules(false));
+			WatchedTime = new GraphQueryField("watchedTime", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			ChaptersRead = new GraphQueryField("chaptersRead", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			ActivityHistory = new GraphQueryField("activityHistory", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			AnimeStatusDistribution = new GraphQueryField("animeStatusDistribution", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			MangaStatusDistribution = new GraphQueryField("mangaStatusDistribution", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			AnimeScoreDistribution = new GraphQueryField("animeScoreDistribution", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			MangaScoreDistribution = new GraphQueryField("mangaScoreDistribution", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
 		}
 	}
 }

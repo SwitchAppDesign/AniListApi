@@ -21,45 +21,68 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders
         /// <param name="graphQueryFields">The list of fields to be used in the graph query.</param>
         protected GraphQuery BuildQuery(
             AniListQueryType aniListQueryType,
-            IList<GraphQLQueryArgument<object>> graphQueryArguments,
-            IList<GraphQLQueryField> graphQueryFields)
+            IList<GraphQueryArgument<object>> graphQueryArguments,
+            IList<GraphQueryField> graphQueryFields)
         {
             var queryBuilder = new StringBuilder();
 
-
+            BuildQueryType(queryBuilder, aniListQueryType, graphQueryArguments);
 
             return new GraphQuery(string.Empty, new Dictionary<string, object>());
         }
 
-        private void BuildQueryType(StringBuilder queryBuilder, AniListQueryType aniListQueryType, IList<GraphQLQueryArgument<object>> graphQueryArguments)
+        /// <summary>
+        /// Builds the first line of a graph query. 
+        /// </summary>
+        private void BuildQueryType(StringBuilder queryBuilder, AniListQueryType aniListQueryType, IList<GraphQueryArgument<object>> graphQueryArguments)
         {
-            queryBuilder.AppendLine(graphQueryArguments != null && graphQueryArguments.Any() ? $"query({BuildQueryArguments(aniListQueryType, graphQueryArguments)}){{" : "query{");
+            queryBuilder.AppendLine(graphQueryArguments != null && graphQueryArguments.Any() 
+                ? $"query({BuildQueryArguments(aniListQueryType, graphQueryArguments)}){{" 
+                : "query{");
+
+            queryBuilder.AppendLine(graphQueryArguments != null && graphQueryArguments.Any()
+                ? $"{aniListQueryType.GetDescription()}({BuildQueryTypeArguments(graphQueryArguments)}){{"
+                : $"{aniListQueryType.GetDescription()}{{");
         }
 
         /// <summary>
         /// Builds the query argument component of a Graph Query. Example: query($arg1: String, $arg2: Int) $arg1 and $arg2 are the query arguments.
         /// </summary>
-        private string BuildQueryArguments(AniListQueryType aniListQueryType, IList<GraphQLQueryArgument<object>> graphQueryArguments)
+        private string BuildQueryArguments(AniListQueryType aniListQueryType, IList<GraphQueryArgument<object>> graphQueryArguments)
         {
-            
+            var queryArgumentBuilder = new StringBuilder();
 
             foreach (var argument in graphQueryArguments)
             {
+                argument.ValidateArgument(queryType: aniListQueryType, isAuthenticated: false);
 
-                var validationWrapper =  argument.QueryArgumentRules.IsQueryArgumentValid(
-                    argument: argument,
-                    queryType: aniListQueryType,
-                    isAuthenticated: false);
-
-                if (!validationWrapper.IsValid)
-                    throw new ArgumentException(validationWrapper.Reason, argument.GetType().Name);
-
-                argument.Value.GetType();
+                queryArgumentBuilder.Append(argument == graphQueryArguments.Last()
+                    ? $"${argument.FieldName}: {argument.GraphQueryArgumentVariableType}"
+                    : $"${argument.FieldName}: {argument.GraphQueryArgumentVariableType},");
             }
 
-            return "";
+            return queryArgumentBuilder.ToString();
         }
 
-        
+        /// <summary>
+        /// Builds the query type argument component of a Graph Query. Example: media(arg1: $arg1, arg2: $arg2).
+        /// <list type="bullet">
+        /// <item><term>arg1 and arg2</term><description>are the query type arguments.</description></item>
+        /// <item><term>$arg1 and $arg2</term><description>are the query arguments.</description></item>
+        /// </list>
+        /// </summary>
+        private string BuildQueryTypeArguments(IList<GraphQueryArgument<object>> graphQueryArguments)
+        {
+            var queryArgumentBuilder = new StringBuilder();
+
+            foreach (var argument in graphQueryArguments)
+            {
+                queryArgumentBuilder.Append(argument == graphQueryArguments.Last()
+                    ? $"{argument.FieldName}: ${argument.FieldName}"
+                    : $"{argument.FieldName}: ${argument.FieldName},");
+            }
+
+            return queryArgumentBuilder.ToString();
+        }
     }
 }

@@ -100,7 +100,7 @@ namespace ApiTestConsoleApp_Core.ClassBuilder
                         _builder.AppendLine("\t\t/// </summary>");
                     }
 
-                    _builder.AppendLine($"\t\tpublic GraphQLQueryField {prop.Name.ToPascalCase()}{PropertySuffix}()");
+                    _builder.AppendLine($"\t\tpublic GraphQueryField {prop.Name.ToPascalCase()}{PropertySuffix}()");
                     _builder.AppendLine("\t\t{");
                     _builder.AppendLine($"\t\t\treturn {prop.Name.ToPascalCase()};");
                     _builder.AppendLine("\t\t}");
@@ -113,7 +113,7 @@ namespace ApiTestConsoleApp_Core.ClassBuilder
         {
             foreach (var prop in _type.GetProperties())
             {
-                _builder.AppendLine($"\t\tprivate GraphQLQueryField {prop.Name.ToPascalCase()} {{ get; set; }}");
+                _builder.AppendLine($"\t\tprivate GraphQueryField {prop.Name.ToPascalCase()} {{ get; set; }}");
             }
             _builder.AppendLine("");
         }
@@ -125,7 +125,7 @@ namespace ApiTestConsoleApp_Core.ClassBuilder
 
             foreach (var prop in _type.GetProperties())
             {
-                _builder.AppendLine($"\t\t\t{prop.Name.ToPascalCase()} = new GraphQLQueryField(\"{prop.Name}\", new FieldRules(false));");
+                _builder.AppendLine($"\t\t\t{prop.Name.ToPascalCase()} = new GraphQueryField(\"{prop.Name}\", new FieldRules(false));");
             }
 
             _builder.AppendLine("\t\t}");

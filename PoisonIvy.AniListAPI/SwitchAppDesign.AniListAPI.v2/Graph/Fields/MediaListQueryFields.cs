@@ -1,20 +1,21 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class MediaListQueryFields
 	{
-		public MediaListQueryFields()
+		public MediaListQueryFields(AniListQueryType queryType)
 		{
-			InitializeProperties();
+			InitializeProperties(queryType);
 		}
 
 		/// <summary>
 		/// The id of the user
 		/// </summary>
-		public GraphQLQueryField IdQueryField()
+		public GraphQueryField IdQueryField()
 		{
 			return Id;
 		}
@@ -22,7 +23,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The id of the user owner of the list entry
 		/// </summary>
-		public GraphQLQueryField UserIdQueryField()
+		public GraphQueryField UserIdQueryField()
 		{
 			return UserId;
 		}
@@ -30,7 +31,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The id of the media
 		/// </summary>
-		public GraphQLQueryField MediaIdQueryField()
+		public GraphQueryField MediaIdQueryField()
 		{
 			return MediaId;
 		}
@@ -38,7 +39,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The watching/reading status
 		/// </summary>
-		public GraphQLQueryField StatusQueryField()
+		public GraphQueryField StatusQueryField()
 		{
 			return Status;
 		}
@@ -46,7 +47,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The score of the entry
 		/// </summary>
-		public GraphQLQueryField ScoreQueryField()
+		public GraphQueryField ScoreQueryField()
 		{
 			return Score;
 		}
@@ -54,7 +55,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The amount of episodes/chapters consumed by the user
 		/// </summary>
-		public GraphQLQueryField ProgressQueryField()
+		public GraphQueryField ProgressQueryField()
 		{
 			return Progress;
 		}
@@ -62,7 +63,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The amount of volumes read by the user
 		/// </summary>
-		public GraphQLQueryField ProgressVolumesQueryField()
+		public GraphQueryField ProgressVolumesQueryField()
 		{
 			return ProgressVolumes;
 		}
@@ -70,7 +71,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The amount of times the user has rewatched/read the media
 		/// </summary>
-		public GraphQLQueryField RepeatQueryField()
+		public GraphQueryField RepeatQueryField()
 		{
 			return Repeat;
 		}
@@ -78,7 +79,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// Priority of planning
 		/// </summary>
-		public GraphQLQueryField PriorityQueryField()
+		public GraphQueryField PriorityQueryField()
 		{
 			return Priority;
 		}
@@ -86,7 +87,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// If the entry should only be visible to authenticated user
 		/// </summary>
-		public GraphQLQueryField _privateQueryField()
+		public GraphQueryField _privateQueryField()
 		{
 			return _private;
 		}
@@ -94,7 +95,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// Text notes
 		/// </summary>
-		public GraphQLQueryField NotesQueryField()
+		public GraphQueryField NotesQueryField()
 		{
 			return Notes;
 		}
@@ -102,7 +103,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// If the entry shown be hidden from non-custom lists
 		/// </summary>
-		public GraphQLQueryField HiddenFromStatusListsQueryField()
+		public GraphQueryField HiddenFromStatusListsQueryField()
 		{
 			return HiddenFromStatusLists;
 		}
@@ -110,7 +111,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// Map of booleans for which custom lists the entry are in
 		/// </summary>
-		public GraphQLQueryField CustomListsQueryField()
+		public GraphQueryField CustomListsQueryField()
 		{
 			return CustomLists;
 		}
@@ -118,7 +119,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// Map of advanced scores with name keys
 		/// </summary>
-		public GraphQLQueryField AdvancedScoresQueryField()
+		public GraphQueryField AdvancedScoresQueryField()
 		{
 			return AdvancedScores;
 		}
@@ -126,7 +127,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// When the entry was started by the user
 		/// </summary>
-		public GraphQLQueryField StartedAtQueryField()
+		public GraphQueryField StartedAtQueryField()
 		{
 			return StartedAt;
 		}
@@ -134,7 +135,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// When the entry was completed by the user
 		/// </summary>
-		public GraphQLQueryField CompletedAtQueryField()
+		public GraphQueryField CompletedAtQueryField()
 		{
 			return CompletedAt;
 		}
@@ -142,7 +143,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// When the entry data was last updated
 		/// </summary>
-		public GraphQLQueryField UpdatedAtQueryField()
+		public GraphQueryField UpdatedAtQueryField()
 		{
 			return UpdatedAt;
 		}
@@ -150,7 +151,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// When the entry data was created
 		/// </summary>
-		public GraphQLQueryField CreatedAtQueryField()
+		public GraphQueryField CreatedAtQueryField()
 		{
 			return CreatedAt;
 		}
@@ -158,7 +159,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The id of the media
 		/// </summary>
-		public GraphQLQueryField MediaQueryField()
+		public GraphQueryField MediaQueryField()
 		{
 			return Media;
 		}
@@ -166,54 +167,54 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The id of the user owner of the list entry
 		/// </summary>
-		public GraphQLQueryField UserQueryField()
+		public GraphQueryField UserQueryField()
 		{
 			return User;
 		}
 
-		private GraphQLQueryField Id { get; set; }
-		private GraphQLQueryField UserId { get; set; }
-		private GraphQLQueryField MediaId { get; set; }
-		private GraphQLQueryField Status { get; set; }
-		private GraphQLQueryField Score { get; set; }
-		private GraphQLQueryField Progress { get; set; }
-		private GraphQLQueryField ProgressVolumes { get; set; }
-		private GraphQLQueryField Repeat { get; set; }
-		private GraphQLQueryField Priority { get; set; }
-		private GraphQLQueryField _private { get; set; }
-		private GraphQLQueryField Notes { get; set; }
-		private GraphQLQueryField HiddenFromStatusLists { get; set; }
-		private GraphQLQueryField CustomLists { get; set; }
-		private GraphQLQueryField AdvancedScores { get; set; }
-		private GraphQLQueryField StartedAt { get; set; }
-		private GraphQLQueryField CompletedAt { get; set; }
-		private GraphQLQueryField UpdatedAt { get; set; }
-		private GraphQLQueryField CreatedAt { get; set; }
-		private GraphQLQueryField Media { get; set; }
-		private GraphQLQueryField User { get; set; }
+		private GraphQueryField Id { get; set; }
+		private GraphQueryField UserId { get; set; }
+		private GraphQueryField MediaId { get; set; }
+		private GraphQueryField Status { get; set; }
+		private GraphQueryField Score { get; set; }
+		private GraphQueryField Progress { get; set; }
+		private GraphQueryField ProgressVolumes { get; set; }
+		private GraphQueryField Repeat { get; set; }
+		private GraphQueryField Priority { get; set; }
+		private GraphQueryField _private { get; set; }
+		private GraphQueryField Notes { get; set; }
+		private GraphQueryField HiddenFromStatusLists { get; set; }
+		private GraphQueryField CustomLists { get; set; }
+		private GraphQueryField AdvancedScores { get; set; }
+		private GraphQueryField StartedAt { get; set; }
+		private GraphQueryField CompletedAt { get; set; }
+		private GraphQueryField UpdatedAt { get; set; }
+		private GraphQueryField CreatedAt { get; set; }
+		private GraphQueryField Media { get; set; }
+		private GraphQueryField User { get; set; }
 
-		private void InitializeProperties()
+		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Id = new GraphQLQueryField("id", new FieldRules(false));
-			UserId = new GraphQLQueryField("userId", new FieldRules(false));
-			MediaId = new GraphQLQueryField("mediaId", new FieldRules(false));
-			Status = new GraphQLQueryField("status", new FieldRules(false));
-			Score = new GraphQLQueryField("score", new FieldRules(false));
-			Progress = new GraphQLQueryField("progress", new FieldRules(false));
-			ProgressVolumes = new GraphQLQueryField("progressVolumes", new FieldRules(false));
-			Repeat = new GraphQLQueryField("repeat", new FieldRules(false));
-			Priority = new GraphQLQueryField("priority", new FieldRules(false));
-			_private = new GraphQLQueryField("_private", new FieldRules(false));
-			Notes = new GraphQLQueryField("notes", new FieldRules(false));
-			HiddenFromStatusLists = new GraphQLQueryField("hiddenFromStatusLists", new FieldRules(false));
-			CustomLists = new GraphQLQueryField("customLists", new FieldRules(false));
-			AdvancedScores = new GraphQLQueryField("advancedScores", new FieldRules(false));
-			StartedAt = new GraphQLQueryField("startedAt", new FieldRules(false));
-			CompletedAt = new GraphQLQueryField("completedAt", new FieldRules(false));
-			UpdatedAt = new GraphQLQueryField("updatedAt", new FieldRules(false));
-			CreatedAt = new GraphQLQueryField("createdAt", new FieldRules(false));
-			Media = new GraphQLQueryField("media", new FieldRules(false));
-			User = new GraphQLQueryField("user", new FieldRules(false));
+			Id = new GraphQueryField("id", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			UserId = new GraphQueryField("userId", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			MediaId = new GraphQueryField("mediaId", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			Status = new GraphQueryField("status", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			Score = new GraphQueryField("score", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			Progress = new GraphQueryField("progress", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			ProgressVolumes = new GraphQueryField("progressVolumes", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			Repeat = new GraphQueryField("repeat", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			Priority = new GraphQueryField("priority", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			_private = new GraphQueryField("_private", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			Notes = new GraphQueryField("notes", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			HiddenFromStatusLists = new GraphQueryField("hiddenFromStatusLists", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			CustomLists = new GraphQueryField("customLists", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			AdvancedScores = new GraphQueryField("advancedScores", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			StartedAt = new GraphQueryField("startedAt", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			CompletedAt = new GraphQueryField("completedAt", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			UpdatedAt = new GraphQueryField("updatedAt", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			CreatedAt = new GraphQueryField("createdAt", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			Media = new GraphQueryField("media", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			User = new GraphQueryField("user", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
 		}
 	}
 }

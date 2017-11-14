@@ -12,16 +12,16 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Common
         /// <summary>
         /// Gets the graph query variable type from the given property.
         /// </summary>
-        public static string GetGraphQLVariableType(PropertyInfo prop)
+        public static string GetGraphVariableType(Type type)
         {
-            if (prop.PropertyType.IsArray)
+            if (type.DeclaringType.IsArray)
             {
-                return prop.PropertyType.GetElementType().IsNullable() 
-                    ? $"[{GetGraphTypeFromType(prop.PropertyType.GetElementType())}!]" 
-                    : $"[{GetGraphTypeFromType(prop.PropertyType.GetElementType())}]";
+                return type.DeclaringType.GetElementType().IsNullable() 
+                    ? $"[{GetGraphTypeFromType(type.DeclaringType.GetElementType())}!]" 
+                    : $"[{GetGraphTypeFromType(type.DeclaringType.GetElementType())}]";
             }
 
-            return prop.PropertyType.IsNullable() ? $"{GetGraphTypeFromType(prop.PropertyType)}!" : GetGraphTypeFromType(prop.PropertyType);
+            return type.DeclaringType.IsNullable() ? $"{GetGraphTypeFromType(type.DeclaringType)}!" : GetGraphTypeFromType(type.DeclaringType);
         }
 
         private static string GetGraphTypeFromType(Type propType)

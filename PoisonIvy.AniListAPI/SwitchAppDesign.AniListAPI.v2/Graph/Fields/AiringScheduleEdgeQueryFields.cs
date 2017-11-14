@@ -1,17 +1,18 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class AiringScheduleEdgeQueryFields
 	{
-		public AiringScheduleEdgeQueryFields()
+		public AiringScheduleEdgeQueryFields(AniListQueryType queryType)
 		{
-			InitializeProperties();
+			InitializeProperties(queryType);
 		}
 
-		public GraphQLQueryField NodeQueryField()
+		public GraphQueryField NodeQueryField()
 		{
 			return Node;
 		}
@@ -19,18 +20,18 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The id of the connection
 		/// </summary>
-		public GraphQLQueryField IdQueryField()
+		public GraphQueryField IdQueryField()
 		{
 			return Id;
 		}
 
-		private GraphQLQueryField Node { get; set; }
-		private GraphQLQueryField Id { get; set; }
+		private GraphQueryField Node { get; set; }
+		private GraphQueryField Id { get; set; }
 
-		private void InitializeProperties()
+		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Node = new GraphQLQueryField("node", new FieldRules(false));
-			Id = new GraphQLQueryField("id", new FieldRules(false));
+			Node = new GraphQueryField("node", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Id = new GraphQueryField("id", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
 		}
 	}
 }

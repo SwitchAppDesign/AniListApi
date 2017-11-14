@@ -1,20 +1,21 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class AiringProgressionQueryFields
 	{
-		public AiringProgressionQueryFields()
+		public AiringProgressionQueryFields(AniListQueryType queryType)
 		{
-			InitializeProperties();
+			InitializeProperties(queryType);
 		}
 
 		/// <summary>
 		/// The episode the stats were recorded at. .5 is the mid point between 2 episodes airing dates.
 		/// </summary>
-		public GraphQLQueryField EpisodeQueryField()
+		public GraphQueryField EpisodeQueryField()
 		{
 			return Episode;
 		}
@@ -22,7 +23,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The average score for the media
 		/// </summary>
-		public GraphQLQueryField ScoreQueryField()
+		public GraphQueryField ScoreQueryField()
 		{
 			return Score;
 		}
@@ -30,20 +31,20 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The amount of users watching the anime
 		/// </summary>
-		public GraphQLQueryField WatchingQueryField()
+		public GraphQueryField WatchingQueryField()
 		{
 			return Watching;
 		}
 
-		private GraphQLQueryField Episode { get; set; }
-		private GraphQLQueryField Score { get; set; }
-		private GraphQLQueryField Watching { get; set; }
+		private GraphQueryField Episode { get; set; }
+		private GraphQueryField Score { get; set; }
+		private GraphQueryField Watching { get; set; }
 
-		private void InitializeProperties()
+		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Episode = new GraphQLQueryField("episode", new FieldRules(false));
-			Score = new GraphQLQueryField("score", new FieldRules(false));
-			Watching = new GraphQLQueryField("watching", new FieldRules(false));
+			Episode = new GraphQueryField("episode", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Score = new GraphQueryField("score", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Watching = new GraphQueryField("watching", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
 		}
 	}
 }

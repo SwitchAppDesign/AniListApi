@@ -1,17 +1,18 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class MediaEdgeQueryFields
 	{
-		public MediaEdgeQueryFields()
+		public MediaEdgeQueryFields(AniListQueryType queryType)
 		{
-			InitializeProperties();
+			InitializeProperties(queryType);
 		}
 
-		public GraphQLQueryField NodeQueryField()
+		public GraphQueryField NodeQueryField()
 		{
 			return Node;
 		}
@@ -19,7 +20,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The id of the connection
 		/// </summary>
-		public GraphQLQueryField IdQueryField()
+		public GraphQueryField IdQueryField()
 		{
 			return Id;
 		}
@@ -27,7 +28,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The type of relation to the parent model
 		/// </summary>
-		public GraphQLQueryField RelationTypeQueryField()
+		public GraphQueryField RelationTypeQueryField()
 		{
 			return RelationType;
 		}
@@ -35,7 +36,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// If the studio is the main animation studio of the media (For Studio->MediaConnection field only)
 		/// </summary>
-		public GraphQLQueryField IsMainStudioQueryField()
+		public GraphQueryField IsMainStudioQueryField()
 		{
 			return IsMainStudio;
 		}
@@ -43,7 +44,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The characters in the media voiced by the parent actor
 		/// </summary>
-		public GraphQLQueryField CharactersQueryField()
+		public GraphQueryField CharactersQueryField()
 		{
 			return Characters;
 		}
@@ -51,7 +52,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The characters role in the media
 		/// </summary>
-		public GraphQLQueryField CharacterRoleQueryField()
+		public GraphQueryField CharacterRoleQueryField()
 		{
 			return CharacterRole;
 		}
@@ -59,7 +60,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The role of the staff member in the production of the media
 		/// </summary>
-		public GraphQLQueryField StaffRoleQueryField()
+		public GraphQueryField StaffRoleQueryField()
 		{
 			return StaffRole;
 		}
@@ -67,7 +68,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The voice actors of the character
 		/// </summary>
-		public GraphQLQueryField VoiceActorsQueryField()
+		public GraphQueryField VoiceActorsQueryField()
 		{
 			return VoiceActors;
 		}
@@ -75,32 +76,32 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The order the media should be displayed from the users favourites
 		/// </summary>
-		public GraphQLQueryField FavouriteOrderQueryField()
+		public GraphQueryField FavouriteOrderQueryField()
 		{
 			return FavouriteOrder;
 		}
 
-		private GraphQLQueryField Node { get; set; }
-		private GraphQLQueryField Id { get; set; }
-		private GraphQLQueryField RelationType { get; set; }
-		private GraphQLQueryField IsMainStudio { get; set; }
-		private GraphQLQueryField Characters { get; set; }
-		private GraphQLQueryField CharacterRole { get; set; }
-		private GraphQLQueryField StaffRole { get; set; }
-		private GraphQLQueryField VoiceActors { get; set; }
-		private GraphQLQueryField FavouriteOrder { get; set; }
+		private GraphQueryField Node { get; set; }
+		private GraphQueryField Id { get; set; }
+		private GraphQueryField RelationType { get; set; }
+		private GraphQueryField IsMainStudio { get; set; }
+		private GraphQueryField Characters { get; set; }
+		private GraphQueryField CharacterRole { get; set; }
+		private GraphQueryField StaffRole { get; set; }
+		private GraphQueryField VoiceActors { get; set; }
+		private GraphQueryField FavouriteOrder { get; set; }
 
-		private void InitializeProperties()
+		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Node = new GraphQLQueryField("node", new FieldRules(false));
-			Id = new GraphQLQueryField("id", new FieldRules(false));
-			RelationType = new GraphQLQueryField("relationType", new FieldRules(false));
-			IsMainStudio = new GraphQLQueryField("isMainStudio", new FieldRules(false));
-			Characters = new GraphQLQueryField("characters", new FieldRules(false));
-			CharacterRole = new GraphQLQueryField("characterRole", new FieldRules(false));
-			StaffRole = new GraphQLQueryField("staffRole", new FieldRules(false));
-			VoiceActors = new GraphQLQueryField("voiceActors", new FieldRules(false));
-			FavouriteOrder = new GraphQLQueryField("favouriteOrder", new FieldRules(false));
+			Node = new GraphQueryField("node", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Id = new GraphQueryField("id", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			RelationType = new GraphQueryField("relationType", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			IsMainStudio = new GraphQueryField("isMainStudio", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Characters = new GraphQueryField("characters", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			CharacterRole = new GraphQueryField("characterRole", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			StaffRole = new GraphQueryField("staffRole", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			VoiceActors = new GraphQueryField("voiceActors", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			FavouriteOrder = new GraphQueryField("favouriteOrder", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
 		}
 	}
 }

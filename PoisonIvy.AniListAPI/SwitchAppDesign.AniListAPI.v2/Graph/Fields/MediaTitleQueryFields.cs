@@ -1,25 +1,26 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class MediaTitleQueryFields
 	{
-		public MediaTitleQueryFields()
+		public MediaTitleQueryFields(AniListQueryType queryType)
 		{
-			InitializeProperties();
+			InitializeProperties(queryType);
 		}
 
 		/// <summary>
 		/// The romanization of the native language title
 		/// </summary>
-		public GraphQLQueryField RomajiQueryField()
+		public GraphQueryField RomajiQueryField()
 		{
 			return Romaji;
 		}
 
-		public GraphQLQueryField IsRomajiStylisedQueryField()
+		public GraphQueryField IsRomajiStylisedQueryField()
 		{
 			return IsRomajiStylised;
 		}
@@ -27,12 +28,12 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The official english title
 		/// </summary>
-		public GraphQLQueryField EnglishQueryField()
+		public GraphQueryField EnglishQueryField()
 		{
 			return English;
 		}
 
-		public GraphQLQueryField IsEnglishStylisedQueryField()
+		public GraphQueryField IsEnglishStylisedQueryField()
 		{
 			return IsEnglishStylised;
 		}
@@ -40,12 +41,12 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// Official title in it's native language
 		/// </summary>
-		public GraphQLQueryField NativeQueryField()
+		public GraphQueryField NativeQueryField()
 		{
 			return Native;
 		}
 
-		public GraphQLQueryField IsNativeStylisedQueryField()
+		public GraphQueryField IsNativeStylisedQueryField()
 		{
 			return IsNativeStylised;
 		}
@@ -53,28 +54,28 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The currently authenticated users preferred title language. Default romaji for non-authenticaed
 		/// </summary>
-		public GraphQLQueryField UserPreferredQueryField()
+		public GraphQueryField UserPreferredQueryField()
 		{
 			return UserPreferred;
 		}
 
-		private GraphQLQueryField Romaji { get; set; }
-		private GraphQLQueryField IsRomajiStylised { get; set; }
-		private GraphQLQueryField English { get; set; }
-		private GraphQLQueryField IsEnglishStylised { get; set; }
-		private GraphQLQueryField Native { get; set; }
-		private GraphQLQueryField IsNativeStylised { get; set; }
-		private GraphQLQueryField UserPreferred { get; set; }
+		private GraphQueryField Romaji { get; set; }
+		private GraphQueryField IsRomajiStylised { get; set; }
+		private GraphQueryField English { get; set; }
+		private GraphQueryField IsEnglishStylised { get; set; }
+		private GraphQueryField Native { get; set; }
+		private GraphQueryField IsNativeStylised { get; set; }
+		private GraphQueryField UserPreferred { get; set; }
 
-		private void InitializeProperties()
+		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Romaji = new GraphQLQueryField("romaji", new FieldRules(false));
-			IsRomajiStylised = new GraphQLQueryField("IsRomajiStylised", new FieldRules(false));
-			English = new GraphQLQueryField("english", new FieldRules(false));
-			IsEnglishStylised = new GraphQLQueryField("IsEnglishStylised", new FieldRules(false));
-			Native = new GraphQLQueryField("native", new FieldRules(false));
-			IsNativeStylised = new GraphQLQueryField("IsNativeStylised", new FieldRules(false));
-			UserPreferred = new GraphQLQueryField("userPreferred", new FieldRules(false));
+			Romaji = new GraphQueryField("romaji", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			IsRomajiStylised = new GraphQueryField("IsRomajiStylised", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			English = new GraphQueryField("english", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			IsEnglishStylised = new GraphQueryField("IsEnglishStylised", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Native = new GraphQueryField("native", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			IsNativeStylised = new GraphQueryField("IsNativeStylised", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			UserPreferred = new GraphQueryField("userPreferred", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
 		}
 	}
 }

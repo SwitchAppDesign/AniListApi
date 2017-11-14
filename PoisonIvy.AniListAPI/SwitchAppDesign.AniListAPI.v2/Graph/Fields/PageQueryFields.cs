@@ -1,120 +1,121 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class PageQueryFields
 	{
-		public PageQueryFields()
+		public PageQueryFields(AniListQueryType queryType)
 		{
-			InitializeProperties();
+			InitializeProperties(queryType);
 		}
 
 		/// <summary>
 		/// The pagination information
 		/// </summary>
-		public GraphQLQueryField PageInfoQueryField()
+		public GraphQueryField PageInfoQueryField()
 		{
 			return PageInfo;
 		}
 
-		public GraphQLQueryField UsersQueryField()
+		public GraphQueryField UsersQueryField()
 		{
 			return Users;
 		}
 
-		public GraphQLQueryField MediaQueryField()
+		public GraphQueryField MediaQueryField()
 		{
 			return Media;
 		}
 
-		public GraphQLQueryField CharactersQueryField()
+		public GraphQueryField CharactersQueryField()
 		{
 			return Characters;
 		}
 
-		public GraphQLQueryField StaffQueryField()
+		public GraphQueryField StaffQueryField()
 		{
 			return Staff;
 		}
 
-		public GraphQLQueryField StudiosQueryField()
+		public GraphQueryField StudiosQueryField()
 		{
 			return Studios;
 		}
 
-		public GraphQLQueryField MediaListQueryField()
+		public GraphQueryField MediaListQueryField()
 		{
 			return MediaList;
 		}
 
-		public GraphQLQueryField AiringSchedulesQueryField()
+		public GraphQueryField AiringSchedulesQueryField()
 		{
 			return AiringSchedules;
 		}
 
-		public GraphQLQueryField FollowersQueryField()
+		public GraphQueryField FollowersQueryField()
 		{
 			return Followers;
 		}
 
-		public GraphQLQueryField FollowingsQueryField()
+		public GraphQueryField FollowingsQueryField()
 		{
 			return Followings;
 		}
 
-		public GraphQLQueryField ActivityRepliesQueryField()
+		public GraphQueryField ActivityRepliesQueryField()
 		{
 			return ActivityReplies;
 		}
 
-		public GraphQLQueryField ThreadsQueryField()
+		public GraphQueryField ThreadsQueryField()
 		{
 			return Threads;
 		}
 
-		public GraphQLQueryField ThreadCommentsQueryField()
+		public GraphQueryField ThreadCommentsQueryField()
 		{
 			return ThreadComments;
 		}
 
-		public GraphQLQueryField ReviewsQueryField()
+		public GraphQueryField ReviewsQueryField()
 		{
 			return Reviews;
 		}
 
-		private GraphQLQueryField PageInfo { get; set; }
-		private GraphQLQueryField Users { get; set; }
-		private GraphQLQueryField Media { get; set; }
-		private GraphQLQueryField Characters { get; set; }
-		private GraphQLQueryField Staff { get; set; }
-		private GraphQLQueryField Studios { get; set; }
-		private GraphQLQueryField MediaList { get; set; }
-		private GraphQLQueryField AiringSchedules { get; set; }
-		private GraphQLQueryField Followers { get; set; }
-		private GraphQLQueryField Followings { get; set; }
-		private GraphQLQueryField ActivityReplies { get; set; }
-		private GraphQLQueryField Threads { get; set; }
-		private GraphQLQueryField ThreadComments { get; set; }
-		private GraphQLQueryField Reviews { get; set; }
+		private GraphQueryField PageInfo { get; set; }
+		private GraphQueryField Users { get; set; }
+		private GraphQueryField Media { get; set; }
+		private GraphQueryField Characters { get; set; }
+		private GraphQueryField Staff { get; set; }
+		private GraphQueryField Studios { get; set; }
+		private GraphQueryField MediaList { get; set; }
+		private GraphQueryField AiringSchedules { get; set; }
+		private GraphQueryField Followers { get; set; }
+		private GraphQueryField Followings { get; set; }
+		private GraphQueryField ActivityReplies { get; set; }
+		private GraphQueryField Threads { get; set; }
+		private GraphQueryField ThreadComments { get; set; }
+		private GraphQueryField Reviews { get; set; }
 
-		private void InitializeProperties()
+		private void InitializeProperties(AniListQueryType queryType)
 		{
-			PageInfo = new GraphQLQueryField("pageInfo", new FieldRules(false));
-			Users = new GraphQLQueryField("users", new FieldRules(false));
-			Media = new GraphQLQueryField("media", new FieldRules(false));
-			Characters = new GraphQLQueryField("characters", new FieldRules(false));
-			Staff = new GraphQLQueryField("staff", new FieldRules(false));
-			Studios = new GraphQLQueryField("studios", new FieldRules(false));
-			MediaList = new GraphQLQueryField("mediaList", new FieldRules(false));
-			AiringSchedules = new GraphQLQueryField("airingSchedules", new FieldRules(false));
-			Followers = new GraphQLQueryField("followers", new FieldRules(false));
-			Followings = new GraphQLQueryField("followings", new FieldRules(false));
-			ActivityReplies = new GraphQLQueryField("activityReplies", new FieldRules(false));
-			Threads = new GraphQLQueryField("threads", new FieldRules(false));
-			ThreadComments = new GraphQLQueryField("threadComments", new FieldRules(false));
-			Reviews = new GraphQLQueryField("reviews", new FieldRules(false));
+			PageInfo = new GraphQueryField("pageInfo", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			Users = new GraphQueryField("users", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			Media = new GraphQueryField("media", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			Characters = new GraphQueryField("characters", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			Staff = new GraphQueryField("staff", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			Studios = new GraphQueryField("studios", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			MediaList = new GraphQueryField("mediaList", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			AiringSchedules = new GraphQueryField("airingSchedules", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			Followers = new GraphQueryField("followers", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			Followings = new GraphQueryField("followings", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			ActivityReplies = new GraphQueryField("activityReplies", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			Threads = new GraphQueryField("threads", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			ThreadComments = new GraphQueryField("threadComments", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			Reviews = new GraphQueryField("reviews", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
 		}
 	}
 }

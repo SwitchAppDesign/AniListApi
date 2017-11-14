@@ -1,47 +1,48 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class NameQueryFields
 	{
-		public NameQueryFields()
+		public NameQueryFields(AniListQueryType queryType)
 		{
-			InitializeProperties();
+			InitializeProperties(queryType);
 		}
 
-		public GraphQLQueryField FirstQueryField()
+		public GraphQueryField FirstQueryField()
 		{
 			return First;
 		}
 
-		public GraphQLQueryField LastQueryField()
+		public GraphQueryField LastQueryField()
 		{
 			return Last;
 		}
 
-		public GraphQLQueryField NativeQueryField()
+		public GraphQueryField NativeQueryField()
 		{
 			return Native;
 		}
 
-		public GraphQLQueryField AlternativeQueryField()
+		public GraphQueryField AlternativeQueryField()
 		{
 			return Alternative;
 		}
 
-		private GraphQLQueryField First { get; set; }
-		private GraphQLQueryField Last { get; set; }
-		private GraphQLQueryField Native { get; set; }
-		private GraphQLQueryField Alternative { get; set; }
+		private GraphQueryField First { get; set; }
+		private GraphQueryField Last { get; set; }
+		private GraphQueryField Native { get; set; }
+		private GraphQueryField Alternative { get; set; }
 
-		private void InitializeProperties()
+		private void InitializeProperties(AniListQueryType queryType)
 		{
-			First = new GraphQLQueryField("first", new FieldRules(false));
-			Last = new GraphQLQueryField("last", new FieldRules(false));
-			Native = new GraphQLQueryField("native", new FieldRules(false));
-			Alternative = new GraphQLQueryField("alternative", new FieldRules(false));
+			First = new GraphQueryField("first", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Staff }));
+			Last = new GraphQueryField("last", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Staff }));
+			Native = new GraphQueryField("native", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Staff }));
+			Alternative = new GraphQueryField("alternative", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Staff }));
 		}
 	}
 }

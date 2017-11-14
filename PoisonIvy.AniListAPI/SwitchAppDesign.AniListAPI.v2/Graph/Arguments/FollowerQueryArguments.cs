@@ -6,17 +6,20 @@ using SwitchAppDesign.AniListAPI.v2.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
 {
-    internal class FollowerQueryArguments
+    /// <summary>
+    /// All available follower query arguments.
+    /// </summary>
+    public class FollowerQueryArguments
     {
-        public FollowerQueryArguments()
+        internal FollowerQueryArguments(AniListQueryType queryType)
         {
-            InitializeProperties();
+            InitializeProperties(queryType);
         }
 
         /// <summary>
         /// User id of the follower/followed.
         /// </summary>
-        public GraphQLQueryArgument<int?> PageQueryArgument(int? value)
+        public GraphQueryArgument<int?> PageQueryArgument(int? value)
         {
             return UserId.GetQueryArgumentAndSetValue(value);
         }
@@ -24,18 +27,18 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         /// <summary>
         /// The order the results will be returned in.
         /// </summary>
-        public GraphQLQueryArgument<IEnumerable<UserSort>> PerPageQueryArgument(IEnumerable<UserSort> value)
+        public GraphQueryArgument<IEnumerable<UserSort>> PerPageQueryArgument(IEnumerable<UserSort> value)
         {
             return Sort.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<int?> UserId { get; set; }
-        private GraphQLQueryArgument<IEnumerable<UserSort>> Sort { get; set; }
+        private GraphQueryArgument<int?> UserId { get; set; }
+        private GraphQueryArgument<IEnumerable<UserSort>> Sort { get; set; }
 
-        private void InitializeProperties()
+        private void InitializeProperties(AniListQueryType queryType)
         {
-            UserId = new GraphQLQueryArgument<int?>("userId", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Follower }));
-            Sort = new GraphQLQueryArgument<IEnumerable<UserSort>>("sort", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Follower }));
+            UserId = new GraphQueryArgument<int?>("userId", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Follower }));
+            Sort = new GraphQueryArgument<IEnumerable<UserSort>>("sort", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Follower }));
         }
     }
 }

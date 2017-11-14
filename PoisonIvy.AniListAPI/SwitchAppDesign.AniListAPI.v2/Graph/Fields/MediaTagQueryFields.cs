@@ -1,20 +1,21 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class MediaTagQueryFields
 	{
-		public MediaTagQueryFields()
+		public MediaTagQueryFields(AniListQueryType queryType)
 		{
-			InitializeProperties();
+			InitializeProperties(queryType);
 		}
 
 		/// <summary>
 		/// The id of the tag
 		/// </summary>
-		public GraphQLQueryField IdQueryField()
+		public GraphQueryField IdQueryField()
 		{
 			return Id;
 		}
@@ -22,7 +23,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The name of the tag
 		/// </summary>
-		public GraphQLQueryField NameQueryField()
+		public GraphQueryField NameQueryField()
 		{
 			return Name;
 		}
@@ -30,7 +31,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// A general description of the tag
 		/// </summary>
-		public GraphQLQueryField DescriptionQueryField()
+		public GraphQueryField DescriptionQueryField()
 		{
 			return Description;
 		}
@@ -38,7 +39,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The categories of tags this tag belongs to
 		/// </summary>
-		public GraphQLQueryField CategoryQueryField()
+		public GraphQueryField CategoryQueryField()
 		{
 			return Category;
 		}
@@ -46,7 +47,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The relevance ranking of the tag out of the 100 for this media
 		/// </summary>
-		public GraphQLQueryField RankQueryField()
+		public GraphQueryField RankQueryField()
 		{
 			return Rank;
 		}
@@ -54,7 +55,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// If the tag could be a spoiler for any media
 		/// </summary>
-		public GraphQLQueryField IsGeneralSpoilerQueryField()
+		public GraphQueryField IsGeneralSpoilerQueryField()
 		{
 			return IsGeneralSpoiler;
 		}
@@ -62,7 +63,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// If the tag is a spoiler for this media
 		/// </summary>
-		public GraphQLQueryField IsMediaSpoilerQueryField()
+		public GraphQueryField IsMediaSpoilerQueryField()
 		{
 			return IsMediaSpoiler;
 		}
@@ -70,30 +71,30 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// If the tag is only for adult 18+ media
 		/// </summary>
-		public GraphQLQueryField IsAdultQueryField()
+		public GraphQueryField IsAdultQueryField()
 		{
 			return IsAdult;
 		}
 
-		private GraphQLQueryField Id { get; set; }
-		private GraphQLQueryField Name { get; set; }
-		private GraphQLQueryField Description { get; set; }
-		private GraphQLQueryField Category { get; set; }
-		private GraphQLQueryField Rank { get; set; }
-		private GraphQLQueryField IsGeneralSpoiler { get; set; }
-		private GraphQLQueryField IsMediaSpoiler { get; set; }
-		private GraphQLQueryField IsAdult { get; set; }
+		private GraphQueryField Id { get; set; }
+		private GraphQueryField Name { get; set; }
+		private GraphQueryField Description { get; set; }
+		private GraphQueryField Category { get; set; }
+		private GraphQueryField Rank { get; set; }
+		private GraphQueryField IsGeneralSpoiler { get; set; }
+		private GraphQueryField IsMediaSpoiler { get; set; }
+		private GraphQueryField IsAdult { get; set; }
 
-		private void InitializeProperties()
+		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Id = new GraphQLQueryField("id", new FieldRules(false));
-			Name = new GraphQLQueryField("name", new FieldRules(false));
-			Description = new GraphQLQueryField("description", new FieldRules(false));
-			Category = new GraphQLQueryField("category", new FieldRules(false));
-			Rank = new GraphQLQueryField("rank", new FieldRules(false));
-			IsGeneralSpoiler = new GraphQLQueryField("isGeneralSpoiler", new FieldRules(false));
-			IsMediaSpoiler = new GraphQLQueryField("isMediaSpoiler", new FieldRules(false));
-			IsAdult = new GraphQLQueryField("isAdult", new FieldRules(false));
+			Id = new GraphQueryField("id", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Name = new GraphQueryField("name", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Description = new GraphQueryField("description", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Category = new GraphQueryField("category", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Rank = new GraphQueryField("rank", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			IsGeneralSpoiler = new GraphQueryField("isGeneralSpoiler", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			IsMediaSpoiler = new GraphQueryField("isMediaSpoiler", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			IsAdult = new GraphQueryField("isAdult", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
 		}
 	}
 }

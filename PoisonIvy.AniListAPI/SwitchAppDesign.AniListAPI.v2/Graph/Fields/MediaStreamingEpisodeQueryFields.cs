@@ -1,20 +1,21 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class MediaStreamingEpisodeQueryFields
 	{
-		public MediaStreamingEpisodeQueryFields()
+		public MediaStreamingEpisodeQueryFields(AniListQueryType queryType)
 		{
-			InitializeProperties();
+			InitializeProperties(queryType);
 		}
 
 		/// <summary>
 		/// Title of the episode
 		/// </summary>
-		public GraphQLQueryField TitleQueryField()
+		public GraphQueryField TitleQueryField()
 		{
 			return Title;
 		}
@@ -22,7 +23,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// Url of episode image thumbnail
 		/// </summary>
-		public GraphQLQueryField ThumbnailQueryField()
+		public GraphQueryField ThumbnailQueryField()
 		{
 			return Thumbnail;
 		}
@@ -30,7 +31,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The url of the episode
 		/// </summary>
-		public GraphQLQueryField UrlQueryField()
+		public GraphQueryField UrlQueryField()
 		{
 			return Url;
 		}
@@ -38,22 +39,22 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The site location of the streaming episodes
 		/// </summary>
-		public GraphQLQueryField SiteQueryField()
+		public GraphQueryField SiteQueryField()
 		{
 			return Site;
 		}
 
-		private GraphQLQueryField Title { get; set; }
-		private GraphQLQueryField Thumbnail { get; set; }
-		private GraphQLQueryField Url { get; set; }
-		private GraphQLQueryField Site { get; set; }
+		private GraphQueryField Title { get; set; }
+		private GraphQueryField Thumbnail { get; set; }
+		private GraphQueryField Url { get; set; }
+		private GraphQueryField Site { get; set; }
 
-		private void InitializeProperties()
+		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Title = new GraphQLQueryField("title", new FieldRules(false));
-			Thumbnail = new GraphQLQueryField("thumbnail", new FieldRules(false));
-			Url = new GraphQLQueryField("url", new FieldRules(false));
-			Site = new GraphQLQueryField("site", new FieldRules(false));
+			Title = new GraphQueryField("title", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Thumbnail = new GraphQueryField("thumbnail", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Url = new GraphQueryField("url", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Site = new GraphQueryField("site", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
 		}
 	}
 }

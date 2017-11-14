@@ -1,20 +1,21 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class ReviewQueryFields
 	{
-		public ReviewQueryFields()
+		public ReviewQueryFields(AniListQueryType queryType)
 		{
-			InitializeProperties();
+			InitializeProperties(queryType);
 		}
 
 		/// <summary>
 		/// The id of the review
 		/// </summary>
-		public GraphQLQueryField IdQueryField()
+		public GraphQueryField IdQueryField()
 		{
 			return Id;
 		}
@@ -22,7 +23,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The id of the review's creator
 		/// </summary>
-		public GraphQLQueryField UserIdQueryField()
+		public GraphQueryField UserIdQueryField()
 		{
 			return UserId;
 		}
@@ -30,7 +31,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The id of the review's media
 		/// </summary>
-		public GraphQLQueryField MediaIdQueryField()
+		public GraphQueryField MediaIdQueryField()
 		{
 			return MediaId;
 		}
@@ -38,7 +39,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// For which type of media the review is for
 		/// </summary>
-		public GraphQLQueryField MediaTypeQueryField()
+		public GraphQueryField MediaTypeQueryField()
 		{
 			return MediaType;
 		}
@@ -46,7 +47,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// A short summary of the review
 		/// </summary>
-		public GraphQLQueryField SummaryQueryField()
+		public GraphQueryField SummaryQueryField()
 		{
 			return Summary;
 		}
@@ -54,7 +55,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The main review body text
 		/// </summary>
-		public GraphQLQueryField BodyQueryField()
+		public GraphQueryField BodyQueryField()
 		{
 			return Body;
 		}
@@ -62,7 +63,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The total user rating of the review
 		/// </summary>
-		public GraphQLQueryField RatingQueryField()
+		public GraphQueryField RatingQueryField()
 		{
 			return Rating;
 		}
@@ -70,7 +71,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The amount of user ratings of the review
 		/// </summary>
-		public GraphQLQueryField RatingAmountQueryField()
+		public GraphQueryField RatingAmountQueryField()
 		{
 			return RatingAmount;
 		}
@@ -78,7 +79,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The rating of the review by currently authenticated user
 		/// </summary>
-		public GraphQLQueryField UserRatingQueryField()
+		public GraphQueryField UserRatingQueryField()
 		{
 			return UserRating;
 		}
@@ -86,7 +87,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The review score of the media
 		/// </summary>
-		public GraphQLQueryField ScoreQueryField()
+		public GraphQueryField ScoreQueryField()
 		{
 			return Score;
 		}
@@ -94,7 +95,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// If the review is not yet publicly published and is only viewable by creator
 		/// </summary>
-		public GraphQLQueryField _privateQueryField()
+		public GraphQueryField _privateQueryField()
 		{
 			return _private;
 		}
@@ -102,7 +103,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The url for the review page on the AniList website
 		/// </summary>
-		public GraphQLQueryField SiteUrlQueryField()
+		public GraphQueryField SiteUrlQueryField()
 		{
 			return SiteUrl;
 		}
@@ -110,7 +111,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The time of the thread creation
 		/// </summary>
-		public GraphQLQueryField CreatedAtQueryField()
+		public GraphQueryField CreatedAtQueryField()
 		{
 			return CreatedAt;
 		}
@@ -118,7 +119,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The time of the thread last update
 		/// </summary>
-		public GraphQLQueryField UpdatedAtQueryField()
+		public GraphQueryField UpdatedAtQueryField()
 		{
 			return UpdatedAt;
 		}
@@ -126,7 +127,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The id of the review's creator
 		/// </summary>
-		public GraphQLQueryField UserQueryField()
+		public GraphQueryField UserQueryField()
 		{
 			return User;
 		}
@@ -134,46 +135,46 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The id of the review's media
 		/// </summary>
-		public GraphQLQueryField MediaQueryField()
+		public GraphQueryField MediaQueryField()
 		{
 			return Media;
 		}
 
-		private GraphQLQueryField Id { get; set; }
-		private GraphQLQueryField UserId { get; set; }
-		private GraphQLQueryField MediaId { get; set; }
-		private GraphQLQueryField MediaType { get; set; }
-		private GraphQLQueryField Summary { get; set; }
-		private GraphQLQueryField Body { get; set; }
-		private GraphQLQueryField Rating { get; set; }
-		private GraphQLQueryField RatingAmount { get; set; }
-		private GraphQLQueryField UserRating { get; set; }
-		private GraphQLQueryField Score { get; set; }
-		private GraphQLQueryField _private { get; set; }
-		private GraphQLQueryField SiteUrl { get; set; }
-		private GraphQLQueryField CreatedAt { get; set; }
-		private GraphQLQueryField UpdatedAt { get; set; }
-		private GraphQLQueryField User { get; set; }
-		private GraphQLQueryField Media { get; set; }
+		private GraphQueryField Id { get; set; }
+		private GraphQueryField UserId { get; set; }
+		private GraphQueryField MediaId { get; set; }
+		private GraphQueryField MediaType { get; set; }
+		private GraphQueryField Summary { get; set; }
+		private GraphQueryField Body { get; set; }
+		private GraphQueryField Rating { get; set; }
+		private GraphQueryField RatingAmount { get; set; }
+		private GraphQueryField UserRating { get; set; }
+		private GraphQueryField Score { get; set; }
+		private GraphQueryField _private { get; set; }
+		private GraphQueryField SiteUrl { get; set; }
+		private GraphQueryField CreatedAt { get; set; }
+		private GraphQueryField UpdatedAt { get; set; }
+		private GraphQueryField User { get; set; }
+		private GraphQueryField Media { get; set; }
 
-		private void InitializeProperties()
+		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Id = new GraphQLQueryField("id", new FieldRules(false));
-			UserId = new GraphQLQueryField("userId", new FieldRules(false));
-			MediaId = new GraphQLQueryField("mediaId", new FieldRules(false));
-			MediaType = new GraphQLQueryField("mediaType", new FieldRules(false));
-			Summary = new GraphQLQueryField("summary", new FieldRules(false));
-			Body = new GraphQLQueryField("body", new FieldRules(false));
-			Rating = new GraphQLQueryField("rating", new FieldRules(false));
-			RatingAmount = new GraphQLQueryField("ratingAmount", new FieldRules(false));
-			UserRating = new GraphQLQueryField("userRating", new FieldRules(false));
-			Score = new GraphQLQueryField("score", new FieldRules(false));
-			_private = new GraphQLQueryField("_private", new FieldRules(false));
-			SiteUrl = new GraphQLQueryField("siteUrl", new FieldRules(false));
-			CreatedAt = new GraphQLQueryField("createdAt", new FieldRules(false));
-			UpdatedAt = new GraphQLQueryField("updatedAt", new FieldRules(false));
-			User = new GraphQLQueryField("user", new FieldRules(false));
-			Media = new GraphQLQueryField("media", new FieldRules(false));
+			Id = new GraphQueryField("id", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
+			UserId = new GraphQueryField("userId", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
+			MediaId = new GraphQueryField("mediaId", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
+			MediaType = new GraphQueryField("mediaType", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
+			Summary = new GraphQueryField("summary", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
+			Body = new GraphQueryField("body", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
+			Rating = new GraphQueryField("rating", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
+			RatingAmount = new GraphQueryField("ratingAmount", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
+			UserRating = new GraphQueryField("userRating", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
+			Score = new GraphQueryField("score", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
+			_private = new GraphQueryField("_private", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
+			SiteUrl = new GraphQueryField("siteUrl", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
+			CreatedAt = new GraphQueryField("createdAt", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
+			UpdatedAt = new GraphQueryField("updatedAt", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
+			User = new GraphQueryField("user", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
+			Media = new GraphQueryField("media", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
 		}
 	}
 }

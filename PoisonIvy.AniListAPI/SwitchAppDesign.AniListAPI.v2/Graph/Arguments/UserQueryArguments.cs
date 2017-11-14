@@ -8,17 +8,20 @@ using SwitchAppDesign.AniListAPI.v2.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
 {
-    internal class UserQueryArguments
+    /// <summary>
+    /// All available user query arguments.
+    /// </summary>
+    public class UserQueryArguments
     {
-        public UserQueryArguments()
+        internal UserQueryArguments(AniListQueryType queryType)
         {
-            InitializeProperties();
+            InitializeProperties(queryType);
         }
 
         /// <summary>
         /// Filter by the user id.
         /// </summary>
-        public GraphQLQueryArgument<int> IdQueryArgument(int value)
+        public GraphQueryArgument<int> IdQueryArgument(int value)
         {
             return Id.GetQueryArgumentAndSetValue(value);
         }
@@ -26,7 +29,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         /// <summary>
         /// Filter by the name of the user.
         /// </summary>
-        public GraphQLQueryArgument<string> NameQueryArgument(string value)
+        public GraphQueryArgument<string> NameQueryArgument(string value)
         {
             return Name.GetQueryArgumentAndSetValue(value);
         }
@@ -34,7 +37,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         /// <summary>
         /// Filter by search query.
         /// </summary>
-        public GraphQLQueryArgument<string> SearchQueryArgument(string value)
+        public GraphQueryArgument<string> SearchQueryArgument(string value)
         {
             return Search.GetQueryArgumentAndSetValue(value);
         }
@@ -42,22 +45,22 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         /// <summary>
         /// The order the results will be returned in.
         /// </summary>
-        public GraphQLQueryArgument<IEnumerable<UserSort>> SortQueryArgument(IEnumerable<UserSort> value)
+        public GraphQueryArgument<IEnumerable<UserSort>> SortQueryArgument(IEnumerable<UserSort> value)
         {
             return Sort.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<int> Id { get; set; }
-        private GraphQLQueryArgument<string> Name { get; set; }
-        private GraphQLQueryArgument<string> Search { get; set; }
-        private GraphQLQueryArgument<IEnumerable<UserSort>> Sort { get; set; }
+        private GraphQueryArgument<int> Id { get; set; }
+        private GraphQueryArgument<string> Name { get; set; }
+        private GraphQueryArgument<string> Search { get; set; }
+        private GraphQueryArgument<IEnumerable<UserSort>> Sort { get; set; }
 
-        private void InitializeProperties()
+        private void InitializeProperties(AniListQueryType queryType)
         {
-            Id = new GraphQLQueryArgument<int>("id", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.User }));
-            Name = new GraphQLQueryArgument<string>("name", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.User }));
-            Search = new GraphQLQueryArgument<string>("search", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.User }));
-            Sort = new GraphQLQueryArgument<IEnumerable<UserSort>>("sort", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.User }));
+            Id = new GraphQueryArgument<int>("id", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.User }));
+            Name = new GraphQueryArgument<string>("name", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.User }));
+            Search = new GraphQueryArgument<string>("search", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.User }));
+            Sort = new GraphQueryArgument<IEnumerable<UserSort>>("sort", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.User }));
         }
     }
 }

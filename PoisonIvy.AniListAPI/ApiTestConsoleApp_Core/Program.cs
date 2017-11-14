@@ -12,16 +12,7 @@ namespace ApiTestConsoleApp_Core
         {
             //ClassBuilder.ArgumentFieldClassBuilder.BuildGraphFieldClassesForModels();
 
-            var lst = new List<object>()
-            {
-                12,
-                "Hello"
-            };
-
-            foreach (var o in lst)
-            {
-                Console.WriteLine(o.GetType());
-            }
+            
 
 
             Console.ReadKey();

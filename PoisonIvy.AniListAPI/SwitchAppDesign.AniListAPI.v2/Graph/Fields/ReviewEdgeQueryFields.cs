@@ -1,26 +1,27 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class ReviewEdgeQueryFields
 	{
-		public ReviewEdgeQueryFields()
+		public ReviewEdgeQueryFields(AniListQueryType queryType)
 		{
-			InitializeProperties();
+			InitializeProperties(queryType);
 		}
 
-		public GraphQLQueryField NodeQueryField()
+		public GraphQueryField NodeQueryField()
 		{
 			return Node;
 		}
 
-		private GraphQLQueryField Node { get; set; }
+		private GraphQueryField Node { get; set; }
 
-		private void InitializeProperties()
+		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Node = new GraphQLQueryField("node", new FieldRules(false));
+			Node = new GraphQueryField("node", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
 		}
 	}
 }

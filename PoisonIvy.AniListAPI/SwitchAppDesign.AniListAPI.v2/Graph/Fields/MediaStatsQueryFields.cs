@@ -1,40 +1,41 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class MediaStatsQueryFields
 	{
-		public MediaStatsQueryFields()
+		public MediaStatsQueryFields(AniListQueryType queryType)
 		{
-			InitializeProperties();
+			InitializeProperties(queryType);
 		}
 
-		public GraphQLQueryField ScoreDistributionQueryField()
+		public GraphQueryField ScoreDistributionQueryField()
 		{
 			return ScoreDistribution;
 		}
 
-		public GraphQLQueryField StatusDistributionQueryField()
+		public GraphQueryField StatusDistributionQueryField()
 		{
 			return StatusDistribution;
 		}
 
-		public GraphQLQueryField AiringProgressionQueryField()
+		public GraphQueryField AiringProgressionQueryField()
 		{
 			return AiringProgression;
 		}
 
-		private GraphQLQueryField ScoreDistribution { get; set; }
-		private GraphQLQueryField StatusDistribution { get; set; }
-		private GraphQLQueryField AiringProgression { get; set; }
+		private GraphQueryField ScoreDistribution { get; set; }
+		private GraphQueryField StatusDistribution { get; set; }
+		private GraphQueryField AiringProgression { get; set; }
 
-		private void InitializeProperties()
+		private void InitializeProperties(AniListQueryType queryType)
 		{
-			ScoreDistribution = new GraphQLQueryField("scoreDistribution", new FieldRules(false));
-			StatusDistribution = new GraphQLQueryField("statusDistribution", new FieldRules(false));
-			AiringProgression = new GraphQLQueryField("airingProgression", new FieldRules(false));
+			ScoreDistribution = new GraphQueryField("scoreDistribution", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			StatusDistribution = new GraphQueryField("statusDistribution", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			AiringProgression = new GraphQueryField("airingProgression", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
 		}
 	}
 }

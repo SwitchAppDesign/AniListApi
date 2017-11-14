@@ -1,20 +1,21 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class StudioQueryFields
 	{
-		public StudioQueryFields()
+		public StudioQueryFields(AniListQueryType queryType)
 		{
-			InitializeProperties();
+			InitializeProperties(queryType);
 		}
 
 		/// <summary>
 		/// The id of the studio
 		/// </summary>
-		public GraphQLQueryField IdQueryField()
+		public GraphQueryField IdQueryField()
 		{
 			return Id;
 		}
@@ -22,7 +23,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The name of the studio
 		/// </summary>
-		public GraphQLQueryField NameQueryField()
+		public GraphQueryField NameQueryField()
 		{
 			return Name;
 		}
@@ -30,7 +31,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The media the studio has worked on
 		/// </summary>
-		public GraphQLQueryField MediaQueryField()
+		public GraphQueryField MediaQueryField()
 		{
 			return Media;
 		}
@@ -38,7 +39,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The url for the studio page on the AniList website
 		/// </summary>
-		public GraphQLQueryField SiteUrlQueryField()
+		public GraphQueryField SiteUrlQueryField()
 		{
 			return SiteUrl;
 		}
@@ -46,24 +47,24 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// If the studio is marked as favourite by the currently authenticated user
 		/// </summary>
-		public GraphQLQueryField IsFavouriteQueryField()
+		public GraphQueryField IsFavouriteQueryField()
 		{
 			return IsFavourite;
 		}
 
-		private GraphQLQueryField Id { get; set; }
-		private GraphQLQueryField Name { get; set; }
-		private GraphQLQueryField Media { get; set; }
-		private GraphQLQueryField SiteUrl { get; set; }
-		private GraphQLQueryField IsFavourite { get; set; }
+		private GraphQueryField Id { get; set; }
+		private GraphQueryField Name { get; set; }
+		private GraphQueryField Media { get; set; }
+		private GraphQueryField SiteUrl { get; set; }
+		private GraphQueryField IsFavourite { get; set; }
 
-		private void InitializeProperties()
+		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Id = new GraphQLQueryField("id", new FieldRules(false));
-			Name = new GraphQLQueryField("name", new FieldRules(false));
-			Media = new GraphQLQueryField("media", new FieldRules(false));
-			SiteUrl = new GraphQLQueryField("siteUrl", new FieldRules(false));
-			IsFavourite = new GraphQLQueryField("isFavourite", new FieldRules(false));
+			Id = new GraphQueryField("id", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Studio }));
+			Name = new GraphQueryField("name", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Studio }));
+			Media = new GraphQueryField("media", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Studio }));
+			SiteUrl = new GraphQueryField("siteUrl", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Studio }));
+			IsFavourite = new GraphQueryField("isFavourite", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Studio }));
 		}
 	}
 }

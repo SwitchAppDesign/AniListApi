@@ -1,20 +1,21 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class ThreadCommentQueryFields
 	{
-		public ThreadCommentQueryFields()
+		public ThreadCommentQueryFields(AniListQueryType queryType)
 		{
-			InitializeProperties();
+			InitializeProperties(queryType);
 		}
 
 		/// <summary>
 		/// The id of the comment.
 		/// </summary>
-		public GraphQLQueryField IdQueryField()
+		public GraphQueryField IdQueryField()
 		{
 			return Id;
 		}
@@ -22,7 +23,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The user id of the comment's owner.
 		/// </summary>
-		public GraphQLQueryField UserIdQueryField()
+		public GraphQueryField UserIdQueryField()
 		{
 			return UserId;
 		}
@@ -30,7 +31,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The id of thread the comment belongs to.
 		/// </summary>
-		public GraphQLQueryField ThreadIdQueryField()
+		public GraphQueryField ThreadIdQueryField()
 		{
 			return ThreadId;
 		}
@@ -38,7 +39,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The text content of the comment (Markdown)
 		/// </summary>
-		public GraphQLQueryField CommentQueryField()
+		public GraphQueryField CommentQueryField()
 		{
 			return Comment;
 		}
@@ -46,7 +47,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The url for the comment page on the AniList website.
 		/// </summary>
-		public GraphQLQueryField SiteUrlQueryField()
+		public GraphQueryField SiteUrlQueryField()
 		{
 			return SiteUrl;
 		}
@@ -54,7 +55,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The time of the comments creation.
 		/// </summary>
-		public GraphQLQueryField CreatedAtQueryField()
+		public GraphQueryField CreatedAtQueryField()
 		{
 			return CreatedAt;
 		}
@@ -62,7 +63,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The time of the comments last update.
 		/// </summary>
-		public GraphQLQueryField UpdatedAtQueryField()
+		public GraphQueryField UpdatedAtQueryField()
 		{
 			return UpdatedAt;
 		}
@@ -70,7 +71,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The user id of the comment's owner.
 		/// </summary>
-		public GraphQLQueryField UserQueryField()
+		public GraphQueryField UserQueryField()
 		{
 			return User;
 		}
@@ -78,7 +79,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The users who liked the comment.
 		/// </summary>
-		public GraphQLQueryField LikesQueryField()
+		public GraphQueryField LikesQueryField()
 		{
 			return Likes;
 		}
@@ -86,34 +87,34 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The comment's child reply comments.
 		/// </summary>
-		public GraphQLQueryField ChildCommentsQueryField()
+		public GraphQueryField ChildCommentsQueryField()
 		{
 			return ChildComments;
 		}
 
-		private GraphQLQueryField Id { get; set; }
-		private GraphQLQueryField UserId { get; set; }
-		private GraphQLQueryField ThreadId { get; set; }
-		private GraphQLQueryField Comment { get; set; }
-		private GraphQLQueryField SiteUrl { get; set; }
-		private GraphQLQueryField CreatedAt { get; set; }
-		private GraphQLQueryField UpdatedAt { get; set; }
-		private GraphQLQueryField User { get; set; }
-		private GraphQLQueryField Likes { get; set; }
-		private GraphQLQueryField ChildComments { get; set; }
+		private GraphQueryField Id { get; set; }
+		private GraphQueryField UserId { get; set; }
+		private GraphQueryField ThreadId { get; set; }
+		private GraphQueryField Comment { get; set; }
+		private GraphQueryField SiteUrl { get; set; }
+		private GraphQueryField CreatedAt { get; set; }
+		private GraphQueryField UpdatedAt { get; set; }
+		private GraphQueryField User { get; set; }
+		private GraphQueryField Likes { get; set; }
+		private GraphQueryField ChildComments { get; set; }
 
-		private void InitializeProperties()
+		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Id = new GraphQLQueryField("id", new FieldRules(false));
-			UserId = new GraphQLQueryField("userId", new FieldRules(false));
-			ThreadId = new GraphQLQueryField("threadId", new FieldRules(false));
-			Comment = new GraphQLQueryField("comment", new FieldRules(false));
-			SiteUrl = new GraphQLQueryField("siteUrl", new FieldRules(false));
-			CreatedAt = new GraphQLQueryField("createdAt", new FieldRules(false));
-			UpdatedAt = new GraphQLQueryField("updatedAt", new FieldRules(false));
-			User = new GraphQLQueryField("user", new FieldRules(false));
-			Likes = new GraphQLQueryField("likes", new FieldRules(false));
-			ChildComments = new GraphQLQueryField("childComments", new FieldRules(false));
+			Id = new GraphQueryField("id", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
+			UserId = new GraphQueryField("userId", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
+			ThreadId = new GraphQueryField("threadId", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
+			Comment = new GraphQueryField("comment", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
+			SiteUrl = new GraphQueryField("siteUrl", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
+			CreatedAt = new GraphQueryField("createdAt", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
+			UpdatedAt = new GraphQueryField("updatedAt", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
+			User = new GraphQueryField("user", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
+			Likes = new GraphQueryField("likes", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
+			ChildComments = new GraphQueryField("childComments", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
 		}
 	}
 }

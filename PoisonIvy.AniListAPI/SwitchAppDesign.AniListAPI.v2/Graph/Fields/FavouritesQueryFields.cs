@@ -1,54 +1,55 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class FavouritesQueryFields
 	{
-		public FavouritesQueryFields()
+		public FavouritesQueryFields(AniListQueryType queryType)
 		{
-			InitializeProperties();
+			InitializeProperties(queryType);
 		}
 
-		public GraphQLQueryField AnimeQueryField()
+		public GraphQueryField AnimeQueryField()
 		{
 			return Anime;
 		}
 
-		public GraphQLQueryField MangaQueryField()
+		public GraphQueryField MangaQueryField()
 		{
 			return Manga;
 		}
 
-		public GraphQLQueryField CharactersQueryField()
+		public GraphQueryField CharactersQueryField()
 		{
 			return Characters;
 		}
 
-		public GraphQLQueryField StaffQueryField()
+		public GraphQueryField StaffQueryField()
 		{
 			return Staff;
 		}
 
-		public GraphQLQueryField StudiosQueryField()
+		public GraphQueryField StudiosQueryField()
 		{
 			return Studios;
 		}
 
-		private GraphQLQueryField Anime { get; set; }
-		private GraphQLQueryField Manga { get; set; }
-		private GraphQLQueryField Characters { get; set; }
-		private GraphQLQueryField Staff { get; set; }
-		private GraphQLQueryField Studios { get; set; }
+		private GraphQueryField Anime { get; set; }
+		private GraphQueryField Manga { get; set; }
+		private GraphQueryField Characters { get; set; }
+		private GraphQueryField Staff { get; set; }
+		private GraphQueryField Studios { get; set; }
 
-		private void InitializeProperties()
+		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Anime = new GraphQLQueryField("anime", new FieldRules(false));
-			Manga = new GraphQLQueryField("manga", new FieldRules(false));
-			Characters = new GraphQLQueryField("characters", new FieldRules(false));
-			Staff = new GraphQLQueryField("staff", new FieldRules(false));
-			Studios = new GraphQLQueryField("studios", new FieldRules(false));
+			Anime = new GraphQueryField("anime", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			Manga = new GraphQueryField("manga", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			Characters = new GraphQueryField("characters", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			Staff = new GraphQueryField("staff", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			Studios = new GraphQueryField("studios", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
 		}
 	}
 }

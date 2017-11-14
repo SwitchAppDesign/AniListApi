@@ -1,20 +1,21 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class ImageDataQueryFields
 	{
-		public ImageDataQueryFields()
+		public ImageDataQueryFields(AniListQueryType queryType)
 		{
-			InitializeProperties();
+			InitializeProperties(queryType);
 		}
 
 		/// <summary>
 		/// The image at its largest size
 		/// </summary>
-		public GraphQLQueryField LargeQueryField()
+		public GraphQueryField LargeQueryField()
 		{
 			return Large;
 		}
@@ -22,18 +23,18 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The cover image of media at medium size
 		/// </summary>
-		public GraphQLQueryField MediumQueryField()
+		public GraphQueryField MediumQueryField()
 		{
 			return Medium;
 		}
 
-		private GraphQLQueryField Large { get; set; }
-		private GraphQLQueryField Medium { get; set; }
+		private GraphQueryField Large { get; set; }
+		private GraphQueryField Medium { get; set; }
 
-		private void InitializeProperties()
+		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Large = new GraphQLQueryField("large", new FieldRules(false));
-			Medium = new GraphQLQueryField("medium", new FieldRules(false));
+			Large = new GraphQueryField("large", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Medium = new GraphQueryField("medium", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
 		}
 	}
 }

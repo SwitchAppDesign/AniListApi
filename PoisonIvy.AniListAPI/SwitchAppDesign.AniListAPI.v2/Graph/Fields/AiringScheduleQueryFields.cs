@@ -1,20 +1,21 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class AiringScheduleQueryFields
 	{
-		public AiringScheduleQueryFields()
+		public AiringScheduleQueryFields(AniListQueryType queryType)
 		{
-			InitializeProperties();
+			InitializeProperties(queryType);
 		}
 
 		/// <summary>
 		/// The id of the airing schedule item
 		/// </summary>
-		public GraphQLQueryField IdQueryField()
+		public GraphQueryField IdQueryField()
 		{
 			return Id;
 		}
@@ -22,7 +23,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// Time the episode airs
 		/// </summary>
-		public GraphQLQueryField AiringAtQueryField()
+		public GraphQueryField AiringAtQueryField()
 		{
 			return AiringAt;
 		}
@@ -30,7 +31,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// Seconds until episode starts airing
 		/// </summary>
-		public GraphQLQueryField TimeUntilAiringQueryField()
+		public GraphQueryField TimeUntilAiringQueryField()
 		{
 			return TimeUntilAiring;
 		}
@@ -38,7 +39,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The airing episode number
 		/// </summary>
-		public GraphQLQueryField EpisodeQueryField()
+		public GraphQueryField EpisodeQueryField()
 		{
 			return Episode;
 		}
@@ -46,7 +47,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The associate media id of the airing episode
 		/// </summary>
-		public GraphQLQueryField MediaIdQueryField()
+		public GraphQueryField MediaIdQueryField()
 		{
 			return MediaId;
 		}
@@ -54,26 +55,26 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The associate media id of the airing episode
 		/// </summary>
-		public GraphQLQueryField MediaQueryField()
+		public GraphQueryField MediaQueryField()
 		{
 			return Media;
 		}
 
-		private GraphQLQueryField Id { get; set; }
-		private GraphQLQueryField AiringAt { get; set; }
-		private GraphQLQueryField TimeUntilAiring { get; set; }
-		private GraphQLQueryField Episode { get; set; }
-		private GraphQLQueryField MediaId { get; set; }
-		private GraphQLQueryField Media { get; set; }
+		private GraphQueryField Id { get; set; }
+		private GraphQueryField AiringAt { get; set; }
+		private GraphQueryField TimeUntilAiring { get; set; }
+		private GraphQueryField Episode { get; set; }
+		private GraphQueryField MediaId { get; set; }
+		private GraphQueryField Media { get; set; }
 
-		private void InitializeProperties()
+		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Id = new GraphQLQueryField("id", new FieldRules(false));
-			AiringAt = new GraphQLQueryField("airingAt", new FieldRules(false));
-			TimeUntilAiring = new GraphQLQueryField("timeUntilAiring", new FieldRules(false));
-			Episode = new GraphQLQueryField("episode", new FieldRules(false));
-			MediaId = new GraphQLQueryField("mediaId", new FieldRules(false));
-			Media = new GraphQLQueryField("media", new FieldRules(false));
+			Id = new GraphQueryField("id", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
+			AiringAt = new GraphQueryField("airingAt", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
+			TimeUntilAiring = new GraphQueryField("timeUntilAiring", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
+			Episode = new GraphQueryField("episode", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
+			MediaId = new GraphQueryField("mediaId", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
+			Media = new GraphQueryField("media", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
 		}
 	}
 }

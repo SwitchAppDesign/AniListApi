@@ -1,17 +1,18 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class StaffEdgeQueryFields
 	{
-		public StaffEdgeQueryFields()
+		public StaffEdgeQueryFields(AniListQueryType queryType)
 		{
-			InitializeProperties();
+			InitializeProperties(queryType);
 		}
 
-		public GraphQLQueryField NodeQueryField()
+		public GraphQueryField NodeQueryField()
 		{
 			return Node;
 		}
@@ -19,7 +20,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The id of the connection
 		/// </summary>
-		public GraphQLQueryField IdQueryField()
+		public GraphQueryField IdQueryField()
 		{
 			return Id;
 		}
@@ -27,7 +28,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The role of the staff member in the production of the media
 		/// </summary>
-		public GraphQLQueryField RoleQueryField()
+		public GraphQueryField RoleQueryField()
 		{
 			return Role;
 		}
@@ -35,22 +36,22 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The order the staff should be displayed from the users favourites
 		/// </summary>
-		public GraphQLQueryField FavouriteOrderQueryField()
+		public GraphQueryField FavouriteOrderQueryField()
 		{
 			return FavouriteOrder;
 		}
 
-		private GraphQLQueryField Node { get; set; }
-		private GraphQLQueryField Id { get; set; }
-		private GraphQLQueryField Role { get; set; }
-		private GraphQLQueryField FavouriteOrder { get; set; }
+		private GraphQueryField Node { get; set; }
+		private GraphQueryField Id { get; set; }
+		private GraphQueryField Role { get; set; }
+		private GraphQueryField FavouriteOrder { get; set; }
 
-		private void InitializeProperties()
+		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Node = new GraphQLQueryField("node", new FieldRules(false));
-			Id = new GraphQLQueryField("id", new FieldRules(false));
-			Role = new GraphQLQueryField("role", new FieldRules(false));
-			FavouriteOrder = new GraphQLQueryField("favouriteOrder", new FieldRules(false));
+			Node = new GraphQueryField("node", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Staff }));
+			Id = new GraphQueryField("id", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Staff }));
+			Role = new GraphQueryField("role", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Staff }));
+			FavouriteOrder = new GraphQueryField("favouriteOrder", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Staff }));
 		}
 	}
 }

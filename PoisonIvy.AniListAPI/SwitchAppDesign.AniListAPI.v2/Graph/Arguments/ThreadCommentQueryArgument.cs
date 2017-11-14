@@ -5,17 +5,20 @@ using SwitchAppDesign.AniListAPI.v2.Models;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
 {
-    internal class ThreadCommentQueryArgument
+    /// <summary>
+    /// All available thread comment query arguments.
+    /// </summary>
+    public class ThreadCommentQueryArgument
     {
-        public ThreadCommentQueryArgument()
+        internal ThreadCommentQueryArgument(AniListQueryType queryType)
         {
-            InitializeProperties();
+            InitializeProperties(queryType);
         }
 
         /// <summary>
         /// Filter by the comment id.
         /// </summary>
-        public GraphQLQueryArgument<int> IdQueryArgument(int value)
+        public GraphQueryArgument<int> IdQueryArgument(int value)
         {
             return Id.GetQueryArgumentAndSetValue(value);
         }
@@ -23,7 +26,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         /// <summary>
         /// Filter by the thread id.
         /// </summary>
-        public GraphQLQueryArgument<int> ThreadIdQueryArgument(int value)
+        public GraphQueryArgument<int> ThreadIdQueryArgument(int value)
         {
             return ThreadId.GetQueryArgumentAndSetValue(value);
         }
@@ -31,20 +34,20 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         /// <summary>
         /// Filter by the user id of the comment's creator.
         /// </summary>
-        public GraphQLQueryArgument<int> UserIdQueryArgument(int value)
+        public GraphQueryArgument<int> UserIdQueryArgument(int value)
         {
             return UserId.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<int> Id { get; set; }
-        private GraphQLQueryArgument<int> ThreadId { get; set; }
-        private GraphQLQueryArgument<int> UserId { get; set; }
+        private GraphQueryArgument<int> Id { get; set; }
+        private GraphQueryArgument<int> ThreadId { get; set; }
+        private GraphQueryArgument<int> UserId { get; set; }
 
-        private void InitializeProperties()
+        private void InitializeProperties(AniListQueryType queryType)
         {
-            Id = new GraphQLQueryArgument<int>("id", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
-            ThreadId = new GraphQLQueryArgument<int>("threadId", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.ThreadComment })); 
-            UserId =new GraphQLQueryArgument<int>("userId", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.ThreadComment })); 
+            Id = new GraphQueryArgument<int>("id", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
+            ThreadId = new GraphQueryArgument<int>("threadId", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.ThreadComment })); 
+            UserId =new GraphQueryArgument<int>("userId", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.ThreadComment })); 
         }
     }
 }

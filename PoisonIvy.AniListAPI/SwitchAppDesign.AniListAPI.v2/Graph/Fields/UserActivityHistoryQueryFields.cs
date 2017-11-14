@@ -1,20 +1,21 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class UserActivityHistoryQueryFields
 	{
-		public UserActivityHistoryQueryFields()
+		public UserActivityHistoryQueryFields(AniListQueryType queryType)
 		{
-			InitializeProperties();
+			InitializeProperties(queryType);
 		}
 
 		/// <summary>
 		/// The day the activity took place (Unix timestamp)
 		/// </summary>
-		public GraphQLQueryField DateQueryField()
+		public GraphQueryField DateQueryField()
 		{
 			return Date;
 		}
@@ -22,7 +23,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The amount of activity on the day
 		/// </summary>
-		public GraphQLQueryField AmountQueryField()
+		public GraphQueryField AmountQueryField()
 		{
 			return Amount;
 		}
@@ -30,20 +31,20 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The level of activity represented on a 1-10 scale
 		/// </summary>
-		public GraphQLQueryField LevelQueryField()
+		public GraphQueryField LevelQueryField()
 		{
 			return Level;
 		}
 
-		private GraphQLQueryField Date { get; set; }
-		private GraphQLQueryField Amount { get; set; }
-		private GraphQLQueryField Level { get; set; }
-
-		private void InitializeProperties()
+		private GraphQueryField Date { get; set; }
+		private GraphQueryField Amount { get; set; }
+		private GraphQueryField Level { get; set; }
+         
+		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Date = new GraphQLQueryField("date", new FieldRules(false));
-			Amount = new GraphQLQueryField("amount", new FieldRules(false));
-			Level = new GraphQLQueryField("level", new FieldRules(false));
+			Date = new GraphQueryField("date", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			Amount = new GraphQueryField("amount", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			Level = new GraphQueryField("level", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
 		}
 	}
 }

@@ -1,219 +1,220 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
-	internal class ThreadQueryFields
-	{
-		public ThreadQueryFields()
-		{
-			InitializeProperties();
-		}
+    internal class ThreadQueryFields
+    {
+        public ThreadQueryFields(AniListQueryType queryType)
+        {
+            InitializeProperties(queryType);
+        }
 
-		/// <summary>
-		/// The id of the thread.
-		/// </summary>
-		public GraphQLQueryField IdQueryField()
-		{
-			return Id;
-		}
+        /// <summary>
+        /// The id of the thread.
+        /// </summary>
+        public GraphQueryField IdQueryField()
+        {
+            return Id;
+        }
 
-		/// <summary>
-		/// The title of the thread.
-		/// </summary>
-		public GraphQLQueryField TitleQueryField()
-		{
-			return Title;
-		}
+        /// <summary>
+        /// The title of the thread.
+        /// </summary>
+        public GraphQueryField TitleQueryField()
+        {
+            return Title;
+        }
 
-		/// <summary>
-		/// The text body of the thread (Markdown).
-		/// </summary>
-		public GraphQLQueryField BodyQueryField()
-		{
-			return Body;
-		}
+        /// <summary>
+        /// The text body of the thread (Markdown).
+        /// </summary>
+        public GraphQueryField BodyQueryField()
+        {
+            return Body;
+        }
 
-		/// <summary>
-		/// The id of the thread owner user.
-		/// </summary>
-		public GraphQLQueryField UserIdQueryField()
-		{
-			return UserId;
-		}
+        /// <summary>
+        /// The id of the thread owner user.
+        /// </summary>
+        public GraphQueryField UserIdQueryField()
+        {
+            return UserId;
+        }
 
-		/// <summary>
-		/// The id of the user who most recently commented on the thread.
-		/// </summary>
-		public GraphQLQueryField ReplyUserIdQueryField()
-		{
-			return ReplyUserId;
-		}
+        /// <summary>
+        /// The id of the user who most recently commented on the thread.
+        /// </summary>
+        public GraphQueryField ReplyUserIdQueryField()
+        {
+            return ReplyUserId;
+        }
 
-		/// <summary>
-		/// The id of the most recent comment on the thread.
-		/// </summary>
-		public GraphQLQueryField ReplyCommentIdQueryField()
-		{
-			return ReplyCommentId;
-		}
+        /// <summary>
+        /// The id of the most recent comment on the thread.
+        /// </summary>
+        public GraphQueryField ReplyCommentIdQueryField()
+        {
+            return ReplyCommentId;
+        }
 
-		/// <summary>
-		/// The number of comments on the thread.
-		/// </summary>
-		public GraphQLQueryField ReplyCountQueryField()
-		{
-			return ReplyCount;
-		}
+        /// <summary>
+        /// The number of comments on the thread.
+        /// </summary>
+        public GraphQueryField ReplyCountQueryField()
+        {
+            return ReplyCount;
+        }
 
-		/// <summary>
-		/// The number of times users have viewed the thread.
-		/// </summary>
-		public GraphQLQueryField ViewCountQueryField()
-		{
-			return ViewCount;
-		}
+        /// <summary>
+        /// The number of times users have viewed the thread.
+        /// </summary>
+        public GraphQueryField ViewCountQueryField()
+        {
+            return ViewCount;
+        }
 
-		/// <summary>
-		/// If the thread is locked and can receive comments.
-		/// </summary>
-		public GraphQLQueryField IsLockedQueryField()
-		{
-			return IsLocked;
-		}
+        /// <summary>
+        /// If the thread is locked and can receive comments.
+        /// </summary>
+        public GraphQueryField IsLockedQueryField()
+        {
+            return IsLocked;
+        }
 
-		/// <summary>
-		/// If the thread is stickied and should be displayed at the top of the page.
-		/// </summary>
-		public GraphQLQueryField IsStickyQueryField()
-		{
-			return IsSticky;
-		}
+        /// <summary>
+        /// If the thread is stickied and should be displayed at the top of the page.
+        /// </summary>
+        public GraphQueryField IsStickyQueryField()
+        {
+            return IsSticky;
+        }
 
-		/// <summary>
-		/// If the currently authenticated user is subscribed to the thread.
-		/// </summary>
-		public GraphQLQueryField IsSubscribedQueryField()
-		{
-			return IsSubscribed;
-		}
+        /// <summary>
+        /// If the currently authenticated user is subscribed to the thread.
+        /// </summary>
+        public GraphQueryField IsSubscribedQueryField()
+        {
+            return IsSubscribed;
+        }
 
-		/// <summary>
-		/// The time of the last reply.
-		/// </summary>
-		public GraphQLQueryField RepliedAtQueryField()
-		{
-			return RepliedAt;
-		}
+        /// <summary>
+        /// The time of the last reply.
+        /// </summary>
+        public GraphQueryField RepliedAtQueryField()
+        {
+            return RepliedAt;
+        }
 
-		/// <summary>
-		/// The time of the thread creation.
-		/// </summary>
-		public GraphQLQueryField CreatedAtQueryField()
-		{
-			return CreatedAt;
-		}
+        /// <summary>
+        /// The time of the thread creation.
+        /// </summary>
+        public GraphQueryField CreatedAtQueryField()
+        {
+            return CreatedAt;
+        }
 
-		/// <summary>
-		/// The time of the thread last update.
-		/// </summary>
-		public GraphQLQueryField UpdatedAtQueryField()
-		{
-			return UpdatedAt;
-		}
+        /// <summary>
+        /// The time of the thread last update.
+        /// </summary>
+        public GraphQueryField UpdatedAtQueryField()
+        {
+            return UpdatedAt;
+        }
 
-		/// <summary>
-		/// The id of the thread owner user.
-		/// </summary>
-		public GraphQLQueryField UserQueryField()
-		{
-			return User;
-		}
+        /// <summary>
+        /// The id of the thread owner user.
+        /// </summary>
+        public GraphQueryField UserQueryField()
+        {
+            return User;
+        }
 
-		/// <summary>
-		/// The id of the user who most recently commented on the thread.
-		/// </summary>
-		public GraphQLQueryField ReplyUserQueryField()
-		{
-			return ReplyUser;
-		}
+        /// <summary>
+        /// The id of the user who most recently commented on the thread.
+        /// </summary>
+        public GraphQueryField ReplyUserQueryField()
+        {
+            return ReplyUser;
+        }
 
-		/// <summary>
-		/// The users who liked the thread.
-		/// </summary>
-		public GraphQLQueryField LikesQueryField()
-		{
-			return Likes;
-		}
+        /// <summary>
+        /// The users who liked the thread.
+        /// </summary>
+        public GraphQueryField LikesQueryField()
+        {
+            return Likes;
+        }
 
-		/// <summary>
-		/// The url for the thread page on the AniList website.
-		/// </summary>
-		public GraphQLQueryField SiteUrlQueryField()
-		{
-			return SiteUrl;
-		}
+        /// <summary>
+        /// The url for the thread page on the AniList website.
+        /// </summary>
+        public GraphQueryField SiteUrlQueryField()
+        {
+            return SiteUrl;
+        }
 
-		/// <summary>
-		/// The categories of the thread.
-		/// </summary>
-		public GraphQLQueryField CategoriesQueryField()
-		{
-			return Categories;
-		}
+        /// <summary>
+        /// The categories of the thread.
+        /// </summary>
+        public GraphQueryField CategoriesQueryField()
+        {
+            return Categories;
+        }
 
-		/// <summary>
-		/// The media categories of the thread.
-		/// </summary>
-		public GraphQLQueryField MediaCategoriesQueryField()
-		{
-			return MediaCategories;
-		}
+        /// <summary>
+        /// The media categories of the thread.
+        /// </summary>
+        public GraphQueryField MediaCategoriesQueryField()
+        {
+            return MediaCategories;
+        }
 
-		private GraphQLQueryField Id { get; set; }
-		private GraphQLQueryField Title { get; set; }
-		private GraphQLQueryField Body { get; set; }
-		private GraphQLQueryField UserId { get; set; }
-		private GraphQLQueryField ReplyUserId { get; set; }
-		private GraphQLQueryField ReplyCommentId { get; set; }
-		private GraphQLQueryField ReplyCount { get; set; }
-		private GraphQLQueryField ViewCount { get; set; }
-		private GraphQLQueryField IsLocked { get; set; }
-		private GraphQLQueryField IsSticky { get; set; }
-		private GraphQLQueryField IsSubscribed { get; set; }
-		private GraphQLQueryField RepliedAt { get; set; }
-		private GraphQLQueryField CreatedAt { get; set; }
-		private GraphQLQueryField UpdatedAt { get; set; }
-		private GraphQLQueryField User { get; set; }
-		private GraphQLQueryField ReplyUser { get; set; }
-		private GraphQLQueryField Likes { get; set; }
-		private GraphQLQueryField SiteUrl { get; set; }
-		private GraphQLQueryField Categories { get; set; }
-		private GraphQLQueryField MediaCategories { get; set; }
+        private GraphQueryField Id { get; set; }
+        private GraphQueryField Title { get; set; }
+        private GraphQueryField Body { get; set; }
+        private GraphQueryField UserId { get; set; }
+        private GraphQueryField ReplyUserId { get; set; }
+        private GraphQueryField ReplyCommentId { get; set; }
+        private GraphQueryField ReplyCount { get; set; }
+        private GraphQueryField ViewCount { get; set; }
+        private GraphQueryField IsLocked { get; set; }
+        private GraphQueryField IsSticky { get; set; }
+        private GraphQueryField IsSubscribed { get; set; }
+        private GraphQueryField RepliedAt { get; set; }
+        private GraphQueryField CreatedAt { get; set; }
+        private GraphQueryField UpdatedAt { get; set; }
+        private GraphQueryField User { get; set; }
+        private GraphQueryField ReplyUser { get; set; }
+        private GraphQueryField Likes { get; set; }
+        private GraphQueryField SiteUrl { get; set; }
+        private GraphQueryField Categories { get; set; }
+        private GraphQueryField MediaCategories { get; set; }
 
-		private void InitializeProperties()
-		{
-			Id = new GraphQLQueryField("id", new FieldRules(false));
-			Title = new GraphQLQueryField("title", new FieldRules(false));
-			Body = new GraphQLQueryField("body", new FieldRules(false));
-			UserId = new GraphQLQueryField("userId", new FieldRules(false));
-			ReplyUserId = new GraphQLQueryField("replyUserId", new FieldRules(false));
-			ReplyCommentId = new GraphQLQueryField("replyCommentId", new FieldRules(false));
-			ReplyCount = new GraphQLQueryField("replyCount", new FieldRules(false));
-			ViewCount = new GraphQLQueryField("viewCount", new FieldRules(false));
-			IsLocked = new GraphQLQueryField("isLocked", new FieldRules(false));
-			IsSticky = new GraphQLQueryField("isSticky", new FieldRules(false));
-			IsSubscribed = new GraphQLQueryField("isSubscribed", new FieldRules(false));
-			RepliedAt = new GraphQLQueryField("repliedAt", new FieldRules(false));
-			CreatedAt = new GraphQLQueryField("createdAt", new FieldRules(false));
-			UpdatedAt = new GraphQLQueryField("updatedAt", new FieldRules(false));
-			User = new GraphQLQueryField("user", new FieldRules(false));
-			ReplyUser = new GraphQLQueryField("replyUser", new FieldRules(false));
-			Likes = new GraphQLQueryField("likes", new FieldRules(false));
-			SiteUrl = new GraphQLQueryField("siteUrl", new FieldRules(false));
-			Categories = new GraphQLQueryField("categories", new FieldRules(false));
-			MediaCategories = new GraphQLQueryField("mediaCategories", new FieldRules(false));
-		}
-	}
+        private void InitializeProperties(AniListQueryType queryType)
+        {
+            Id = new GraphQueryField("id", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            Title = new GraphQueryField("title", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            Body = new GraphQueryField("body", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            UserId = new GraphQueryField("userId", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            ReplyUserId = new GraphQueryField("replyUserId", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            ReplyCommentId = new GraphQueryField("replyCommentId", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            ReplyCount = new GraphQueryField("replyCount", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            ViewCount = new GraphQueryField("viewCount", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            IsLocked = new GraphQueryField("isLocked", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            IsSticky = new GraphQueryField("isSticky", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            IsSubscribed = new GraphQueryField("isSubscribed", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            RepliedAt = new GraphQueryField("repliedAt", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            CreatedAt = new GraphQueryField("createdAt", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            UpdatedAt = new GraphQueryField("updatedAt", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            User = new GraphQueryField("user", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            ReplyUser = new GraphQueryField("replyUser", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            Likes = new GraphQueryField("likes", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            SiteUrl = new GraphQueryField("siteUrl", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            Categories = new GraphQueryField("categories", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            MediaCategories = new GraphQueryField("mediaCategories", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+        }
+    }
 }

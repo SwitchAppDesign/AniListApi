@@ -5,18 +5,20 @@ using SwitchAppDesign.AniListAPI.v2.Models;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
 {
-    internal class ActivityReplyQueryArguments
+    /// <summary>
+    /// All available activity reply query arguments.
+    /// </summary>
+    public class ActivityReplyQueryArguments
     {
-        public ActivityReplyQueryArguments()
+        internal ActivityReplyQueryArguments(AniListQueryType queryType)
         {
-            InitializeProperties();
+            InitializeProperties(queryType);
         }
-
 
         /// <summary>
         /// Filter by the reply id.
         /// </summary>
-        public GraphQLQueryArgument<int> IdQueryArgument(int value)
+        public GraphQueryArgument<int> IdQueryArgument(int value)
         {
             return Id.GetQueryArgumentAndSetValue(value);
         }
@@ -25,19 +27,19 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         /// <summary>
         /// Filter by the parent id.
         /// </summary>
-        public GraphQLQueryArgument<int> ActivityIdQueryArgument(int value)
+        public GraphQueryArgument<int> ActivityIdQueryArgument(int value)
         {
             return ActivityId.GetQueryArgumentAndSetValue(value);
         }
 
 
-        private GraphQLQueryArgument<int> Id { get; set; }
-        private GraphQLQueryArgument<int> ActivityId { get; set; }
+        private GraphQueryArgument<int> Id { get; set; }
+        private GraphQueryArgument<int> ActivityId { get; set; }
 
-        private void InitializeProperties()
+        private void InitializeProperties(AniListQueryType queryType)
         {
-            Id = new GraphQLQueryArgument<int>("id", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.ActivityReply }));
-            ActivityId = new GraphQLQueryArgument<int>("activityId", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.ActivityReply }));
+            Id = new GraphQueryArgument<int>("id", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.ActivityReply }));
+            ActivityId = new GraphQueryArgument<int>("activityId", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.ActivityReply }));
         }
     }
 }

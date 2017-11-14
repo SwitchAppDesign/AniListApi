@@ -8,26 +8,26 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
     /// <summary>
     /// Provide AniList markdown to be converted to html (Requires auth)
     /// </summary>
-    internal class MarkdownQueryArguments
+    public class MarkdownQueryArguments
     {
-        public MarkdownQueryArguments()
+        internal MarkdownQueryArguments(AniListQueryType queryType)
         {
-            InitializeProperties();
+            InitializeProperties(queryType);
         }
 
         /// <summary>
         /// The markdown to be parsed to html.
         /// </summary>
-        public GraphQLQueryArgument<string> MarkdownQueryArgument(string value)
+        public GraphQueryArgument<string> MarkdownQueryArgument(string value)
         {
             return Markdown.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<string> Markdown { get; set; }
+        private GraphQueryArgument<string> Markdown { get; set; }
 
-        private void InitializeProperties()
+        private void InitializeProperties(AniListQueryType queryType)
         {
-            Markdown = new GraphQLQueryArgument<string>("markdown", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Markdown }));
+            Markdown = new GraphQueryArgument<string>("markdown", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Markdown }));
         }
     }
 }

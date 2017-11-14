@@ -6,17 +6,20 @@ using SwitchAppDesign.AniListAPI.v2.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
 {
-    internal class ReviewQueryArguments
+    /// <summary>
+    /// All available review query arguments.
+    /// </summary>
+    public class ReviewQueryArguments
     {
-        public ReviewQueryArguments()
+        internal ReviewQueryArguments(AniListQueryType queryType)
         {
-            InitializeProperties();
+            InitializeProperties(queryType);
         }
 
         /// <summary>
         /// Filter by a review's id.
         /// </summary>
-        public GraphQLQueryArgument<int> IdQueryArgument(int value)
+        public GraphQueryArgument<int> IdQueryArgument(int value)
         {
             return Id.GetQueryArgumentAndSetValue(value);
         }
@@ -24,7 +27,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         /// <summary>
         /// Filter by a media's id.
         /// </summary>
-        public GraphQLQueryArgument<int> MediaIdQueryArgument(int value)
+        public GraphQueryArgument<int> MediaIdQueryArgument(int value)
         {
             return MediaId.GetQueryArgumentAndSetValue(value);
         }
@@ -32,7 +35,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         /// <summary>
         /// Filter by user's id.
         /// </summary>
-        public GraphQLQueryArgument<int> UserIdQueryArgument(int value)
+        public GraphQueryArgument<int> UserIdQueryArgument(int value)
         {
             return UserId.GetQueryArgumentAndSetValue(value);
         }
@@ -40,7 +43,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         /// <summary>
         /// Filter by media type.
         /// </summary>
-        public GraphQLQueryArgument<MediaType> MediaTypeQueryArgument(MediaType value)
+        public GraphQueryArgument<MediaType> MediaTypeQueryArgument(MediaType value)
         {
             return MediaType.GetQueryArgumentAndSetValue(value);
         }
@@ -48,7 +51,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         /// <summary>
         /// Filter by search query.
         /// </summary>
-        public GraphQLQueryArgument<string> SearchQueryArgument(string value)
+        public GraphQueryArgument<string> SearchQueryArgument(string value)
         {
             return Search.GetQueryArgumentAndSetValue(value);
         }
@@ -56,7 +59,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         /// <summary>
         /// The order the results will be returned in.
         /// </summary>
-        public GraphQLQueryArgument<IEnumerable<ReviewSort>> SortQueryArgument(IEnumerable<ReviewSort> value)
+        public GraphQueryArgument<IEnumerable<ReviewSort>> SortQueryArgument(IEnumerable<ReviewSort> value)
         {
             return Sort.GetQueryArgumentAndSetValue(value);
         }
@@ -64,7 +67,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         /// <summary>
         /// The review limit.
         /// </summary>
-        public GraphQLQueryArgument<int> LimitQueryArgument(int value)
+        public GraphQueryArgument<int> LimitQueryArgument(int value)
         {
             return Limit.GetQueryArgumentAndSetValue(value);
         }
@@ -72,7 +75,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         /// <summary>
         /// The page number.
         /// </summary>
-        public GraphQLQueryArgument<int> PageQueryArgument(int value)
+        public GraphQueryArgument<int> PageQueryArgument(int value)
         {
             return Page.GetQueryArgumentAndSetValue(value);
         }
@@ -80,35 +83,35 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         /// <summary>
         /// The amount of entries per page (Max 25).
         /// </summary>
-        public GraphQLQueryArgument<int> SortQueryArgument(int value)
+        public GraphQueryArgument<int> SortQueryArgument(int value)
         {
             return PerPage.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<int> Id { get; set; }
-        private GraphQLQueryArgument<int> MediaId { get; set; }
-        private GraphQLQueryArgument<int> UserId { get; set; }
-        private GraphQLQueryArgument<MediaType> MediaType { get; set; }
-        private GraphQLQueryArgument<string> Search { get; set; }
-        private GraphQLQueryArgument<IEnumerable<ReviewSort>> Sort { get; set; }
+        private GraphQueryArgument<int> Id { get; set; }
+        private GraphQueryArgument<int> MediaId { get; set; }
+        private GraphQueryArgument<int> UserId { get; set; }
+        private GraphQueryArgument<MediaType> MediaType { get; set; }
+        private GraphQueryArgument<string> Search { get; set; }
+        private GraphQueryArgument<IEnumerable<ReviewSort>> Sort { get; set; }
 
         // Special Query Arguments for use in other queries
-        private GraphQLQueryArgument<int> Limit { get; set; }
-        private GraphQLQueryArgument<int> Page { get; set; }
-        private GraphQLQueryArgument<int> PerPage { get; set; }
+        private GraphQueryArgument<int> Limit { get; set; }
+        private GraphQueryArgument<int> Page { get; set; }
+        private GraphQueryArgument<int> PerPage { get; set; }
 
-        private void InitializeProperties()
+        private void InitializeProperties(AniListQueryType queryType)
         {
-            Id = new GraphQLQueryArgument<int>("id", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Review }));
-            MediaId = new GraphQLQueryArgument<int>("mediaId", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Review }));
-            UserId = new GraphQLQueryArgument<int>("userId", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Review }));
-            MediaType = new GraphQLQueryArgument<MediaType>("mediaType", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Review }));
-            Search = new GraphQLQueryArgument<string>("search", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Review }));
-            Sort = new GraphQLQueryArgument<IEnumerable<ReviewSort>>("sort", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Review }));
+            Id = new GraphQueryArgument<int>("id", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Review }));
+            MediaId = new GraphQueryArgument<int>("mediaId", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Review }));
+            UserId = new GraphQueryArgument<int>("userId", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Review }));
+            MediaType = new GraphQueryArgument<MediaType>("mediaType", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Review }));
+            Search = new GraphQueryArgument<string>("search", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Review }));
+            Sort = new GraphQueryArgument<IEnumerable<ReviewSort>>("sort", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Review }));
 
-            Limit = new GraphQLQueryArgument<int>("limit", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Media }));
-            Page = new GraphQLQueryArgument<int>("page", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Media }));
-            PerPage = new GraphQLQueryArgument<int>("perPage", new QueryArgumentRules(false, 25, null, new List<AniListQueryType> { AniListQueryType.Media }));
+            Limit = new GraphQueryArgument<int>("limit", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Media }));
+            Page = new GraphQueryArgument<int>("page", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Media }));
+            PerPage = new GraphQueryArgument<int>("perPage", queryType, new QueryArgumentRules(false, 25, null, new List<AniListQueryType> { AniListQueryType.Media }));
         }
     }
 }

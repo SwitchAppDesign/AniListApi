@@ -1,40 +1,41 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class AiringScheduleConnectionQueryFields
 	{
-		public AiringScheduleConnectionQueryFields()
+		public AiringScheduleConnectionQueryFields(AniListQueryType queryType)
 		{
-			InitializeProperties();
+			InitializeProperties(queryType);
 		}
 
-		public GraphQLQueryField EdgesQueryField()
+		public GraphQueryField EdgesQueryField()
 		{
 			return Edges;
 		}
 
-		public GraphQLQueryField NodesQueryField()
+		public GraphQueryField NodesQueryField()
 		{
 			return Nodes;
 		}
 
-		public GraphQLQueryField PageInfoQueryField()
+		public GraphQueryField PageInfoQueryField()
 		{
 			return PageInfo;
 		}
 
-		private GraphQLQueryField Edges { get; set; }
-		private GraphQLQueryField Nodes { get; set; }
-		private GraphQLQueryField PageInfo { get; set; }
+		private GraphQueryField Edges { get; set; }
+		private GraphQueryField Nodes { get; set; }
+		private GraphQueryField PageInfo { get; set; }
 
-		private void InitializeProperties()
+		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Edges = new GraphQLQueryField("edges", new FieldRules(false));
-			Nodes = new GraphQLQueryField("nodes", new FieldRules(false));
-			PageInfo = new GraphQLQueryField("pageInfo", new FieldRules(false));
+			Edges = new GraphQueryField("edges", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
+			Nodes = new GraphQueryField("nodes", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
+			PageInfo = new GraphQueryField("pageInfo", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
 		}
 	}
 }

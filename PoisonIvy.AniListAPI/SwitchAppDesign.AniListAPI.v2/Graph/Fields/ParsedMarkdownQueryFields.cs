@@ -1,26 +1,27 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class ParsedMarkdownQueryFields
 	{
-		public ParsedMarkdownQueryFields()
+		public ParsedMarkdownQueryFields(AniListQueryType queryType)
 		{
-			InitializeProperties();
+			InitializeProperties(queryType);
 		}
 
-		public GraphQLQueryField HtmlQueryField()
+		public GraphQueryField HtmlQueryField()
 		{
 			return Html;
 		}
 
-		private GraphQLQueryField Html { get; set; }
+		private GraphQueryField Html { get; set; }
 
-		private void InitializeProperties()
+		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Html = new GraphQLQueryField("html", new FieldRules(false));
+			Html = new GraphQueryField("html", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Markdown }));
 		}
 	}
 }

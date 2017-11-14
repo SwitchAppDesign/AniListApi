@@ -1,22 +1,29 @@
+using System;
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
+using System.Linq;
 using System.Transactions;
+using SwitchAppDesign.AniListAPI.v2.Common;
 using SwitchAppDesign.AniListAPI.v2.Graph.Arguments;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
-	internal class MediaQueryFields
+    /// <summary>
+    /// All available media query fields.
+    /// </summary>
+	public class MediaQueryFields
 	{
-		public MediaQueryFields()
+		internal MediaQueryFields(AniListQueryType queryType)
 		{
-			InitializeProperties();
+			InitializeProperties(queryType);
 		}
 
 		/// <summary>
 		/// The id of the media
 		/// </summary>
-		public GraphQLQueryField IdQueryField()
+		public GraphQueryField IdQueryField()
 		{
 			return Id;
 		}
@@ -24,7 +31,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The mal id of the media
 		/// </summary>
-		public GraphQLQueryField IdMalQueryField()
+		public GraphQueryField IdMalQueryField()
 		{
 			return IdMal;
 		}
@@ -32,7 +39,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The official titles of the media in various languages
 		/// </summary>
-		public GraphQLQueryField TitleQueryField()
+		public GraphQueryField TitleQueryField()
 		{
 			return Title;
 		}
@@ -40,7 +47,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The type of the media; anime or manga
 		/// </summary>
-		public GraphQLQueryField TypeQueryField()
+		public GraphQueryField TypeQueryField()
 		{
 			return Type;
 		}
@@ -48,7 +55,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The format the media was released in
 		/// </summary>
-		public GraphQLQueryField FormatQueryField()
+		public GraphQueryField FormatQueryField()
 		{
 			return Format;
 		}
@@ -56,7 +63,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The current releasing status of the media
 		/// </summary>
-		public GraphQLQueryField StatusQueryField()
+		public GraphQueryField StatusQueryField()
 		{
 			return Status;
 		}
@@ -64,7 +71,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// Short description of the media's story and characters
 		/// </summary>
-		public GraphQLQueryField DescriptionQueryField()
+		public GraphQueryField DescriptionQueryField()
 		{
 			return Description;
 		}
@@ -72,7 +79,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The first official release date of the media
 		/// </summary>
-		public GraphQLQueryField StartDateQueryField()
+		public GraphQueryField StartDateQueryField()
 		{
 			return StartDate;
 		}
@@ -80,7 +87,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The last official release date of the media
 		/// </summary>
-		public GraphQLQueryField EndDateQueryField()
+		public GraphQueryField EndDateQueryField()
 		{
 			return EndDate;
 		}
@@ -88,7 +95,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The season the media was initially released in
 		/// </summary>
-		public GraphQLQueryField SeasonQueryField()
+		public GraphQueryField SeasonQueryField()
 		{
 			return Season;
 		}
@@ -96,7 +103,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The amount of episodes the anime has when complete
 		/// </summary>
-		public GraphQLQueryField EpisodesQueryField()
+		public GraphQueryField EpisodesQueryField()
 		{
 			return Episodes;
 		}
@@ -104,7 +111,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The general length of each anime episode in minutes
 		/// </summary>
-		public GraphQLQueryField DurationQueryField()
+		public GraphQueryField DurationQueryField()
 		{
 			return Duration;
 		}
@@ -112,7 +119,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The amount of chapters the manga has when complete
 		/// </summary>
-		public GraphQLQueryField ChaptersQueryField()
+		public GraphQueryField ChaptersQueryField()
 		{
 			return Chapters;
 		}
@@ -120,7 +127,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The amount of volumes the manga has when complete
 		/// </summary>
-		public GraphQLQueryField VolumesQueryField()
+		public GraphQueryField VolumesQueryField()
 		{
 			return Volumes;
 		}
@@ -128,7 +135,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// Where the media was created. (ISO 3166-1 alpha-2)
 		/// </summary>
-		public GraphQLQueryField CountryOfOriginQueryField()
+		public GraphQueryField CountryOfOriginQueryField()
 		{
 			return CountryOfOrigin;
 		}
@@ -136,7 +143,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// If the media is officially licensed or a self-published doujin release
 		/// </summary>
-		public GraphQLQueryField IsLicensedQueryField()
+		public GraphQueryField IsLicensedQueryField()
 		{
 			return IsLicensed;
 		}
@@ -144,7 +151,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// Source type the media was adapted from.
 		/// </summary>
-		public GraphQLQueryField SourceQueryField()
+		public GraphQueryField SourceQueryField()
 		{
 			return Source;
 		}
@@ -152,7 +159,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// Official Twitter hashtags for the media
 		/// </summary>
-		public GraphQLQueryField HashtagQueryField()
+		public GraphQueryField HashtagQueryField()
 		{
 			return Hashtag;
 		}
@@ -160,7 +167,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// Media trailer or advertisement
 		/// </summary>
-		public GraphQLQueryField TrailerQueryField()
+		public GraphQueryField TrailerQueryField()
 		{
 			return Trailer;
 		}
@@ -168,7 +175,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// When the media's data was last updated
 		/// </summary>
-		public GraphQLQueryField UpdatedAtQueryField()
+		public GraphQueryField UpdatedAtQueryField()
 		{
 			return UpdatedAt;
 		}
@@ -176,7 +183,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The cover images of the media
 		/// </summary>
-		public GraphQLQueryField CoverImageQueryField()
+		public GraphQueryField CoverImageQueryField()
 		{
 			return CoverImage;
 		}
@@ -184,7 +191,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The banner image of the media
 		/// </summary>
-		public GraphQLQueryField BannerImageQueryField()
+		public GraphQueryField BannerImageQueryField()
 		{
 			return BannerImage;
 		}
@@ -192,7 +199,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The genres of the media
 		/// </summary>
-		public GraphQLQueryField GenresQueryField()
+		public GraphQueryField GenresQueryField()
 		{
 			return Genres;
 		}
@@ -200,7 +207,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// Alternative titles of the media
 		/// </summary>
-		public GraphQLQueryField SynonymsQueryField()
+		public GraphQueryField SynonymsQueryField()
 		{
 			return Synonyms;
 		}
@@ -208,7 +215,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// A weighted average score of all the user's scores of the media
 		/// </summary>
-		public GraphQLQueryField AverageScoreQueryField()
+		public GraphQueryField AverageScoreQueryField()
 		{
 			return AverageScore;
 		}
@@ -216,7 +223,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// Mean score of all the user's scores of the media
 		/// </summary>
-		public GraphQLQueryField MeanScoreQueryField()
+		public GraphQueryField MeanScoreQueryField()
 		{
 			return MeanScore;
 		}
@@ -224,7 +231,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The number of users with the media on their list
 		/// </summary>
-		public GraphQLQueryField PopularityQueryField()
+		public GraphQueryField PopularityQueryField()
 		{
 			return Popularity;
 		}
@@ -232,7 +239,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// List of tags that describes elements and themes of the media
 		/// </summary>
-		public GraphQLQueryField TagsQueryField()
+		public GraphQueryField TagsQueryField()
 		{
 			return Tags;
 		}
@@ -240,13 +247,15 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// Other media in the same or connecting franchise
 		/// </summary>
-		public GraphQLQueryField RelationsQueryField()
+		public GraphQueryField RelationsQueryField()
 		{
 			return Relations;
 		}
 
         /// <summary>
         /// The characters in the media.
+        /// <param name="fields">The list of character fields (found in CharacterQueryFields) to be used in the graph query.</param>
+        /// <param name="arguments">The list of character arguments (found in CharacterQueryArguments) to be used in the graph query.</param>
         /// <list type="bullet">
         /// <listheader><term>Allowed params</term><description>(Optional)</description></listheader>
         /// <item><term>Sort:</term><description>The fields to sort by.</description></item>
@@ -255,13 +264,18 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// <item><term>PerPage:</term><description>The amount of entries per page, max 25.</description></item>
         /// </list>
         /// </summary>
-        public GraphQLQueryField<CharacterQueryArguments> CharactersQueryField(CharacterQueryArguments arguments = null)
+        public GraphQueryField CharactersQueryField(IList<GraphQueryField> fields, IList<GraphQueryArgument<object>> arguments = null)
         {
-            return Characters.GetGraphFieldAndSetFieldArguments(arguments);
+            if (fields != null && fields.Any())
+                throw new GraphQueryFieldInvalidException($"Field ({Reviews.GetType().Name}) requires at list one query field.");
+
+            return Characters.GetGraphFieldAndSetFieldArguments(fields, arguments);
         }
 
         /// <summary>
         /// The staff who produced the media
+        /// <param name="fields">The list of staff fields (found in StaffQueryFields) to be used in the graph query.</param>
+        /// <param name="arguments">The list of staff arguments (found in StaffQueryArguments) to be used in the graph query.</param>
         /// <list type="bullet">
         /// <listheader><term>Allowed Arguments</term><description>(Optional)</description></listheader>
         /// <item><term>Sort:</term><description>The fields to sort by.</description></item>
@@ -269,28 +283,36 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// <item><term>PerPage:</term><description>The amount of entries per page, max 25.</description></item>
         /// </list>
         /// </summary>
-        public GraphQLQueryField<StaffQueryArguments> StaffQueryField(StaffQueryArguments arguments = null)
+        public GraphQueryField StaffQueryField(IList<GraphQueryField> fields, IList<GraphQueryArgument<object>> arguments = null)
 		{
-			return Staff.GetGraphFieldAndSetFieldArguments(arguments);
+		    if (fields != null && fields.Any())
+		        throw new GraphQueryFieldInvalidException($"Field ({Reviews.GetType().Name}) requires at list one query field.");
+
+            return Staff.GetGraphFieldAndSetFieldArguments(fields, arguments);
 		}
 
         /// <summary>
         /// The companies who produced the media
+        /// <param name="fields">The list of studios fields (found in StudioQueryFields) to be used in the graph query.</param>
+        /// <param name="arguments">The list of studios arguments (found in StudioQueryArguments) to be used in the graph query.</param>
         /// <list type="bullet">
         /// <listheader><term>Allowed Arguments</term><description>(Optional)</description></listheader>
         /// <item><term>Sort:</term><description>The fields to sort by.</description></item>
         /// <item><term>IsMain:</term><description>The amount of entries per page, max 25.</description></item>
         /// </list>
         /// </summary>
-        public GraphQLQueryField<StudioQueryArguments> StudiosQueryField(StudioQueryArguments arguments = null)
+        public GraphQueryField StudiosQueryField(IList<GraphQueryField> fields, IList<GraphQueryArgument<object>> arguments = null)
 		{
-			return Studios.GetGraphFieldAndSetFieldArguments(arguments);
+		    if (fields != null && fields.Any())
+		        throw new GraphQueryFieldInvalidException($"Field ({Reviews.GetType().Name}) requires at list one query field.");
+
+            return Studios.GetGraphFieldAndSetFieldArguments(fields, arguments);
 		}
 
 		/// <summary>
 		/// If the media is marked as favourite by the current authenticated user
 		/// </summary>
-		public GraphQLQueryField IsFavouriteQueryField()
+		public GraphQueryField IsFavouriteQueryField()
 		{
 			return IsFavourite;
 		}
@@ -298,7 +320,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// If the media is intended only for 18+ adult audiences
 		/// </summary>
-		public GraphQLQueryField IsAdultQueryField()
+		public GraphQueryField IsAdultQueryField()
 		{
 			return IsAdult;
 		}
@@ -306,13 +328,15 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The media's next episode airing schedule
 		/// </summary>
-		public GraphQLQueryField NextAiringEpisodeQueryField()
+		public GraphQueryField NextAiringEpisodeQueryField()
 		{
 			return NextAiringEpisode;
 		}
 
         /// <summary>
         /// The media's entire airing schedule
+        /// <param name="fields">The list of airing schedule fields (found in AiringScheduleQueryFields) to be used in the graph query.</param>
+        /// <param name="arguments">The list of airing schedule arguments (found in AiringScheduleQueryArguments) to be used in the graph query.</param>
         /// <list type="bullet">
         /// <listheader><term>Allowed Arguments</term><description>(Optional)</description></listheader>
         /// <item><term>NotYetAired:</term><description>Whether the media has airing or not.</description></item>
@@ -320,15 +344,18 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// <item><term>PerPage:</term><description>The amount of entries per page, max 25.</description></item>
         /// </list>
         /// </summary>
-        public GraphQLQueryField<AiringScheduleQueryArguments> AiringScheduleQueryField(AiringScheduleQueryArguments arguments)
+        public GraphQueryField AiringScheduleQueryField(IList<GraphQueryField> fields, IList<GraphQueryArgument<object>> arguments = null)
 		{
-			return AiringSchedule.GetGraphFieldAndSetFieldArguments(arguments);
+		    if (fields != null && fields.Any())
+		        throw new GraphQueryFieldInvalidException($"Field ({Reviews.GetType().Name}) requires at list one query field.");
+
+            return AiringSchedule.GetGraphFieldAndSetFieldArguments(fields, arguments);
 		}
 
 		/// <summary>
 		/// External links to another site related to the media
 		/// </summary>
-		public GraphQLQueryField ExternalLinksQueryField()
+		public GraphQueryField ExternalLinksQueryField()
 		{
 			return ExternalLinks;
 		}
@@ -336,7 +363,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// Data and links to legal streaming episodes on external sites
 		/// </summary>
-		public GraphQLQueryField StreamingEpisodesQueryField()
+		public GraphQueryField StreamingEpisodesQueryField()
 		{
 			return StreamingEpisodes;
 		}
@@ -344,7 +371,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The ranking of the media in a particular time span and format compared to other media
 		/// </summary>
-		public GraphQLQueryField RankingsQueryField()
+		public GraphQueryField RankingsQueryField()
 		{
 			return Rankings;
 		}
@@ -352,13 +379,15 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The authenticated user's media list entry for the media
 		/// </summary>
-		public GraphQLQueryField MediaListEntryQueryField()
+		public GraphQueryField MediaListEntryQueryField()
 		{
 			return MediaListEntry;
 		}
 
         /// <summary>
         /// User reviews of the media
+        /// <param name="fields">The list of review fields (found in ReviewQueryFields) to be used in the graph query.</param>
+        /// <param name="arguments">The list of review arguments (found in ReviewQueryArguments) to be used in the graph query.</param>
         /// <list type="bullet">
         /// <listheader><term>Allowed Arguments</term><description>(Optional)</description></listheader>
         /// <item><term>Limit:</term><description>The review limit.</description></item>
@@ -367,12 +396,15 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// <item><term>PerPage:</term><description>The amount of entries per page, max 25.</description></item>
         /// </list>
         /// </summary>
-        public GraphQLQueryField<ReviewQueryArguments> ReviewsQueryField(ReviewQueryArguments arguments = null)
+        public GraphQueryField ReviewsQueryField(IList<GraphQueryField> fields, IList<GraphQueryArgument<object>> arguments = null)
 		{
-			return Reviews.GetGraphFieldAndSetFieldArguments(arguments);
+            if (fields != null && fields.Any())
+                throw new GraphQueryFieldInvalidException($"Field ({Reviews.GetType().Name}) requires at list one query field.");
+
+			return Reviews.GetGraphFieldAndSetFieldArguments(fields, arguments);
 		}
 
-		public GraphQLQueryField StatsQueryField()
+		public GraphQueryField StatsQueryField()
 		{
 			return Stats;
 		}
@@ -380,7 +412,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The url for the media page on the AniList website
 		/// </summary>
-		public GraphQLQueryField SiteUrlQueryField()
+		public GraphQueryField SiteUrlQueryField()
 		{
 			return SiteUrl;
 		}
@@ -388,7 +420,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// If the media should have forum thread automatically created for it on airing episode release
 		/// </summary>
-		public GraphQLQueryField AutoCreateForumThreadQueryField()
+		public GraphQueryField AutoCreateForumThreadQueryField()
 		{
 			return AutoCreateForumThread;
 		}
@@ -396,104 +428,104 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// Notes for site moderators
 		/// </summary>
-		public GraphQLQueryField ModNotesQueryField()
+		public GraphQueryField ModNotesQueryField()
 		{
 			return ModNotes;
 		}
 
-		private GraphQLQueryField Id { get; set; }
-		private GraphQLQueryField IdMal { get; set; }
-		private GraphQLQueryField Title { get; set; }
-		private GraphQLQueryField Type { get; set; }
-		private GraphQLQueryField Format { get; set; }
-		private GraphQLQueryField Status { get; set; }
-		private GraphQLQueryField Description { get; set; }
-		private GraphQLQueryField StartDate { get; set; }
-		private GraphQLQueryField EndDate { get; set; }
-		private GraphQLQueryField Season { get; set; }
-		private GraphQLQueryField Episodes { get; set; }
-		private GraphQLQueryField Duration { get; set; }
-		private GraphQLQueryField Chapters { get; set; }
-		private GraphQLQueryField Volumes { get; set; }
-		private GraphQLQueryField CountryOfOrigin { get; set; }
-		private GraphQLQueryField IsLicensed { get; set; }
-		private GraphQLQueryField Source { get; set; }
-		private GraphQLQueryField Hashtag { get; set; }
-		private GraphQLQueryField Trailer { get; set; }
-		private GraphQLQueryField UpdatedAt { get; set; }
-		private GraphQLQueryField CoverImage { get; set; }
-		private GraphQLQueryField BannerImage { get; set; }
-		private GraphQLQueryField Genres { get; set; }
-		private GraphQLQueryField Synonyms { get; set; }
-		private GraphQLQueryField AverageScore { get; set; }
-		private GraphQLQueryField MeanScore { get; set; }
-		private GraphQLQueryField Popularity { get; set; }
-		private GraphQLQueryField Tags { get; set; }
-		private GraphQLQueryField Relations { get; set; }
-		private GraphQLQueryField<CharacterQueryArguments> Characters { get; set; }
-		private GraphQLQueryField<StaffQueryArguments> Staff { get; set; }
-		private GraphQLQueryField<StudioQueryArguments> Studios { get; set; }
-		private GraphQLQueryField IsFavourite { get; set; }
-		private GraphQLQueryField IsAdult { get; set; }
-		private GraphQLQueryField NextAiringEpisode { get; set; }
-		private GraphQLQueryField<AiringScheduleQueryArguments> AiringSchedule { get; set; }
-		private GraphQLQueryField ExternalLinks { get; set; }
-		private GraphQLQueryField StreamingEpisodes { get; set; }
-		private GraphQLQueryField Rankings { get; set; }
-		private GraphQLQueryField MediaListEntry { get; set; }
-		private GraphQLQueryField<ReviewQueryArguments> Reviews { get; set; }
-		private GraphQLQueryField Stats { get; set; }
-		private GraphQLQueryField SiteUrl { get; set; }
-		private GraphQLQueryField AutoCreateForumThread { get; set; }
-		private GraphQLQueryField ModNotes { get; set; }
+		private GraphQueryField Id { get; set; }
+		private GraphQueryField IdMal { get; set; }
+		private GraphQueryField Title { get; set; }
+		private GraphQueryField Type { get; set; }
+		private GraphQueryField Format { get; set; }
+		private GraphQueryField Status { get; set; }
+		private GraphQueryField Description { get; set; }
+		private GraphQueryField StartDate { get; set; }
+		private GraphQueryField EndDate { get; set; }
+		private GraphQueryField Season { get; set; }
+		private GraphQueryField Episodes { get; set; }
+		private GraphQueryField Duration { get; set; }
+		private GraphQueryField Chapters { get; set; }
+		private GraphQueryField Volumes { get; set; }
+		private GraphQueryField CountryOfOrigin { get; set; }
+		private GraphQueryField IsLicensed { get; set; }
+		private GraphQueryField Source { get; set; }
+		private GraphQueryField Hashtag { get; set; }
+		private GraphQueryField Trailer { get; set; }
+		private GraphQueryField UpdatedAt { get; set; }
+		private GraphQueryField CoverImage { get; set; }
+		private GraphQueryField BannerImage { get; set; }
+		private GraphQueryField Genres { get; set; }
+		private GraphQueryField Synonyms { get; set; }
+		private GraphQueryField AverageScore { get; set; }
+		private GraphQueryField MeanScore { get; set; }
+		private GraphQueryField Popularity { get; set; }
+		private GraphQueryField Tags { get; set; }
+		private GraphQueryField Relations { get; set; }
+		private GraphQueryField Characters { get; set; }
+		private GraphQueryField Staff { get; set; }
+		private GraphQueryField Studios { get; set; }
+		private GraphQueryField IsFavourite { get; set; }
+		private GraphQueryField IsAdult { get; set; }
+		private GraphQueryField NextAiringEpisode { get; set; }
+		private GraphQueryField AiringSchedule { get; set; }
+		private GraphQueryField ExternalLinks { get; set; }
+		private GraphQueryField StreamingEpisodes { get; set; }
+		private GraphQueryField Rankings { get; set; }
+		private GraphQueryField MediaListEntry { get; set; }
+		private GraphQueryField Reviews { get; set; }
+		private GraphQueryField Stats { get; set; }
+		private GraphQueryField SiteUrl { get; set; }
+		private GraphQueryField AutoCreateForumThread { get; set; }
+		private GraphQueryField ModNotes { get; set; }
 
-		private void InitializeProperties()
+		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Id = new GraphQLQueryField("id", new FieldRules(false));
-			IdMal = new GraphQLQueryField("idMal", new FieldRules(false));
-			Title = new GraphQLQueryField("title", new FieldRules(false));
-			Type = new GraphQLQueryField("type", new FieldRules(false));
-			Format = new GraphQLQueryField("format", new FieldRules(false));
-			Status = new GraphQLQueryField("status", new FieldRules(false));
-			Description = new GraphQLQueryField("description", new FieldRules(false));
-			StartDate = new GraphQLQueryField("startDate", new FieldRules(false));
-			EndDate = new GraphQLQueryField("endDate", new FieldRules(false));
-			Season = new GraphQLQueryField("season", new FieldRules(false));
-			Episodes = new GraphQLQueryField("episodes", new FieldRules(false));
-			Duration = new GraphQLQueryField("duration", new FieldRules(false));
-			Chapters = new GraphQLQueryField("chapters", new FieldRules(false));
-			Volumes = new GraphQLQueryField("volumes", new FieldRules(false));
-			CountryOfOrigin = new GraphQLQueryField("countryOfOrigin", new FieldRules(false));
-			IsLicensed = new GraphQLQueryField("isLicensed", new FieldRules(false));
-			Source = new GraphQLQueryField("source", new FieldRules(false));
-			Hashtag = new GraphQLQueryField("hashtag", new FieldRules(false));
-			Trailer = new GraphQLQueryField("trailer", new FieldRules(false));
-			UpdatedAt = new GraphQLQueryField("updatedAt", new FieldRules(false));
-			CoverImage = new GraphQLQueryField("coverImage", new FieldRules(false));
-			BannerImage = new GraphQLQueryField("bannerImage", new FieldRules(false));
-			Genres = new GraphQLQueryField("genres", new FieldRules(false));
-			Synonyms = new GraphQLQueryField("synonyms", new FieldRules(false));
-			AverageScore = new GraphQLQueryField("averageScore", new FieldRules(false));
-			MeanScore = new GraphQLQueryField("meanScore", new FieldRules(false));
-			Popularity = new GraphQLQueryField("popularity", new FieldRules(false));
-			Tags = new GraphQLQueryField("tags", new FieldRules(false));
-			Relations = new GraphQLQueryField("relations", new FieldRules(false));
-			Characters = new GraphQLQueryField<CharacterQueryArguments>("characters", new FieldRules(false));
-			Staff = new GraphQLQueryField<StaffQueryArguments>("staff", new FieldRules(false));
-			Studios = new GraphQLQueryField<StudioQueryArguments>("studios", new FieldRules(false));
-			IsFavourite = new GraphQLQueryField("isFavourite", new FieldRules(false));
-			IsAdult = new GraphQLQueryField("isAdult", new FieldRules(false));
-			NextAiringEpisode = new GraphQLQueryField("nextAiringEpisode", new FieldRules(false));
-			AiringSchedule = new GraphQLQueryField<AiringScheduleQueryArguments>("airingSchedule", new FieldRules(false));
-			ExternalLinks = new GraphQLQueryField("externalLinks", new FieldRules(false));
-			StreamingEpisodes = new GraphQLQueryField("streamingEpisodes", new FieldRules(false));
-			Rankings = new GraphQLQueryField("rankings", new FieldRules(false));
-			MediaListEntry = new GraphQLQueryField("mediaListEntry", new FieldRules(false));
-			Reviews = new GraphQLQueryField<ReviewQueryArguments>("reviews", new FieldRules(false));
-			Stats = new GraphQLQueryField("stats", new FieldRules(false));
-			SiteUrl = new GraphQLQueryField("siteUrl", new FieldRules(false));
-			AutoCreateForumThread = new GraphQLQueryField("autoCreateForumThread", new FieldRules(false));
-			ModNotes = new GraphQLQueryField("modNotes", new FieldRules(false));
+			Id = new GraphQueryField("id", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			IdMal = new GraphQueryField("idMal", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Title = new GraphQueryField("title", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Type = new GraphQueryField("type", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Format = new GraphQueryField("format", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Status = new GraphQueryField("status", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Description = new GraphQueryField("description", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			StartDate = new GraphQueryField("startDate", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			EndDate = new GraphQueryField("endDate", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Season = new GraphQueryField("season", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Episodes = new GraphQueryField("episodes", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Duration = new GraphQueryField("duration", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Chapters = new GraphQueryField("chapters", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Volumes = new GraphQueryField("volumes", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			CountryOfOrigin = new GraphQueryField("countryOfOrigin", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			IsLicensed = new GraphQueryField("isLicensed", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Source = new GraphQueryField("source", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Hashtag = new GraphQueryField("hashtag", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Trailer = new GraphQueryField("trailer", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			UpdatedAt = new GraphQueryField("updatedAt", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			CoverImage = new GraphQueryField("coverImage", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			BannerImage = new GraphQueryField("bannerImage", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Genres = new GraphQueryField("genres", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Synonyms = new GraphQueryField("synonyms", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			AverageScore = new GraphQueryField("averageScore", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			MeanScore = new GraphQueryField("meanScore", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Popularity = new GraphQueryField("popularity", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Tags = new GraphQueryField("tags", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Relations = new GraphQueryField("relations", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Characters = new GraphQueryField("characters", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Staff = new GraphQueryField("staff", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Studios = new GraphQueryField("studios", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			IsFavourite = new GraphQueryField("isFavourite", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			IsAdult = new GraphQueryField("isAdult", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			NextAiringEpisode = new GraphQueryField("nextAiringEpisode", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			AiringSchedule = new GraphQueryField("airingSchedule", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			ExternalLinks = new GraphQueryField("externalLinks", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			StreamingEpisodes = new GraphQueryField("streamingEpisodes", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Rankings = new GraphQueryField("rankings", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			MediaListEntry = new GraphQueryField("mediaListEntry", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Reviews = new GraphQueryField("reviews", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Stats = new GraphQueryField("stats", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			SiteUrl = new GraphQueryField("siteUrl", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			AutoCreateForumThread = new GraphQueryField("autoCreateForumThread", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			ModNotes = new GraphQueryField("modNotes", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
 		}
 	}
 }

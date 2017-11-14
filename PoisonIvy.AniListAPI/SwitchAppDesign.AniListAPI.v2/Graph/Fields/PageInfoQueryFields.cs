@@ -1,20 +1,21 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class PageInfoQueryFields
 	{
-		public PageInfoQueryFields()
+		public PageInfoQueryFields(AniListQueryType queryType)
 		{
-			InitializeProperties();
+			InitializeProperties(queryType);
 		}
 
 		/// <summary>
 		/// The total number of items
 		/// </summary>
-		public GraphQLQueryField TotalQueryField()
+		public GraphQueryField TotalQueryField()
 		{
 			return Total;
 		}
@@ -22,7 +23,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The count on a page
 		/// </summary>
-		public GraphQLQueryField PerPageQueryField()
+		public GraphQueryField PerPageQueryField()
 		{
 			return PerPage;
 		}
@@ -30,7 +31,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The current page
 		/// </summary>
-		public GraphQLQueryField CurrentPageQueryField()
+		public GraphQueryField CurrentPageQueryField()
 		{
 			return CurrentPage;
 		}
@@ -38,7 +39,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The last page
 		/// </summary>
-		public GraphQLQueryField LastPageQueryField()
+		public GraphQueryField LastPageQueryField()
 		{
 			return LastPage;
 		}
@@ -46,24 +47,24 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// If there is another page
 		/// </summary>
-		public GraphQLQueryField HasNextPageQueryField()
+		public GraphQueryField HasNextPageQueryField()
 		{
 			return HasNextPage;
 		}
 
-		private GraphQLQueryField Total { get; set; }
-		private GraphQLQueryField PerPage { get; set; }
-		private GraphQLQueryField CurrentPage { get; set; }
-		private GraphQLQueryField LastPage { get; set; }
-		private GraphQLQueryField HasNextPage { get; set; }
+		private GraphQueryField Total { get; set; }
+		private GraphQueryField PerPage { get; set; }
+		private GraphQueryField CurrentPage { get; set; }
+		private GraphQueryField LastPage { get; set; }
+		private GraphQueryField HasNextPage { get; set; }
 
-		private void InitializeProperties()
+		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Total = new GraphQLQueryField("total", new FieldRules(false));
-			PerPage = new GraphQLQueryField("perPage", new FieldRules(false));
-			CurrentPage = new GraphQLQueryField("currentPage", new FieldRules(false));
-			LastPage = new GraphQLQueryField("lastPage", new FieldRules(false));
-			HasNextPage = new GraphQLQueryField("hasNextPage", new FieldRules(false));
+			Total = new GraphQueryField("total", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			PerPage = new GraphQueryField("perPage", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			CurrentPage = new GraphQueryField("currentPage", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			LastPage = new GraphQueryField("lastPage", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			HasNextPage = new GraphQueryField("hasNextPage", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
 		}
 	}
 }

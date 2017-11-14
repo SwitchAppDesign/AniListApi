@@ -1,20 +1,21 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class MediaExternalLinkQueryFields
 	{
-		public MediaExternalLinkQueryFields()
+		public MediaExternalLinkQueryFields(AniListQueryType queryType)
 		{
-			InitializeProperties();
+			InitializeProperties(queryType);
 		}
 
 		/// <summary>
 		/// The id of the external link
 		/// </summary>
-		public GraphQLQueryField IdQueryField()
+		public GraphQueryField IdQueryField()
 		{
 			return Id;
 		}
@@ -22,7 +23,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The url of the external link
 		/// </summary>
-		public GraphQLQueryField UrlQueryField()
+		public GraphQueryField UrlQueryField()
 		{
 			return Url;
 		}
@@ -30,20 +31,20 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The site location of the external link
 		/// </summary>
-		public GraphQLQueryField SiteQueryField()
+		public GraphQueryField SiteQueryField()
 		{
 			return Site;
 		}
 
-		private GraphQLQueryField Id { get; set; }
-		private GraphQLQueryField Url { get; set; }
-		private GraphQLQueryField Site { get; set; }
+		private GraphQueryField Id { get; set; }
+		private GraphQueryField Url { get; set; }
+		private GraphQueryField Site { get; set; }
 
-		private void InitializeProperties()
+		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Id = new GraphQLQueryField("id", new FieldRules(false));
-			Url = new GraphQLQueryField("url", new FieldRules(false));
-			Site = new GraphQLQueryField("site", new FieldRules(false));
+			Id = new GraphQueryField("id", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			Url = new GraphQueryField("url", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			Site = new GraphQueryField("site", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
 		}
 	}
 }

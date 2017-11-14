@@ -6,17 +6,20 @@ using SwitchAppDesign.AniListAPI.v2.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
 {
-    internal class NotificationQueryArguments
+    /// <summary>
+    /// All available notification query arguments.
+    /// </summary>
+    public class NotificationQueryArguments
     {
-        public NotificationQueryArguments()
+        internal NotificationQueryArguments(AniListQueryType queryType)
         {
-            InitializeProperties();
+            InitializeProperties(queryType);
         }
 
         /// <summary>
         /// Filter by the type of notifications.
         /// </summary>
-        public GraphQLQueryArgument<NotificationType> TypeQueryArgument(NotificationType value)
+        public GraphQueryArgument<NotificationType> TypeQueryArgument(NotificationType value)
         {
             return Type.GetQueryArgumentAndSetValue(value);
         }
@@ -24,18 +27,18 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         /// <summary>
         /// Reset the unread notification count to.
         /// </summary>
-        public GraphQLQueryArgument<bool> ResetNotificationCountQueryArgument(bool value)
+        public GraphQueryArgument<bool> ResetNotificationCountQueryArgument(bool value)
         {
             return ResetNotificationCount.GetQueryArgumentAndSetValue(value);
         }
 
-        private GraphQLQueryArgument<NotificationType> Type { get; set; }
-        private GraphQLQueryArgument<bool> ResetNotificationCount { get; set; }
+        private GraphQueryArgument<NotificationType> Type { get; set; }
+        private GraphQueryArgument<bool> ResetNotificationCount { get; set; }
 
-        private void InitializeProperties()
+        private void InitializeProperties(AniListQueryType queryType)
         {
-            Type = new GraphQLQueryArgument<NotificationType>("type", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Notification }));
-            ResetNotificationCount = new GraphQLQueryArgument<bool>("resetNotificationCount", new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Notification }));
+            Type = new GraphQueryArgument<NotificationType>("type", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Notification }));
+            ResetNotificationCount = new GraphQueryArgument<bool>("resetNotificationCount", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Notification }));
         }
     }
 }

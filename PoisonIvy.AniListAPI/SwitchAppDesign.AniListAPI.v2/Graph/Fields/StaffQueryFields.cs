@@ -1,20 +1,21 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class StaffQueryFields
 	{
-		public StaffQueryFields()
+		public StaffQueryFields(AniListQueryType queryType)
 		{
-			InitializeProperties();
+			InitializeProperties(queryType);
 		}
 
 		/// <summary>
 		/// The id of the staff member
 		/// </summary>
-		public GraphQLQueryField IdQueryField()
+		public GraphQueryField IdQueryField()
 		{
 			return Id;
 		}
@@ -22,7 +23,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The names of the staff member
 		/// </summary>
-		public GraphQLQueryField NameQueryField()
+		public GraphQueryField NameQueryField()
 		{
 			return Name;
 		}
@@ -30,7 +31,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The primary language of the staff member
 		/// </summary>
-		public GraphQLQueryField LanguageQueryField()
+		public GraphQueryField LanguageQueryField()
 		{
 			return Language;
 		}
@@ -38,7 +39,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The staff images
 		/// </summary>
-		public GraphQLQueryField ImageQueryField()
+		public GraphQueryField ImageQueryField()
 		{
 			return Image;
 		}
@@ -46,7 +47,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// A general description of the staff member
 		/// </summary>
-		public GraphQLQueryField DescriptionQueryField()
+		public GraphQueryField DescriptionQueryField()
 		{
 			return Description;
 		}
@@ -54,7 +55,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// If the staff member is marked as favourite by the currently authenticated user
 		/// </summary>
-		public GraphQLQueryField IsFavouriteQueryField()
+		public GraphQueryField IsFavouriteQueryField()
 		{
 			return IsFavourite;
 		}
@@ -62,7 +63,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The url for the staff page on the AniList website
 		/// </summary>
-		public GraphQLQueryField SiteUrlQueryField()
+		public GraphQueryField SiteUrlQueryField()
 		{
 			return SiteUrl;
 		}
@@ -70,7 +71,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// Media where the staff member has a production role
 		/// </summary>
-		public GraphQLQueryField StaffMediaQueryField()
+		public GraphQueryField StaffMediaQueryField()
 		{
 			return StaffMedia;
 		}
@@ -78,32 +79,32 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// Characters voiced by the actor
 		/// </summary>
-		public GraphQLQueryField CharactersQueryField()
+		public GraphQueryField CharactersQueryField()
 		{
 			return Characters;
 		}
 
-		private GraphQLQueryField Id { get; set; }
-		private GraphQLQueryField Name { get; set; }
-		private GraphQLQueryField Language { get; set; }
-		private GraphQLQueryField Image { get; set; }
-		private GraphQLQueryField Description { get; set; }
-		private GraphQLQueryField IsFavourite { get; set; }
-		private GraphQLQueryField SiteUrl { get; set; }
-		private GraphQLQueryField StaffMedia { get; set; }
-		private GraphQLQueryField Characters { get; set; }
+		private GraphQueryField Id { get; set; }
+		private GraphQueryField Name { get; set; }
+		private GraphQueryField Language { get; set; }
+		private GraphQueryField Image { get; set; }
+		private GraphQueryField Description { get; set; }
+		private GraphQueryField IsFavourite { get; set; }
+		private GraphQueryField SiteUrl { get; set; }
+		private GraphQueryField StaffMedia { get; set; }
+		private GraphQueryField Characters { get; set; }
 
-		private void InitializeProperties()
+		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Id = new GraphQLQueryField("id", new FieldRules(false));
-			Name = new GraphQLQueryField("name", new FieldRules(false));
-			Language = new GraphQLQueryField("language", new FieldRules(false));
-			Image = new GraphQLQueryField("image", new FieldRules(false));
-			Description = new GraphQLQueryField("description", new FieldRules(false));
-			IsFavourite = new GraphQLQueryField("isFavourite", new FieldRules(false));
-			SiteUrl = new GraphQLQueryField("siteUrl", new FieldRules(false));
-			StaffMedia = new GraphQLQueryField("staffMedia", new FieldRules(false));
-			Characters = new GraphQLQueryField("characters", new FieldRules(false));
+			Id = new GraphQueryField("id", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Staff }));
+			Name = new GraphQueryField("name", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Staff }));
+			Language = new GraphQueryField("language", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Staff }));
+			Image = new GraphQueryField("image", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Staff }));
+			Description = new GraphQueryField("description", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Staff }));
+			IsFavourite = new GraphQueryField("isFavourite", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Staff }));
+			SiteUrl = new GraphQueryField("siteUrl", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Staff }));
+			StaffMedia = new GraphQueryField("staffMedia", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Staff }));
+			Characters = new GraphQueryField("characters", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Staff }));
 		}
 	}
 }

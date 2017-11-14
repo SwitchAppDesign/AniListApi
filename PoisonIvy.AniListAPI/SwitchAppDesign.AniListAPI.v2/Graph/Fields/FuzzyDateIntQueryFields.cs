@@ -1,26 +1,27 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class FuzzyDateIntQueryFields
 	{
-		public FuzzyDateIntQueryFields()
+		public FuzzyDateIntQueryFields(AniListQueryType queryType)
 		{
-			InitializeProperties();
+			InitializeProperties(queryType);
 		}
 
-		public GraphQLQueryField FuzzyDateQueryField()
+		public GraphQueryField FuzzyDateQueryField()
 		{
 			return FuzzyDate;
 		}
 
-		private GraphQLQueryField FuzzyDate { get; set; }
+		private GraphQueryField FuzzyDate { get; set; }
 
-		private void InitializeProperties()
+		private void InitializeProperties(AniListQueryType queryType)
 		{
-			FuzzyDate = new GraphQLQueryField("FuzzyDate", new FieldRules(false));
+			FuzzyDate = new GraphQueryField("FuzzyDate", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
 		}
 	}
 }

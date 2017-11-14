@@ -1,20 +1,21 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class UserQueryFields
 	{
-		public UserQueryFields()
+		public UserQueryFields(AniListQueryType queryType)
 		{
-			InitializeProperties();
+			InitializeProperties(queryType);
 		}
 
 		/// <summary>
 		/// The id of the user
 		/// </summary>
-		public GraphQLQueryField IdQueryField()
+		public GraphQueryField IdQueryField()
 		{
 			return Id;
 		}
@@ -22,7 +23,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The name of the user
 		/// </summary>
-		public GraphQLQueryField NameQueryField()
+		public GraphQueryField NameQueryField()
 		{
 			return Name;
 		}
@@ -30,7 +31,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The bio written by user (Markdown)
 		/// </summary>
-		public GraphQLQueryField AboutQueryField()
+		public GraphQueryField AboutQueryField()
 		{
 			return About;
 		}
@@ -38,7 +39,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The user's avatar images
 		/// </summary>
-		public GraphQLQueryField AvatarQueryField()
+		public GraphQueryField AvatarQueryField()
 		{
 			return Avatar;
 		}
@@ -46,7 +47,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// If the authenticated user if following this user
 		/// </summary>
-		public GraphQLQueryField IsFollowingQueryField()
+		public GraphQueryField IsFollowingQueryField()
 		{
 			return IsFollowing;
 		}
@@ -54,7 +55,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The user's general options
 		/// </summary>
-		public GraphQLQueryField OptionsQueryField()
+		public GraphQueryField OptionsQueryField()
 		{
 			return Options;
 		}
@@ -62,7 +63,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The user's media list options
 		/// </summary>
-		public GraphQLQueryField MediaListOptionsQueryField()
+		public GraphQueryField MediaListOptionsQueryField()
 		{
 			return MediaListOptions;
 		}
@@ -70,12 +71,12 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The users favourites
 		/// </summary>
-		public GraphQLQueryField FavouritesQueryField()
+		public GraphQueryField FavouritesQueryField()
 		{
 			return Favourites;
 		}
 
-		public GraphQLQueryField StatsQueryField()
+		public GraphQueryField StatsQueryField()
 		{
 			return Stats;
 		}
@@ -83,7 +84,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The number of unread notifications the user has
 		/// </summary>
-		public GraphQLQueryField UnreadNotificationCountQueryField()
+		public GraphQueryField UnreadNotificationCountQueryField()
 		{
 			return UnreadNotificationCount;
 		}
@@ -91,7 +92,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The url for the user page on the AniList website
 		/// </summary>
-		public GraphQLQueryField SiteUrlQueryField()
+		public GraphQueryField SiteUrlQueryField()
 		{
 			return SiteUrl;
 		}
@@ -99,7 +100,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The donation tier of the user
 		/// </summary>
-		public GraphQLQueryField DonatorTierQueryField()
+		public GraphQueryField DonatorTierQueryField()
 		{
 			return DonatorTier;
 		}
@@ -107,40 +108,40 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// When the user's data was last updated
 		/// </summary>
-		public GraphQLQueryField UpdatedAtQueryField()
+		public GraphQueryField UpdatedAtQueryField()
 		{
 			return UpdatedAt;
 		}
 
-		private GraphQLQueryField Id { get; set; }
-		private GraphQLQueryField Name { get; set; }
-		private GraphQLQueryField About { get; set; }
-		private GraphQLQueryField Avatar { get; set; }
-		private GraphQLQueryField IsFollowing { get; set; }
-		private GraphQLQueryField Options { get; set; }
-		private GraphQLQueryField MediaListOptions { get; set; }
-		private GraphQLQueryField Favourites { get; set; }
-		private GraphQLQueryField Stats { get; set; }
-		private GraphQLQueryField UnreadNotificationCount { get; set; }
-		private GraphQLQueryField SiteUrl { get; set; }
-		private GraphQLQueryField DonatorTier { get; set; }
-		private GraphQLQueryField UpdatedAt { get; set; }
+		private GraphQueryField Id { get; set; }
+		private GraphQueryField Name { get; set; }
+		private GraphQueryField About { get; set; }
+		private GraphQueryField Avatar { get; set; }
+		private GraphQueryField IsFollowing { get; set; }
+		private GraphQueryField Options { get; set; }
+		private GraphQueryField MediaListOptions { get; set; }
+		private GraphQueryField Favourites { get; set; }
+		private GraphQueryField Stats { get; set; }
+		private GraphQueryField UnreadNotificationCount { get; set; }
+		private GraphQueryField SiteUrl { get; set; }
+		private GraphQueryField DonatorTier { get; set; }
+		private GraphQueryField UpdatedAt { get; set; }
 
-		private void InitializeProperties()
+		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Id = new GraphQLQueryField("id", new FieldRules(false));
-			Name = new GraphQLQueryField("name", new FieldRules(false));
-			About = new GraphQLQueryField("about", new FieldRules(false));
-			Avatar = new GraphQLQueryField("avatar", new FieldRules(false));
-			IsFollowing = new GraphQLQueryField("isFollowing", new FieldRules(false));
-			Options = new GraphQLQueryField("options", new FieldRules(false));
-			MediaListOptions = new GraphQLQueryField("mediaListOptions", new FieldRules(false));
-			Favourites = new GraphQLQueryField("favourites", new FieldRules(false));
-			Stats = new GraphQLQueryField("stats", new FieldRules(false));
-			UnreadNotificationCount = new GraphQLQueryField("unreadNotificationCount", new FieldRules(false));
-			SiteUrl = new GraphQLQueryField("siteUrl", new FieldRules(false));
-			DonatorTier = new GraphQLQueryField("donatorTier", new FieldRules(false));
-			UpdatedAt = new GraphQLQueryField("updatedAt", new FieldRules(false));
+			Id = new GraphQueryField("id", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			Name = new GraphQueryField("name", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			About = new GraphQueryField("about", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			Avatar = new GraphQueryField("avatar", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			IsFollowing = new GraphQueryField("isFollowing", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			Options = new GraphQueryField("options", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			MediaListOptions = new GraphQueryField("mediaListOptions", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			Favourites = new GraphQueryField("favourites", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			Stats = new GraphQueryField("stats", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			UnreadNotificationCount = new GraphQueryField("unreadNotificationCount", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			SiteUrl = new GraphQueryField("siteUrl", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			DonatorTier = new GraphQueryField("donatorTier", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			UpdatedAt = new GraphQueryField("updatedAt", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
 		}
 	}
 }

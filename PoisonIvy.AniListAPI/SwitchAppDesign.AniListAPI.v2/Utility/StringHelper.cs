@@ -4,7 +4,10 @@ using System.Text;
 
 namespace SwitchAppDesign.AniListAPI.v2.Utility
 {
-    internal static class StringHelper
+    /// <summary>
+    /// String extension methods.
+    /// </summary>
+    public static class StringHelper
     {
         /// <summary>
         /// Converts a string to Pascal case.
