@@ -5,9 +5,12 @@ using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
-	internal class AiringScheduleEdgeQueryFields
+    /// <summary>
+    /// All available airing schedule edge query fields.
+    /// </summary>
+	public class AiringScheduleEdgeQueryFields
 	{
-		public AiringScheduleEdgeQueryFields(AniListQueryType queryType)
+		internal AiringScheduleEdgeQueryFields(AniListQueryType queryType)
 		{
 			InitializeProperties(queryType);
 		}

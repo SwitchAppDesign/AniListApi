@@ -253,7 +253,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		}
 
         /// <summary>
-        /// The characters in the media.
+        /// The characters in the media. <see cref="string"/>
         /// <param name="fields">The list of character fields (found in CharacterQueryFields) to be used in the graph query.</param>
         /// <param name="arguments">The list of character arguments (found in CharacterQueryArguments) to be used in the graph query.</param>
         /// <list type="bullet">
@@ -262,6 +262,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// <item><term>Role:</term><description>Role of the character.</description></item>
         /// <item><term>Page:</term><description>The page.</description></item>
         /// <item><term>PerPage:</term><description>The amount of entries per page, max 25.</description></item>
+        /// <see cref=""/>
         /// </list>
         /// </summary>
         public GraphQueryField CharactersQueryField(IList<GraphQueryField> fields, IList<GraphQueryArgument<object>> arguments = null)

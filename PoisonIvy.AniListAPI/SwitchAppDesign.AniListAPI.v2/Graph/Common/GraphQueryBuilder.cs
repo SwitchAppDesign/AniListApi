@@ -19,7 +19,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders
         /// <param name="aniListQueryType">The type of AniList graph query.</param>
         /// <param name="graphQueryArguments">The list of arguments to be used in the graph query.</param>
         /// <param name="graphQueryFields">The list of fields to be used in the graph query.</param>
-        protected GraphQuery BuildQuery(
+        protected internal GraphQuery BuildQuery(
             AniListQueryType aniListQueryType,
             IList<GraphQueryArgument<object>> graphQueryArguments,
             IList<GraphQueryField> graphQueryFields)

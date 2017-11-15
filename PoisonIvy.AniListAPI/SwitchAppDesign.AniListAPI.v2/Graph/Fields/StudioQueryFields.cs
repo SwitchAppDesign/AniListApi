@@ -5,9 +5,12 @@ using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
-	internal class StudioQueryFields
+    /// <summary>
+    /// All Available studio query fields.
+    /// </summary>
+	public class StudioQueryFields
 	{
-		public StudioQueryFields(AniListQueryType queryType)
+		internal StudioQueryFields(AniListQueryType queryType)
 		{
 			InitializeProperties(queryType);
 		}

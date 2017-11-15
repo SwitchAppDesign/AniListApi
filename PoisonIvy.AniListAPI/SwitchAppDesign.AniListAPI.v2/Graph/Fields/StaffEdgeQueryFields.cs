@@ -5,9 +5,12 @@ using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
-	internal class StaffEdgeQueryFields
+    /// <summary>
+    /// All staff edge query fields.
+    /// </summary>
+	public class StaffEdgeQueryFields
 	{
-		public StaffEdgeQueryFields(AniListQueryType queryType)
+		internal StaffEdgeQueryFields(AniListQueryType queryType)
 		{
 			InitializeProperties(queryType);
 		}

@@ -5,9 +5,12 @@ using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
-	internal class MediaExternalLinkQueryFields
+    /// <summary>
+    /// All available media external link query fields.
+    /// </summary>
+    public class MediaExternalLinkQueryFields
 	{
-		public MediaExternalLinkQueryFields(AniListQueryType queryType)
+		internal MediaExternalLinkQueryFields(AniListQueryType queryType)
 		{
 			InitializeProperties(queryType);
 		}

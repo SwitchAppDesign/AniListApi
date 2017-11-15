@@ -5,9 +5,12 @@ using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
-	internal class MediaTagQueryFields
+    /// <summary>
+    /// All available character query fields.
+    /// </summary>
+	public class MediaTagQueryFields
 	{
-		public MediaTagQueryFields(AniListQueryType queryType)
+		internal MediaTagQueryFields(AniListQueryType queryType)
 		{
 			InitializeProperties(queryType);
 		}

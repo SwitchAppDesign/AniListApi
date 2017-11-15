@@ -5,9 +5,12 @@ using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
-	internal class MediaTitleQueryFields
+    /// <summary>
+    /// All available media title query fields.
+    /// </summary>
+    public class MediaTitleQueryFields
 	{
-		public MediaTitleQueryFields(AniListQueryType queryType)
+		internal MediaTitleQueryFields(AniListQueryType queryType)
 		{
 			InitializeProperties(queryType);
 		}
@@ -20,7 +23,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 			return Romaji;
 		}
 
-		public GraphQueryField IsRomajiStylisedQueryField()
+	    /// <summary>
+	    /// Defines whether the romaji title is stylised.
+	    /// </summary>
+        public GraphQueryField IsRomajiStylisedQueryField()
 		{
 			return IsRomajiStylised;
 		}
@@ -33,7 +39,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 			return English;
 		}
 
-		public GraphQueryField IsEnglishStylisedQueryField()
+	    /// <summary>
+	    /// Defines whether the english title is stylised.
+	    /// </summary>
+        public GraphQueryField IsEnglishStylisedQueryField()
 		{
 			return IsEnglishStylised;
 		}
@@ -46,7 +55,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 			return Native;
 		}
 
-		public GraphQueryField IsNativeStylisedQueryField()
+	    /// <summary>
+	    /// Defines whether the native title is stylised.
+	    /// </summary>
+        public GraphQueryField IsNativeStylisedQueryField()
 		{
 			return IsNativeStylised;
 		}

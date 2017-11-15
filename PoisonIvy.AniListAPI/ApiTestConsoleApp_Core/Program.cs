@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using SwitchAppDesign.AniListAPI.v2;
+using SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilderArguments;
+using SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders;
 
 namespace ApiTestConsoleApp_Core
 {
@@ -12,6 +14,8 @@ namespace ApiTestConsoleApp_Core
         {
             //ClassBuilder.ArgumentFieldClassBuilder.BuildGraphFieldClassesForModels();
 
+
+            var test = MediaQueryBuilder.CreateCustomQueryBuilder();
             
 
 

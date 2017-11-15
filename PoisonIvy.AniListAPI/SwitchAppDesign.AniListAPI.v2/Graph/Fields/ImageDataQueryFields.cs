@@ -5,9 +5,12 @@ using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
-	internal class ImageDataQueryFields
+    /// <summary>
+    /// All available image data query fields.
+    /// </summary>
+	public class ImageDataQueryFields
 	{
-		public ImageDataQueryFields(AniListQueryType queryType)
+		internal ImageDataQueryFields(AniListQueryType queryType)
 		{
 			InitializeProperties(queryType);
 		}
@@ -21,7 +24,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		}
 
 		/// <summary>
-		/// The cover image of media at medium size
+		/// The image of media at medium size
 		/// </summary>
 		public GraphQueryField MediumQueryField()
 		{

@@ -11,6 +11,9 @@ namespace SwitchAppDesign.AniListAPI.v2.Models
         /// </summary>
         public string romaji { get; set; }
 
+        /// <summary>
+        /// Defines whether the romaji title is stylised.
+        /// </summary>
         public bool IsRomajiStylised { get; set; }
 
         /// <summary>
@@ -18,6 +21,9 @@ namespace SwitchAppDesign.AniListAPI.v2.Models
         /// </summary>
         public string english { get; set; }
 
+        /// <summary>
+        /// Defines whether the english title is stylised.
+        /// </summary>
         public bool IsEnglishStylised { get; set; }
 
         /// <summary>
@@ -25,6 +31,9 @@ namespace SwitchAppDesign.AniListAPI.v2.Models
         /// </summary>
         public string native { get; set; }
 
+        /// <summary>
+        /// Defines whether the native title is stylised.
+        /// </summary>
         public bool IsNativeStylised { get; set; }
 
         /// <summary>
