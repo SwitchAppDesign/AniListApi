@@ -67,7 +67,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Common
         /// Validates the current state of the query argument according to its rules.
         /// </summary>
         /// <exception cref="GraphQueryArgumentInvalidException">Thrown if the query argument is in an invalid state.</exception>
-        public void ValidateArgument(AniListQueryType queryType, bool isAuthenticated, IList<GraphQueryArgument<object>> graphQueryArguments = null)
+        public void Validate(AniListQueryType queryType, bool isAuthenticated, IList<GraphQueryArgument<object>> graphQueryArguments = null)
         {
             if (Value == null)
             {

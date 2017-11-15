@@ -15,11 +15,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilderFields
         }
 
         /// <summary>
-        /// All available media query fields.
-        /// </summary>
-        public MediaQueryFields MediaQueryFields { get; private set; }
-
-        /// <summary>
         /// All available character query fields.
         /// </summary>
         public CharacterQueryFields CharacterQueryFields { get; private set; }
@@ -156,7 +151,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilderFields
 
         private void InitializeFields()
         {
-            MediaQueryFields = new MediaQueryFields(AniListQueryType.Media);
             CharacterQueryFields = new CharacterQueryFields(AniListQueryType.Media);
             MediaTitleQueryFields = new MediaTitleQueryFields(AniListQueryType.Media);
             MediaTrailerQueryFields = new MediaTrailerQueryFields(AniListQueryType.Media);

@@ -14,51 +14,85 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders
     public abstract class GraphQueryBuilder
     {
         /// <summary>
+        /// Graph query arguments to be used to build the query.
+        /// </summary>
+        private IList<object> GraphQueryArguments { get; set; }
+
+        /// <summary>
+        /// Graph query fields to be used to build the query.
+        /// </summary>
+        public IList<GraphQueryField> GraphQueryFields { get; set; }
+
+        /// <summary>
+        /// The type of query to be used.
+        /// </summary>
+        public AniListQueryType AniListQueryType { get; set; }
+
+        /// <summary>
+        /// Adds an argument to the query builder.
+        /// </summary>
+        public void AddArgument(object argument)
+        {
+            if (!argument.GetType().IsGenericType)
+                throw new Exception("The incorrect argument type provided.");
+
+            if (!argument.GetType().GetGenericArguments().Any())
+                throw new Exception("The incorrect argument type provided.");
+
+            GraphQueryArguments.Add(argument);
+        }
+
+        internal void InitializeBase(AniListQueryType queryType)
+        {
+            AniListQueryType = queryType;
+            GraphQueryArguments = new List<object>();
+        }
+
+        /// <summary>
         /// Builds a graph query from a list of fields and arguments.
         /// </summary>
-        /// <param name="aniListQueryType">The type of AniList graph query.</param>
-        /// <param name="graphQueryArguments">The list of arguments to be used in the graph query.</param>
-        /// <param name="graphQueryFields">The list of fields to be used in the graph query.</param>
-        protected internal GraphQuery BuildQuery(
-            AniListQueryType aniListQueryType,
-            IList<GraphQueryArgument<object>> graphQueryArguments,
-            IList<GraphQueryField> graphQueryFields)
+        protected internal GraphQuery BuildQuery()
         {
             var queryBuilder = new StringBuilder();
 
-            BuildQueryType(queryBuilder, aniListQueryType, graphQueryArguments);
+            BuildQueryType(queryBuilder);
 
-            return new GraphQuery(string.Empty, new Dictionary<string, object>());
+            return new GraphQuery(queryBuilder.ToString(), new Dictionary<string, object>());
         }
 
         /// <summary>
         /// Builds the first line of a graph query. 
         /// </summary>
-        private void BuildQueryType(StringBuilder queryBuilder, AniListQueryType aniListQueryType, IList<GraphQueryArgument<object>> graphQueryArguments)
+        private void BuildQueryType(StringBuilder queryBuilder)
         {
-            queryBuilder.AppendLine(graphQueryArguments != null && graphQueryArguments.Any() 
-                ? $"query({BuildQueryArguments(aniListQueryType, graphQueryArguments)}){{" 
+            queryBuilder.AppendLine(GraphQueryArguments != null && GraphQueryArguments.Any() 
+                ? $"query({BuildQueryArguments()}){{" 
                 : "query{");
 
-            queryBuilder.AppendLine(graphQueryArguments != null && graphQueryArguments.Any()
-                ? $"{aniListQueryType.GetDescription()}({BuildQueryTypeArguments(graphQueryArguments)}){{"
-                : $"{aniListQueryType.GetDescription()}{{");
+            queryBuilder.AppendLine(GraphQueryArguments != null && GraphQueryArguments.Any()
+                ? $"{AniListQueryType.GetDescription()}({BuildQueryTypeArguments()}){{"
+                : $"{AniListQueryType.GetDescription()}{{");
         }
 
         /// <summary>
         /// Builds the query argument component of a Graph Query. Example: query($arg1: String, $arg2: Int) $arg1 and $arg2 are the query arguments.
         /// </summary>
-        private string BuildQueryArguments(AniListQueryType aniListQueryType, IList<GraphQueryArgument<object>> graphQueryArguments)
+        private string BuildQueryArguments()
         {
             var queryArgumentBuilder = new StringBuilder();
 
-            foreach (var argument in graphQueryArguments)
+            foreach (var argument in GraphQueryArguments)
             {
-                argument.ValidateArgument(queryType: aniListQueryType, isAuthenticated: false);
+                var argType = argument.GetType();
+                var argMethod = argType.GetMethod("Validate");
+                var fieldName = argType.GetProperty("FieldName");
+                var graphQueryArgumentVariableType = argType.GetProperty("GraphQueryArgumentVariableType");
 
-                queryArgumentBuilder.Append(argument == graphQueryArguments.Last()
-                    ? $"${argument.FieldName}: {argument.GraphQueryArgumentVariableType}"
-                    : $"${argument.FieldName}: {argument.GraphQueryArgumentVariableType},");
+                argMethod.Invoke(argument, new object[]{ AniListQueryType, false, null });
+
+                queryArgumentBuilder.Append(argument == GraphQueryArguments.Last()
+                    ? $"${fieldName.GetValue(argument)}: {graphQueryArgumentVariableType.GetValue(argument)}"
+                    : $"${fieldName.GetValue(argument)}: {graphQueryArgumentVariableType.GetValue(argument)},");
             }
 
             return queryArgumentBuilder.ToString();
@@ -71,18 +105,36 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders
         /// <item><term>$arg1 and $arg2</term><description>are the query arguments.</description></item>
         /// </list>
         /// </summary>
-        private string BuildQueryTypeArguments(IList<GraphQueryArgument<object>> graphQueryArguments)
+        private string BuildQueryTypeArguments()
         {
             var queryArgumentBuilder = new StringBuilder();
 
-            foreach (var argument in graphQueryArguments)
+            foreach (var argument in GraphQueryArguments)
             {
-                queryArgumentBuilder.Append(argument == graphQueryArguments.Last()
-                    ? $"{argument.FieldName}: ${argument.FieldName}"
-                    : $"{argument.FieldName}: ${argument.FieldName},");
+                var fieldName = argument.GetType().GetProperty("FieldName");
+
+                queryArgumentBuilder.Append(argument == GraphQueryArguments.Last()
+                    ? $"{fieldName.GetValue(argument)}: ${fieldName.GetValue(argument)}"
+                    : $"{fieldName.GetValue(argument)}: ${fieldName.GetValue(argument)},");
             }
 
             return queryArgumentBuilder.ToString();
+        }
+
+        private void BuildQueryFields(StringBuilder builder)
+        {
+            foreach (var field in GraphQueryFields)
+            {
+                field.Validate(isAuthenticated: false);
+
+
+            }
+        }
+
+        private void BuildQueryEnd(StringBuilder builder)
+        {
+            builder.AppendLine("}");
+            builder.AppendLine("}");
         }
     }
 }

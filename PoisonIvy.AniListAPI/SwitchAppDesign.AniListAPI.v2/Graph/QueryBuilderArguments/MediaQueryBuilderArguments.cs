@@ -14,11 +14,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilderArguments
         }
 
         /// <summary>
-        /// All available media query arguments.
-        /// </summary>
-        public MediaQueryArguments MediaQueryArguments { get; private set; }
-
-        /// <summary>
         /// All available character query arguments.
         /// </summary>
         public CharacterQueryArguments CharacterQueryArguments { get; private set; }
@@ -45,7 +40,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilderArguments
 
         private void InitializeArguments()
         {
-            MediaQueryArguments = new MediaQueryArguments(AniListQueryType.Media);
             CharacterQueryArguments = new CharacterQueryArguments(AniListQueryType.Media);
             StaffQueryArguments = new StaffQueryArguments(AniListQueryType.Media);
             StudioQueryArguments = new StudioQueryArguments(AniListQueryType.Media);

@@ -39,9 +39,12 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The official titles of the media in various languages
 		/// </summary>
-		public GraphQueryField TitleQueryField()
+		public GraphQueryField TitleQueryField(IList<GraphQueryField> fields)
 		{
-			return Title;
+		    if (fields != null && fields.Any())
+		        throw new GraphQueryFieldInvalidException($"Field ({Reviews.GetType().Name}) requires at list one query field.");
+
+            return Title.GetGraphFieldAndSetFieldArguments(fields);
 		}
 
 		/// <summary>

@@ -14,14 +14,20 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Common
         /// </summary>
         public static string GetGraphVariableType(Type type)
         {
-            if (type.DeclaringType.IsArray)
+            if (type.IsPrimitive)
             {
-                return type.DeclaringType.GetElementType().IsNullable() 
-                    ? $"[{GetGraphTypeFromType(type.DeclaringType.GetElementType())}!]" 
-                    : $"[{GetGraphTypeFromType(type.DeclaringType.GetElementType())}]";
+                return type.IsNullable() ? $"{GetGraphTypeFromType(type.DeclaringType)}!" : GetGraphTypeFromType(type);
             }
 
-            return type.DeclaringType.IsNullable() ? $"{GetGraphTypeFromType(type.DeclaringType)}!" : GetGraphTypeFromType(type.DeclaringType);
+            if (type.IsArray)
+            {
+                return type.GetElementType().IsNullable()
+                    ? $"[{GetGraphTypeFromType(type.GetElementType())}!]"
+                    : $"[{GetGraphTypeFromType(type.GetElementType())}]";
+            }
+
+            return type.Name;
+
         }
 
         private static string GetGraphTypeFromType(Type propType)

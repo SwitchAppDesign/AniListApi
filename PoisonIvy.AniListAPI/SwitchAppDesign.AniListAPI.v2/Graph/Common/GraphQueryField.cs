@@ -53,7 +53,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Common
         /// </summary>
         /// <param name="fields">The fields to be used in a graph query.</param>
         /// <param name="arguments">The arguments to be used in a graph query.</param>
-        public GraphQueryField GetGraphFieldAndSetFieldArguments(IEnumerable<GraphQueryField> fields, IEnumerable<GraphQueryArgument<object>> arguments)
+        public GraphQueryField GetGraphFieldAndSetFieldArguments(IEnumerable<GraphQueryField> fields, IEnumerable<GraphQueryArgument<object>> arguments = null)
         {
             SetFieldArguments(arguments);
             SetFields(fields);
@@ -74,7 +74,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Common
         /// Validates the current state of the query field according to its rules.
         /// </summary>
         /// <exception cref="GraphQueryFieldInvalidException">Thrown if the query field is in an invalid state.</exception>
-        public void IsValid(bool isAuthenticated)
+        public void Validate(bool isAuthenticated)
         {
             if (Rules.AuthenticationRequired && !isAuthenticated)
             {

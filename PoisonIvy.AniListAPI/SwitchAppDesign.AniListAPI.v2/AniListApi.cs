@@ -11,7 +11,8 @@ namespace SwitchAppDesign.AniListAPI.v2
     {
         public void Test(GraphQueryBuilder queryBuilder)
         {
-            var test = new MediaQueryBuilder();
+            var val = queryBuilder.BuildQuery();
+            Console.WriteLine(val.Query);
         }
     }
 }
