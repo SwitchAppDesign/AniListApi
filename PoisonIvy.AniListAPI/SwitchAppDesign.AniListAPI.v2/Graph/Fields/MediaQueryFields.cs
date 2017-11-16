@@ -7,6 +7,7 @@ using SwitchAppDesign.AniListAPI.v2.Common;
 using SwitchAppDesign.AniListAPI.v2.Graph.Arguments;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
 using SwitchAppDesign.AniListAPI.v2.Graph.Types;
+using SwitchAppDesign.AniListAPI.v2.Utility;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
@@ -268,10 +269,16 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// <see cref=""/>
         /// </list>
         /// </summary>
-        public GraphQueryField CharactersQueryField(IList<GraphQueryField> fields, IList<GraphQueryArgument<object>> arguments = null)
+        public GraphQueryField CharactersQueryField(IList<GraphQueryField> fields, IList<object> arguments = null)
         {
             if (fields != null && fields.Any())
                 throw new GraphQueryFieldInvalidException($"Field ({Reviews.GetType().Name}) requires at list one query field.");
+
+            if (arguments != null)
+            {
+                foreach (var argument in arguments)
+                    argument.IsValidArgumentType();
+            }
 
             return Characters.GetGraphFieldAndSetFieldArguments(fields, arguments);
         }
@@ -287,10 +294,16 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// <item><term>PerPage:</term><description>The amount of entries per page, max 25.</description></item>
         /// </list>
         /// </summary>
-        public GraphQueryField StaffQueryField(IList<GraphQueryField> fields, IList<GraphQueryArgument<object>> arguments = null)
+        public GraphQueryField StaffQueryField(IList<GraphQueryField> fields, IList<object> arguments = null)
 		{
 		    if (fields != null && fields.Any())
 		        throw new GraphQueryFieldInvalidException($"Field ({Reviews.GetType().Name}) requires at list one query field.");
+
+		    if (arguments != null)
+		    {
+		        foreach (var argument in arguments)
+		            argument.IsValidArgumentType();
+		    }
 
             return Staff.GetGraphFieldAndSetFieldArguments(fields, arguments);
 		}
@@ -309,6 +322,12 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    if (fields != null && fields.Any())
 		        throw new GraphQueryFieldInvalidException($"Field ({Reviews.GetType().Name}) requires at list one query field.");
+
+		    if (arguments != null)
+		    {
+		        foreach (var argument in arguments)
+		            argument.IsValidArgumentType();
+		    }
 
             return Studios.GetGraphFieldAndSetFieldArguments(fields, arguments);
 		}
@@ -405,7 +424,13 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
             if (fields != null && fields.Any())
                 throw new GraphQueryFieldInvalidException($"Field ({Reviews.GetType().Name}) requires at list one query field.");
 
-			return Reviews.GetGraphFieldAndSetFieldArguments(fields, arguments);
+		    if (arguments != null)
+		    {
+		        foreach (var argument in arguments)
+		            argument.IsValidArgumentType();
+		    }
+
+            return Reviews.GetGraphFieldAndSetFieldArguments(fields, arguments);
 		}
 
 		public GraphQueryField StatsQueryField()

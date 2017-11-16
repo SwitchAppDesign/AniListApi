@@ -8,9 +8,9 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilderArguments
     /// </summary>
     public class MediaQueryBuilderArguments
     {
-        internal MediaQueryBuilderArguments()
+        internal MediaQueryBuilderArguments(AniListQueryType queryType)
         {
-            InitializeArguments();
+            InitializeArguments(queryType);
         }
 
         /// <summary>
@@ -38,13 +38,13 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilderArguments
         /// </summary>
         public ReviewQueryArguments ReviewQueryArguments { get; private set; }
 
-        private void InitializeArguments()
+        private void InitializeArguments(AniListQueryType queryType)
         {
-            CharacterQueryArguments = new CharacterQueryArguments(AniListQueryType.Media);
-            StaffQueryArguments = new StaffQueryArguments(AniListQueryType.Media);
-            StudioQueryArguments = new StudioQueryArguments(AniListQueryType.Media);
-            AiringScheduleQueryArguments = new AiringScheduleQueryArguments(AniListQueryType.Media);
-            ReviewQueryArguments = new ReviewQueryArguments(AniListQueryType.Media);
+            CharacterQueryArguments = new CharacterQueryArguments(queryType);
+            StaffQueryArguments = new StaffQueryArguments(queryType);
+            StudioQueryArguments = new StudioQueryArguments(queryType);
+            AiringScheduleQueryArguments = new AiringScheduleQueryArguments(queryType);
+            ReviewQueryArguments = new ReviewQueryArguments(queryType);
         }
     }
 }

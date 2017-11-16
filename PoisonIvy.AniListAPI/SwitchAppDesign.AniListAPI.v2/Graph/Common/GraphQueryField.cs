@@ -36,7 +36,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Common
         /// <summary>
         /// The arguments to be used in a graph query.
         /// </summary>
-        public IEnumerable<GraphQueryArgument<object>> Arguments { get; private set; }
+        public IEnumerable<object> Arguments { get; private set; }
 
         /// <summary>
         /// The fields to be used in a graph query.
@@ -53,14 +53,14 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Common
         /// </summary>
         /// <param name="fields">The fields to be used in a graph query.</param>
         /// <param name="arguments">The arguments to be used in a graph query.</param>
-        public GraphQueryField GetGraphFieldAndSetFieldArguments(IEnumerable<GraphQueryField> fields, IEnumerable<GraphQueryArgument<object>> arguments = null)
+        public GraphQueryField GetGraphFieldAndSetFieldArguments(IEnumerable<GraphQueryField> fields, IEnumerable<object> arguments = null)
         {
             SetFieldArguments(arguments);
             SetFields(fields);
             return this;
         }
 
-        private void SetFieldArguments(IEnumerable<GraphQueryArgument<object>> arguments)
+        private void SetFieldArguments(IEnumerable<object> arguments)
         {
             Arguments = arguments;
         }

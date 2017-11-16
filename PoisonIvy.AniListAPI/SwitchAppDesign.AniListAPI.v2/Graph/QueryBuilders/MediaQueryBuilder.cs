@@ -20,16 +20,21 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders
     {
         internal MediaQueryBuilder()
         {
-            InitializeBuilder();
+            InitializeBuilder(AniListQueryType.Media);
+        }
+
+        internal MediaQueryBuilder(AniListQueryType queryType)
+        {
+            InitializeBuilder(queryType);
         }
 
         /// <summary>
         /// Initilizes an new instance of <see cref="MediaQueryBuilder"/> for custom query building.
         /// </summary>
         /// <returns></returns>
-        public static MediaQueryBuilder CreateCustomerQueryBuider()
+        public static MediaQueryBuilder CreateCustomerQueryBuider(AniListQueryType queryType)
         {
-            return new MediaQueryBuilder();
+            return new MediaQueryBuilder(queryType);
         }
 
         /// <summary>
@@ -53,16 +58,16 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders
         public MediaQueryBuilderArguments AdditionalAvailableArguments { get; private set; }
 
 
-        private void InitializeBuilder()
+        private void InitializeBuilder(AniListQueryType queryType)
         {
-            InitializeBase(AniListQueryType.Media);
+            InitializeBase(queryType);
             GraphQueryFields = new List<GraphQueryField>();
 
-            MediaQueryFields = new MediaQueryFields(AniListQueryType.Media);
-            MediaQueryArguments = new MediaQueryArguments(AniListQueryType.Media);
+            MediaQueryFields = new MediaQueryFields(queryType);
+            MediaQueryArguments = new MediaQueryArguments(queryType);
 
-            AdditionalAvailableFields = new MediaQueryBuilderFields();
-            AdditionalAvailableArguments = new MediaQueryBuilderArguments();
+            AdditionalAvailableFields = new MediaQueryBuilderFields(queryType);
+            AdditionalAvailableArguments = new MediaQueryBuilderArguments(queryType);
         }
     }
 }

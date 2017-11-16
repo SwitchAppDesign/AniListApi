@@ -33,11 +33,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders
         /// </summary>
         public void AddArgument(object argument)
         {
-            if (!argument.GetType().IsGenericType)
-                throw new Exception("The incorrect argument type provided.");
-
-            if (!argument.GetType().GetGenericArguments().Any())
-                throw new Exception("The incorrect argument type provided.");
+            argument.IsValidArgumentType();
 
             GraphQueryArguments.Add(argument);
         }
