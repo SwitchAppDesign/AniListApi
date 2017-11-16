@@ -27,9 +27,6 @@ namespace ApiTestConsoleApp_Core
 
         
     }
+    
 
-    class Test
-    {
-        public int?[] NullableIntArray { get; set; }
-    }
 }
