@@ -147,20 +147,20 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
 
         private void InitializeProperties(AniListQueryType queryType)
         {
-            UserId = new GraphQueryArgument<int>("userId", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
-            UserName = new GraphQueryArgument<string>("userName", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
-            Type = new GraphQueryArgument<MediaType>("type", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
-            Notes = new GraphQueryArgument<string>("notes", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
-            StartedAt = new GraphQueryArgument<FuzzyDateInt>("startedAt", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
-            CompletedAt = new GraphQueryArgument<FuzzyDateInt>("completedAt", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
-            NotesLike = new GraphQueryArgument<string>("notes_like", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
-            StartedAtGreater = new GraphQueryArgument<FuzzyDateInt>("startedAt_greater", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
-            StartedAtLesser = new GraphQueryArgument<FuzzyDateInt>("startedAt_lesser", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
-            StartedAtLike = new GraphQueryArgument<string>("startedAt_like", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
-            CompletedAtGreater = new GraphQueryArgument<FuzzyDateInt>("completedAt_greater", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
-            CompletedAtLesser = new GraphQueryArgument<FuzzyDateInt>("completedAt_lesser", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
-            CompletedAtLike = new GraphQueryArgument<string>("completedAt_like", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
-            Sort = new GraphQueryArgument<IEnumerable<MediaListSort>>("sort", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
+            UserId = new GraphQueryArgument<int>("userId", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
+            UserName = new GraphQueryArgument<string>("userName", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
+            Type = new GraphQueryArgument<MediaType>("type", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
+            Notes = new GraphQueryArgument<string>("notes", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
+            StartedAt = new GraphQueryArgument<FuzzyDateInt>("startedAt", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
+            CompletedAt = new GraphQueryArgument<FuzzyDateInt>("completedAt", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
+            NotesLike = new GraphQueryArgument<string>("notes_like", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
+            StartedAtGreater = new GraphQueryArgument<FuzzyDateInt>("startedAt_greater", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
+            StartedAtLesser = new GraphQueryArgument<FuzzyDateInt>("startedAt_lesser", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
+            StartedAtLike = new GraphQueryArgument<string>("startedAt_like", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
+            CompletedAtGreater = new GraphQueryArgument<FuzzyDateInt>("completedAt_greater", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
+            CompletedAtLesser = new GraphQueryArgument<FuzzyDateInt>("completedAt_lesser", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
+            CompletedAtLike = new GraphQueryArgument<string>("completedAt_like", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
+            Sort = new GraphQueryArgument<IEnumerable<MediaListSort>>("sort", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.MediaListCollection }));
         }
     }
 }

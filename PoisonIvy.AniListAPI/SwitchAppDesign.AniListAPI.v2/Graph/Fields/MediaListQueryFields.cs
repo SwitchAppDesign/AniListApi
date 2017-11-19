@@ -198,26 +198,26 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 
 		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Id = new GraphQueryField("id", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			UserId = new GraphQueryField("userId", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			MediaId = new GraphQueryField("mediaId", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			Status = new GraphQueryField("status", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			Score = new GraphQueryField("score", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			Progress = new GraphQueryField("progress", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			ProgressVolumes = new GraphQueryField("progressVolumes", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			Repeat = new GraphQueryField("repeat", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			Priority = new GraphQueryField("priority", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			_private = new GraphQueryField("_private", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			Notes = new GraphQueryField("notes", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			HiddenFromStatusLists = new GraphQueryField("hiddenFromStatusLists", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			CustomLists = new GraphQueryField("customLists", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			AdvancedScores = new GraphQueryField("advancedScores", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			StartedAt = new GraphQueryField("startedAt", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			CompletedAt = new GraphQueryField("completedAt", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			UpdatedAt = new GraphQueryField("updatedAt", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			CreatedAt = new GraphQueryField("createdAt", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			Media = new GraphQueryField("media", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			User = new GraphQueryField("user", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			Id = new GraphQueryField("id", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			UserId = new GraphQueryField("userId", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			MediaId = new GraphQueryField("mediaId", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			Status = new GraphQueryField("status", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			Score = new GraphQueryField("score", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			Progress = new GraphQueryField("progress", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			ProgressVolumes = new GraphQueryField("progressVolumes", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			Repeat = new GraphQueryField("repeat", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			Priority = new GraphQueryField("priority", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			_private = new GraphQueryField("_private", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			Notes = new GraphQueryField("notes", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			HiddenFromStatusLists = new GraphQueryField("hiddenFromStatusLists", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			CustomLists = new GraphQueryField("customLists", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			AdvancedScores = new GraphQueryField("advancedScores", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			StartedAt = new GraphQueryField("startedAt", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			CompletedAt = new GraphQueryField("completedAt", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			UpdatedAt = new GraphQueryField("updatedAt", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			CreatedAt = new GraphQueryField("createdAt", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			Media = new GraphQueryField("media", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			User = new GraphQueryField("user", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
 		}
 	}
 }

@@ -21,7 +21,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 
 		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Html = new GraphQueryField("html", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Markdown }));
+			Html = new GraphQueryField("html", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Markdown }));
 		}
 	}
 }

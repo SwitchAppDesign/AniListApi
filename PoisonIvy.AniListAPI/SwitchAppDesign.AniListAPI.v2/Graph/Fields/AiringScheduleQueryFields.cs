@@ -1,5 +1,7 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
+using System.Linq;
+using SwitchAppDesign.AniListAPI.v2.Common;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
 using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
@@ -55,13 +57,20 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 			return MediaId;
 		}
 
-		/// <summary>
-		/// The associate media id of the airing episode
-		/// </summary>
-		public GraphQueryField MediaQueryField()
+        /// <summary>
+        /// The associate media id of the airing episode
+        /// <param name="fields">The list of media fields (found in <see cref="MediaQueryFields"/>) to be used in the graph query (at least of media query field is required).</param>
+        /// </summary>
+        public GraphQueryField MediaQueryField(IList<GraphQueryField> fields)
 		{
-			return Media;
-		}
+		    if (fields == null || !fields.Any())
+		        throw new GraphQueryFieldInvalidException($"Query field ({Media.GetType().Name}) requires at least one media query field.");
+
+		    if (fields.Any(x => x.ParentClassType != typeof(MediaQueryFields)))
+		        throw new GraphQueryFieldInvalidException($"The following fields are not media data query fields {fields.Where(x => x.ParentClassType != typeof(MediaQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+
+		    return Media.GetGraphFieldAndSetFieldArguments(fields);
+        }
 
 		private GraphQueryField Id { get; set; }
 		private GraphQueryField AiringAt { get; set; }
@@ -72,12 +81,12 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 
 		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Id = new GraphQueryField("id", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
-			AiringAt = new GraphQueryField("airingAt", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
-			TimeUntilAiring = new GraphQueryField("timeUntilAiring", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
-			Episode = new GraphQueryField("episode", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
-			MediaId = new GraphQueryField("mediaId", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
-			Media = new GraphQueryField("media", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
+			Id = new GraphQueryField("id", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
+			AiringAt = new GraphQueryField("airingAt", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
+			TimeUntilAiring = new GraphQueryField("timeUntilAiring", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
+			Episode = new GraphQueryField("episode", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
+			MediaId = new GraphQueryField("mediaId", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
+			Media = new GraphQueryField("media", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
 		}
 	}
 }

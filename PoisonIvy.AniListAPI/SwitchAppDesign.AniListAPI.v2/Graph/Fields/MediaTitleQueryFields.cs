@@ -81,13 +81,13 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 
 		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Romaji = new GraphQueryField("romaji", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-			IsRomajiStylised = new GraphQueryField("IsRomajiStylised", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-			English = new GraphQueryField("english", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-			IsEnglishStylised = new GraphQueryField("IsEnglishStylised", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-			Native = new GraphQueryField("native", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-			IsNativeStylised = new GraphQueryField("IsNativeStylised", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-			UserPreferred = new GraphQueryField("userPreferred", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Romaji = new GraphQueryField("romaji", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			IsRomajiStylised = new GraphQueryField("IsRomajiStylised", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			English = new GraphQueryField("english", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			IsEnglishStylised = new GraphQueryField("IsEnglishStylised", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Native = new GraphQueryField("native", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			IsNativeStylised = new GraphQueryField("IsNativeStylised", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			UserPreferred = new GraphQueryField("userPreferred", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
 		}
 	}
 }

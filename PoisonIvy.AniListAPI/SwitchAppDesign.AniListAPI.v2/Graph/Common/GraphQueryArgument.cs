@@ -13,9 +13,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Common
     /// <typeparam name="T">The type of value this class contains.</typeparam>
     public class GraphQueryArgument<T>
     {
-        internal GraphQueryArgument(string fieldName, AniListQueryType allowedInQueryType, QueryArgumentRules queryArgumentRules)
+        internal GraphQueryArgument(string fieldName, Type parentClassType, AniListQueryType allowedInQueryType, QueryArgumentRules queryArgumentRules)
         {
             FieldName = fieldName;
+            ParentClassType = parentClassType;
             AllowedInQueryType = allowedInQueryType;
             QueryArgumentRules = queryArgumentRules;
             GraphQueryArgumentVariableType = GraphHelper.GetGraphVariableType(typeof(T));
@@ -25,6 +26,11 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Common
         /// Raw name of the argument to be used in a graph query.
         /// </summary>
         public string FieldName { get; }
+
+        /// <summary>
+        /// The class this fields belongs to.
+        /// </summary>
+        public Type ParentClassType { get; }
 
         /// <summary>
         /// The value of the property to be used in a graph query.

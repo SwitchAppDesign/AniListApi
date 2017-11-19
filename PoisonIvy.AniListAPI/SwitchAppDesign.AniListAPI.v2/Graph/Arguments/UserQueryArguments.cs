@@ -57,10 +57,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
 
         private void InitializeProperties(AniListQueryType queryType)
         {
-            Id = new GraphQueryArgument<int>("id", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.User }));
-            Name = new GraphQueryArgument<string>("name", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.User }));
-            Search = new GraphQueryArgument<string>("search", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.User }));
-            Sort = new GraphQueryArgument<IEnumerable<UserSort>>("sort", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.User }));
+            Id = new GraphQueryArgument<int>("id", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.User }));
+            Name = new GraphQueryArgument<string>("name", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.User }));
+            Search = new GraphQueryArgument<string>("search", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.User }));
+            Sort = new GraphQueryArgument<IEnumerable<UserSort>>("sort", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.User }));
         }
     }
 }

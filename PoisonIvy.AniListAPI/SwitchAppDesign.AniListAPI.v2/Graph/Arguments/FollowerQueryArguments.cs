@@ -37,8 +37,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
 
         private void InitializeProperties(AniListQueryType queryType)
         {
-            UserId = new GraphQueryArgument<int?>("userId", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Follower }));
-            Sort = new GraphQueryArgument<IEnumerable<UserSort>>("sort", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Follower }));
+            UserId = new GraphQueryArgument<int?>("userId", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Follower }));
+            Sort = new GraphQueryArgument<IEnumerable<UserSort>>("sort", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Follower }));
         }
     }
 }

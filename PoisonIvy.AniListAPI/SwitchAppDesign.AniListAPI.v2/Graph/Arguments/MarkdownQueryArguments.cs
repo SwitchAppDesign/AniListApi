@@ -27,7 +27,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
 
         private void InitializeProperties(AniListQueryType queryType)
         {
-            Markdown = new GraphQueryArgument<string>("markdown", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Markdown }));
+            Markdown = new GraphQueryArgument<string>("markdown", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Markdown }));
         }
     }
 }

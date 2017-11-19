@@ -9,6 +9,57 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Common
 {
     internal static class GraphHelper
     {
+        ///// <summary>
+        ///// Gets the raw value of a query field.
+        ///// </summary>
+        ///// <returns></returns>
+        //public static string GetGraphQueryFieldValue(GraphQueryField field)
+        //{
+            
+        //}
+
+        /// <summary>
+        /// Gets the raw value of a query argument.
+        /// </summary>
+        /// <returns></returns>
+        public static string GetGraphQueryArgumentValue(object argument)
+        {
+            var value = argument.GetType().GetProperty("Value");
+            var type = value.GetType();
+
+            if (type.IsPrimitive)
+            {
+                if (type == typeof(string))
+                {
+                    return "String";
+                }
+
+                if (type == typeof(int) || type == typeof(double) || type == typeof(decimal))
+                {
+                    return "Int";
+                }
+
+                if (type == typeof(bool))
+                {
+                    return "Boolean";
+                }
+            }
+
+            if (type.IsEnum)
+            {
+                return $"{(value.GetValue(argument) as Enum).GetDescription()}";
+            }
+
+            if (type.IsArray)
+            {
+                var args = type.GetGenericArguments()[0];
+
+
+            }
+
+            return "";
+        }
+
         /// <summary>
         /// Gets the graph query variable type from the given property.
         /// </summary>

@@ -90,14 +90,14 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 
 		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Id = new GraphQueryField("id", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-			Name = new GraphQueryField("name", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-			Description = new GraphQueryField("description", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-			Category = new GraphQueryField("category", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-			Rank = new GraphQueryField("rank", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-			IsGeneralSpoiler = new GraphQueryField("isGeneralSpoiler", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-			IsMediaSpoiler = new GraphQueryField("isMediaSpoiler", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-			IsAdult = new GraphQueryField("isAdult", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Id = new GraphQueryField("id", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Name = new GraphQueryField("name", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Description = new GraphQueryField("description", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Category = new GraphQueryField("category", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Rank = new GraphQueryField("rank", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			IsGeneralSpoiler = new GraphQueryField("isGeneralSpoiler", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			IsMediaSpoiler = new GraphQueryField("isMediaSpoiler", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			IsAdult = new GraphQueryField("isAdult", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
 		}
 	}
 }

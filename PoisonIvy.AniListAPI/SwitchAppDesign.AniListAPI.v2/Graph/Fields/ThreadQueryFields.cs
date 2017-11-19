@@ -195,26 +195,26 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 
         private void InitializeProperties(AniListQueryType queryType)
         {
-            Id = new GraphQueryField("id", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            Title = new GraphQueryField("title", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            Body = new GraphQueryField("body", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            UserId = new GraphQueryField("userId", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            ReplyUserId = new GraphQueryField("replyUserId", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            ReplyCommentId = new GraphQueryField("replyCommentId", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            ReplyCount = new GraphQueryField("replyCount", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            ViewCount = new GraphQueryField("viewCount", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            IsLocked = new GraphQueryField("isLocked", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            IsSticky = new GraphQueryField("isSticky", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            IsSubscribed = new GraphQueryField("isSubscribed", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            RepliedAt = new GraphQueryField("repliedAt", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            CreatedAt = new GraphQueryField("createdAt", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            UpdatedAt = new GraphQueryField("updatedAt", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            User = new GraphQueryField("user", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            ReplyUser = new GraphQueryField("replyUser", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            Likes = new GraphQueryField("likes", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            SiteUrl = new GraphQueryField("siteUrl", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            Categories = new GraphQueryField("categories", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            MediaCategories = new GraphQueryField("mediaCategories", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            Id = new GraphQueryField("id", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            Title = new GraphQueryField("title", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            Body = new GraphQueryField("body", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            UserId = new GraphQueryField("userId", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            ReplyUserId = new GraphQueryField("replyUserId", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            ReplyCommentId = new GraphQueryField("replyCommentId", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            ReplyCount = new GraphQueryField("replyCount", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            ViewCount = new GraphQueryField("viewCount", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            IsLocked = new GraphQueryField("isLocked", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            IsSticky = new GraphQueryField("isSticky", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            IsSubscribed = new GraphQueryField("isSubscribed", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            RepliedAt = new GraphQueryField("repliedAt", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            CreatedAt = new GraphQueryField("createdAt", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            UpdatedAt = new GraphQueryField("updatedAt", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            User = new GraphQueryField("user", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            ReplyUser = new GraphQueryField("replyUser", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            Likes = new GraphQueryField("likes", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            SiteUrl = new GraphQueryField("siteUrl", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            Categories = new GraphQueryField("categories", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            MediaCategories = new GraphQueryField("mediaCategories", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
         }
     }
 }

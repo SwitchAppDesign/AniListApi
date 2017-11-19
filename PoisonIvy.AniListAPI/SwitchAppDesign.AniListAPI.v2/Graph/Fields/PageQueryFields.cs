@@ -102,20 +102,20 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 
 		private void InitializeProperties(AniListQueryType queryType)
 		{
-			PageInfo = new GraphQueryField("pageInfo", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
-			Users = new GraphQueryField("users", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
-			Media = new GraphQueryField("media", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
-			Characters = new GraphQueryField("characters", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
-			Staff = new GraphQueryField("staff", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
-			Studios = new GraphQueryField("studios", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
-			MediaList = new GraphQueryField("mediaList", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
-			AiringSchedules = new GraphQueryField("airingSchedules", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
-			Followers = new GraphQueryField("followers", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
-			Followings = new GraphQueryField("followings", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
-			ActivityReplies = new GraphQueryField("activityReplies", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
-			Threads = new GraphQueryField("threads", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
-			ThreadComments = new GraphQueryField("threadComments", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
-			Reviews = new GraphQueryField("reviews", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			PageInfo = new GraphQueryField("pageInfo", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			Users = new GraphQueryField("users", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			Media = new GraphQueryField("media", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			Characters = new GraphQueryField("characters", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			Staff = new GraphQueryField("staff", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			Studios = new GraphQueryField("studios", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			MediaList = new GraphQueryField("mediaList", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			AiringSchedules = new GraphQueryField("airingSchedules", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			Followers = new GraphQueryField("followers", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			Followings = new GraphQueryField("followings", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			ActivityReplies = new GraphQueryField("activityReplies", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			Threads = new GraphQueryField("threads", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			ThreadComments = new GraphQueryField("threadComments", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			Reviews = new GraphQueryField("reviews", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
 		}
 	}
 }

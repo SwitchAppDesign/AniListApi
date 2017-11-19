@@ -105,16 +105,16 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 
 		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Id = new GraphQueryField("id", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
-			UserId = new GraphQueryField("userId", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
-			ThreadId = new GraphQueryField("threadId", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
-			Comment = new GraphQueryField("comment", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
-			SiteUrl = new GraphQueryField("siteUrl", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
-			CreatedAt = new GraphQueryField("createdAt", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
-			UpdatedAt = new GraphQueryField("updatedAt", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
-			User = new GraphQueryField("user", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
-			Likes = new GraphQueryField("likes", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
-			ChildComments = new GraphQueryField("childComments", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
+			Id = new GraphQueryField("id", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
+			UserId = new GraphQueryField("userId", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
+			ThreadId = new GraphQueryField("threadId", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
+			Comment = new GraphQueryField("comment", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
+			SiteUrl = new GraphQueryField("siteUrl", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
+			CreatedAt = new GraphQueryField("createdAt", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
+			UpdatedAt = new GraphQueryField("updatedAt", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
+			User = new GraphQueryField("user", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
+			Likes = new GraphQueryField("likes", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
+			ChildComments = new GraphQueryField("childComments", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
 		}
 	}
 }

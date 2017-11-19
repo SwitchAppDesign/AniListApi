@@ -52,6 +52,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders
             var queryBuilder = new StringBuilder();
 
             BuildQueryType(queryBuilder);
+            queryBuilder.Append(BuildQueryFields(GraphQueryFields));
+            BuildQueryEnd(queryBuilder);
 
             return new GraphQuery(queryBuilder.ToString(), new Dictionary<string, object>());
         }
@@ -66,7 +68,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders
                 : "query{");
 
             queryBuilder.AppendLine(GraphQueryArguments != null && GraphQueryArguments.Any()
-                ? $"{AniListQueryType.GetDescription()}({BuildQueryTypeArguments()}){{"
+                ? $"{AniListQueryType.GetDescription()}({BuildQueryFieldArgumentsForVariables()}){{"
                 : $"{AniListQueryType.GetDescription()}{{");
         }
 
@@ -95,19 +97,23 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders
         }
 
         /// <summary>
-        /// Builds the query type argument component of a Graph Query. Example: media(arg1: $arg1, arg2: $arg2).
+        /// Builds the query argument component of a Graph Query. Example: media(arg1: $arg1, arg2: $arg2).
         /// <list type="bullet">
         /// <item><term>arg1 and arg2</term><description>are the query type arguments.</description></item>
         /// <item><term>$arg1 and $arg2</term><description>are the query arguments.</description></item>
         /// </list>
         /// </summary>
-        private string BuildQueryTypeArguments()
+        private string BuildQueryFieldArgumentsForVariables()
         {
             var queryArgumentBuilder = new StringBuilder();
 
             foreach (var argument in GraphQueryArguments)
             {
-                var fieldName = argument.GetType().GetProperty("FieldName");
+                var argType = argument.GetType();
+                var argMethod = argType.GetMethod("Validate");
+                var fieldName = argType.GetProperty("FieldName");
+
+                argMethod.Invoke(argument, new object[]{ AniListQueryType, false, null });
 
                 queryArgumentBuilder.Append(argument == GraphQueryArguments.Last()
                     ? $"{fieldName.GetValue(argument)}: ${fieldName.GetValue(argument)}"
@@ -117,14 +123,59 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders
             return queryArgumentBuilder.ToString();
         }
 
-        private void BuildQueryFields(StringBuilder builder)
+        private string BuildQueryFieldArgumentsWithValues(IList<object> graphQueryArguments)
         {
-            foreach (var field in GraphQueryFields)
+            var queryArgumentBuilder = new StringBuilder();
+
+            foreach (var argument in graphQueryArguments)
+            {
+                var argType = argument.GetType();
+                var argMethod = argType.GetMethod("Validate");
+                var fieldName = argType.GetProperty("FieldName");
+
+                argMethod.Invoke(argument, new object[] { AniListQueryType, false, null });
+
+                queryArgumentBuilder.Append(argument == graphQueryArguments.Last()
+                    ? $"{fieldName.GetValue(argument)}: {GraphHelper.GetGraphQueryArgumentValue(argument)}"
+                    : $"{fieldName.GetValue(argument)}: {GraphHelper.GetGraphQueryArgumentValue(argument)},");
+            }
+
+            return queryArgumentBuilder.ToString();
+        }
+
+        /// <summary>
+        /// Builds the query field component of a graph query.
+        /// </summary>
+        private string BuildQueryFields(IList<GraphQueryField> graphQueryFields)
+        {
+            var builder = new StringBuilder();
+
+            foreach (var field in graphQueryFields)
             {
                 field.Validate(isAuthenticated: false);
 
-
+                if (field.Arguments != null && field.Arguments.Any())
+                {
+                    builder.AppendLine($"{field.FieldName}({BuildQueryFieldArgumentsWithValues(field.Arguments.ToList())}){{");
+                    builder.AppendLine(BuildQueryFields(field.Fields.ToList()));
+                    builder.AppendLine("}");
+                }
+                else
+                {
+                    if (field.Fields != null && field.Fields.Any())
+                    {
+                        builder.AppendLine($"{field.FieldName}{{");
+                        builder.AppendLine(BuildQueryFields(field.Fields.ToList()));
+                        builder.AppendLine("}");
+                    }
+                    else
+                    {
+                        builder.AppendLine(field.FieldName);
+                    }
+                }
             }
+
+            return builder.ToString();
         }
 
         private void BuildQueryEnd(StringBuilder builder)

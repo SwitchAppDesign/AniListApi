@@ -45,9 +45,9 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
 
         private void InitializeProperties(AniListQueryType queryType)
         {
-            Id = new GraphQueryArgument<int>("id", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
-            ThreadId = new GraphQueryArgument<int>("threadId", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.ThreadComment })); 
-            UserId =new GraphQueryArgument<int>("userId", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.ThreadComment })); 
+            Id = new GraphQueryArgument<int>("id", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.ThreadComment }));
+            ThreadId = new GraphQueryArgument<int>("threadId", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.ThreadComment })); 
+            UserId =new GraphQueryArgument<int>("userId", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.ThreadComment })); 
         }
     }
 }

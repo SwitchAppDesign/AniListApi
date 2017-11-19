@@ -1,5 +1,7 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
+using System.Linq;
+using SwitchAppDesign.AniListAPI.v2.Common;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
 using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
@@ -52,34 +54,65 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 			return IsFollowing;
 		}
 
-		/// <summary>
-		/// The user's general options
-		/// </summary>
-		public GraphQueryField OptionsQueryField()
+        /// <summary>
+        /// The user's general options.
+        /// <param name="fields">The list of user options fields (found in <see cref="AiringScheduleQueryFields"/>) to be used in the graph query (at least of user options query field is required).</param>
+        /// </summary>
+        public GraphQueryField OptionsQueryField(IList<GraphQueryField> fields)
 		{
-			return Options;
-		}
+		    if (fields == null || !fields.Any())
+		        throw new GraphQueryFieldInvalidException($"Query field ({Options.GetType().Name}) requires at least one user options query field.");
 
-		/// <summary>
-		/// The user's media list options
-		/// </summary>
-		public GraphQueryField MediaListOptionsQueryField()
-		{
-			return MediaListOptions;
-		}
+		    if (fields.Any(x => x.ParentClassType != typeof(UserOptionsQueryFields)))
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid user options query fields {fields.Where(x => x.ParentClassType != typeof(UserOptionsQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
 
-		/// <summary>
-		/// The users favourites
-		/// </summary>
-		public GraphQueryField FavouritesQueryField()
-		{
-			return Favourites;
-		}
+		    return Options.GetGraphFieldAndSetFieldArguments(fields);
+        }
 
-		public GraphQueryField StatsQueryField()
+        /// <summary>
+        /// The user's media list options.
+        /// <param name="fields">The list of media list options fields (found in <see cref="MediaListOptionsQueryFields"/>) to be used in the graph query (at least of media list options query field is required).</param>
+        /// </summary>
+        public GraphQueryField MediaListOptionsQueryField(IList<GraphQueryField> fields)
 		{
-			return Stats;
-		}
+		    if (fields == null || !fields.Any())
+		        throw new GraphQueryFieldInvalidException($"Query field ({Options.GetType().Name}) requires at least one media list options query field.");
+
+		    if (fields.Any(x => x.ParentClassType != typeof(MediaListOptionsQueryFields)))
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid media list options query fields {fields.Where(x => x.ParentClassType != typeof(MediaListOptionsQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+
+		    return Options.GetGraphFieldAndSetFieldArguments(fields);
+        }
+
+        /// <summary>
+        /// The users favourites.
+        /// <param name="fields">The list of favourites fields (found in <see cref="FavouritesQueryFields"/>) to be used in the graph query (at least of favourites query field is required).</param>
+        /// </summary>
+        public GraphQueryField FavouritesQueryField(IList<GraphQueryField> fields)
+		{
+		    if (fields == null || !fields.Any())
+		        throw new GraphQueryFieldInvalidException($"Query field ({Favourites.GetType().Name}) requires at least one favourites query field.");
+
+		    if (fields.Any(x => x.ParentClassType != typeof(FavouritesQueryFields)))
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid favourites query fields {fields.Where(x => x.ParentClassType != typeof(FavouritesQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+
+		    return Favourites.GetGraphFieldAndSetFieldArguments(fields);
+        }
+
+        /// <summary>
+        /// The user's statistics.
+        /// <param name="fields">The list of user stats fields (found in <see cref="UserStatsQueryFields"/>) to be used in the graph query (at least of user stats query field is required).</param>
+        /// </summary>
+        public GraphQueryField StatsQueryField(IList<GraphQueryField> fields)
+		{
+		    if (fields == null || !fields.Any())
+		        throw new GraphQueryFieldInvalidException($"Query field ({Stats.GetType().Name}) requires at least one user stats query field.");
+
+		    if (fields.Any(x => x.ParentClassType != typeof(UserStatsQueryFields)))
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid user stats query fields {fields.Where(x => x.ParentClassType != typeof(UserStatsQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+
+		    return Stats.GetGraphFieldAndSetFieldArguments(fields);
+        }
 
 		/// <summary>
 		/// The number of unread notifications the user has
@@ -129,19 +162,19 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 
 		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Id = new GraphQueryField("id", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			Name = new GraphQueryField("name", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			About = new GraphQueryField("about", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			Avatar = new GraphQueryField("avatar", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			IsFollowing = new GraphQueryField("isFollowing", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			Options = new GraphQueryField("options", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			MediaListOptions = new GraphQueryField("mediaListOptions", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			Favourites = new GraphQueryField("favourites", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			Stats = new GraphQueryField("stats", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			UnreadNotificationCount = new GraphQueryField("unreadNotificationCount", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			SiteUrl = new GraphQueryField("siteUrl", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			DonatorTier = new GraphQueryField("donatorTier", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			UpdatedAt = new GraphQueryField("updatedAt", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			Id = new GraphQueryField("id", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			Name = new GraphQueryField("name", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			About = new GraphQueryField("about", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			Avatar = new GraphQueryField("avatar", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			IsFollowing = new GraphQueryField("isFollowing", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			Options = new GraphQueryField("options", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			MediaListOptions = new GraphQueryField("mediaListOptions", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			Favourites = new GraphQueryField("favourites", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			Stats = new GraphQueryField("stats", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			UnreadNotificationCount = new GraphQueryField("unreadNotificationCount", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			SiteUrl = new GraphQueryField("siteUrl", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			DonatorTier = new GraphQueryField("donatorTier", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			UpdatedAt = new GraphQueryField("updatedAt", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
 		}
 	}
 }

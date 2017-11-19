@@ -54,10 +54,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 
 		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Title = new GraphQueryField("title", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-			Thumbnail = new GraphQueryField("thumbnail", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-			Url = new GraphQueryField("url", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-			Site = new GraphQueryField("site", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Title = new GraphQueryField("title", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Thumbnail = new GraphQueryField("thumbnail", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Url = new GraphQueryField("url", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Site = new GraphQueryField("site", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
 		}
 	}
 }

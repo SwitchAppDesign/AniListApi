@@ -37,8 +37,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
 
         private void InitializeProperties(AniListQueryType queryType)
         {
-            Type = new GraphQueryArgument<NotificationType>("type", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Notification }));
-            ResetNotificationCount = new GraphQueryArgument<bool>("resetNotificationCount", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Notification }));
+            Type = new GraphQueryArgument<NotificationType>("type", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Notification }));
+            ResetNotificationCount = new GraphQueryArgument<bool>("resetNotificationCount", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Notification }));
         }
     }
 }

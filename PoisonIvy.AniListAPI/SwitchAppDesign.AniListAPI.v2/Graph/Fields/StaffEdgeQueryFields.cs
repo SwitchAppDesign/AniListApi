@@ -1,5 +1,7 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
+using System.Linq;
+using SwitchAppDesign.AniListAPI.v2.Common;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
 using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
@@ -15,10 +17,19 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 			InitializeProperties(queryType);
 		}
 
-		public GraphQueryField NodeQueryField()
+        /// <summary>
+        /// <param name="fields">The list of staff fields (found in <see cref="StaffQueryFields"/>) to be used in the graph query (at least of staff query field is required).</param>
+        /// </summary>
+        public GraphQueryField NodeQueryField(IList<GraphQueryField> fields)
 		{
-			return Node;
-		}
+		    if (fields == null || !fields.Any())
+		        throw new GraphQueryFieldInvalidException($"Query field ({Node.GetType().Name}) requires at least one staff query field.");
+
+		    if (fields.Any(x => x.ParentClassType != typeof(StaffQueryFields)))
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid staff query fields {fields.Where(x => x.ParentClassType != typeof(StaffQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+
+		    return Node.GetGraphFieldAndSetFieldArguments(fields);
+        }
 
 		/// <summary>
 		/// The id of the connection
@@ -51,10 +62,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 
 		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Node = new GraphQueryField("node", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Staff }));
-			Id = new GraphQueryField("id", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Staff }));
-			Role = new GraphQueryField("role", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Staff }));
-			FavouriteOrder = new GraphQueryField("favouriteOrder", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Staff }));
+			Node = new GraphQueryField("node", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Staff }));
+			Id = new GraphQueryField("id", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Staff }));
+			Role = new GraphQueryField("role", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Staff }));
+			FavouriteOrder = new GraphQueryField("favouriteOrder", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Staff }));
 		}
 	}
 }

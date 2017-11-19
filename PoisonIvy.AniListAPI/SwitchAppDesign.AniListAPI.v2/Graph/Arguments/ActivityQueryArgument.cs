@@ -226,29 +226,29 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
 
         private void InitializeProperties(AniListQueryType queryType)
         {
-            Id = new GraphQueryArgument<int>("id", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
-            UserId = new GraphQueryArgument<int>("userId", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
-            MessengerId = new GraphQueryArgument<int>("messangerId", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
-            Type = new GraphQueryArgument<ActivityType>("type", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
-            IsFollowing = new GraphQueryArgument<bool>("isFollowing", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
-            HasReplies = new GraphQueryArgument<bool>("hasReplies", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
-            HasRepliesOrTypeText = new GraphQueryArgument<bool>("hasRepliesOrTypeText", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
-            CreatedAt = new GraphQueryArgument<int>("createdAt", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
-            IdNot = new GraphQueryArgument<int>("id_not", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
-            IdIn = new GraphQueryArgument<IEnumerable<int>>("id_in", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
-            IdNotIn = new GraphQueryArgument<IEnumerable<int>>("id_not_in", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
-            UserIdNot = new GraphQueryArgument<int>("userId_not", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
-            UserIdIn = new GraphQueryArgument<IEnumerable<int>>("userId_in", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
-            UserIdNotIn = new GraphQueryArgument<IEnumerable<int>>("userId_not_in", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
-            MessengerIdNot = new GraphQueryArgument<int>("messengerId_not", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
-            MessengerIdIn = new GraphQueryArgument<IEnumerable<int>>("messengerId_in", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
-            MessengerIdNotIn = new GraphQueryArgument<IEnumerable<int>>("messengerId_not_in", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
-            TypeNot = new GraphQueryArgument<ActivityType>("type_not", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
-            TypeIn = new GraphQueryArgument<IEnumerable<ActivityType>>("type_in", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
-            TypeNotIn = new GraphQueryArgument<IEnumerable<ActivityType>>("type_not_in", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
-            CreatedAtGreater = new GraphQueryArgument<int>("createdAt_greater", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
-            CreatedAtLesser = new GraphQueryArgument<int>("createdAt_lesser", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
-            Sort = new GraphQueryArgument<IEnumerable<ActivitySort>>("sort", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            Id = new GraphQueryArgument<int>("id", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            UserId = new GraphQueryArgument<int>("userId", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            MessengerId = new GraphQueryArgument<int>("messangerId", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            Type = new GraphQueryArgument<ActivityType>("type", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            IsFollowing = new GraphQueryArgument<bool>("isFollowing", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            HasReplies = new GraphQueryArgument<bool>("hasReplies", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            HasRepliesOrTypeText = new GraphQueryArgument<bool>("hasRepliesOrTypeText", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            CreatedAt = new GraphQueryArgument<int>("createdAt", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            IdNot = new GraphQueryArgument<int>("id_not", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            IdIn = new GraphQueryArgument<IEnumerable<int>>("id_in", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            IdNotIn = new GraphQueryArgument<IEnumerable<int>>("id_not_in", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            UserIdNot = new GraphQueryArgument<int>("userId_not", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            UserIdIn = new GraphQueryArgument<IEnumerable<int>>("userId_in", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            UserIdNotIn = new GraphQueryArgument<IEnumerable<int>>("userId_not_in", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            MessengerIdNot = new GraphQueryArgument<int>("messengerId_not", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            MessengerIdIn = new GraphQueryArgument<IEnumerable<int>>("messengerId_in", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            MessengerIdNotIn = new GraphQueryArgument<IEnumerable<int>>("messengerId_not_in", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            TypeNot = new GraphQueryArgument<ActivityType>("type_not", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            TypeIn = new GraphQueryArgument<IEnumerable<ActivityType>>("type_in", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            TypeNotIn = new GraphQueryArgument<IEnumerable<ActivityType>>("type_not_in", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            CreatedAtGreater = new GraphQueryArgument<int>("createdAt_greater", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            CreatedAtLesser = new GraphQueryArgument<int>("createdAt_lesser", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
+            Sort = new GraphQueryArgument<IEnumerable<ActivitySort>>("sort", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Activity }));
         }
     }
 }

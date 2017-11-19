@@ -38,8 +38,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
 
         private void InitializeProperties(AniListQueryType queryType)
         {
-            Id = new GraphQueryArgument<int>("id", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.ActivityReply }));
-            ActivityId = new GraphQueryArgument<int>("activityId", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.ActivityReply }));
+            Id = new GraphQueryArgument<int>("id", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.ActivityReply }));
+            ActivityId = new GraphQueryArgument<int>("activityId", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.ActivityReply }));
         }
     }
 }

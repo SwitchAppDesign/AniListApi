@@ -1,5 +1,7 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
+using System.Linq;
+using SwitchAppDesign.AniListAPI.v2.Common;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
 using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
@@ -15,23 +17,48 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 			InitializeProperties(queryType);
 		}
 
-		public GraphQueryField EdgesQueryField()
+        /// <summary>
+        /// <param name="fields">The list of character edge query fields (found in <see cref="CharacterEdgeQueryFields"/>) to be used in the graph query (at least of character edge query field is required).</param>
+        /// </summary>
+        public GraphQueryField EdgesQueryField(IList<GraphQueryField> fields)
 		{
-			return Edges;
-		}
+		    if (fields == null || !fields.Any())
+		        throw new GraphQueryFieldInvalidException($"Query field ({Edges.GetType().Name}) requires at least one character edge query field.");
 
-		public GraphQueryField NodesQueryField()
-		{
-			return Nodes;
-		}
+		    if (fields.Any(x => x.ParentClassType != typeof(CharacterEdgeQueryFields)))
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid character edge query fields {fields.Where(x => x.ParentClassType != typeof(CharacterEdgeQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
 
-		/// <summary>
-		/// The pagination information
-		/// </summary>
-		public GraphQueryField PageInfoQueryField()
+		    return Edges.GetGraphFieldAndSetFieldArguments(fields);
+        }
+
+        /// <summary>
+        /// <param name="fields">The list of character query fields (found in <see cref="CharacterQueryFields"/>) to be used in the graph query (at least of character query field is required).</param>
+        /// </summary>
+        public GraphQueryField NodesQueryField(IList<GraphQueryField> fields)
 		{
-			return PageInfo;
-		}
+		    if (fields == null || !fields.Any())
+		        throw new GraphQueryFieldInvalidException($"Query field ({Nodes.GetType().Name}) requires at least one character query field.");
+
+		    if (fields.Any(x => x.ParentClassType != typeof(CharacterQueryFields)))
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid character query fields {fields.Where(x => x.ParentClassType != typeof(CharacterQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+
+		    return Nodes.GetGraphFieldAndSetFieldArguments(fields);
+        }
+
+        /// <summary>
+        /// The pagination information
+        /// <param name="fields">The list of page info query fields (found in <see cref="PageInfoQueryFields"/>) to be used in the graph query (at least of page info query field is required).</param>
+        /// </summary>
+        public GraphQueryField PageInfoQueryField(IList<GraphQueryField> fields)
+        {
+            if (fields == null || !fields.Any())
+                throw new GraphQueryFieldInvalidException($"Query field ({PageInfo.GetType().Name}) requires at least one page info query field.");
+
+            if (fields.Any(x => x.ParentClassType != typeof(PageInfoQueryFields)))
+                throw new GraphQueryFieldInvalidException($"The following fields are not valid page info query fields {fields.Where(x => x.ParentClassType != typeof(PageInfoQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+
+            return PageInfo.GetGraphFieldAndSetFieldArguments(fields);
+        }
 
 		private GraphQueryField Edges { get; set; }
 		private GraphQueryField Nodes { get; set; }
@@ -39,9 +66,9 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 
 		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Edges = new GraphQueryField("edges", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Staff, AniListQueryType.User }));
-			Nodes = new GraphQueryField("nodes", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Staff, AniListQueryType.User }));
-			PageInfo = new GraphQueryField("pageInfo", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Staff, AniListQueryType.User }));
+			Edges = new GraphQueryField("edges", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Staff, AniListQueryType.User }));
+			Nodes = new GraphQueryField("nodes", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Staff, AniListQueryType.User }));
+			PageInfo = new GraphQueryField("pageInfo", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Staff, AniListQueryType.User }));
 		}
 	}
 }

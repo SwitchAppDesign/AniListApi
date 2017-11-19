@@ -90,14 +90,14 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 
 		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Id = new GraphQueryField("id", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-			Rank = new GraphQueryField("rank", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-			Type = new GraphQueryField("type", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-			Format = new GraphQueryField("format", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-			Year = new GraphQueryField("year", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-			Season = new GraphQueryField("season", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-			AllTime = new GraphQueryField("allTime", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-			Context = new GraphQueryField("context", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Id = new GraphQueryField("id", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Rank = new GraphQueryField("rank", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Type = new GraphQueryField("type", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Format = new GraphQueryField("format", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Year = new GraphQueryField("year", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Season = new GraphQueryField("season", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			AllTime = new GraphQueryField("allTime", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Context = new GraphQueryField("context", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
 		}
 	}
 }

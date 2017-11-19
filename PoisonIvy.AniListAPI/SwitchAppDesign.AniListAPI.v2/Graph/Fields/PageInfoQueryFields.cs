@@ -63,11 +63,11 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 
 		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Total = new GraphQueryField("total", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
-			PerPage = new GraphQueryField("perPage", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
-			CurrentPage = new GraphQueryField("currentPage", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
-			LastPage = new GraphQueryField("lastPage", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
-			HasNextPage = new GraphQueryField("hasNextPage", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			Total = new GraphQueryField("total", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			PerPage = new GraphQueryField("perPage", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			CurrentPage = new GraphQueryField("currentPage", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			LastPage = new GraphQueryField("lastPage", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+			HasNextPage = new GraphQueryField("hasNextPage", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
 		}
 	}
 }

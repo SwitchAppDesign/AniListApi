@@ -78,13 +78,13 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 
 		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Id = new GraphQueryField("id", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ActivityReply }));
-			UserId = new GraphQueryField("userId", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ActivityReply }));
-			ActivityId = new GraphQueryField("activityId", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ActivityReply }));
-			Text = new GraphQueryField("text", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ActivityReply }));
-			CreatedAt = new GraphQueryField("createdAt", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ActivityReply }));
-			User = new GraphQueryField("user", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ActivityReply }));
-			Likes = new GraphQueryField("likes", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ActivityReply }));
+			Id = new GraphQueryField("id", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ActivityReply }));
+			UserId = new GraphQueryField("userId", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ActivityReply }));
+			ActivityId = new GraphQueryField("activityId", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ActivityReply }));
+			Text = new GraphQueryField("text", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ActivityReply }));
+			CreatedAt = new GraphQueryField("createdAt", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ActivityReply }));
+			User = new GraphQueryField("user", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ActivityReply }));
+			Likes = new GraphQueryField("likes", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ActivityReply }));
 		}
 	}
 }

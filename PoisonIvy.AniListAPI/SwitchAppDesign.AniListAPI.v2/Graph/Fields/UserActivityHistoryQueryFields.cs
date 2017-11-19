@@ -42,9 +42,9 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
          
 		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Date = new GraphQueryField("date", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			Amount = new GraphQueryField("amount", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			Level = new GraphQueryField("level", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			Date = new GraphQueryField("date", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			Amount = new GraphQueryField("amount", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			Level = new GraphQueryField("level", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
 		}
 	}
 }

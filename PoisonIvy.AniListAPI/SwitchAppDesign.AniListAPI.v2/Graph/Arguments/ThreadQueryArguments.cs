@@ -100,15 +100,15 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
 
         private void InitializeProperties(AniListQueryType queryType)
         {
-            Id = new GraphQueryArgument<int>("id", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Thread }));
-            UserId = new GraphQueryArgument<int>("userId", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Thread }));
-            ReplyUserId = new GraphQueryArgument<int>("replyUserId", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Thread }));
-            Subscribed = new GraphQueryArgument<bool>("subscribed", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Thread }));
-            CategoryId = new GraphQueryArgument<int>("categoryId", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Thread }));
-            MediaCategoryId = new GraphQueryArgument<int>("mediaCategoryId", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Thread }));
-            Search = new GraphQueryArgument<string>("search", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Thread }));
-            IdIn = new GraphQueryArgument<IEnumerable<int>>("id_in", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Thread }));
-            Sort = new GraphQueryArgument<IEnumerable<ThreadSort>>("sort", queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Thread }));
+            Id = new GraphQueryArgument<int>("id", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Thread }));
+            UserId = new GraphQueryArgument<int>("userId", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Thread }));
+            ReplyUserId = new GraphQueryArgument<int>("replyUserId", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Thread }));
+            Subscribed = new GraphQueryArgument<bool>("subscribed", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Thread }));
+            CategoryId = new GraphQueryArgument<int>("categoryId", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Thread }));
+            MediaCategoryId = new GraphQueryArgument<int>("mediaCategoryId", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Thread }));
+            Search = new GraphQueryArgument<string>("search", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Thread }));
+            IdIn = new GraphQueryArgument<IEnumerable<int>>("id_in", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Thread }));
+            Sort = new GraphQueryArgument<IEnumerable<ThreadSort>>("sort", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Thread }));
         }
     }
 }

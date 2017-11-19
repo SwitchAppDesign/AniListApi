@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using SwitchAppDesign.AniListAPI.v2.Common;
 using SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders;
 using SwitchAppDesign.AniListAPI.v2.Graph.Types;
@@ -14,11 +15,13 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Common
         /// Initilizes an instance of a GraphQueryField.
         /// </summary>
         /// <param name="fieldName">Raw name of the field to be used in a graph query.</param>
+        /// <param name="parentClassType">The class this fields belongs to.</param>
         /// <param name="allowedInQueryType">The query type this instance of graph query field is allowed to be used in.</param>
         /// <param name="rules">The rules and contraints to be applied to this field in a graph query.</param>
-        public GraphQueryField(string fieldName, AniListQueryType allowedInQueryType, FieldRules rules)
+        public GraphQueryField(string fieldName, Type parentClassType, AniListQueryType allowedInQueryType, FieldRules rules)
         {
             FieldName = fieldName;
+            ParentClassType = parentClassType;
             Rules = rules;
             AllowedInQueryType = allowedInQueryType;
         }
@@ -27,6 +30,11 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Common
         /// Raw name of the field to be used in a graph query 
         /// </summary>
         public string FieldName { get; }
+
+        /// <summary>
+        /// The class this fields belongs to.
+        /// </summary>
+        public Type ParentClassType { get; }
 
         /// <summary>
         /// The rules and contraints to be applied to this field in a graph query.

@@ -33,8 +33,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 
 		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Status = new GraphQueryField("status", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.User }));
-			Amount = new GraphQueryField("amount", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.User }));
+			Status = new GraphQueryField("status", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.User }));
+			Amount = new GraphQueryField("amount", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.User }));
 		}
 	}
 }

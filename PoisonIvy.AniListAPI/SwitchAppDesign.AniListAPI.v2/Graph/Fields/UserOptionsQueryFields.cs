@@ -27,8 +27,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 
 		private void InitializeProperties(AniListQueryType queryType)
 		{
-			TitleLanguage = new GraphQueryField("titleLanguage", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			DisplayAdultContent = new GraphQueryField("displayAdultContent", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			TitleLanguage = new GraphQueryField("titleLanguage", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+			DisplayAdultContent = new GraphQueryField("displayAdultContent", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
 		}
 	}
 }

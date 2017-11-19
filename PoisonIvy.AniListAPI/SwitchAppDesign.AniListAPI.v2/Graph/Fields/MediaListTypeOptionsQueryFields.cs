@@ -45,11 +45,11 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 
 		private void InitializeProperties(AniListQueryType queryType)
 		{
-			SectionOrder = new GraphQueryField("sectionOrder", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			SplitCompletedSectionByFormat = new GraphQueryField("splitCompletedSectionByFormat", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			CustomLists = new GraphQueryField("customLists", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			AdvancedScoring = new GraphQueryField("advancedScoring", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			AdvancedScoringEnabled = new GraphQueryField("advancedScoringEnabled", queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			SectionOrder = new GraphQueryField("sectionOrder", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			SplitCompletedSectionByFormat = new GraphQueryField("splitCompletedSectionByFormat", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			CustomLists = new GraphQueryField("customLists", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			AdvancedScoring = new GraphQueryField("advancedScoring", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+			AdvancedScoringEnabled = new GraphQueryField("advancedScoringEnabled", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
 		}
 	}
 }
