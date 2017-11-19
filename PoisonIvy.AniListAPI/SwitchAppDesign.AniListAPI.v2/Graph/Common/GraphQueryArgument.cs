@@ -113,6 +113,5 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Common
                     propertyName: GetType().Name);
             }
         }
-
     }
 }

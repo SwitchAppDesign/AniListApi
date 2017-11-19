@@ -4,8 +4,7 @@ using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilderFields
 {
     /// <summary>
-    /// Entry point to the media query available fields and arguments. 
-    /// Includes a reference to all related models available fields and arguments.
+    /// All available other fields available for the media query
     /// </summary>
     public class MediaQueryBuilderFields
     {
@@ -17,167 +16,167 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilderFields
         /// <summary>
         /// All available character query fields.
         /// </summary>
-        public CharacterQueryFields CharacterQueryFields { get; private set; }
+        public CharacterQueryFields Character { get; private set; }
 
         /// <summary>
         /// All available character query fields.
         /// </summary>
-        public MediaTitleQueryFields MediaTitleQueryFields { get; private set; }
+        public MediaTitleQueryFields MediaTitle { get; private set; }
 
         /// <summary>
         /// All available character query fields.
         /// </summary>
-        public MediaTrailerQueryFields MediaTrailerQueryFields { get; private set; }
+        public MediaTrailerQueryFields MediaTrailer { get; private set; }
 
         /// <summary>
         /// All available cover image query fields.
         /// </summary>
-        public ImageDataQueryFields CoverImageQueryFields { get; private set; }
+        public ImageDataQueryFields CoverImageData { get; private set; }
 
         /// <summary>
         /// All available media tag query fields.
         /// </summary>
-        public MediaTagQueryFields MediaTagQueryFields { get; private set; }
+        public MediaTagQueryFields MediaTag { get; private set; }
 
         /// <summary>
         /// All available media connection query fields.
         /// </summary>
-        public MediaConnectionQueryFields MediaConnectionQueryFields { get; private set; }
+        public MediaConnectionQueryFields MediaConnection { get; private set; }
 
         /// <summary>
         /// All available media edge query fields.
         /// </summary>
-        public MediaEdgeQueryFields MediaEdgeQueryFields { get; private set; }
+        public MediaEdgeQueryFields MediaEdge { get; private set; }
 
         /// <summary>
         /// All available page info query fields.
         /// </summary>
-        public PageInfoQueryFields PagiInfoQueryFields { get; private set; }
+        public PageInfoQueryFields PagiInfoQuery { get; private set; }
 
         /// <summary>
         /// All available character connection query fields.
         /// </summary>
-        public CharacterConnectionQueryFields CharacterConnectionQueryFields { get; private set; }
+        public CharacterConnectionQueryFields CharacterConnection { get; private set; }
 
         /// <summary>
         /// All available character edge query fields.
         /// </summary>
-        public CharacterEdgeQueryFields CharacterEdgeQueryFields { get; private set; }
+        public CharacterEdgeQueryFields CharacterEdge { get; private set; }
 
         /// <summary>
         /// Staff connection query fields.
         /// </summary>
-        public StaffConnectionQueryFields StaffConnectionQueryFields { get; private set; }
+        public StaffConnectionQueryFields StaffConnection { get; private set; }
 
         /// <summary>
         /// All available staff query fields.
         /// </summary>
-        public StaffQueryFields StaffQueryFields { get; private set; }
+        public StaffQueryFields Staff { get; private set; }
 
         /// <summary>
         /// All available staff edge query fields.
         /// </summary>
-        public StaffEdgeQueryFields StaffEdgeQueryFields { get; private set; }
+        public StaffEdgeQueryFields StaffEdge { get; private set; }
 
         /// <summary>
         /// All available staff connection query fields.
         /// </summary>
-        public StudioConnectionQueryFields StudioConnectionQueryFields { get; private set; }
+        public StudioConnectionQueryFields StudioConnection { get; private set; }
 
         /// <summary>
         /// All available studio edge query fields.
         /// </summary>
-        public StudioEdgeQueryFields StudioEdgeQueryFields { get; private set; }
+        public StudioEdgeQueryFields StudioEdge { get; private set; }
 
         /// <summary>
         /// All available studio query fields.
         /// </summary>
-        public StudioQueryFields StudioQueryFields { get; private set; }
+        public StudioQueryFields Studio { get; private set; }
 
         /// <summary>
         /// All available airing schedule query fields.
         /// </summary>
-        public AiringScheduleQueryFields AiringScheduleQueryFields { get; private set; }
+        public AiringScheduleQueryFields AiringSchedule { get; private set; }
 
         /// <summary>
         /// All available airing schedule connection query fields.
         /// </summary>
-        public AiringScheduleConnectionQueryFields AiringScheduleConnectionQueryFields { get; private set; }
+        public AiringScheduleConnectionQueryFields AiringScheduleConnection { get; private set; }
 
         /// <summary>
         /// All availabl airing schedule edge query fields.
         /// </summary>
-        public AiringScheduleEdgeQueryFields AiringScheduleEdgeQueryFields { get; private set; }
+        public AiringScheduleEdgeQueryFields AiringScheduleEdge { get; private set; }
 
         /// <summary>
         /// All available media external link query fields.
         /// </summary>
-        public MediaExternalLinkQueryFields MediaExternalLinkQueryFields { get; private set; }
+        public MediaExternalLinkQueryFields MediaExternalLink { get; private set; }
 
         /// <summary>
         /// All available streaming episode query fields.
         /// </summary>
-        public MediaStreamingEpisodeQueryFields MediaStreamingEpisodeQueryFields { get; private set; }
+        public MediaStreamingEpisodeQueryFields MediaStreamingEpisode { get; private set; }
 
         /// <summary>
         /// All available media rank query fields.
         /// </summary>
-        public MediaRankQueryFields MediaRankQueryFields { get; private set; }
+        public MediaRankQueryFields MediaRank { get; private set; }
 
         /// <summary>
         /// All available media list query fields.
         /// </summary>
-        public MediaListQueryFields MediaListQueryFields { get; private set; }
+        public MediaListQueryFields MediaList { get; private set; }
 
         /// <summary>
         /// All available review connection query fields.
         /// </summary>
-        public ReviewConnectionQueryFields ReviewConnectionQueryFields { get; private set; }
+        public ReviewConnectionQueryFields ReviewConnection { get; private set; }
 
         /// <summary>
         /// All available review edge query fields
         /// </summary>
-        public ReviewEdgeQueryFields ReviewEdgeQueryFields { get; private set; }
+        public ReviewEdgeQueryFields ReviewEdge { get; private set; }
 
         /// <summary>
         /// All available review query fields.
         /// </summary>
-        public ReviewQueryFields ReviewQueryFields { get; private set; }
+        public ReviewQueryFields Review { get; private set; }
 
         /// <summary>
         /// All available media stats query fields.
         /// </summary>
-        public MediaStatsQueryFields MediaStatsQueryFields { get; private set; }
+        public MediaStatsQueryFields MediaStats { get; private set; }
 
         private void InitializeFields(AniListQueryType queryType)
         {
-            CharacterQueryFields = new CharacterQueryFields(queryType);
-            MediaTitleQueryFields = new MediaTitleQueryFields(queryType);
-            MediaTrailerQueryFields = new MediaTrailerQueryFields(queryType);
-            CoverImageQueryFields = new ImageDataQueryFields(queryType);
-            MediaTagQueryFields = new MediaTagQueryFields(queryType);
-            MediaConnectionQueryFields = new MediaConnectionQueryFields(queryType);
-            MediaEdgeQueryFields = new MediaEdgeQueryFields(queryType);
-            PagiInfoQueryFields = new PageInfoQueryFields(queryType);
-            CharacterConnectionQueryFields = new CharacterConnectionQueryFields(queryType);
-            CharacterEdgeQueryFields = new CharacterEdgeQueryFields(queryType);
-            StaffConnectionQueryFields = new StaffConnectionQueryFields(queryType);
-            StaffQueryFields = new StaffQueryFields(queryType);
-            StaffEdgeQueryFields = new StaffEdgeQueryFields(queryType);
-            StudioConnectionQueryFields = new StudioConnectionQueryFields(queryType);
-            StudioEdgeQueryFields = new StudioEdgeQueryFields(queryType);
-            StudioQueryFields = new StudioQueryFields(queryType);
-            AiringScheduleQueryFields = new AiringScheduleQueryFields(queryType);
-            AiringScheduleConnectionQueryFields = new AiringScheduleConnectionQueryFields(queryType);
-            AiringScheduleEdgeQueryFields = new AiringScheduleEdgeQueryFields(queryType);
-            MediaExternalLinkQueryFields = new MediaExternalLinkQueryFields(queryType);
-            MediaStreamingEpisodeQueryFields = new MediaStreamingEpisodeQueryFields(queryType);
-            MediaRankQueryFields = new MediaRankQueryFields(queryType);
-            MediaListQueryFields = new MediaListQueryFields(queryType);
-            ReviewConnectionQueryFields = new ReviewConnectionQueryFields(queryType);
-            ReviewEdgeQueryFields = new ReviewEdgeQueryFields(queryType);
-            ReviewQueryFields = new ReviewQueryFields(queryType);
-            MediaStatsQueryFields = new MediaStatsQueryFields(queryType);
+            Character = new CharacterQueryFields(queryType);
+            MediaTitle = new MediaTitleQueryFields(queryType);
+            MediaTrailer = new MediaTrailerQueryFields(queryType);
+            CoverImageData = new ImageDataQueryFields(queryType);
+            MediaTag = new MediaTagQueryFields(queryType);
+            MediaConnection = new MediaConnectionQueryFields(queryType);
+            MediaEdge = new MediaEdgeQueryFields(queryType);
+            PagiInfoQuery = new PageInfoQueryFields(queryType);
+            CharacterConnection = new CharacterConnectionQueryFields(queryType);
+            CharacterEdge = new CharacterEdgeQueryFields(queryType);
+            StaffConnection = new StaffConnectionQueryFields(queryType);
+            Staff = new StaffQueryFields(queryType);
+            StaffEdge = new StaffEdgeQueryFields(queryType);
+            StudioConnection = new StudioConnectionQueryFields(queryType);
+            StudioEdge = new StudioEdgeQueryFields(queryType);
+            Studio = new StudioQueryFields(queryType);
+            AiringSchedule = new AiringScheduleQueryFields(queryType);
+            AiringScheduleConnection = new AiringScheduleConnectionQueryFields(queryType);
+            AiringScheduleEdge = new AiringScheduleEdgeQueryFields(queryType);
+            MediaExternalLink = new MediaExternalLinkQueryFields(queryType);
+            MediaStreamingEpisode = new MediaStreamingEpisodeQueryFields(queryType);
+            MediaRank = new MediaRankQueryFields(queryType);
+            MediaList = new MediaListQueryFields(queryType);
+            ReviewConnection = new ReviewConnectionQueryFields(queryType);
+            ReviewEdge = new ReviewEdgeQueryFields(queryType);
+            Review = new ReviewQueryFields(queryType);
+            MediaStats = new MediaStatsQueryFields(queryType);
         }
     }
 }

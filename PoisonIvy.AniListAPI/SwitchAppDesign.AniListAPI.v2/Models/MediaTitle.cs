@@ -12,29 +12,14 @@ namespace SwitchAppDesign.AniListAPI.v2.Models
         public string romaji { get; set; }
 
         /// <summary>
-        /// Defines whether the romaji title is stylised.
-        /// </summary>
-        public bool IsRomajiStylised { get; set; }
-
-        /// <summary>
         /// The official english title
         /// </summary>
         public string english { get; set; }
 
         /// <summary>
-        /// Defines whether the english title is stylised.
-        /// </summary>
-        public bool IsEnglishStylised { get; set; }
-
-        /// <summary>
         /// Official title in it's native language
         /// </summary>
         public string native { get; set; }
-
-        /// <summary>
-        /// Defines whether the native title is stylised.
-        /// </summary>
-        public bool IsNativeStylised { get; set; }
 
         /// <summary>
         /// The currently authenticated users preferred title language. Default romaji for non-authenticaed

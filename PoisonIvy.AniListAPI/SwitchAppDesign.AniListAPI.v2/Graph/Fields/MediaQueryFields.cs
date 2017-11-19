@@ -91,16 +91,16 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// </summary>
 		public GraphQueryField StartDateQueryField()
 		{
-			return StartDate;
-		}
+		    return StartDate.GetGraphFieldAndSetFieldArguments(new FuzzyDateQueryFields(AniListQueryType.Media).GetAllFields());
+        }
 
 		/// <summary>
 		/// The last official release date of the media
 		/// </summary>
 		public GraphQueryField EndDateQueryField()
 		{
-			return EndDate;
-		}
+		    return EndDate.GetGraphFieldAndSetFieldArguments(new FuzzyDateQueryFields(AniListQueryType.Media).GetAllFields());
+        }
 
 		/// <summary>
 		/// The season the media was initially released in

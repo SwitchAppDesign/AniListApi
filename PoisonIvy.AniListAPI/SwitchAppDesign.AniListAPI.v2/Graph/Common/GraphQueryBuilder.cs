@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
 using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 using SwitchAppDesign.AniListAPI.v2.Utility;
@@ -21,7 +22,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders
         /// <summary>
         /// Graph query fields to be used to build the query.
         /// </summary>
-        public IList<GraphQueryField> GraphQueryFields { get; set; }
+        private IList<GraphQueryField> GraphQueryFields { get; set; }
 
         /// <summary>
         /// The type of query to be used.
@@ -38,10 +39,19 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders
             GraphQueryArguments.Add(argument);
         }
 
+        /// <summary>
+        /// Adds a field to the query builder.
+        /// </summary>
+        public void AddField(GraphQueryField field)
+        {
+            GraphQueryFields.Add(field);
+        }
+
         internal void InitializeBase(AniListQueryType queryType)
         {
             AniListQueryType = queryType;
             GraphQueryArguments = new List<object>();
+            GraphQueryFields = new List<GraphQueryField>();
         }
 
         /// <summary>
@@ -55,7 +65,11 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders
             queryBuilder.Append(BuildQueryFields(GraphQueryFields));
             BuildQueryEnd(queryBuilder);
 
-            return new GraphQuery(queryBuilder.ToString(), new Dictionary<string, object>());
+            return new GraphQuery(
+                query: queryBuilder.ToString(),
+                variables: GraphQueryArguments.Any()
+                    ? JsonConvert.SerializeObject(BuildQueryVariables())
+                    : null);
         }
 
         /// <summary>
@@ -165,7 +179,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders
                     if (field.Fields != null && field.Fields.Any())
                     {
                         builder.AppendLine($"{field.FieldName}{{");
-                        builder.AppendLine(BuildQueryFields(field.Fields.ToList()));
+                        builder.Append(BuildQueryFields(field.Fields.ToList()));
                         builder.AppendLine("}");
                     }
                     else
@@ -176,6 +190,23 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders
             }
 
             return builder.ToString();
+        }
+
+        private Dictionary<string, object> BuildQueryVariables()
+        {
+            var result = new Dictionary<string, object>();
+
+            foreach (var argument in GraphQueryArguments)
+            {
+                var argType = argument.GetType();
+                var fieldName = argType.GetProperty("FieldName");
+             
+                result.Add(
+                    fieldName.GetValue(argument) as string,
+                    GraphHelper.GetGraphQueryArgumentValue(argument));
+            }
+
+            return result;
         }
 
         private void BuildQueryEnd(StringBuilder builder)

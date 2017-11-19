@@ -1,42 +1,19 @@
-﻿using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Security;
-using System.Text;
 using SwitchAppDesign.AniListAPI.v2.Graph.Arguments;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
 using SwitchAppDesign.AniListAPI.v2.Graph.Fields;
 using SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilderArguments;
 using SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilderFields;
+using SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.PrebuiltQueries;
 using SwitchAppDesign.AniListAPI.v2.Graph.Types;
-using SwitchAppDesign.AniListAPI.v2.Models;
 
-namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders
+namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.Builders
 {
     /// <summary>
-    /// 
+    /// Builds a media graph query for the AniListAPI v2.
     /// </summary>
     public class MediaQueryBuilder : GraphQueryBuilder
     {
-        internal MediaQueryBuilder()
-        {
-            InitializeBuilder(AniListQueryType.Media);
-        }
-
-        internal MediaQueryBuilder(AniListQueryType queryType)
-        {
-            InitializeBuilder(queryType);
-        }
-
-        /// <summary>
-        /// Initilizes an new instance of <see cref="MediaQueryBuilder"/> for custom query building.
-        /// </summary>
-        /// <returns></returns>
-        public static MediaQueryBuilder CreateCustomerQueryBuider(AniListQueryType queryType)
-        {
-            return new MediaQueryBuilder(queryType);
-        }
-
         /// <summary>
         /// The main fields for a media query.
         /// </summary>
@@ -57,12 +34,28 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders
         /// </summary>
         public MediaQueryBuilderArguments AdditionalAvailableArguments { get; private set; }
 
+        internal MediaQueryBuilder()
+        {
+            InitializeBuilder(AniListQueryType.Media);
+        }
+
+        internal MediaQueryBuilder(AniListQueryType queryType)
+        {
+            InitializeBuilder(queryType);
+        }
+
+        /// <summary>
+        /// Initilizes an new instance of <see cref="MediaQueryBuilder"/> for custom query building.
+        /// </summary>
+        public static MediaQueryBuilder CreateCustomerQueryBuider(AniListQueryType queryType)
+        {
+            return new MediaQueryBuilder(queryType);
+        }
 
         private void InitializeBuilder(AniListQueryType queryType)
         {
             InitializeBase(queryType);
-            GraphQueryFields = new List<GraphQueryField>();
-
+                
             MediaQueryFields = new MediaQueryFields(queryType);
             MediaQueryArguments = new MediaQueryArguments(queryType);
 

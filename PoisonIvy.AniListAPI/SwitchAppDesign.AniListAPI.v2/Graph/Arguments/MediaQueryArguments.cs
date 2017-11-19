@@ -23,7 +23,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         /// <summary>
         /// Filter by the media id.
         /// </summary>
-        public GraphQueryArgument<int> GetIdQueryArgument(int value)
+        public GraphQueryArgument<int> IdQueryArgument(int value)
         {
             return Id.GetQueryArgumentAndSetValue(value);
         }
@@ -32,7 +32,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
         /// <summary>
         /// Filter by the media id's MyAnimeList id.
         /// </summary>
-        public GraphQueryArgument<int> GetIdMyAnimeListArgument(int value)
+        public GraphQueryArgument<int> IdMyAnimeListArgument(int value)
         {
             return IdMyAnimeList.GetQueryArgumentAndSetValue(value);
         }

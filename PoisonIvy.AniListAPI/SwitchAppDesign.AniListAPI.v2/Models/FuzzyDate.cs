@@ -13,9 +13,9 @@ namespace SwitchAppDesign.AniListAPI.v2.Models
             this.day = day;
         }
 
-        private int? year { get; }
-        private int? month { get; }
-        private int? day { get; }
+        public int? year { get; }
+        public int? month { get; }
+        public int? day { get; }
 
         public FuzzyDateInt GetFuzzyDateInt()
         {

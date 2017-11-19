@@ -22,26 +22,22 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Common
         /// Gets the raw value of a query argument.
         /// </summary>
         /// <returns></returns>
-        public static string GetGraphQueryArgumentValue(object argument)
+        public static object GetGraphQueryArgumentValue(object argument)
         {
             var value = argument.GetType().GetProperty("Value");
-            var type = value.GetType();
+            var type = value.PropertyType;
+            
 
             if (type.IsPrimitive)
             {
-                if (type == typeof(string))
+                if (type == typeof(string) || type == typeof(int) || type == typeof(double) || type == typeof(decimal))
                 {
-                    return "String";
-                }
-
-                if (type == typeof(int) || type == typeof(double) || type == typeof(decimal))
-                {
-                    return "Int";
+                    return value.GetValue(argument);
                 }
 
                 if (type == typeof(bool))
                 {
-                    return "Boolean";
+                    return value.GetValue(argument);
                 }
             }
 
