@@ -27,12 +27,12 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.Builders
         /// <summary>
         /// Access point for the media query fields.
         /// </summary>
-        public MediaQueryBuilderFields AdditionalAvailableFields { get; private set; }
+        public MediaQueryBuilderFields OtherFields { get; private set; }
 
         /// <summary>
         /// Access point for all media query arguments.
         /// </summary>
-        public MediaQueryBuilderArguments AdditionalAvailableArguments { get; private set; }
+        public MediaQueryBuilderArguments OtherArguments { get; private set; }
 
         internal MediaQueryBuilder()
         {
@@ -59,8 +59,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.Builders
             MediaQueryFields = new MediaQueryFields(queryType);
             MediaQueryArguments = new MediaQueryArguments(queryType);
 
-            AdditionalAvailableFields = new MediaQueryBuilderFields(queryType);
-            AdditionalAvailableArguments = new MediaQueryBuilderArguments(queryType);
+            OtherFields = new MediaQueryBuilderFields(queryType);
+            OtherArguments = new MediaQueryBuilderArguments(queryType);
         }
     }
 }

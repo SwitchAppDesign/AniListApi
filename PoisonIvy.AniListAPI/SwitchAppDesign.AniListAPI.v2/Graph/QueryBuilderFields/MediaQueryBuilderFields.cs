@@ -64,6 +64,11 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilderFields
         public CharacterEdgeQueryFields CharacterEdge { get; private set; }
 
         /// <summary>
+        /// All available character edge query fields.
+        /// </summary>
+        public NameQueryFields Name { get; private set; }
+
+        /// <summary>
         /// Staff connection query fields.
         /// </summary>
         public StaffConnectionQueryFields StaffConnection { get; private set; }
@@ -160,6 +165,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilderFields
             PagiInfoQuery = new PageInfoQueryFields(queryType);
             CharacterConnection = new CharacterConnectionQueryFields(queryType);
             CharacterEdge = new CharacterEdgeQueryFields(queryType);
+            Name = new NameQueryFields(queryType);
             StaffConnection = new StaffConnectionQueryFields(queryType);
             Staff = new StaffQueryFields(queryType);
             StaffEdge = new StaffEdgeQueryFields(queryType);

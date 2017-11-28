@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
 using SwitchAppDesign.AniListAPI.v2.Graph.Types;
@@ -15,7 +17,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Common
         ///// <returns></returns>
         //public static string GetGraphQueryFieldValue(GraphQueryField field)
         //{
-            
+
         //}
 
         /// <summary>
@@ -25,8 +27,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Common
         public static object GetGraphQueryArgumentValue(object argument)
         {
             var value = argument.GetType().GetProperty("Value");
-            var type = value.PropertyType;
-            
+            var actualValue = value.GetValue(argument);
+            var type = actualValue.GetType();
 
             if (type.IsPrimitive)
             {
@@ -48,9 +50,17 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Common
 
             if (type.IsArray)
             {
-                var args = type.GetGenericArguments()[0];
+                var result = string.Empty;
+                foreach (var item in (IEnumerable)actualValue)
+                {
+                    if (item.GetType().IsEnum)
+                    {
+                        result += $"{(item as Enum).GetDescription()}";
+                    }
 
+                }
 
+                return result;
             }
 
             return "";

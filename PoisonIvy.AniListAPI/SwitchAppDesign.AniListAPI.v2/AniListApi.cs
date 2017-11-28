@@ -19,7 +19,7 @@ namespace SwitchAppDesign.AniListAPI.v2
         /// </summary>
         public void GetBasicAnime(int anilistMediaId)
         {
-            var val = new PreBuiltMediaQueries().BasicAnimeMediaQuery(anilistMediaId);
+            var val = new PreBuiltMediaQueries().FullAnimeQuery(anilistMediaId);
 
             Console.WriteLine("==========================================");
             Console.WriteLine("Variables");

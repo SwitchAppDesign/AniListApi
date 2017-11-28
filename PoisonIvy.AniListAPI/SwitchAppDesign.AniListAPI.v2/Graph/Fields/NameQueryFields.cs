@@ -5,9 +5,12 @@ using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
-	internal class NameQueryFields
+    /// <summary>
+    /// All available name query fields.
+    /// </summary>
+	public class NameQueryFields
 	{
-		public NameQueryFields(AniListQueryType queryType)
+		internal NameQueryFields(AniListQueryType queryType)
 		{
 			InitializeProperties(queryType);
 		}

@@ -77,8 +77,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders
         /// </summary>
         private void BuildQueryType(StringBuilder queryBuilder)
         {
-            queryBuilder.AppendLine(GraphQueryArguments != null && GraphQueryArguments.Any() 
-                ? $"query({BuildQueryArguments()}){{" 
+            queryBuilder.AppendLine(GraphQueryArguments != null && GraphQueryArguments.Any()
+                ? $"query({BuildQueryArguments()}){{"
                 : "query{");
 
             queryBuilder.AppendLine(GraphQueryArguments != null && GraphQueryArguments.Any()
@@ -100,7 +100,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders
                 var fieldName = argType.GetProperty("FieldName");
                 var graphQueryArgumentVariableType = argType.GetProperty("GraphQueryArgumentVariableType");
 
-                argMethod.Invoke(argument, new object[]{ AniListQueryType, false, null });
+                argMethod.Invoke(argument, new object[] { AniListQueryType, false, null });
 
                 queryArgumentBuilder.Append(argument == GraphQueryArguments.Last()
                     ? $"${fieldName.GetValue(argument)}: {graphQueryArgumentVariableType.GetValue(argument)}"
@@ -127,7 +127,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders
                 var argMethod = argType.GetMethod("Validate");
                 var fieldName = argType.GetProperty("FieldName");
 
-                argMethod.Invoke(argument, new object[]{ AniListQueryType, false, null });
+                argMethod.Invoke(argument, new object[] { AniListQueryType, false, null });
 
                 queryArgumentBuilder.Append(argument == GraphQueryArguments.Last()
                     ? $"{fieldName.GetValue(argument)}: ${fieldName.GetValue(argument)}"
@@ -184,11 +184,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders
                     }
                     else
                     {
-                        builder.AppendLine(field.FieldName);
+                        builder.AppendLine($"{field.FieldName}");
                     }
                 }
             }
-
             return builder.ToString();
         }
 
@@ -200,7 +199,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders
             {
                 var argType = argument.GetType();
                 var fieldName = argType.GetProperty("FieldName");
-             
+
                 result.Add(
                     fieldName.GetValue(argument) as string,
                     GraphHelper.GetGraphQueryArgumentValue(argument));
