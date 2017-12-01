@@ -10,7 +10,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.PrebuiltQueries
     {
         private void BasicAnimeFields()
         {
-
             _builder.AddField(_builder.MediaQueryFields.TitleQueryField(
                 fields: new List<GraphQueryField>
                 {
@@ -72,6 +71,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.PrebuiltQueries
                 {
                     _builder.OtherFields.CoverImageData.MediumQueryField(),
                     _builder.OtherFields.CoverImageData.LargeQueryField(),
+                    _builder.OtherFields.Character.IdQueryField()
                 }));
             _builder.AddField(_builder.MediaQueryFields.BannerImageQueryField());
             _builder.AddField(_builder.MediaQueryFields.GenresQueryField());

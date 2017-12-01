@@ -23,6 +23,9 @@ namespace ApiTestConsoleApp_Core.ClassBuilder
         private static Type _type;
         private static XmlDocument _assemblyDocument;
 
+        /// <summary>
+        /// Dont Run this.
+        /// </summary>
         public static void BuildGraphFieldClassesForModels()
         {
             var dir = Path.Combine(Environment.CurrentDirectory, "Fields");

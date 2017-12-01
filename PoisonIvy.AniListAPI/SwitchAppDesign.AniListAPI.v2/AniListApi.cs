@@ -35,7 +35,7 @@ namespace SwitchAppDesign.AniListAPI.v2
         /// <summary>
         /// Fetches a basic instance of media model of type anime.
         /// </summary>
-        public async Task<Media> GetBasicAnime(int anilistMediaId)
+        public async Task<Media> GetBasicAnimeByAniListId(int anilistMediaId)
         {
             try
             {
@@ -43,21 +43,78 @@ namespace SwitchAppDesign.AniListAPI.v2
 
                 var rawQuery = GetBody(query);
 
-                var result = await _proxy.GenericPostAsync<Media>(rawQuery);
+                var result = await _proxy.GenericPostAsync<Media>(rawQuery, AniListQueryType.Media);
 
                 return result;
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                HandleException(e);
             }
+
+            return await Task.FromResult<Media>(null);
         }
+
+        /// <summary>
+        /// Fetches a full instance of media model of type anime.
+        /// </summary>
+        public async Task<Media> GetFullAnimeByAniListId(int anilistMediaId)
+        {
+            try
+            {
+                var query = new PreBuiltMediaQueries().FullAnimeQuery(anilistMediaId);
+
+                var rawQuery = GetBody(query);
+
+                var result = await _proxy.GenericPostAsync<Media>(rawQuery, AniListQueryType.Media);
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                HandleException(e);
+            }
+
+            return await Task.FromResult<Media>(null);
+        }
+
+        #region SharedBehaviour
 
         private HttpContent GetBody(GraphQuery query)
         {
             return new StringContent(JsonConvert.SerializeObject(query, _serializerSettings), Encoding.UTF8, "application/json");
         }
+
+        private static void HandleException(Exception e)
+        {
+            switch (e)
+            {
+                case GraphQueryFieldInvalidException fieldException:
+                {
+#if DEBUG
+                    Console.WriteLine(e);
+#endif
+                    throw fieldException;
+                }
+                case GraphQueryArgumentInvalidException argumentException:
+                {
+#if DEBUG
+                    Console.WriteLine(e);
+#endif
+
+                    throw argumentException;
+                }
+                default:
+                {
+#if DEBUG
+                    Console.WriteLine(e);
+#endif
+                    throw e;
+                }
+            }
+        }
+
+        #endregion
     }
 
     //Console.WriteLine("==========================================");

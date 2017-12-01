@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 using SwitchAppDesign.AniListAPI.v2.Models;
 using SwitchAppDesign.AniListAPI.v2.Responses;
 
@@ -22,7 +23,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Common
             _client = new HttpClient();
         }
 
-        public async Task<T> GenericPostAsync<T>(HttpContent content, bool isVerifyInstance = false)
+        public async Task<T> GenericPostAsync<T>(HttpContent content, AniListQueryType queryType, bool isVerifyInstance = false)
             where T : class
         {
             var response = await _client.PostAsync(AniListBaseUrl, content);
