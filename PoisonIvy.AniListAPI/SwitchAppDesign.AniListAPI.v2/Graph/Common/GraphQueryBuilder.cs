@@ -82,8 +82,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders
                 : "query{");
 
             queryBuilder.AppendLine(GraphQueryArguments != null && GraphQueryArguments.Any()
-                ? $"{AniListQueryType.GetDescription()}({BuildQueryFieldArgumentsForVariables()}){{"
-                : $"{AniListQueryType.GetDescription()}{{");
+                ? $"Value: {AniListQueryType.GetDescription()}({BuildQueryFieldArgumentsForVariables()}){{"
+                : $"Value: {AniListQueryType.GetDescription()}{{");
         }
 
         /// <summary>
@@ -112,10 +112,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders
 
         /// <summary>
         /// Builds the query argument component of a Graph Query. Example: media(arg1: $arg1, arg2: $arg2).
-        /// <list type="bullet">
-        /// <item><term>arg1 and arg2</term><description>are the query type arguments.</description></item>
-        /// <item><term>$arg1 and $arg2</term><description>are the query arguments.</description></item>
-        /// </list>
         /// </summary>
         private string BuildQueryFieldArgumentsForVariables()
         {
@@ -137,6 +133,9 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders
             return queryArgumentBuilder.ToString();
         }
 
+        /// <summary>
+        /// Builds the query field arguments with there respective values.
+        /// </summary>
         private string BuildQueryFieldArgumentsWithValues(IList<object> graphQueryArguments)
         {
             var queryArgumentBuilder = new StringBuilder();

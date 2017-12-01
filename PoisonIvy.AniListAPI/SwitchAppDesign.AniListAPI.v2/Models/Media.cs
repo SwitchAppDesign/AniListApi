@@ -14,7 +14,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Models
         /// <summary>
         /// The mal id of the media
         /// </summary>
-        public int idMal { get; set; }
+        public int? idMal { get; set; }
 
         /// <summary>
         /// The official titles of the media in various languages
@@ -59,22 +59,22 @@ namespace SwitchAppDesign.AniListAPI.v2.Models
         /// <summary>
         /// The amount of episodes the anime has when complete
         /// </summary>
-        public int episodes { get; set; }
+        public int? episodes { get; set; }
 
         /// <summary>
         /// The general length of each anime episode in minutes
         /// </summary>
-        public int duration { get; set; }
+        public int? duration { get; set; }
 
         /// <summary>
         /// The amount of chapters the manga has when complete
         /// </summary>
-        public int chapters { get; set; }
+        public int? chapters { get; set; }
 
         /// <summary>
         /// The amount of volumes the manga has when complete
         /// </summary>
-        public int volumes { get; set; }
+        public int? volumes { get; set; }
 
         /// <summary>
         /// Where the media was created. (ISO 3166-1 alpha-2)
@@ -104,7 +104,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Models
         /// <summary>
         /// When the media's data was last updated
         /// </summary>
-        public int updatedAt { get; set; }
+        public int? updatedAt { get; set; }
 
         /// <summary>
         /// The cover images of the media
@@ -129,17 +129,17 @@ namespace SwitchAppDesign.AniListAPI.v2.Models
         /// <summary>
         /// A weighted average score of all the user's scores of the media
         /// </summary>
-        public int averageScore { get; set; }
+        public int? averageScore { get; set; }
 
         /// <summary>
         /// Mean score of all the user's scores of the media
         /// </summary>
-        public int meanScore { get; set; }
+        public int? meanScore { get; set; }
 
         /// <summary>
         /// The number of users with the media on their list
         /// </summary>
-        public int popularity { get; set; }
+        public int? popularity { get; set; }
 
         /// <summary>
         /// List of tags that describes elements and themes of the media

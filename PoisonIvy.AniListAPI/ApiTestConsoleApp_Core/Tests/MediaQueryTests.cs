@@ -16,7 +16,7 @@ namespace ApiTestConsoleApp_Core.Tests
         {
             var api = new AniListApi();
             
-            api.GetBasicAnime(21);
+            var output = api.GetBasicAnime(21).Result;
         }
     }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using ApiTestConsoleApp_Core.Tests;
+using Newtonsoft.Json;
 using SwitchAppDesign.AniListAPI.v2;
 using SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilderArguments;
 using SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders;
@@ -25,8 +26,6 @@ namespace ApiTestConsoleApp_Core
             Console.ReadKey();
         }
 
-        
-    }
-    
 
+    }
 }
