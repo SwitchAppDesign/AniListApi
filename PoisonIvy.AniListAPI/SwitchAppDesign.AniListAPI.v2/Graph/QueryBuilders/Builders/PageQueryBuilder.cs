@@ -1,8 +1,8 @@
+﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using SwitchAppDesign.AniListAPI.v2.Graph.Arguments;
-using SwitchAppDesign.AniListAPI.v2.Graph.Common;
 using SwitchAppDesign.AniListAPI.v2.Graph.Fields;
-using SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.PrebuiltQueries;
 using SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.QueryBuilderArguments;
 using SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.QueryBuilderFields;
 using SwitchAppDesign.AniListAPI.v2.Graph.Types;
@@ -10,37 +10,37 @@ using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.Builders
 {
     /// <summary>
-    /// Builds a media graph query for the AniListAPI v2.
+    /// Builds a page graph query for the AniListAPI v2
     /// </summary>
-    public class MediaQueryBuilder : GraphQueryBuilder
+    public class PageQueryBuilder : GraphQueryBuilder
     {
         /// <summary>
         /// The main fields for a media query.
         /// </summary>
-        public MediaQueryFields MediaQueryFields { get; private set; }
+        public PageQueryFields PageQueryFields { get; private set; }
 
         /// <summary>
         /// The main arguments for a media query.
         /// </summary>
-        public MediaQueryArguments MediaQueryArguments { get; private set; }
+        public PageQueryArguments PageQueryArguments { get; private set; }
 
         /// <summary>
         /// Access point for the media query fields.
         /// </summary>
-        public MediaQueryBuilderFields OtherFields { get; private set; }
+        public PageQueryBuilderFields OtherFields { get; private set; }
 
         /// <summary>
         /// Access point for all media query arguments.
         /// </summary>
-        public MediaQueryBuilderArguments OtherArguments { get; private set; }
+        public PageQueryBuilderArguments OtherArguments { get; private set; }
 
-        internal MediaQueryBuilder()
+        internal PageQueryBuilder()
         {
             InitializeBuilder(AniListQueryType.Media);
         }
 
 
-        public MediaQueryBuilder(AniListQueryType queryType)
+        public PageQueryBuilder(AniListQueryType queryType)
         {
             InitializeBuilder(queryType);
         }
@@ -48,12 +48,12 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.Builders
         private void InitializeBuilder(AniListQueryType queryType)
         {
             InitializeBase(queryType);
-                
-            MediaQueryFields = new MediaQueryFields(queryType);
-            MediaQueryArguments = new MediaQueryArguments(queryType);
 
-            OtherFields = new MediaQueryBuilderFields(queryType);
-            OtherArguments = new MediaQueryBuilderArguments(queryType);
+            PageQueryFields = new PageQueryFields(queryType);
+            PageQueryArguments = new PageQueryArguments(queryType);
+
+            OtherFields = new PageQueryBuilderFields(queryType);
+            OtherArguments = new PageQueryBuilderArguments(queryType);
         }
     }
 }

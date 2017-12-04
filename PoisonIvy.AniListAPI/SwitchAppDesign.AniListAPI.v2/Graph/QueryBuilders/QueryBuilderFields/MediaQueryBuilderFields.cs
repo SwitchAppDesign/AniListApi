@@ -1,7 +1,7 @@
 ﻿using SwitchAppDesign.AniListAPI.v2.Graph.Fields;
 using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
-namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilderFields
+namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.QueryBuilderFields
 {
     /// <summary>
     /// All available other fields available for the media query

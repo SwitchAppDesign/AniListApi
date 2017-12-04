@@ -32,15 +32,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Common
 
             if (type.IsPrimitive)
             {
-                if (type == typeof(string) || type == typeof(int) || type == typeof(double) || type == typeof(decimal))
-                {
-                    return value.GetValue(argument);
-                }
-
-                if (type == typeof(bool))
-                {
-                    return value.GetValue(argument);
-                }
+                GetValueFromPrimitive(type, value, argument);
             }
 
             if (type.IsEnum)
@@ -51,19 +43,41 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Common
             if (type.IsArray)
             {
                 var result = string.Empty;
+
                 foreach (var item in (IEnumerable)actualValue)
                 {
-                    if (item.GetType().IsEnum)
+                    var itemType = item.GetType();
+
+                    if (itemType.IsEnum)
                     {
-                        result += $"{(item as Enum).GetDescription()}";
+                        result += $"{(item as Enum).GetDescription()}, ";
                     }
 
+                    if (itemType.IsPrimitive)
+                    {
+                        result += $"{item}, ";
+                    }
                 }
 
-                return result;
+                return result.Replace(result.Substring(result.LastIndexOf(",", StringComparison.Ordinal)), string.Empty).Trim();
             }
 
             return "";
+        }
+
+        private static object GetValueFromPrimitive(Type type, PropertyInfo value, object argument)
+        {
+            if (type == typeof(string) || type == typeof(int) || type == typeof(double) || type == typeof(decimal))
+            {
+                return value.GetValue(argument);
+            }
+
+            if (type == typeof(bool))
+            {
+                return value.GetValue(argument);
+            }
+
+            return null;
         }
 
         /// <summary>

@@ -1,13 +1,18 @@
 using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
+using System.Linq;
+using SwitchAppDesign.AniListAPI.v2.Common;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
 using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
-	internal class PageQueryFields
+    /// <summary>
+    /// All available page query fields.
+    /// </summary>
+	public class PageQueryFields
 	{
-		public PageQueryFields(AniListQueryType queryType)
+	    internal PageQueryFields(AniListQueryType queryType)
 		{
 			InitializeProperties(queryType);
 		}
@@ -15,10 +20,16 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// <summary>
 		/// The pagination information
 		/// </summary>
-		public GraphQueryField PageInfoQueryField()
+		public GraphQueryField PageInfoQueryField(IList<GraphQueryField> fields)
 		{
-			return PageInfo;
-		}
+		    if (fields == null || !fields.Any())
+		        throw new GraphQueryFieldInvalidException($"Query field ({PageInfo.GetType().Name}) requires at least one query field.");
+
+		    if (fields.Any(x => x.ParentClassType != typeof(MediaTitleQueryFields)))
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({PageInfo.GetType().Name}) {fields.Where(x => x.ParentClassType != typeof(MediaTitleQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+
+		    return PageInfo.GetGraphFieldAndSetFieldArguments(fields);
+        }
 
 		public GraphQueryField UsersQueryField()
 		{

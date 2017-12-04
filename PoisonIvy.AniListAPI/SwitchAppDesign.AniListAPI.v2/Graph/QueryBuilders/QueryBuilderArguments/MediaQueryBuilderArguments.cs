@@ -1,10 +1,10 @@
 ﻿using SwitchAppDesign.AniListAPI.v2.Graph.Arguments;
 using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
-namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilderArguments
+namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.QueryBuilderArguments
 {
     /// <summary>
-    /// 
+    /// All available other arguments available for the media query
     /// </summary>
     public class MediaQueryBuilderArguments
     {

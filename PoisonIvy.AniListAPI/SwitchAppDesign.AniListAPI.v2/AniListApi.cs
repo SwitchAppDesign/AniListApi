@@ -116,17 +116,4 @@ namespace SwitchAppDesign.AniListAPI.v2
 
         #endregion
     }
-
-    //Console.WriteLine("==========================================");
-    //Console.WriteLine("Variables");
-    //Console.WriteLine("==========================================");
-    //Console.WriteLine();
-    //Console.WriteLine(val.Variables);
-    //Console.WriteLine();
-    //Console.WriteLine();
-    //Console.WriteLine("==========================================");
-    //Console.WriteLine("Query");
-    //Console.WriteLine("==========================================");
-    //Console.WriteLine();
-    //Console.WriteLine(val.Query);
 }
