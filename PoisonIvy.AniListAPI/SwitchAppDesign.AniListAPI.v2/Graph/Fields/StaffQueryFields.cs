@@ -35,10 +35,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         public GraphQueryField NameQueryField(IList<GraphQueryField> fields)
 		{
 		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({Name.GetType().Name}) requires at least one name query field.");
+		        throw new GraphQueryFieldInvalidException($"Query field ({Name.GetType().Name}) requires at least one query field.");
 
 		    if (fields.Any(x => x.ParentClassType != typeof(NameQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid name query fields {fields.Where(x => x.ParentClassType != typeof(NameQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({Name.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(NameQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
 
 		    return Name.GetGraphFieldAndSetFieldArguments(fields);
         }
@@ -58,10 +58,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         public GraphQueryField ImageQueryField(IList<GraphQueryField> fields)
 		{
 		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({Image.GetType().Name}) requires at least one image data query field.");
+		        throw new GraphQueryFieldInvalidException($"Query field ({Image.GetType().Name}) requires at least one query field.");
 
 		    if (fields.Any(x => x.ParentClassType != typeof(ImageDataQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid image data query fields {fields.Where(x => x.ParentClassType != typeof(ImageDataQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({Image.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(ImageDataQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
 
 		    return Image.GetGraphFieldAndSetFieldArguments(fields);
         }
@@ -104,16 +104,16 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         public GraphQueryField StaffMediaQueryField(IList<GraphQueryField> fields, IList<object> arguments = null)
 		{
 		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({StaffMedia.GetType().Name}) requires at least one media connection query field.");
+		        throw new GraphQueryFieldInvalidException($"Query field ({StaffMedia.GetType().Name}) requires at least one query field.");
 
 		    if (fields.Any(x => x.ParentClassType != typeof(MediaConnectionQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid media connection query fields {fields.Where(x => x.ParentClassType != typeof(MediaConnectionQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({StaffMedia.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(MediaConnectionQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
 
 		    if (arguments != null)
 		    {
 		        if (arguments.Any(x => (Type)x.GetType().GetProperty("ParentClassType").GetValue(x) != typeof(MediaConnectionQueryArguments)))
 		        {
-		            throw new GraphQueryArgumentInvalidException($@"The following fields are not valid media connection query arguments {
+		            throw new GraphQueryArgumentInvalidException($@"The following fields are not valid query arguments for the field ({StaffMedia.GetType().Name}): {
 		                arguments
 		                    .Where(x => (Type)x.GetType().GetProperty("ParentClassType").GetValue(x) != typeof(MediaConnectionQueryArguments))
 		                    .Select(x => x.GetType().Name)
@@ -141,16 +141,16 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         public GraphQueryField CharactersQueryField(IList<GraphQueryField> fields, IList<object> arguments = null)
 		{
 		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({Characters.GetType().Name}) requires at least one character connection query field.");
+		        throw new GraphQueryFieldInvalidException($"Query field ({Characters.GetType().Name}) requires at least one query field.");
 
 		    if (fields.Any(x => x.ParentClassType != typeof(CharacterConnectionQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid character connection query fields {fields.Where(x => x.ParentClassType != typeof(CharacterConnectionQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({Characters.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(CharacterConnectionQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
 
 		    if (arguments != null)
 		    {
 		        if (arguments.Any(x => (Type)x.GetType().GetProperty("ParentClassType").GetValue(x) != typeof(CharacterConnectionQueryArguments)))
 		        {
-		            throw new GraphQueryArgumentInvalidException($@"The following fields are not valid character connection query arguments {
+		            throw new GraphQueryArgumentInvalidException($@"The following fields are not valid query arguments for the field ({Characters.GetType().Name}): {
 		                arguments
 		                    .Where(x => (Type)x.GetType().GetProperty("ParentClassType").GetValue(x) != typeof(CharacterConnectionQueryArguments))
 		                    .Select(x => x.GetType().Name)

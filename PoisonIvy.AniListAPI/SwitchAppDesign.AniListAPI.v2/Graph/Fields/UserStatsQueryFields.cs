@@ -36,10 +36,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         public GraphQueryField ActivityHistoryQueryField(IList<GraphQueryField> fields)
 		{
 		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({ActivityHistory.GetType().Name}) requires at least one user activity history query field.");
+		        throw new GraphQueryFieldInvalidException($"Query field ({ActivityHistory.GetType().Name}) requires at least one query field.");
 
 		    if (fields.Any(x => x.ParentClassType != typeof(UserActivityHistoryQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid user activity history query fields {fields.Where(x => x.ParentClassType != typeof(UserActivityHistoryQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({ActivityHistory.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(UserActivityHistoryQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
 
 		    return ActivityHistory.GetGraphFieldAndSetFieldArguments(fields);
         }
@@ -50,10 +50,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         public GraphQueryField AnimeStatusDistributionQueryField(IList<GraphQueryField> fields)
 		{
 		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({AnimeStatusDistribution.GetType().Name}) requires at least one status distribution stats query field.");
+		        throw new GraphQueryFieldInvalidException($"Query field ({AnimeStatusDistribution.GetType().Name}) requires at least one query field.");
 
 		    if (fields.Any(x => x.ParentClassType != typeof(StatusDistributionQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid status distribution query fields {fields.Where(x => x.ParentClassType != typeof(StatusDistributionQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({AnimeStatusDistribution.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(StatusDistributionQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
 
 		    return AnimeStatusDistribution.GetGraphFieldAndSetFieldArguments(fields);
         }
@@ -64,10 +64,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         public GraphQueryField MangaStatusDistributionQueryField(IList<GraphQueryField> fields)
 		{
 		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({MangaStatusDistribution.GetType().Name}) requires at least one status distribution stats query field.");
+		        throw new GraphQueryFieldInvalidException($"Query field ({MangaStatusDistribution.GetType().Name}) requires at least one query field.");
 
 		    if (fields.Any(x => x.ParentClassType != typeof(StatusDistributionQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid status distribution query fields {fields.Where(x => x.ParentClassType != typeof(StatusDistributionQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({MangaStatusDistribution.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(StatusDistributionQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
 
 		    return MangaStatusDistribution.GetGraphFieldAndSetFieldArguments(fields);
         }
@@ -78,10 +78,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         public GraphQueryField AnimeScoreDistributionQueryField(IList<GraphQueryField> fields)
 		{
 		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({AnimeScoreDistribution.GetType().Name}) requires at least one score distribution query field.");
+		        throw new GraphQueryFieldInvalidException($"Query field ({AnimeScoreDistribution.GetType().Name}) requires at least one query field.");
 
 		    if (fields.Any(x => x.ParentClassType != typeof(ScoreDistributionQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid score distribution query fields {fields.Where(x => x.ParentClassType != typeof(ScoreDistributionQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({AnimeScoreDistribution.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(ScoreDistributionQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
 
 		    return AnimeScoreDistribution.GetGraphFieldAndSetFieldArguments(fields);
         }
@@ -92,10 +92,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         public GraphQueryField MangaScoreDistributionQueryField(IList<GraphQueryField> fields)
 		{
 		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({MangaScoreDistribution.GetType().Name}) requires at least one score distribution query field.");
+		        throw new GraphQueryFieldInvalidException($"Query field ({MangaScoreDistribution.GetType().Name}) requires at least one query field.");
 
 		    if (fields.Any(x => x.ParentClassType != typeof(ScoreDistributionQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid score distribution query fields {fields.Where(x => x.ParentClassType != typeof(ScoreDistributionQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({MangaScoreDistribution.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(ScoreDistributionQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
 
 		    return MangaScoreDistribution.GetGraphFieldAndSetFieldArguments(fields);
         }

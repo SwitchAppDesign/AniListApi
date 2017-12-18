@@ -129,7 +129,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders
                     ? $"{fieldName.GetValue(argument)}: ${fieldName.GetValue(argument)}"
                     : $"{fieldName.GetValue(argument)}: ${fieldName.GetValue(argument)},");
             }
-
+            var s = queryArgumentBuilder.ToString();
             return queryArgumentBuilder.ToString();
         }
 

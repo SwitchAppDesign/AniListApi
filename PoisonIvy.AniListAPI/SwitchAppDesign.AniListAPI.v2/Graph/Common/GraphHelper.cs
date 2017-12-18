@@ -32,7 +32,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Common
 
             if (type.IsPrimitive)
             {
-                GetValueFromPrimitive(type, value, argument);
+                return GetValueFromPrimitive(type, value, argument);
             }
 
             if (type.IsEnum)

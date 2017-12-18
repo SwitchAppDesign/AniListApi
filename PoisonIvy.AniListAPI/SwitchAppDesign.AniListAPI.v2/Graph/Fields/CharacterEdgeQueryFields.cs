@@ -26,10 +26,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         public GraphQueryField NodeQueryField(IList<GraphQueryField> fields)
 	    {
 	        if (fields == null || !fields.Any())
-	            throw new GraphQueryFieldInvalidException($"Query field ({Node.GetType().Name}) requires at least one character query field.");
+	            throw new GraphQueryFieldInvalidException($"Query field ({Node.GetType().Name}) requires at least one query field.");
 
 	        if (fields.Any(x => x.ParentClassType != typeof(CharacterQueryFields)))
-	            throw new GraphQueryFieldInvalidException($"The following fields are not valid character query fields {fields.Where(x => x.ParentClassType != typeof(CharacterQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+	            throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({Node.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(CharacterQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
 
 	        return Node.GetGraphFieldAndSetFieldArguments(fields);
 	    }
@@ -63,10 +63,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         public GraphQueryField VoiceActorsQueryField(IList<GraphQueryField> fields, IList<GraphQueryArgument<object>> arguments = null)
         {
             if (fields == null || !fields.Any())
-                throw new GraphQueryFieldInvalidException($"Query field ({VoiceActors.GetType().Name}) requires at least one staff query field.");
+                throw new GraphQueryFieldInvalidException($"Query field ({VoiceActors.GetType().Name}) requires at least one query field.");
 
             if (fields.Any(x => x.ParentClassType != typeof(StaffQueryFields)))
-                throw new GraphQueryFieldInvalidException($"The following fields are not valid staff query fields {fields.Where(x => x.ParentClassType != typeof(StaffQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+                throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({VoiceActors.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(StaffQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
 
             if (arguments != null)
             {

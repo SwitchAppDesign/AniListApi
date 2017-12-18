@@ -45,10 +45,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         public GraphQueryField AnimeListQueryField(IList<GraphQueryField> fields)
 		{
 		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({AnimeList.GetType().Name}) requires at least one user options query field.");
+		        throw new GraphQueryFieldInvalidException($"Query field ({AnimeList.GetType().Name}) requires at least one query field.");
 
 		    if (fields.Any(x => x.ParentClassType != typeof(MediaListTypeOptionsQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid user options query fields {fields.Where(x => x.ParentClassType != typeof(MediaListTypeOptionsQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({AnimeList.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(MediaListTypeOptionsQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
 
 		    return AnimeList.GetGraphFieldAndSetFieldArguments(fields);
         }
@@ -60,10 +60,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         public GraphQueryField MangaListQueryField(IList<GraphQueryField> fields)
 		{
 		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({MangaList.GetType().Name}) requires at least one user options query field.");
+		        throw new GraphQueryFieldInvalidException($"Query field ({MangaList.GetType().Name}) requires at least one query field.");
 
 		    if (fields.Any(x => x.ParentClassType != typeof(MediaListTypeOptionsQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid user options query fields {fields.Where(x => x.ParentClassType != typeof(MediaListTypeOptionsQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({MangaList.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(MediaListTypeOptionsQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
 
 		    return MangaList.GetGraphFieldAndSetFieldArguments(fields);
         }

@@ -61,10 +61,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         public GraphQueryField OptionsQueryField(IList<GraphQueryField> fields)
 		{
 		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({Options.GetType().Name}) requires at least one user options query field.");
+		        throw new GraphQueryFieldInvalidException($"Query field ({Options.GetType().Name}) requires at least one query field.");
 
 		    if (fields.Any(x => x.ParentClassType != typeof(UserOptionsQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid user options query fields {fields.Where(x => x.ParentClassType != typeof(UserOptionsQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({Options.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(UserOptionsQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
 
 		    return Options.GetGraphFieldAndSetFieldArguments(fields);
         }
@@ -76,10 +76,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         public GraphQueryField MediaListOptionsQueryField(IList<GraphQueryField> fields)
 		{
 		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({Options.GetType().Name}) requires at least one media list options query field.");
+		        throw new GraphQueryFieldInvalidException($"Query field ({Options.GetType().Name}) requires at least one query field.");
 
 		    if (fields.Any(x => x.ParentClassType != typeof(MediaListOptionsQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid media list options query fields {fields.Where(x => x.ParentClassType != typeof(MediaListOptionsQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({Options.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(MediaListOptionsQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
 
 		    return Options.GetGraphFieldAndSetFieldArguments(fields);
         }
@@ -91,10 +91,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         public GraphQueryField FavouritesQueryField(IList<GraphQueryField> fields)
 		{
 		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({Favourites.GetType().Name}) requires at least one favourites query field.");
+		        throw new GraphQueryFieldInvalidException($"Query field ({Favourites.GetType().Name}) requires at least one query field.");
 
 		    if (fields.Any(x => x.ParentClassType != typeof(FavouritesQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid favourites query fields {fields.Where(x => x.ParentClassType != typeof(FavouritesQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({Favourites.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(FavouritesQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
 
 		    return Favourites.GetGraphFieldAndSetFieldArguments(fields);
         }
@@ -106,10 +106,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         public GraphQueryField StatsQueryField(IList<GraphQueryField> fields)
 		{
 		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({Stats.GetType().Name}) requires at least one user stats query field.");
+		        throw new GraphQueryFieldInvalidException($"Query field ({Stats.GetType().Name}) requires at least one query field.");
 
 		    if (fields.Any(x => x.ParentClassType != typeof(UserStatsQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid user stats query fields {fields.Where(x => x.ParentClassType != typeof(UserStatsQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({Stats.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(UserStatsQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
 
 		    return Stats.GetGraphFieldAndSetFieldArguments(fields);
         }

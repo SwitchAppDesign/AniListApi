@@ -1,4 +1,3 @@
-using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
 using System.Linq;
 using SwitchAppDesign.AniListAPI.v2.Common;
@@ -26,7 +25,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		        throw new GraphQueryFieldInvalidException($"Query field ({PageInfo.GetType().Name}) requires at least one query field.");
 
 		    if (fields.Any(x => x.ParentClassType != typeof(MediaTitleQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({PageInfo.GetType().Name}) {fields.Where(x => x.ParentClassType != typeof(MediaTitleQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({PageInfo.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(MediaTitleQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
 
 		    return PageInfo.GetGraphFieldAndSetFieldArguments(fields);
         }

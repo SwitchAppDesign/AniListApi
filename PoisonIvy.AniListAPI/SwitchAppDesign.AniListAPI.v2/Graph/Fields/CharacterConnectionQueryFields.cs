@@ -23,10 +23,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         public GraphQueryField EdgesQueryField(IList<GraphQueryField> fields)
 		{
 		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({Edges.GetType().Name}) requires at least one character edge query field.");
+		        throw new GraphQueryFieldInvalidException($"Query field ({Edges.GetType().Name}) requires at least one query field.");
 
 		    if (fields.Any(x => x.ParentClassType != typeof(CharacterEdgeQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid character edge query fields {fields.Where(x => x.ParentClassType != typeof(CharacterEdgeQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({Edges.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(CharacterEdgeQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
 
 		    return Edges.GetGraphFieldAndSetFieldArguments(fields);
         }
@@ -37,10 +37,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         public GraphQueryField NodesQueryField(IList<GraphQueryField> fields)
 		{
 		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({Nodes.GetType().Name}) requires at least one character query field.");
+		        throw new GraphQueryFieldInvalidException($"Query field ({Nodes.GetType().Name}) requires at least one query field.");
 
 		    if (fields.Any(x => x.ParentClassType != typeof(CharacterQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid character query fields {fields.Where(x => x.ParentClassType != typeof(CharacterQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({Nodes.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(CharacterQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
 
 		    return Nodes.GetGraphFieldAndSetFieldArguments(fields);
         }
@@ -52,10 +52,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         public GraphQueryField PageInfoQueryField(IList<GraphQueryField> fields)
         {
             if (fields == null || !fields.Any())
-                throw new GraphQueryFieldInvalidException($"Query field ({PageInfo.GetType().Name}) requires at least one page info query field.");
+                throw new GraphQueryFieldInvalidException($"Query field ({PageInfo.GetType().Name}) requires at least one query field.");
 
             if (fields.Any(x => x.ParentClassType != typeof(PageInfoQueryFields)))
-                throw new GraphQueryFieldInvalidException($"The following fields are not valid page info query fields {fields.Where(x => x.ParentClassType != typeof(PageInfoQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+                throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({PageInfo.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(PageInfoQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
 
             return PageInfo.GetGraphFieldAndSetFieldArguments(fields);
         }
