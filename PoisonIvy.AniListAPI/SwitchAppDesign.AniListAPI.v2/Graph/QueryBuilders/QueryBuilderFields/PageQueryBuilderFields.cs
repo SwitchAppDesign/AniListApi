@@ -34,6 +34,11 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.QueryBuilderFields
         public ImageDataQueryFields CoverImageData { get; private set; }
 
         /// <summary>
+        /// All available media query fields.
+        /// </summary>
+        public MediaQueryFields Media { get; private set; }
+
+        /// <summary>
         /// All available media tag query fields.
         /// </summary>
         public MediaTagQueryFields MediaTag { get; private set; }
@@ -159,6 +164,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.QueryBuilderFields
             MediaTitle = new MediaTitleQueryFields(queryType);
             MediaTrailer = new MediaTrailerQueryFields(queryType);
             CoverImageData = new ImageDataQueryFields(queryType);
+            Media = new MediaQueryFields(queryType);
             MediaTag = new MediaTagQueryFields(queryType);
             MediaConnection = new MediaConnectionQueryFields(queryType);
             MediaEdge = new MediaEdgeQueryFields(queryType);

@@ -14,26 +14,26 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.PrebuiltQueries
         {
         }
 
-        internal GraphQuery BasicAnimeMediaQuery(string searchPhrase)
+        internal GraphQuery BasicAnimeMediaQuery(string searchPhrase, int pageNumber, int pageSize)
         {
             _builder = new PageQueryBuilder();
 
-            //_builder.AddArgument(_builder.MediaQueryArguments.IdQueryArgument(anilistMediaId));
-            //_builder.AddArgument(_builder.MediaQueryArguments.TypeArgument(MediaType.Anime));
+            _builder.AddArgument(_builder.PageQueryArguments.PageQueryArgument(pageNumber));
+            _builder.AddArgument(_builder.PageQueryArguments.PerPageQueryArgument(pageNumber));
 
-            BasicAnimeFields();
+            BasicAnimeFields(searchPhrase);
 
             return _builder.BuildQuery();
         }
 
-        internal GraphQuery FullAnimeQuery(string searchPhrase)
+        internal GraphQuery FullAnimeQuery(string searchPhrase, int pageNumber, int pageSize)
         {
             _builder = new PageQueryBuilder();
 
-            //_builder.AddArgument(_builder.MediaQueryArguments.IdQueryArgument(anilistMediaId));
-            //_builder.AddArgument(_builder.MediaQueryArguments.TypeArgument(MediaType.Anime));
+            _builder.AddArgument(_builder.PageQueryArguments.PageQueryArgument(pageNumber));
+            _builder.AddArgument(_builder.PageQueryArguments.PerPageQueryArgument(pageNumber));
 
-            //FullAnimeFields();
+            FullAnimeFields();
 
             return _builder.BuildQuery();
         }

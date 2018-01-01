@@ -24,6 +24,11 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.QueryBuilderArgument
         public CharacterQueryArguments Character { get; private set; }
 
         /// <summary>
+        /// All available media query arguments
+        /// </summary>
+        public MediaQueryArguments Media { get; private set; }
+
+        /// <summary>
         /// All available staff connection query arguments
         /// </summary>
         public StaffConnectionQueryArguments StaffConnection { get; private set; }
@@ -67,6 +72,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.QueryBuilderArgument
         {
             CharacterConnection = new CharacterConnectionQueryArguments(queryType);
             Character = new CharacterQueryArguments(queryType);
+            Media = new MediaQueryArguments(queryType);
             StaffConnection = new StaffConnectionQueryArguments(queryType);
             Staff = new StaffQueryArguments(queryType);
             StudioConnection = new StudioConnectionQueryArguments(queryType);

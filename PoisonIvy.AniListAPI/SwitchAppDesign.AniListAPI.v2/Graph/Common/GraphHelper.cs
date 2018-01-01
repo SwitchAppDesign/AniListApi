@@ -35,6 +35,11 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Common
                 return GetValueFromPrimitive(type, value, argument);
             }
 
+            if (type == typeof(string))
+            {
+                return $"\"{value.GetValue(argument)}\"";
+            }
+
             if (type.IsEnum)
             {
                 return $"{(value.GetValue(argument) as Enum).GetDescription()}";
@@ -67,7 +72,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Common
 
         private static object GetValueFromPrimitive(Type type, PropertyInfo value, object argument)
         {
-            if (type == typeof(string) || type == typeof(int) || type == typeof(double) || type == typeof(decimal))
+            if (type == typeof(int) || type == typeof(double) || type == typeof(decimal))
             {
                 return value.GetValue(argument);
             }

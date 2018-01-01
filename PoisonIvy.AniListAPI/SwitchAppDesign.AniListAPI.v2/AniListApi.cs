@@ -78,6 +78,52 @@ namespace SwitchAppDesign.AniListAPI.v2
             return await Task.FromResult<Media>(null);
         }
 
+        /// <summary>
+        /// Searches for a anime using the given search phrase. Returns a list of small anime.
+        /// </summary>
+        public async Task<Page> SearchSmallAnime(string searchPhrase, int pageNumber = 1, int pageSize = 50)
+        {
+            try
+            {
+                var query = new PreBuiltPageQueries().BasicAnimeMediaQuery(searchPhrase, pageNumber, pageSize);
+
+                var rawQuery = GetBody(query);
+
+                var result = await _proxy.GenericPostAsync<Page>(rawQuery, AniListQueryType.Page);
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                HandleException(e);
+            }
+
+            return await Task.FromResult<Page>(null);
+        }
+
+        /// <summary>
+        /// Searches for a anime using the given search phrase. Returns a list of full anime.
+        /// </summary>
+        public async Task<Page> SearchFullAnime(string searchPhrase, int pageNumber = 1, int pageSize = 50)
+        {
+            try
+            {
+                var query = new PreBuiltPageQueries().FullAnimeQuery(searchPhrase, pageNumber, pageSize);
+
+                var rawQuery = GetBody(query);
+
+                var result = await _proxy.GenericPostAsync<Page>(rawQuery, AniListQueryType.Page);
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                HandleException(e);
+            }
+
+            return await Task.FromResult<Page>(null);
+        }
+
         #region SharedBehaviour
 
         private HttpContent GetBody(GraphQuery query)

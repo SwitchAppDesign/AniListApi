@@ -36,7 +36,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.Builders
 
         internal PageQueryBuilder()
         {
-            InitializeBuilder(AniListQueryType.Media);
+            InitializeBuilder(AniListQueryType.Page);
         }
 
         private void InitializeBuilder(AniListQueryType queryType)
