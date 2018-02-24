@@ -89,9 +89,9 @@ namespace SwitchAppDesign.AniListAPI.v2
 
                 var rawQuery = GetBody(query);
 
-                var result = await _proxy.GenericPostAsync<IEnumerable<Media>>(rawQuery, AniListQueryType.Media);
+                var result = await _proxy.GenericPostAsync<Page>(content: rawQuery, queryType: AniListQueryType.Page);
 
-                return result;
+                return result.media;
             }
             catch (Exception e)
             {

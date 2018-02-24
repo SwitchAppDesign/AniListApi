@@ -54,7 +54,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Common
 
             var data = jsonObj.GetValue("data");
 
-            return !data.HasValues ? null : data.Values().First().ToObject<T>();
+            if (!data.HasValues)
+                return null;
+
+            return data.Values().First().ToObject<T>();
         }
 
         public async Task<T> GenericGetAsync<T>(string url, bool isVerifyInstance = false)
