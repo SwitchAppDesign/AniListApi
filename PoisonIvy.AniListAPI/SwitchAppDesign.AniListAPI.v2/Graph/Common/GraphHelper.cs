@@ -30,7 +30,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Common
             var actualValue = value.GetValue(argument);
             var type = actualValue.GetType();
 
-            if (type.IsPrimitive)
+            if (type.IsPrimitive || _otherTypes.Contains(type))
             {
                 return GetValueFromPrimitive(type, value, argument);
             }
@@ -70,11 +70,24 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Common
             return "";
         }
 
+        private static readonly List<Type> _otherTypes = new List<Type>
+        {
+            typeof(String),
+            typeof(Int16),
+            typeof(Int32),
+            typeof(Int64)
+        };
+
         private static object GetValueFromPrimitive(Type type, PropertyInfo value, object argument)
         {
             if (type == typeof(int) || type == typeof(double) || type == typeof(decimal))
             {
                 return value.GetValue(argument);
+            }
+
+            if (type == typeof(string) || type == typeof(String))
+            {
+                return $"\"{value.GetValue(argument)}\"";
             }
 
             if (type == typeof(bool))

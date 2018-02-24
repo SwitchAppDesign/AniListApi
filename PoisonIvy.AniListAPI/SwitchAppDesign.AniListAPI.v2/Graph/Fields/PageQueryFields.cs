@@ -1,4 +1,5 @@
 using System;
+using SwitchAppDesign.AniListAPI.v2.Types;
 using System.Collections.Generic;
 using System.Linq;
 using SwitchAppDesign.AniListAPI.v2.Common;
@@ -25,10 +26,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		public GraphQueryField PageInfoQueryField(IList<GraphQueryField> fields)
 		{
 		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({PageInfo.GetType().Name}) requires at least one query field.");
+		        throw new GraphQueryFieldInvalidException($"Query field ({nameof(PageInfo)}) requires at least one query field.");
 
 		    if (fields.Any(x => x.ParentClassType != typeof(MediaTitleQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({PageInfo.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(MediaTitleQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({nameof(PageInfo)}) {fields.Where(x => x.ParentClassType != typeof(MediaTitleQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
 
 		    return PageInfo.GetGraphFieldAndSetFieldArguments(fields);
         }
@@ -38,38 +39,33 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 			return Users;
 		}
 
-	    /// <summary>
-	    /// Media. <see cref="string"/>
-	    /// <param name="fields">The list of media fields (found in <see cref="MediaQueryFields"/>) to be used in the graph query (at least of media query field is required).</param>
-	    /// <param name="arguments">The list of media arguments (found in <see cref="MediaQueryArguments"/>) to be used in the graph query.</param>
-	    /// </summary>
-        public GraphQueryField MediaQueryField(IList<GraphQueryField> fields, IList<object> arguments = null)
-		{
-		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({Media.GetType().Name}) requires at least one query field.");
+		public GraphQueryField MediaQueryField(IList<GraphQueryField> fields, IList<object> arguments = null)
+	    {
+	        if (fields == null || !fields.Any())
+	            throw new GraphQueryFieldInvalidException($"Query field ({nameof(Media)}) requires at least one media query field.");
 
-		    if (fields.Any(x => x.ParentClassType != typeof(MediaQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({Media.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(CharacterConnectionQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+	        if (fields.Any(x => x.ParentClassType != typeof(MediaQueryFields)))
+	            throw new GraphQueryFieldInvalidException($"The following fields are not valid media query fields {fields.Where(x => x.ParentClassType != typeof(MediaQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
 
-		    if (arguments != null)
-		    {
-		        if (arguments.Any(x => (Type)x.GetType().GetProperty("ParentClassType").GetValue(x) != typeof(MediaQueryArguments)))
-		        {
-		            throw new GraphQueryArgumentInvalidException($@"The following fields are not valid query arguments for the field ({Media.GetType().Name}): {
-		                arguments
-		                    .Where(x => (Type)x.GetType().GetProperty("ParentClassType").GetValue(x) != typeof(MediaQueryArguments))
-		                    .Select(x => x.GetType().Name)
-		                    .Aggregate((x, y) => $"{x}, {y}")}.");
-		        }
+	        if (arguments != null)
+	        {
+	            if (arguments.Any(x => (Type)x.GetType().GetProperty("ParentClassType").GetValue(x) != typeof(MediaQueryArguments)))
+	            {
+	                throw new GraphQueryArgumentInvalidException($@"The following fields are not valid media query arguments {
+	                    arguments
+	                        .Where(x => (Type)x.GetType().GetProperty("ParentClassType").GetValue(x) != typeof(MediaQueryArguments))
+	                        .Select(x => nameof(x))
+	                        .Aggregate((x, y) => $"{x}, {y}")}.");
+	            }
 
-		        foreach (var argument in arguments)
-		            argument.IsValidArgumentType();
-		    }
+	            foreach (var argument in arguments)
+	                argument.IsValidArgumentType();
+	        }
 
-		    return Media.GetGraphFieldAndSetFieldArguments(fields, arguments);
-        }
+	        return Media.GetGraphFieldAndSetFieldArguments(fields, arguments);
+	    }
 
-		public GraphQueryField CharactersQueryField()
+        public GraphQueryField CharactersQueryField()
 		{
 			return Characters;
 		}

@@ -216,7 +216,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
             MediaId = new GraphQueryArgument<int>("mediaId", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
             Episode = new GraphQueryArgument<int>("episode", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
             AiringAt = new GraphQueryArgument<int>("airingAt", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
-            NotYetAired = new GraphQueryArgument<bool>("notYetAired", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.AiringSchedule, AniListQueryType.Media }));
+            NotYetAired = new GraphQueryArgument<bool>("notYetAired", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
             IdNot = new GraphQueryArgument<int>("id_not", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
             IdIn = new GraphQueryArgument<IEnumerable<int>>("id_in", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
             IdNotIn = new GraphQueryArgument<IEnumerable<int>>("id_not_in", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
@@ -232,8 +232,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
             AiringAtLesser = new GraphQueryArgument<int>("airingAt_lesser", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
             Sort = new GraphQueryArgument<IEnumerable<AiringSort>>("sort", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.AiringSchedule }));
 
-            Page = new GraphQueryArgument<int>("page", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Media }));
-            PerPage = new GraphQueryArgument<int>("perPage", GetType(), queryType, new QueryArgumentRules(false, 25, null, new List<AniListQueryType> { AniListQueryType.Media }));
+            Page = new GraphQueryArgument<int>("page", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
+            PerPage = new GraphQueryArgument<int>("perPage", GetType(), queryType, new QueryArgumentRules(false, 25, null, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
         }
     }
 }

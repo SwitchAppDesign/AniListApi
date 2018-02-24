@@ -8,7 +8,7 @@ using SwitchAppDesign.AniListAPI.v2.Types;
 namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.PrebuiltQueries
 {
     /// <summary>
-    /// All pre-built media queries.
+    /// All pre-built queries for media.
     /// </summary>
     public partial class PreBuiltMediaQueries
     {

@@ -56,60 +56,56 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 
         /// <summary>
         /// The user's general options.
-        /// <param name="fields">The list of user options fields (found in <see cref="AiringScheduleQueryFields"/>) to be used in the graph query (at least of user options query field is required).</param>
         /// </summary>
         public GraphQueryField OptionsQueryField(IList<GraphQueryField> fields)
 		{
 		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({Options.GetType().Name}) requires at least one query field.");
+		        throw new GraphQueryFieldInvalidException($"Query field ({nameof(Options)}) requires at least one user options query field.");
 
 		    if (fields.Any(x => x.ParentClassType != typeof(UserOptionsQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({Options.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(UserOptionsQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid user options query fields {fields.Where(x => x.ParentClassType != typeof(UserOptionsQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
 
 		    return Options.GetGraphFieldAndSetFieldArguments(fields);
         }
 
         /// <summary>
         /// The user's media list options.
-        /// <param name="fields">The list of media list options fields (found in <see cref="MediaListOptionsQueryFields"/>) to be used in the graph query (at least of media list options query field is required).</param>
         /// </summary>
         public GraphQueryField MediaListOptionsQueryField(IList<GraphQueryField> fields)
 		{
 		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({Options.GetType().Name}) requires at least one query field.");
+		        throw new GraphQueryFieldInvalidException($"Query field ({nameof(MediaListOptions)}) requires at least one media list options query field.");
 
 		    if (fields.Any(x => x.ParentClassType != typeof(MediaListOptionsQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({Options.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(MediaListOptionsQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid media list options query fields {fields.Where(x => x.ParentClassType != typeof(MediaListOptionsQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
 
-		    return Options.GetGraphFieldAndSetFieldArguments(fields);
+		    return MediaListOptions.GetGraphFieldAndSetFieldArguments(fields);
         }
 
         /// <summary>
         /// The users favourites.
-        /// <param name="fields">The list of favourites fields (found in <see cref="FavouritesQueryFields"/>) to be used in the graph query (at least of favourites query field is required).</param>
         /// </summary>
         public GraphQueryField FavouritesQueryField(IList<GraphQueryField> fields)
 		{
 		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({Favourites.GetType().Name}) requires at least one query field.");
+		        throw new GraphQueryFieldInvalidException($"Query field ({nameof(Favourites)}) requires at least one favourites query field.");
 
 		    if (fields.Any(x => x.ParentClassType != typeof(FavouritesQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({Favourites.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(FavouritesQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid favourites query fields {fields.Where(x => x.ParentClassType != typeof(FavouritesQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
 
 		    return Favourites.GetGraphFieldAndSetFieldArguments(fields);
         }
 
         /// <summary>
         /// The user's statistics.
-        /// <param name="fields">The list of user stats fields (found in <see cref="UserStatsQueryFields"/>) to be used in the graph query (at least of user stats query field is required).</param>
         /// </summary>
         public GraphQueryField StatsQueryField(IList<GraphQueryField> fields)
 		{
 		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({Stats.GetType().Name}) requires at least one query field.");
+		        throw new GraphQueryFieldInvalidException($"Query field ({nameof(Stats)}) requires at least one user stats query field.");
 
 		    if (fields.Any(x => x.ParentClassType != typeof(UserStatsQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({Stats.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(UserStatsQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid user stats query fields {fields.Where(x => x.ParentClassType != typeof(UserStatsQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
 
 		    return Stats.GetGraphFieldAndSetFieldArguments(fields);
         }

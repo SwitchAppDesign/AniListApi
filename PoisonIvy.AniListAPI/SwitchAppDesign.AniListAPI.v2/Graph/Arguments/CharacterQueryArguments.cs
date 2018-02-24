@@ -107,11 +107,11 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
             IdNot = new GraphQueryArgument<int>("id_not", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Character }));
             IdIn = new GraphQueryArgument<IEnumerable<int>>("id_in", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Character }));
             IdNotIn = new GraphQueryArgument<IEnumerable<int>>("id_not_in", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Character }));
-            Sort = new GraphQueryArgument<IEnumerable<CharacterSort>>("sort", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Character, AniListQueryType.Media }));
+            Sort = new GraphQueryArgument<IEnumerable<CharacterSort>>("sort", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Character, AniListQueryType.Media, AniListQueryType.Page }));
 
-            Role = new GraphQueryArgument<CharacterRole>("role", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Media }));
-            Page = new GraphQueryArgument<int>("page", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Media }));
-            PerPage = new GraphQueryArgument<int>("perPage", GetType(), queryType, new QueryArgumentRules(false, 25, null, new List<AniListQueryType> { AniListQueryType.Media }));
+            Role = new GraphQueryArgument<CharacterRole>("role", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
+            Page = new GraphQueryArgument<int>("page", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
+            PerPage = new GraphQueryArgument<int>("perPage", GetType(), queryType, new QueryArgumentRules(false, 25, null, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
         }
     }
 }

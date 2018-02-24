@@ -54,10 +54,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 
 		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Romaji = new GraphQueryField("romaji", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-			English = new GraphQueryField("english", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-			Native = new GraphQueryField("native", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-			UserPreferred = new GraphQueryField("userPreferred", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Romaji = new GraphQueryField("romaji", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
+			English = new GraphQueryField("english", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
+			Native = new GraphQueryField("native", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
+			UserPreferred = new GraphQueryField("userPreferred", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
 		}
 	}
 }

@@ -36,9 +36,9 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 
 		private void InitializeProperties(AniListQueryType queryType)
 		{
-			ScoreDistribution = new GraphQueryField("scoreDistribution", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-			StatusDistribution = new GraphQueryField("statusDistribution", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-			AiringProgression = new GraphQueryField("airingProgression", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			ScoreDistribution = new GraphQueryField("scoreDistribution", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
+			StatusDistribution = new GraphQueryField("statusDistribution", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
+			AiringProgression = new GraphQueryField("airingProgression", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
 		}
 	}
 }

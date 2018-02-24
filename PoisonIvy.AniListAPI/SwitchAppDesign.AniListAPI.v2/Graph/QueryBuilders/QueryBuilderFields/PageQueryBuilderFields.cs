@@ -1,4 +1,5 @@
-﻿using SwitchAppDesign.AniListAPI.v2.Graph.Fields;
+﻿using SwitchAppDesign.AniListAPI.v2.Graph.Arguments;
+using SwitchAppDesign.AniListAPI.v2.Graph.Fields;
 using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.QueryBuilderFields
@@ -13,6 +14,11 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.QueryBuilderFields
             InitializeFields(queryType);
         }
 
+        /// <summary>
+        /// All available media query fields.
+        /// </summary>
+        public MediaQueryFields Media { get; private set; }        
+        
         /// <summary>
         /// All available character query fields.
         /// </summary>
@@ -32,11 +38,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.QueryBuilderFields
         /// All available cover image query fields.
         /// </summary>
         public ImageDataQueryFields CoverImageData { get; private set; }
-
-        /// <summary>
-        /// All available media query fields.
-        /// </summary>
-        public MediaQueryFields Media { get; private set; }
 
         /// <summary>
         /// All available media tag query fields.
@@ -158,13 +159,14 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.QueryBuilderFields
         /// </summary>
         public MediaStatsQueryFields MediaStats { get; private set; }
 
+
         private void InitializeFields(AniListQueryType queryType)
         {
+            Media = new MediaQueryFields(queryType);
             Character = new CharacterQueryFields(queryType);
             MediaTitle = new MediaTitleQueryFields(queryType);
             MediaTrailer = new MediaTrailerQueryFields(queryType);
             CoverImageData = new ImageDataQueryFields(queryType);
-            Media = new MediaQueryFields(queryType);
             MediaTag = new MediaTagQueryFields(queryType);
             MediaConnection = new MediaConnectionQueryFields(queryType);
             MediaEdge = new MediaEdgeQueryFields(queryType);

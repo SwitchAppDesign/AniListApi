@@ -91,7 +91,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
             IdNotIn = new GraphQueryArgument<IEnumerable<int>>("id_not_in", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Studio }));
             Sort = new GraphQueryArgument<IEnumerable<StudioSort>>("sort", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Studio }));
 
-            IsMain = new GraphQueryArgument<bool>("isMain", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Media }));
+            IsMain = new GraphQueryArgument<bool>("isMain", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
         }
     }
 }

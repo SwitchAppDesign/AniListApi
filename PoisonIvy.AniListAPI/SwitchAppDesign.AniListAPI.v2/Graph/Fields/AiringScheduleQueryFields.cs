@@ -59,15 +59,14 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 
         /// <summary>
         /// The associate media id of the airing episode
-        /// <param name="fields">The list of media fields (found in <see cref="MediaQueryFields"/>) to be used in the graph query (at least of media query field is required).</param>
         /// </summary>
         public GraphQueryField MediaQueryField(IList<GraphQueryField> fields)
 		{
 		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({Media.GetType().Name}) requires at least one query field.");
+		        throw new GraphQueryFieldInvalidException($"Query field ({nameof(Media)}) requires at least one media query field.");
 
 		    if (fields.Any(x => x.ParentClassType != typeof(MediaQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({Media.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(MediaQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+		        throw new GraphQueryFieldInvalidException($"The following fields are not media data query fields {fields.Where(x => x.ParentClassType != typeof(MediaQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
 
 		    return Media.GetGraphFieldAndSetFieldArguments(fields);
         }

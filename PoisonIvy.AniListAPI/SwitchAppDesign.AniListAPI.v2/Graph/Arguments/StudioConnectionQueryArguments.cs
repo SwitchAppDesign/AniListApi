@@ -36,8 +36,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Arguments
 
         private void InitializeProperties(AniListQueryType queryType)
         {
-            Sort = new GraphQueryArgument<IEnumerable<MediaSort>>("sort", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Media }));
-            IsMain = new GraphQueryArgument<bool>("isMain", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Media }));
+            Sort = new GraphQueryArgument<IEnumerable<MediaSort>>("sort", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
+            IsMain = new GraphQueryArgument<bool>("isMain", GetType(), queryType, new QueryArgumentRules(false, null, null, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
         }
     }
 }

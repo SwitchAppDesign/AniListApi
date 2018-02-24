@@ -52,9 +52,9 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 
         private void InitializeProperties(AniListQueryType queryType)
 		{
-		    Year = new GraphQueryField("year", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-		    Month = new GraphQueryField("month", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-		    Day = new GraphQueryField("day", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+		    Year = new GraphQueryField("year", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
+		    Month = new GraphQueryField("month", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
+		    Day = new GraphQueryField("day", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
         }
     }
 }

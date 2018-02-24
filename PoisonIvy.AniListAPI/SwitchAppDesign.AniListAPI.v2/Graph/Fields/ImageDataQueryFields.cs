@@ -36,8 +36,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 
 		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Large = new GraphQueryField("large", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-			Medium = new GraphQueryField("medium", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Large = new GraphQueryField("large", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
+			Medium = new GraphQueryField("medium", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
 		}
 	}
 }

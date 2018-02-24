@@ -79,17 +79,17 @@ namespace SwitchAppDesign.AniListAPI.v2
         }
 
         /// <summary>
-        /// Searches for a anime using the given search phrase. Returns a list of small anime.
+        /// Fetches a full instance of media model of type anime.
         /// </summary>
-        public async Task<Page> SearchSmallAnime(string searchPhrase, int pageNumber = 1, int pageSize = 50)
+        public async Task<IEnumerable<Media>> GetSearchFullAnime(string  searchPhrase)
         {
             try
             {
-                var query = new PreBuiltPageQueries().BasicAnimeMediaQuery(searchPhrase, pageNumber, pageSize);
+                var query = new PreBuiltPageQueries().SearchFullAnimeQuery(searchPhrase);
 
                 var rawQuery = GetBody(query);
 
-                var result = await _proxy.GenericPostAsync<Page>(rawQuery, AniListQueryType.Page);
+                var result = await _proxy.GenericPostAsync<IEnumerable<Media>>(rawQuery, AniListQueryType.Media);
 
                 return result;
             }
@@ -98,30 +98,7 @@ namespace SwitchAppDesign.AniListAPI.v2
                 HandleException(e);
             }
 
-            return await Task.FromResult<Page>(null);
-        }
-
-        /// <summary>
-        /// Searches for a anime using the given search phrase. Returns a list of full anime.
-        /// </summary>
-        public async Task<Page> SearchFullAnime(string searchPhrase, int pageNumber = 1, int pageSize = 50)
-        {
-            try
-            {
-                var query = new PreBuiltPageQueries().FullAnimeQuery(searchPhrase, pageNumber, pageSize);
-
-                var rawQuery = GetBody(query);
-
-                var result = await _proxy.GenericPostAsync<Page>(rawQuery, AniListQueryType.Page);
-
-                return result;
-            }
-            catch (Exception e)
-            {
-                HandleException(e);
-            }
-
-            return await Task.FromResult<Page>(null);
+            return await Task.FromResult<IEnumerable<Media>>(null);
         }
 
         #region SharedBehaviour

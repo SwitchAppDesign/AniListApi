@@ -136,10 +136,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         public GraphQueryField UserQueryField(IList<GraphQueryField> fields)
 		{
 		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({User.GetType().Name}) requires at least one query field.");
+		        throw new GraphQueryFieldInvalidException($"Query field ({nameof(User)}) requires at least one user query field.");
 
 		    if (fields.Any(x => x.ParentClassType != typeof(UserQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({User.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(UserQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid user query fields {fields.Where(x => x.ParentClassType != typeof(UserQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
 
 		    return User.GetGraphFieldAndSetFieldArguments(fields);
         }
@@ -151,10 +151,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         public GraphQueryField MediaQueryField(IList<GraphQueryField> fields)
         {
             if (fields == null || !fields.Any())
-                throw new GraphQueryFieldInvalidException($"Query field ({Media.GetType().Name}) requires at least one query field.");
+                throw new GraphQueryFieldInvalidException($"Query field ({nameof(Media)}) requires at least one media query field.");
 
             if (fields.Any(x => x.ParentClassType != typeof(UserQueryFields)))
-                throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({Media.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(UserQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+                throw new GraphQueryFieldInvalidException($"The following fields are not valid media query fields {fields.Where(x => x.ParentClassType != typeof(UserQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
 
             return Media.GetGraphFieldAndSetFieldArguments(fields);
         }

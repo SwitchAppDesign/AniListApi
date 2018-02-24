@@ -14,6 +14,11 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.QueryBuilderArgument
         }
 
         /// <summary>
+        /// All available media query arguments.
+        /// </summary>
+        public MediaQueryArguments Media { get; private set; }
+
+        /// <summary>
         /// All available character connection query arguments.
         /// </summary>
         public CharacterConnectionQueryArguments CharacterConnection { get; private set; }
@@ -22,11 +27,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.QueryBuilderArgument
         /// All available character query arguments.
         /// </summary>
         public CharacterQueryArguments Character { get; private set; }
-
-        /// <summary>
-        /// All available media query arguments
-        /// </summary>
-        public MediaQueryArguments Media { get; private set; }
 
         /// <summary>
         /// All available staff connection query arguments
@@ -68,11 +68,12 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.QueryBuilderArgument
         /// </summary>
         public ReviewQueryArguments Review { get; private set; }
 
+
         private void InitializeArguments(AniListQueryType queryType)
         {
+            Media = new MediaQueryArguments(queryType);
             CharacterConnection = new CharacterConnectionQueryArguments(queryType);
             Character = new CharacterQueryArguments(queryType);
-            Media = new MediaQueryArguments(queryType);
             StaffConnection = new StaffConnectionQueryArguments(queryType);
             Staff = new StaffQueryArguments(queryType);
             StudioConnection = new StudioConnectionQueryArguments(queryType);

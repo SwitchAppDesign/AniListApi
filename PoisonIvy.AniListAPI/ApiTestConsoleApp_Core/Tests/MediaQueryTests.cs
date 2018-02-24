@@ -17,7 +17,8 @@ namespace ApiTestConsoleApp_Core.Tests
             var api = new AniListApi();
             
             //var output = api.GetBasicAnimeByAniListId(21).Result;
-            var output = api.SearchFullAnime("Bleach").Result;
+
+            var scum = api.GetSearchFullAnime("Bleach").Result;
         }
     }
 

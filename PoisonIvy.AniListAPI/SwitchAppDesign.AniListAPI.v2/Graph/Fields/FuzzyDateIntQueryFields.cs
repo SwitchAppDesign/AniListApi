@@ -21,7 +21,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 
 		private void InitializeProperties(AniListQueryType queryType)
 		{
-			FuzzyDate = new GraphQueryField("FuzzyDate", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			FuzzyDate = new GraphQueryField("FuzzyDate", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
 		}
 	}
 }

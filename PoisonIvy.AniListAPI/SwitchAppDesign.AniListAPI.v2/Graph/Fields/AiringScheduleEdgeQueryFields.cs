@@ -23,10 +23,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         public GraphQueryField NodeQueryField(IList<GraphQueryField> fields)
 	    {
 	        if (fields == null || !fields.Any())
-	            throw new GraphQueryFieldInvalidException($"Query field ({Node.GetType().Name}) requires at least one query field.");
+	            throw new GraphQueryFieldInvalidException($"Query field ({nameof(Node)}) requires at least one airing schedule query field.");
 
 	        if (fields.Any(x => x.ParentClassType != typeof(AiringScheduleQueryFields)))
-	            throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({Node.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(AiringScheduleQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+	            throw new GraphQueryFieldInvalidException($"The following fields are not valid airing schedule query fields {fields.Where(x => x.ParentClassType != typeof(AiringScheduleQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
 
 	        return Node.GetGraphFieldAndSetFieldArguments(fields);
 	    }
@@ -44,8 +44,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 
 		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Node = new GraphQueryField("node", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
-			Id = new GraphQueryField("id", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media }));
+			Node = new GraphQueryField("node", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
+			Id = new GraphQueryField("id", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
 		}
 	}
 }

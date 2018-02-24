@@ -23,10 +23,10 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         public GraphQueryField NodeQueryField(IList<GraphQueryField> fields)
 		{
 		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({Node.GetType().Name}) requires at least one query field.");
+		        throw new GraphQueryFieldInvalidException($"Query field ({nameof(Node)}) requires at least one studio query field.");
 
 		    if (fields.Any(x => x.ParentClassType != typeof(StudioQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({Node.GetType().Name}): {fields.Where(x => x.ParentClassType != typeof(StudioQueryFields)).Select(x => x.GetType().Name).Aggregate((x, y) => $"{x}, {y}")}.");
+		        throw new GraphQueryFieldInvalidException($"The following fields are not valid studio query fields {fields.Where(x => x.ParentClassType != typeof(StudioQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
 
 		    return Node.GetGraphFieldAndSetFieldArguments(fields);
         }

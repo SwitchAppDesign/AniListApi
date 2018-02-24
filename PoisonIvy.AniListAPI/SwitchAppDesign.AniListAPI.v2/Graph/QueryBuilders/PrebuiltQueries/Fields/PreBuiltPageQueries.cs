@@ -1,189 +1,220 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Text;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
 using SwitchAppDesign.AniListAPI.v2.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.PrebuiltQueries
 {
-    /// <summary>
-    /// All pre-built queries.
-    /// </summary>
-    public partial class PreBuiltPageQueries
+    partial class PreBuiltPageQueries
     {
-        private void BasicAnimeFields(string searchPhrase)
+        private void FullAnimeFields(string searchPhrase)
         {
-            _builder.AddField(_builder.PageQueryFields.MediaQueryField(new List<GraphQueryField>
+            var fieldList = new List<GraphQueryField>();
+
+            fieldList.Add(_builder.OtherFields.Media.IdQueryField());
+            fieldList.Add(_builder.OtherFields.Media.IdMalQueryField());
+            fieldList.Add(GetTitleField());
+            fieldList.Add(_builder.OtherFields.Media.FormatQueryField());
+            fieldList.Add(_builder.OtherFields.Media.StatusQueryField());
+            fieldList.Add(_builder.OtherFields.Media.DescriptionQueryField());
+            fieldList.Add(_builder.OtherFields.Media.StartDateQueryField());
+            fieldList.Add(_builder.OtherFields.Media.EndDateQueryField());
+            fieldList.Add(_builder.OtherFields.Media.SeasonQueryField());
+            fieldList.Add(_builder.OtherFields.Media.EpisodesQueryField());
+            fieldList.Add(_builder.OtherFields.Media.DurationQueryField());
+            fieldList.Add(_builder.OtherFields.Media.CountryOfOriginQueryField());
+            fieldList.Add(_builder.OtherFields.Media.SourceQueryField());
+            fieldList.Add(_builder.OtherFields.Media.UpdatedAtQueryField());
+            fieldList.Add(GetCoverImageQueryField());
+            fieldList.Add(_builder.OtherFields.Media.BannerImageQueryField());
+            fieldList.Add(_builder.OtherFields.Media.GenresQueryField());
+            fieldList.Add(_builder.OtherFields.Media.SynonymsQueryField());
+            fieldList.Add(GetTagQueryField());
+            fieldList.Add(GetRelationQueryField());
+            fieldList.Add(GetCharacterQueryField());
+            fieldList.Add(_builder.OtherFields.Media.IsAdultQueryField());
+            fieldList.Add(GetNextAiringEpisodeQueryField());
+            fieldList.Add(GetAiringScheduleQueryField());
+            fieldList.Add(GetExternalLinksQueryField());
+            fieldList.Add(GetStreamingEpisodesField());
+            fieldList.Add(_builder.OtherFields.Media.SiteUrlQueryField());
+
+            var argumentList = new List<object>
             {
-                _builder.OtherFields.Media.TitleQueryField(new List<GraphQueryField>
+               _builder.OtherArguments.Media.SearchArgument(searchPhrase)
+            };
+
+            var mediaQueryField = _builder.PageQueryFields.MediaQueryField(fieldList, argumentList);
+
+            _builder.AddField(mediaQueryField);
+        }
+
+        private GraphQueryField GetStreamingEpisodesField()
+        {
+            var streamingEpisodesFields = new List<GraphQueryField>();
+
+            streamingEpisodesFields.Add(_builder.OtherFields.MediaStreamingEpisode.TitleQueryField());
+            streamingEpisodesFields.Add(_builder.OtherFields.MediaStreamingEpisode.ThumbnailQueryField());
+            streamingEpisodesFields.Add(_builder.OtherFields.MediaStreamingEpisode.UrlQueryField());
+            streamingEpisodesFields.Add(_builder.OtherFields.MediaStreamingEpisode.SiteQueryField());
+
+            return _builder.OtherFields.Media.StreamingEpisodesQueryField(streamingEpisodesFields);
+        }
+
+        #region Fields with lists
+        private GraphQueryField GetExternalLinksQueryField()
+        {
+            var externalLinksFields = new List<GraphQueryField>();
+
+            externalLinksFields.Add(_builder.OtherFields.MediaExternalLink.IdQueryField());
+            externalLinksFields.Add(_builder.OtherFields.MediaExternalLink.SiteQueryField());
+            externalLinksFields.Add(_builder.OtherFields.MediaExternalLink.UrlQueryField());
+
+            return _builder.OtherFields.Media.ExternalLinksQueryField(externalLinksFields);
+        }
+
+        private GraphQueryField GetAiringScheduleQueryField()
+        {
+            var airingScheduleFields = new List<GraphQueryField>();
+            var airingScheduleNodeFields = new List<GraphQueryField>();
+            var airingScheduleEdgeFields = new List<GraphQueryField>();
+
+            airingScheduleNodeFields.Add(_builder.OtherFields.AiringSchedule.AiringAtQueryField());
+            airingScheduleNodeFields.Add(_builder.OtherFields.AiringSchedule.EpisodeQueryField());
+
+            airingScheduleEdgeFields.Add(_builder.OtherFields.AiringScheduleEdge.IdQueryField());
+            airingScheduleEdgeFields.Add(_builder.OtherFields.AiringScheduleEdge.NodeQueryField(airingScheduleNodeFields));
+
+            airingScheduleFields.Add(_builder.OtherFields.AiringScheduleConnection.EdgesQueryField(airingScheduleEdgeFields));
+
+            return _builder.OtherFields.Media.AiringScheduleQueryField(airingScheduleFields);
+        }
+
+        private GraphQueryField GetNextAiringEpisodeQueryField()
+        {
+            var nextAiringEpisodeFields = new List<GraphQueryField>();
+
+            nextAiringEpisodeFields.Add(_builder.OtherFields.AiringSchedule.AiringAtQueryField()); 
+            nextAiringEpisodeFields.Add(_builder.OtherFields.AiringSchedule.EpisodeQueryField()); 
+           
+            return _builder.OtherFields.Media.NextAiringEpisodeQueryField(nextAiringEpisodeFields);
+        }
+
+        private GraphQueryField GetCharacterQueryField()
+        {
+            //var characterFieldList = new List<GraphQueryField>();
+            //var characterConnectionFieldList = new List<GraphQueryField>();
+            //var characterEdgeFieldList = new List<GraphQueryField>();
+            //var characterNodeFieldList = new List<GraphQueryField>();
+            //var nameFieldList = new List<GraphQueryField>();
+
+            //nameFieldList.Add(_builder.OtherFields.Name.FirstQueryField());
+            //nameFieldList.Add(_builder.OtherFields.Name.LastQueryField());
+
+            //characterNodeFieldList.Add(_builder.OtherFields.Character.IdQueryField());
+            //characterNodeFieldList.Add(_builder.OtherFields.Character.NameQueryField(nameFieldList));
+
+            //characterEdgeFieldList.Add(_builder.OtherFields.CharacterEdge.IdQueryField());
+            //characterEdgeFieldList.Add(_builder.OtherFields.CharacterEdge.NodeQueryField(characterNodeFieldList));
+            //characterEdgeFieldList.Add(_builder.OtherFields.CharacterEdge.RoleQueryField());
+
+            //characterConnectionFieldList.Add(_builder.OtherFields.CharacterConnection.EdgesQueryField(characterEdgeFieldList));
+
+            //characterFieldList.Add(_builder.OtherFields.Media.CharactersQueryField(
+            //    fields: characterConnectionFieldList,
+            //    arguments: new List<object>
+            //    {
+            //        _builder.OtherArguments.CharacterConnection.SortQueryArgument(new[] {CharacterSort.Role})
+            //    }));
+
+            //return _builder.OtherFields.Media.CharactersQueryField(characterFieldList);
+            
+            return _builder.OtherFields.Media.CharactersQueryField(
+                fields: new List<GraphQueryField>
                 {
-                    _builder.OtherFields.MediaTitle.EnglishQueryField(),
-                    _builder.OtherFields.MediaTitle.RomajiQueryField()
-                }),
-                _builder.OtherFields.Media.FormatQueryField(),
-                _builder.OtherFields.Media.StatusQueryField(),
-                _builder.OtherFields.Media.DescriptionQueryField(),
-                _builder.OtherFields.Media.StartDateQueryField(),
-                _builder.OtherFields.Media.EndDateQueryField(),
-                _builder.OtherFields.Media.SeasonQueryField(),
-                _builder.OtherFields.Media.EpisodesQueryField(),
-                _builder.OtherFields.Media.DurationQueryField(),
-                _builder.OtherFields.Media.CountryOfOriginQueryField(),
-                _builder.OtherFields.Media.SourceQueryField(),
-                _builder.OtherFields.Media.UpdatedAtQueryField(),
-                _builder.OtherFields.Media.CoverImageQueryField(
+                    _builder.OtherFields.CharacterConnection.EdgesQueryField(
                         fields: new List<GraphQueryField>
                         {
-                            _builder.OtherFields.CoverImageData.MediumQueryField(),
-                            _builder.OtherFields.CoverImageData.LargeQueryField(),
-                        }),
-                    _builder.OtherFields.Media.GenresQueryField(),
-                    _builder.OtherFields.Media.AverageScoreQueryField(),
-                    _builder.OtherFields.Media.IsAdultQueryField(),
-                    _builder.OtherFields.Media.NextAiringEpisodeQueryField(
-                        fields: new List<GraphQueryField>
-                        {
-                            _builder.OtherFields.AiringSchedule.AiringAtQueryField(),
-                            _builder.OtherFields.AiringSchedule.EpisodeQueryField()
+                            _builder.OtherFields.CharacterEdge.IdQueryField(),
+                            _builder.OtherFields.CharacterEdge.NodeQueryField(
+                                fields: new List<GraphQueryField>
+                                {
+                                    _builder.OtherFields.Character.IdQueryField(),
+                                    _builder.OtherFields.Character.NameQueryField(
+                                        fields: new List<GraphQueryField>
+                                        {
+                                            _builder.OtherFields.Name.FirstQueryField(),
+                                            _builder.OtherFields.Name.LastQueryField()
+                                        })
+                                }),
+                            _builder.OtherFields.CharacterEdge.RoleQueryField()
                         })
-            },
-            new List<object>
-            {
-                _builder.OtherArguments.Media.SearchArgument(searchPhrase)
-            }));
+                },
+                arguments: new List<object>
+                {
+                    _builder.OtherArguments.CharacterConnection.SortQueryArgument(new[] { CharacterSort.Role })
+                });
         }
 
-        private void FullAnimeFields()
+        private GraphQueryField GetRelationQueryField()
         {
-            _builder.AddField(_builder.PageQueryFields.MediaQueryField(new List<GraphQueryField>
-            {
-                _builder.OtherFields.Media.IdQueryField(),
-                _builder.OtherFields.Media.IdMalQueryField(),
-                _builder.OtherFields.Media.TitleQueryField(
-                    fields: new List<GraphQueryField>
-                    {
-                        _builder.OtherFields.MediaTitle.EnglishQueryField(),
-                        _builder.OtherFields.MediaTitle.RomajiQueryField(),
-                        _builder.OtherFields.MediaTitle.NativeQueryField()
-                    }),
-                _builder.OtherFields.Media.FormatQueryField(),
-                _builder.OtherFields.Media.StatusQueryField(),
-                _builder.OtherFields.Media.DescriptionQueryField(),
-                _builder.OtherFields.Media.StartDateQueryField(),
-                _builder.OtherFields.Media.EndDateQueryField(),
-                _builder.OtherFields.Media.SeasonQueryField(),
-                _builder.OtherFields.Media.EpisodesQueryField(),
-                _builder.OtherFields.Media.DurationQueryField(),
-                _builder.OtherFields.Media.CountryOfOriginQueryField(),
-                _builder.OtherFields.Media.SourceQueryField(),
-                _builder.OtherFields.Media.UpdatedAtQueryField(),
-                _builder.OtherFields.Media.CoverImageQueryField(
-                    fields: new List<GraphQueryField>
-                    {
-                        _builder.OtherFields.CoverImageData.MediumQueryField(),
-                        _builder.OtherFields.CoverImageData.LargeQueryField(),
-                        _builder.OtherFields.Character.IdQueryField()
-                    }),
-                _builder.OtherFields.Media.BannerImageQueryField(),
-                _builder.OtherFields.Media.GenresQueryField(),
-                _builder.OtherFields.Media.SynonymsQueryField(),
-                _builder.OtherFields.Media.TagsQueryField(
-                    fields: new List<GraphQueryField>
-                    {
-                        _builder.OtherFields.MediaTag.IdQueryField(),
-                        _builder.OtherFields.MediaTag.NameQueryField(),
-                        _builder.OtherFields.MediaTag.DescriptionQueryField(),
-                        _builder.OtherFields.MediaTag.CategoryQueryField(),
-                        _builder.OtherFields.MediaTag.RankQueryField(),
-                        _builder.OtherFields.MediaTag.IsGeneralSpoilerQueryField(),
-                        _builder.OtherFields.MediaTag.IsMediaSpoilerQueryField(),
-                        _builder.OtherFields.MediaTag.IsAdultQueryField()
-                    }),
-                _builder.OtherFields.Media.RelationsQueryField(
-                    fields: new List<GraphQueryField>
-                    {
-                        _builder.OtherFields.MediaConnection.EdgesQueryField(
-                            fields: new List<GraphQueryField>
-                            {
-                                _builder.OtherFields.MediaEdge.IdQueryField(),
-                                _builder.OtherFields.MediaEdge.NodeQueryField(
-                                    fields: new List<GraphQueryField>
-                                    {
-                                        _builder.OtherFields.Media.IdQueryField(),
-                                        _builder.OtherFields.Media.TitleQueryField(
-                                            fields: new List<GraphQueryField>
-                                            {
-                                                _builder.OtherFields.MediaTitle.EnglishQueryField(),
-                                                _builder.OtherFields.MediaTitle.RomajiQueryField()
-                                            }),
-                                    }),
-                                _builder.OtherFields.MediaEdge.RelationTypeQueryField(),
-                                _builder.OtherFields.MediaEdge.IsMainStudioQueryField()
+            var relationQueryFields = new List<GraphQueryField>();
+            var edgeQueryFields = new List<GraphQueryField>();
+            var edgeNodeQueryFields = new List<GraphQueryField>();
 
-                            })
-                    }),
-                _builder.OtherFields.Media.CharactersQueryField(
-                    fields: new List<GraphQueryField>
-                    {
-                        _builder.OtherFields.CharacterConnection.EdgesQueryField(
-                            fields: new List<GraphQueryField>
-                            {
-                                _builder.OtherFields.CharacterEdge.IdQueryField(),
-                                _builder.OtherFields.CharacterEdge.NodeQueryField(
-                                    fields: new List<GraphQueryField>
-                                    {
-                                        _builder.OtherFields.Character.IdQueryField(),
-                                        _builder.OtherFields.Character.NameQueryField(
-                                            fields: new List<GraphQueryField>
-                                            {
-                                                _builder.OtherFields.Name.FirstQueryField(),
-                                                _builder.OtherFields.Name.LastQueryField()
-                                            })
-                                    }),
-                                _builder.OtherFields.CharacterEdge.RoleQueryField()
-                            })
-                    },
-                    arguments: new List<object>
-                    {
-                        _builder.OtherArguments.CharacterConnection.SortQueryArgument(new[] { CharacterSort.Role })
-                    }),
-                _builder.OtherFields.Media.IsAdultQueryField(),
-                _builder.OtherFields.Media.NextAiringEpisodeQueryField(
-                    fields: new List<GraphQueryField>
-                    {
-                        _builder.OtherFields.AiringSchedule.AiringAtQueryField(),
-                        _builder.OtherFields.AiringSchedule.EpisodeQueryField()
-                    }),
-                _builder.OtherFields.Media.AiringScheduleQueryField(
-                    fields: new List<GraphQueryField>
-                    {
-                        _builder.OtherFields.AiringScheduleConnection.EdgesQueryField(
-                            fields: new List<GraphQueryField>
-                            {
-                                _builder.OtherFields.AiringScheduleEdge.IdQueryField(),
-                                _builder.OtherFields.AiringScheduleEdge.NodeQueryField(
-                                    fields: new List<GraphQueryField>
-                                    {
-                                        _builder.OtherFields.AiringSchedule.AiringAtQueryField(),
-                                        _builder.OtherFields.AiringSchedule.EpisodeQueryField()
-                                    }),
-                            })
-                    }),
-                _builder.OtherFields.Media.ExternalLinksQueryField(
-                    fields: new List<GraphQueryField>
-                    {
-                        _builder.OtherFields.MediaExternalLink.IdQueryField(),
-                        _builder.OtherFields.MediaExternalLink.SiteQueryField(),
-                        _builder.OtherFields.MediaExternalLink.UrlQueryField()
-                    }),
-                _builder.OtherFields.Media.StreamingEpisodesQueryField(
-                    fields: new List<GraphQueryField>
-                    {
-                        _builder.OtherFields.MediaStreamingEpisode.TitleQueryField(),
-                        _builder.OtherFields.MediaStreamingEpisode.ThumbnailQueryField(),
-                        _builder.OtherFields.MediaStreamingEpisode.UrlQueryField(),
-                        _builder.OtherFields.MediaStreamingEpisode.SiteQueryField()
-                    }),
-                _builder.OtherFields.Media.SiteUrlQueryField()
-            }));
+            edgeNodeQueryFields.Add(_builder.OtherFields.Media.IdQueryField());
+            edgeNodeQueryFields.Add(GetTitleField());
+
+            edgeQueryFields.Add(_builder.OtherFields.MediaEdge.IdQueryField());
+            edgeQueryFields.Add(_builder.OtherFields.MediaEdge.RelationTypeQueryField());
+            edgeQueryFields.Add(_builder.OtherFields.MediaEdge.IsMainStudioQueryField());
+            edgeQueryFields.Add(_builder.OtherFields.MediaEdge.NodeQueryField(edgeNodeQueryFields));
+
+            relationQueryFields.Add(_builder.OtherFields.MediaConnection.EdgesQueryField(edgeQueryFields));
+
+
+            return _builder.OtherFields.Media.RelationsQueryField(relationQueryFields);
         }
-}
+
+        private GraphQueryField GetTagQueryField()
+        {
+            var tagFieldList = new List<GraphQueryField>();
+
+            tagFieldList.Add(_builder.OtherFields.MediaTag.IdQueryField());
+            tagFieldList.Add(_builder.OtherFields.MediaTag.NameQueryField());
+            tagFieldList.Add(_builder.OtherFields.MediaTag.DescriptionQueryField());
+            tagFieldList.Add(_builder.OtherFields.MediaTag.CategoryQueryField());
+            tagFieldList.Add(_builder.OtherFields.MediaTag.RankQueryField());
+            tagFieldList.Add(_builder.OtherFields.MediaTag.IsGeneralSpoilerQueryField());
+            tagFieldList.Add(_builder.OtherFields.MediaTag.IsMediaSpoilerQueryField());
+            tagFieldList.Add(_builder.OtherFields.MediaTag.IsAdultQueryField());
+
+            return _builder.OtherFields.Media.TagsQueryField(tagFieldList);
+        }
+
+        private GraphQueryField GetTitleField()
+        {
+            var titleFields = new List<GraphQueryField>();
+
+            titleFields.Add(_builder.OtherFields.MediaTitle.EnglishQueryField());
+            titleFields.Add(_builder.OtherFields.MediaTitle.RomajiQueryField());
+            titleFields.Add(_builder.OtherFields.MediaTitle.NativeQueryField());
+
+            return _builder.OtherFields.Media.TitleQueryField(titleFields);
+        }
+
+        private GraphQueryField GetCoverImageQueryField()
+        {
+            var coverImageFieldList = new List<GraphQueryField>();
+
+            coverImageFieldList.Add(_builder.OtherFields.CoverImageData.MediumQueryField());
+            coverImageFieldList.Add(_builder.OtherFields.CoverImageData.LargeQueryField());
+
+            return _builder.OtherFields.Media.CoverImageQueryField(coverImageFieldList);
+
+        }
+        #endregion
+    }
 }

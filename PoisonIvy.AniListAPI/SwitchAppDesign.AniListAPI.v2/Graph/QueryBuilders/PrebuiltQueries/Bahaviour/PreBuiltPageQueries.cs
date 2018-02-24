@@ -1,10 +1,10 @@
 ﻿using SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.Builders;
-using SwitchAppDesign.AniListAPI.v2.Types;
+using SwitchAppDesign.AniListAPI.v2.Graph.Types;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.PrebuiltQueries
 {
     /// <summary>
-    /// All pre-built queries.
+    /// All pre-built queries for page.
     /// </summary>
     public partial class PreBuiltPageQueries
     {
@@ -12,28 +12,14 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.PrebuiltQueries
 
         internal PreBuiltPageQueries()
         {
+            
         }
 
-        internal GraphQuery BasicAnimeMediaQuery(string searchPhrase, int pageNumber, int pageSize)
+        internal GraphQuery SearchFullAnimeQuery(string searchPhrase)
         {
             _builder = new PageQueryBuilder();
-
-            _builder.AddArgument(_builder.PageQueryArguments.PageQueryArgument(pageNumber));
-            _builder.AddArgument(_builder.PageQueryArguments.PerPageQueryArgument(pageNumber));
-
-            BasicAnimeFields(searchPhrase);
-
-            return _builder.BuildQuery();
-        }
-
-        internal GraphQuery FullAnimeQuery(string searchPhrase, int pageNumber, int pageSize)
-        {
-            _builder = new PageQueryBuilder();
-
-            _builder.AddArgument(_builder.PageQueryArguments.PageQueryArgument(pageNumber));
-            _builder.AddArgument(_builder.PageQueryArguments.PerPageQueryArgument(pageNumber));
-
-            FullAnimeFields();
+            
+            FullAnimeFields(searchPhrase);
 
             return _builder.BuildQuery();
         }
