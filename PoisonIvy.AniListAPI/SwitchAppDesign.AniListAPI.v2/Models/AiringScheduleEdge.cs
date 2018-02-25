@@ -11,6 +11,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Models
         /// <summary>
         /// The id of the connection
         /// </summary>
-        public int id { get; set; }
+        public int? id { get; set; }
     }
 }

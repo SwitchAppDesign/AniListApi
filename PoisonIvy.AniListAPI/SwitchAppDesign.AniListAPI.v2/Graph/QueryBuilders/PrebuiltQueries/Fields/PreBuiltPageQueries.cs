@@ -43,7 +43,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.PrebuiltQueries
 
             var argumentList = new List<object>
             {
-               _builder.OtherArguments.Media.SearchArgument(searchPhrase)
+                _builder.OtherArguments.Media.SearchArgument(searchPhrase),
+                _builder.OtherArguments.Media.TypeArgument(MediaType.Anime)
             };
 
             var mediaQueryField = _builder.PageQueryFields.MediaQueryField(fieldList, argumentList);
@@ -96,9 +97,9 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.PrebuiltQueries
         {
             var nextAiringEpisodeFields = new List<GraphQueryField>();
 
-            nextAiringEpisodeFields.Add(_builder.OtherFields.AiringSchedule.AiringAtQueryField()); 
-            nextAiringEpisodeFields.Add(_builder.OtherFields.AiringSchedule.EpisodeQueryField()); 
-           
+            nextAiringEpisodeFields.Add(_builder.OtherFields.AiringSchedule.AiringAtQueryField());
+            nextAiringEpisodeFields.Add(_builder.OtherFields.AiringSchedule.EpisodeQueryField());
+
             return _builder.OtherFields.Media.NextAiringEpisodeQueryField(nextAiringEpisodeFields);
         }
 
@@ -130,7 +131,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.PrebuiltQueries
             //    }));
 
             //return _builder.OtherFields.Media.CharactersQueryField(characterFieldList);
-            
+
             return _builder.OtherFields.Media.CharactersQueryField(
                 fields: new List<GraphQueryField>
                 {
