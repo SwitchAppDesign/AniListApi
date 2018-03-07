@@ -18,7 +18,7 @@ namespace ApiTestConsoleApp_Core.Tests
             
             //var output = api.GetBasicAnimeByAniListId(21).Result;
 
-            var scum = api.GetSearchFullAnime("Attack on Titan").Result;
+            var scum = api.SearchFullAnime("Attack on Titan").Result;
         }
     }
 

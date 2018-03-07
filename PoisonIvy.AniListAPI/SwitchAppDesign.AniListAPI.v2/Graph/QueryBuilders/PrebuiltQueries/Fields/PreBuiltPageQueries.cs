@@ -105,33 +105,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.PrebuiltQueries
 
         private GraphQueryField GetCharacterQueryField()
         {
-            //var characterFieldList = new List<GraphQueryField>();
-            //var characterConnectionFieldList = new List<GraphQueryField>();
-            //var characterEdgeFieldList = new List<GraphQueryField>();
-            //var characterNodeFieldList = new List<GraphQueryField>();
-            //var nameFieldList = new List<GraphQueryField>();
-
-            //nameFieldList.Add(_builder.OtherFields.Name.FirstQueryField());
-            //nameFieldList.Add(_builder.OtherFields.Name.LastQueryField());
-
-            //characterNodeFieldList.Add(_builder.OtherFields.Character.IdQueryField());
-            //characterNodeFieldList.Add(_builder.OtherFields.Character.NameQueryField(nameFieldList));
-
-            //characterEdgeFieldList.Add(_builder.OtherFields.CharacterEdge.IdQueryField());
-            //characterEdgeFieldList.Add(_builder.OtherFields.CharacterEdge.NodeQueryField(characterNodeFieldList));
-            //characterEdgeFieldList.Add(_builder.OtherFields.CharacterEdge.RoleQueryField());
-
-            //characterConnectionFieldList.Add(_builder.OtherFields.CharacterConnection.EdgesQueryField(characterEdgeFieldList));
-
-            //characterFieldList.Add(_builder.OtherFields.Media.CharactersQueryField(
-            //    fields: characterConnectionFieldList,
-            //    arguments: new List<object>
-            //    {
-            //        _builder.OtherArguments.CharacterConnection.SortQueryArgument(new[] {CharacterSort.Role})
-            //    }));
-
-            //return _builder.OtherFields.Media.CharactersQueryField(characterFieldList);
-
             return _builder.OtherFields.Media.CharactersQueryField(
                 fields: new List<GraphQueryField>
                 {
@@ -181,37 +154,43 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.PrebuiltQueries
 
         private GraphQueryField GetTagQueryField()
         {
-            var tagFieldList = new List<GraphQueryField>();
+            var tagFieldList = new List<GraphQueryField>
+            {
+                _builder.OtherFields.MediaTag.IdQueryField(),
+                _builder.OtherFields.MediaTag.NameQueryField(),
+                _builder.OtherFields.MediaTag.DescriptionQueryField(),
+                _builder.OtherFields.MediaTag.CategoryQueryField(),
+                _builder.OtherFields.MediaTag.RankQueryField(),
+                _builder.OtherFields.MediaTag.IsGeneralSpoilerQueryField(),
+                _builder.OtherFields.MediaTag.IsMediaSpoilerQueryField(),
+                _builder.OtherFields.MediaTag.IsAdultQueryField()
+            };
 
-            tagFieldList.Add(_builder.OtherFields.MediaTag.IdQueryField());
-            tagFieldList.Add(_builder.OtherFields.MediaTag.NameQueryField());
-            tagFieldList.Add(_builder.OtherFields.MediaTag.DescriptionQueryField());
-            tagFieldList.Add(_builder.OtherFields.MediaTag.CategoryQueryField());
-            tagFieldList.Add(_builder.OtherFields.MediaTag.RankQueryField());
-            tagFieldList.Add(_builder.OtherFields.MediaTag.IsGeneralSpoilerQueryField());
-            tagFieldList.Add(_builder.OtherFields.MediaTag.IsMediaSpoilerQueryField());
-            tagFieldList.Add(_builder.OtherFields.MediaTag.IsAdultQueryField());
 
             return _builder.OtherFields.Media.TagsQueryField(tagFieldList);
         }
 
         private GraphQueryField GetTitleField()
         {
-            var titleFields = new List<GraphQueryField>();
+            var titleFields = new List<GraphQueryField>
+            {
+                _builder.OtherFields.MediaTitle.EnglishQueryField(),
+                _builder.OtherFields.MediaTitle.RomajiQueryField(),
+                _builder.OtherFields.MediaTitle.NativeQueryField()
+            };
 
-            titleFields.Add(_builder.OtherFields.MediaTitle.EnglishQueryField());
-            titleFields.Add(_builder.OtherFields.MediaTitle.RomajiQueryField());
-            titleFields.Add(_builder.OtherFields.MediaTitle.NativeQueryField());
 
             return _builder.OtherFields.Media.TitleQueryField(titleFields);
         }
 
         private GraphQueryField GetCoverImageQueryField()
         {
-            var coverImageFieldList = new List<GraphQueryField>();
+            var coverImageFieldList = new List<GraphQueryField>
+            {
+                _builder.OtherFields.CoverImageData.MediumQueryField(),
+                _builder.OtherFields.CoverImageData.LargeQueryField()
+            };
 
-            coverImageFieldList.Add(_builder.OtherFields.CoverImageData.MediumQueryField());
-            coverImageFieldList.Add(_builder.OtherFields.CoverImageData.LargeQueryField());
 
             return _builder.OtherFields.Media.CoverImageQueryField(coverImageFieldList);
 

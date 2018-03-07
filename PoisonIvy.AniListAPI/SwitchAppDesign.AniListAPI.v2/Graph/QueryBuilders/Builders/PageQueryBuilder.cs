@@ -17,12 +17,12 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.Builders
         /// <summary>
         /// The main fields for a media query.
         /// </summary>
-        public PageQueryFields PageQueryFields { get; private set; }
+        public PageQueryFields PageQueryFields => new PageQueryFields(AniListQueryType);
 
         /// <summary>
         /// The main arguments for a media query.
         /// </summary>
-        public PageQueryArguments PageQueryArguments { get; private set; }
+        public PageQueryArguments PageQueryArguments => new PageQueryArguments(AniListQueryType);
 
         /// <summary>
         /// Access point for the media query fields.
@@ -42,9 +42,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.Builders
         private void InitializeBuilder(AniListQueryType queryType)
         {
             InitializeBase(queryType);
-
-            PageQueryFields = new PageQueryFields(queryType);
-            PageQueryArguments = new PageQueryArguments(queryType);
 
             OtherFields = new PageQueryBuilderFields(queryType);
             OtherArguments = new PageQueryBuilderArguments(queryType);

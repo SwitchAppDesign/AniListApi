@@ -81,7 +81,7 @@ namespace SwitchAppDesign.AniListAPI.v2
         /// <summary>
         /// Fetches a full instance of media model of type anime.
         /// </summary>
-        public async Task<IEnumerable<Media>> GetSearchFullAnime(string  searchPhrase)
+        public async Task<IEnumerable<Media>> SearchFullAnime(string  searchPhrase)
         {
             try
             {

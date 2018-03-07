@@ -27,7 +27,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders
         /// <summary>
         /// The type of query to be used.
         /// </summary>
-        public AniListQueryType AniListQueryType { get; set; }
+        public AniListQueryType AniListQueryType { get; private set; }
 
         /// <summary>
         /// Adds an argument to the query builder.
