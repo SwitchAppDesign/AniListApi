@@ -8,7 +8,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Common
     /// </summary>
     public class FieldRules
     {
-
         /// <summary>
         /// Constructs the applicable rules and restrictions for a GraphQueryField.
         /// </summary>

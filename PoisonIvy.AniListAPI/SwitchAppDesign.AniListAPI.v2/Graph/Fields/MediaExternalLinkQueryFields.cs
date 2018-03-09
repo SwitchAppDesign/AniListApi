@@ -9,45 +9,45 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
     /// All available media external link query fields.
     /// </summary>
     public class MediaExternalLinkQueryFields
-	{
-		internal MediaExternalLinkQueryFields(AniListQueryType queryType)
-		{
-			InitializeProperties(queryType);
-		}
+    {
+        private readonly List<AniListQueryType> _allowedQueryTypes;
+        private readonly AniListQueryType _queryType;
 
-		/// <summary>
-		/// The id of the external link
-		/// </summary>
-		public GraphQueryField IdQueryField()
-		{
-			return Id;
-		}
+        internal MediaExternalLinkQueryFields(AniListQueryType queryType)
+        {
+            _queryType = queryType;
+            _allowedQueryTypes = new List<AniListQueryType> { AniListQueryType.MediaList };
+        }
 
-		/// <summary>
-		/// The url of the external link
-		/// </summary>
-		public GraphQueryField UrlQueryField()
-		{
-			return Url;
-		}
+        /// <summary>
+        /// The id of the external link
+        /// </summary>
+        public GraphQueryField IdQueryField()
+        {
+            return new GraphQueryField("id", GetType(), _queryType, InitilizeDefaultFieldRules());
 
-		/// <summary>
-		/// The site location of the external link
-		/// </summary>
-		public GraphQueryField SiteQueryField()
-		{
-			return Site;
-		}
+        }
 
-		private GraphQueryField Id { get; set; }
-		private GraphQueryField Url { get; set; }
-		private GraphQueryField Site { get; set; }
+        /// <summary>
+        /// The url of the external link
+        /// </summary>
+        public GraphQueryField UrlQueryField()
+        {
+            return new GraphQueryField("url", GetType(), _queryType, InitilizeDefaultFieldRules());
 
-		private void InitializeProperties(AniListQueryType queryType)
-		{
-			Id = new GraphQueryField("id", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			Url = new GraphQueryField("url", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			Site = new GraphQueryField("site", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-		}
-	}
+        }
+
+        /// <summary>
+        /// The site location of the external link
+        /// </summary>
+        public GraphQueryField SiteQueryField()
+        {
+            return new GraphQueryField("site", GetType(), _queryType, InitilizeDefaultFieldRules());
+        }
+
+        private FieldRules InitilizeDefaultFieldRules(bool authenticationRequired = false)
+        {
+            return new FieldRules(authenticationRequired, _allowedQueryTypes);
+        }
+    }
 }

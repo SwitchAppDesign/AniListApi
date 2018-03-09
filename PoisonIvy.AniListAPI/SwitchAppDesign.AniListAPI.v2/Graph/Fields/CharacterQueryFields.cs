@@ -15,45 +15,45 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
     /// </summary>
 	public class CharacterQueryFields
 	{
-		internal CharacterQueryFields(AniListQueryType queryType)
+	    private readonly List<AniListQueryType> _allowedQueryTypes;
+	    private readonly AniListQueryType _queryType;
+
+        internal CharacterQueryFields(AniListQueryType queryType)
 		{
-			InitializeProperties(queryType);
-		}
+		    _queryType = queryType;
+		    _allowedQueryTypes = new List<AniListQueryType> { AniListQueryType.Character, AniListQueryType.Media, AniListQueryType.Page };
+        }
 
 		/// <summary>
 		/// The id of the character
 		/// </summary>
 		public GraphQueryField IdQueryField()
 		{
-			return Id;
-		}
+		    return new GraphQueryField("id", GetType(), _queryType, InitilizeDefaultFieldRules());
+        }
 
         /// <summary>
         /// The names of the character
         /// </summary>
         public GraphQueryField NameQueryField(IList<GraphQueryField> fields)
-		{
-		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({nameof(Name)}) requires at least one name query field.");
+        {
+            var field = new GraphQueryField("name", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(fields);
 
-		    if (fields.Any(x => x.ParentClassType != typeof(NameQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid image name query fields {fields.Where(x => x.ParentClassType != typeof(NameQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
-		    return Name.GetGraphFieldAndSetFieldArguments(fields);
+            return field;
         }
 
         /// <summary>
         /// Character images
         /// </summary>
         public GraphQueryField ImageQueryField(IList<GraphQueryField> fields)
-		{
-		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({nameof(Image)}) requires at least one image data query field.");
+        {
+            var field = new GraphQueryField("image", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(fields);
 
-		    if (fields.Any(x => x.ParentClassType != typeof(ImageDataQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid image data query fields {fields.Where(x => x.ParentClassType != typeof(ImageDataQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
-		    return Image.GetGraphFieldAndSetFieldArguments(fields);
+            return field;
         }
 
 		/// <summary>
@@ -61,71 +61,40 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// </summary>
 		public GraphQueryField DescriptionQueryField()
 		{
-			return Description;
-		}
+		    return new GraphQueryField("description", GetType(), _queryType, InitilizeDefaultFieldRules());
+        }
 
 		/// <summary>
 		/// If the character is marked as favourite by the currently authenticated user
 		/// </summary>
 		public GraphQueryField IsFavouriteQueryField()
 		{
-			return IsFavourite;
-		}
+		    return new GraphQueryField("isFavourite", GetType(), _queryType, InitilizeDefaultFieldRules());
+        }
 
 		/// <summary>
 		/// The url for the character page on the AniList website
 		/// </summary>
 		public GraphQueryField SiteUrlQueryField()
 		{
-			return SiteUrl;
-		}
+		    return new GraphQueryField("siteUrl", GetType(), _queryType, InitilizeDefaultFieldRules());
+        }
 
 		/// <summary>
 		/// Media that includes the character
 		/// </summary>
 		public GraphQueryField MediaQueryField(IList<GraphQueryField> fields, IList<object> arguments = null)
 		{
-		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({nameof(Media)}) requires at least one media connection query field.");
+		    var field = new GraphQueryField("media", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(fields, arguments);
 
-		    if (fields.Any(x => x.ParentClassType != typeof(MediaConnectionQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid media connection query fields {fields.Where(x => x.ParentClassType != typeof(MediaConnectionQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
+            FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
 
-		    if (arguments != null)
-		    {
-		        if (arguments.Any(x => (Type)x.GetType().GetProperty("ParentClassType").GetValue(x) != typeof(MediaConnectionQueryArguments)))
-		        {
-		            throw new GraphQueryArgumentInvalidException($@"The following fields are not valid query arguments for the field ({Media.GetType().Name}): {
-		                arguments
-		                    .Where(x => (Type)x.GetType().GetProperty("ParentClassType").GetValue(x) != typeof(MediaConnectionQueryArguments))
-		                    .Select(x => nameof(x))
-		                    .Aggregate((x, y) => $"{x}, {y}")}.");
-		        }
-
-		        foreach (var argument in arguments)
-		            argument.IsValidArgumentType();
-		    }
-
-		    return Media.GetGraphFieldAndSetFieldArguments(fields, arguments);
+            return field;
         }
 
-		private GraphQueryField Id { get; set; }
-		private GraphQueryField Name { get; set; }
-		private GraphQueryField Image { get; set; }
-		private GraphQueryField Description { get; set; }
-		private GraphQueryField IsFavourite { get; set; }
-		private GraphQueryField SiteUrl { get; set; }
-		private GraphQueryField Media { get; set; }
-       
-		private void InitializeProperties(AniListQueryType queryType)
-		{
-			Id = new GraphQueryField("id", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Character, AniListQueryType.Media, AniListQueryType.Page }));
-			Name = new GraphQueryField("name", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Character, AniListQueryType.Media, AniListQueryType.Page }));
-			Image = new GraphQueryField("image", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Character, AniListQueryType.Media, AniListQueryType.Page }));
-			Description = new GraphQueryField("description", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Character, AniListQueryType.Media, AniListQueryType.Page }));
-			IsFavourite = new GraphQueryField("isFavourite", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Character, AniListQueryType.Media, AniListQueryType.Page }));
-			SiteUrl = new GraphQueryField("siteUrl", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Character, AniListQueryType.Media, AniListQueryType.Page }));
-			Media = new GraphQueryField("media", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Character, AniListQueryType.Media, AniListQueryType.Page }));
-		}
-	}
+	    private FieldRules InitilizeDefaultFieldRules(bool authenticationRequired = false)
+	    {
+	        return new FieldRules(authenticationRequired, _allowedQueryTypes);
+	    }
+    }
 }

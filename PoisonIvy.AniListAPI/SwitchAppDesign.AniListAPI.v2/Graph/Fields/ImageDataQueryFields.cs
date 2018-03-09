@@ -10,34 +10,35 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
     /// </summary>
 	public class ImageDataQueryFields
 	{
-		internal ImageDataQueryFields(AniListQueryType queryType)
-		{
-			InitializeProperties(queryType);
-		}
+	    private readonly List<AniListQueryType> _allowedQueryTypes;
+	    private readonly AniListQueryType _queryType;
+
+        internal ImageDataQueryFields(AniListQueryType queryType)
+        {
+            _queryType = queryType;
+            _allowedQueryTypes = new List<AniListQueryType> {AniListQueryType.Media, AniListQueryType.Page};
+        }
 
 		/// <summary>
 		/// The image at its largest size
 		/// </summary>
 		public GraphQueryField LargeQueryField()
 		{
-			return Large;
-		}
+		    return new GraphQueryField("large", GetType(), _queryType, InitilizeDefaultFieldRules());
+		    
+        }
 
 		/// <summary>
 		/// The image of media at medium size
 		/// </summary>
 		public GraphQueryField MediumQueryField()
 		{
-			return Medium;
-		}
+			return new GraphQueryField("medium", GetType(), _queryType, InitilizeDefaultFieldRules());
+        }
 
-		private GraphQueryField Large { get; set; }
-		private GraphQueryField Medium { get; set; }
-
-		private void InitializeProperties(AniListQueryType queryType)
-		{
-			Large = new GraphQueryField("large", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
-			Medium = new GraphQueryField("medium", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
-		}
-	}
+	    private FieldRules InitilizeDefaultFieldRules(bool authenticationRequired = false)
+	    {
+	        return new FieldRules(authenticationRequired, _allowedQueryTypes);
+	    }
+    }
 }

@@ -7,84 +7,84 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class ActivityReplyQueryFields
 	{
-		public ActivityReplyQueryFields(AniListQueryType queryType)
-		{
-			InitializeProperties(queryType);
-		}
+	    private readonly List<AniListQueryType> _allowedQueryTypes;
+	    private readonly AniListQueryType _queryType;
+
+        public ActivityReplyQueryFields(AniListQueryType queryType)
+        {
+            _queryType = queryType;
+
+            _allowedQueryTypes = new List<AniListQueryType>
+            {
+                AniListQueryType.ActivityReply
+            };
+        }
 
 		/// <summary>
 		/// The id of the reply.
 		/// </summary>
 		public GraphQueryField IdQueryField()
 		{
-			return Id;
-		}
+		    return new GraphQueryField("id", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The id of the replies creator.
 		/// </summary>
 		public GraphQueryField UserIdQueryField()
 		{
-			return UserId;
-		}
+		    return new GraphQueryField("userId", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The id of the parent activity.
 		/// </summary>
 		public GraphQueryField ActivityIdQueryField()
 		{
-			return ActivityId;
-		}
+		    return new GraphQueryField("activityId", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The reply text.
 		/// </summary>
 		public GraphQueryField TextQueryField()
 		{
-			return Text;
-		}
+		    return new GraphQueryField("text", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The time of the reply was created.
 		/// </summary>
 		public GraphQueryField CreatedAtQueryField()
 		{
-			return CreatedAt;
-		}
+		    return new GraphQueryField("createdAt", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The id of the replies creator.
 		/// </summary>
 		public GraphQueryField UserQueryField()
 		{
-			return User;
-		}
+		    return new GraphQueryField("user", GetType(), _queryType, InitilizeDefaultFieldRules());
+		    
+        }
 
 		/// <summary>
 		/// The users who liked the reply.
 		/// </summary>
 		public GraphQueryField LikesQueryField()
 		{
-			return Likes;
-		}
+			return new GraphQueryField("likes", GetType(), _queryType, InitilizeDefaultFieldRules());
+        }
 
-		private GraphQueryField Id { get; set; }
-		private GraphQueryField UserId { get; set; }
-		private GraphQueryField ActivityId { get; set; }
-		private GraphQueryField Text { get; set; }
-		private GraphQueryField CreatedAt { get; set; }
-		private GraphQueryField User { get; set; }
-		private GraphQueryField Likes { get; set; }
-
-		private void InitializeProperties(AniListQueryType queryType)
-		{
-			Id = new GraphQueryField("id", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ActivityReply }));
-			UserId = new GraphQueryField("userId", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ActivityReply }));
-			ActivityId = new GraphQueryField("activityId", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ActivityReply }));
-			Text = new GraphQueryField("text", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ActivityReply }));
-			CreatedAt = new GraphQueryField("createdAt", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ActivityReply }));
-			User = new GraphQueryField("user", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ActivityReply }));
-			Likes = new GraphQueryField("likes", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.ActivityReply }));
-		}
-	}
+	    private FieldRules InitilizeDefaultFieldRules(bool authenticationRequired = false)
+	    {
+	        return new FieldRules(authenticationRequired, _allowedQueryTypes);
+	    }
+    }
 }

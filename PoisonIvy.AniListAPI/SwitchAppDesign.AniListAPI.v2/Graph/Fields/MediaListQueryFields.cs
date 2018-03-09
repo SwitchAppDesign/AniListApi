@@ -10,214 +10,204 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
     /// </summary>
 	public class MediaListQueryFields
 	{
-		internal MediaListQueryFields(AniListQueryType queryType)
-		{
-			InitializeProperties(queryType);
-		}
+	    private readonly List<AniListQueryType> _allowedQueryTypes;
+	    private readonly AniListQueryType _queryType;
+
+        internal MediaListQueryFields(AniListQueryType queryType)
+        {
+            _queryType = queryType;
+            _allowedQueryTypes = new List<AniListQueryType> {AniListQueryType.MediaList};
+        }
 
 		/// <summary>
 		/// The id of the user
 		/// </summary>
 		public GraphQueryField IdQueryField()
 		{
-			return Id;
-		}
+		    return new GraphQueryField("id", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The id of the user owner of the list entry
 		/// </summary>
 		public GraphQueryField UserIdQueryField()
 		{
-			return UserId;
-		}
+		    return new GraphQueryField("userId", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The id of the media
 		/// </summary>
 		public GraphQueryField MediaIdQueryField()
 		{
-			return MediaId;
-		}
+		    return new GraphQueryField("mediaId", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The watching/reading status
 		/// </summary>
 		public GraphQueryField StatusQueryField()
 		{
-			return Status;
-		}
+		    return new GraphQueryField("status", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The score of the entry
 		/// </summary>
 		public GraphQueryField ScoreQueryField()
 		{
-			return Score;
-		}
+		    return new GraphQueryField("score", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The amount of episodes/chapters consumed by the user
 		/// </summary>
 		public GraphQueryField ProgressQueryField()
 		{
-			return Progress;
-		}
+		    return new GraphQueryField("progress", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The amount of volumes read by the user
 		/// </summary>
 		public GraphQueryField ProgressVolumesQueryField()
 		{
-			return ProgressVolumes;
-		}
+		    return new GraphQueryField("progressVolumes", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The amount of times the user has rewatched/read the media
 		/// </summary>
 		public GraphQueryField RepeatQueryField()
 		{
-			return Repeat;
-		}
+		    return new GraphQueryField("repeat", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// Priority of planning
 		/// </summary>
 		public GraphQueryField PriorityQueryField()
 		{
-			return Priority;
-		}
+		    return new GraphQueryField("priority", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// If the entry should only be visible to authenticated user
 		/// </summary>
 		public GraphQueryField _privateQueryField()
 		{
-			return _private;
-		}
+		    return new GraphQueryField("_private", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// Text notes
 		/// </summary>
 		public GraphQueryField NotesQueryField()
 		{
-			return Notes;
-		}
+		    return new GraphQueryField("notes", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// If the entry shown be hidden from non-custom lists
 		/// </summary>
 		public GraphQueryField HiddenFromStatusListsQueryField()
 		{
-			return HiddenFromStatusLists;
-		}
+		    return new GraphQueryField("hiddenFromStatusLists", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// Map of booleans for which custom lists the entry are in
 		/// </summary>
 		public GraphQueryField CustomListsQueryField()
 		{
-			return CustomLists;
-		}
+		    return new GraphQueryField("customLists", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// Map of advanced scores with name keys
 		/// </summary>
 		public GraphQueryField AdvancedScoresQueryField()
 		{
-			return AdvancedScores;
-		}
+		    return new GraphQueryField("advancedScores", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// When the entry was started by the user
 		/// </summary>
 		public GraphQueryField StartedAtQueryField()
 		{
-			return StartedAt;
-		}
+		    return new GraphQueryField("startedAt", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// When the entry was completed by the user
 		/// </summary>
 		public GraphQueryField CompletedAtQueryField()
 		{
-			return CompletedAt;
-		}
+		    return new GraphQueryField("completedAt", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// When the entry data was last updated
 		/// </summary>
 		public GraphQueryField UpdatedAtQueryField()
 		{
-			return UpdatedAt;
-		}
+		    return new GraphQueryField("updatedAt", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// When the entry data was created
 		/// </summary>
 		public GraphQueryField CreatedAtQueryField()
 		{
-			return CreatedAt;
-		}
+		    return new GraphQueryField("createdAt", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The id of the media
 		/// </summary>
 		public GraphQueryField MediaQueryField()
 		{
-			return Media;
-		}
+		    return new GraphQueryField("media", GetType(), _queryType, InitilizeDefaultFieldRules());
+		    
+        }
 
 		/// <summary>
 		/// The id of the user owner of the list entry
 		/// </summary>
 		public GraphQueryField UserQueryField()
 		{
-			return User;
-		}
+			return new GraphQueryField("user", GetType(), _queryType, InitilizeDefaultFieldRules());
+        }
 
-		private GraphQueryField Id { get; set; }
-		private GraphQueryField UserId { get; set; }
-		private GraphQueryField MediaId { get; set; }
-		private GraphQueryField Status { get; set; }
-		private GraphQueryField Score { get; set; }
-		private GraphQueryField Progress { get; set; }
-		private GraphQueryField ProgressVolumes { get; set; }
-		private GraphQueryField Repeat { get; set; }
-		private GraphQueryField Priority { get; set; }
-		private GraphQueryField _private { get; set; }
-		private GraphQueryField Notes { get; set; }
-		private GraphQueryField HiddenFromStatusLists { get; set; }
-		private GraphQueryField CustomLists { get; set; }
-		private GraphQueryField AdvancedScores { get; set; }
-		private GraphQueryField StartedAt { get; set; }
-		private GraphQueryField CompletedAt { get; set; }
-		private GraphQueryField UpdatedAt { get; set; }
-		private GraphQueryField CreatedAt { get; set; }
-		private GraphQueryField Media { get; set; }
-		private GraphQueryField User { get; set; }
+
 
 		private void InitializeProperties(AniListQueryType queryType)
 		{
-			Id = new GraphQueryField("id", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			UserId = new GraphQueryField("userId", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			MediaId = new GraphQueryField("mediaId", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			Status = new GraphQueryField("status", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			Score = new GraphQueryField("score", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			Progress = new GraphQueryField("progress", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			ProgressVolumes = new GraphQueryField("progressVolumes", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			Repeat = new GraphQueryField("repeat", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			Priority = new GraphQueryField("priority", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			_private = new GraphQueryField("_private", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			Notes = new GraphQueryField("notes", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			HiddenFromStatusLists = new GraphQueryField("hiddenFromStatusLists", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			CustomLists = new GraphQueryField("customLists", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			AdvancedScores = new GraphQueryField("advancedScores", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			StartedAt = new GraphQueryField("startedAt", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			CompletedAt = new GraphQueryField("completedAt", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			UpdatedAt = new GraphQueryField("updatedAt", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			CreatedAt = new GraphQueryField("createdAt", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			Media = new GraphQueryField("media", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			User = new GraphQueryField("user", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
+
 		}
-	}
+
+	    private FieldRules InitilizeDefaultFieldRules(bool authenticationRequired = false)
+	    {
+	        return new FieldRules(authenticationRequired, _allowedQueryTypes);
+	    }
+    }
 }

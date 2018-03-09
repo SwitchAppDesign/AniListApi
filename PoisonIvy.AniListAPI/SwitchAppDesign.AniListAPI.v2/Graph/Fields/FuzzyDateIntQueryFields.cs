@@ -7,21 +7,23 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class FuzzyDateIntQueryFields
 	{
-		public FuzzyDateIntQueryFields(AniListQueryType queryType)
-		{
-			InitializeProperties(queryType);
-		}
+	    private readonly List<AniListQueryType> _allowedQueryTypes;
+	    private readonly AniListQueryType _queryType;
+
+        public FuzzyDateIntQueryFields(AniListQueryType queryType)
+        {
+            _queryType = queryType;
+            _allowedQueryTypes = new List<AniListQueryType> {AniListQueryType.Media, AniListQueryType.Page};
+        }
 
 		public GraphQueryField FuzzyDateQueryField()
 		{
-			return FuzzyDate;
+			return new GraphQueryField("FuzzyDate", GetType(), _queryType, InitilizeDefaultFieldRules());
 		}
 
-		private GraphQueryField FuzzyDate { get; set; }
-
-		private void InitializeProperties(AniListQueryType queryType)
-		{
-			FuzzyDate = new GraphQueryField("FuzzyDate", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
-		}
-	}
+	    private FieldRules InitilizeDefaultFieldRules(bool authenticationRequired = false)
+	    {
+	        return new FieldRules(authenticationRequired, _allowedQueryTypes);
+	    }
+    }
 }

@@ -7,49 +7,51 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class MediaListTypeOptionsQueryFields
 	{
-		public MediaListTypeOptionsQueryFields(AniListQueryType queryType)
-		{
-			InitializeProperties(queryType);
-		}
+	    private readonly List<AniListQueryType> _allowedQueryTypes;
+	    private readonly AniListQueryType _queryType;
+
+        public MediaListTypeOptionsQueryFields(AniListQueryType queryType)
+        {
+            _queryType = queryType;
+
+            _allowedQueryTypes = new List<AniListQueryType>
+            {
+                AniListQueryType.MediaList
+            };
+        }
 
 		public GraphQueryField SectionOrderQueryField()
 		{
-			return SectionOrder;
-		}
+		    return new GraphQueryField("sectionOrder", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		public GraphQueryField SplitCompletedSectionByFormatQueryField()
 		{
-			return SplitCompletedSectionByFormat;
-		}
+		    return new GraphQueryField("splitCompletedSectionByFormat", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		public GraphQueryField CustomListsQueryField()
 		{
-			return CustomLists;
-		}
+		    return new GraphQueryField("customLists", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		public GraphQueryField AdvancedScoringQueryField()
 		{
-			return AdvancedScoring;
-		}
+		    return new GraphQueryField("advancedScoring", GetType(), _queryType, InitilizeDefaultFieldRules());
+		    
+        }
 
 		public GraphQueryField AdvancedScoringEnabledQueryField()
 		{
-			return AdvancedScoringEnabled;
-		}
+		    return new GraphQueryField("advancedScoringEnabled", GetType(), _queryType, InitilizeDefaultFieldRules());
+        }
 
-		private GraphQueryField SectionOrder { get; set; }
-		private GraphQueryField SplitCompletedSectionByFormat { get; set; }
-		private GraphQueryField CustomLists { get; set; }
-		private GraphQueryField AdvancedScoring { get; set; }
-		private GraphQueryField AdvancedScoringEnabled { get; set; }
-
-		private void InitializeProperties(AniListQueryType queryType)
-		{
-			SectionOrder = new GraphQueryField("sectionOrder", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			SplitCompletedSectionByFormat = new GraphQueryField("splitCompletedSectionByFormat", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			CustomLists = new GraphQueryField("customLists", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			AdvancedScoring = new GraphQueryField("advancedScoring", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			AdvancedScoringEnabled = new GraphQueryField("advancedScoringEnabled", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-		}
-	}
+	    private FieldRules InitilizeDefaultFieldRules(bool authenticationRequired = false)
+	    {
+	        return new FieldRules(authenticationRequired, _allowedQueryTypes);
+	    }
+    }
 }

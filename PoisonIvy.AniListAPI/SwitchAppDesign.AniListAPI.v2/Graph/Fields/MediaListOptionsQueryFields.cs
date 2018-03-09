@@ -9,76 +9,73 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class MediaListOptionsQueryFields
 	{
-		public MediaListOptionsQueryFields(AniListQueryType queryType)
-		{
-			InitializeProperties(queryType);
-		}
+	    private readonly List<AniListQueryType> _allowedQueryTypes;
+	    private readonly AniListQueryType _queryType;
+
+        public MediaListOptionsQueryFields(AniListQueryType queryType)
+        {
+            _queryType = queryType;
+            _allowedQueryTypes = new List<AniListQueryType>
+            {
+                AniListQueryType.MediaList
+            };
+
+        }
 
         /// <summary>
         /// The score format the user is using for media lists
         /// </summary>
         public GraphQueryField ScoreFormatQueryField()
 		{
-			return ScoreFormat;
-		}
+		    return new GraphQueryField("scoreFormat", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
         /// <summary>
         /// The default order list rows should be displayed in
         /// </summary>
         public GraphQueryField RowOrderQueryField()
 		{
-			return RowOrder;
-		}
+		    return new GraphQueryField("rowOrder", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
         /// <summary>
         /// (Site only) If the user should be using legacy css-supporting list versions
         /// </summary>
 		public GraphQueryField UseLegacyListsQueryField()
 		{
-			return UseLegacyLists;
-		}
+		    return new GraphQueryField("useLegacyLists", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
         /// <summary>
         /// The user's anime list options.
         /// </summary>
         public GraphQueryField AnimeListQueryField(IList<GraphQueryField> fields)
 		{
-		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({nameof(AnimeList)}) requires at least one user options query field.");
+            var field = new GraphQueryField("animeList", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(fields);
 
-		    if (fields.Any(x => x.ParentClassType != typeof(MediaListTypeOptionsQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid user options query fields {fields.Where(x => x.ParentClassType != typeof(MediaListTypeOptionsQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
+		    FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
-		    return AnimeList.GetGraphFieldAndSetFieldArguments(fields);
+            return field;
         }
 
 	    /// <summary>
 	    /// The user's manga list options.
 	    /// </summary>
         public GraphQueryField MangaListQueryField(IList<GraphQueryField> fields)
-		{
-		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({nameof(MangaList)}) requires at least one user options query field.");
+	    {
+	        var field = new GraphQueryField("mangaList", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(fields);
 
-		    if (fields.Any(x => x.ParentClassType != typeof(MediaListTypeOptionsQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid user options query fields {fields.Where(x => x.ParentClassType != typeof(MediaListTypeOptionsQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
-		    return MangaList.GetGraphFieldAndSetFieldArguments(fields);
+            return field;
         }
 
-		private GraphQueryField ScoreFormat { get; set; }
-		private GraphQueryField RowOrder { get; set; }
-		private GraphQueryField UseLegacyLists { get; set; }
-		private GraphQueryField AnimeList { get; set; }
-		private GraphQueryField MangaList { get; set; }
-
-		private void InitializeProperties(AniListQueryType queryType)
-		{
-			ScoreFormat = new GraphQueryField("scoreFormat", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			RowOrder = new GraphQueryField("rowOrder", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			UseLegacyLists = new GraphQueryField("useLegacyLists", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			AnimeList = new GraphQueryField("animeList", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-			MangaList = new GraphQueryField("mangaList", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.MediaList }));
-		}
-	}
+	    private FieldRules InitilizeDefaultFieldRules(bool authenticationRequired = false)
+	    {
+	        return new FieldRules(authenticationRequired, _allowedQueryTypes);
+	    }
+    }
 }
