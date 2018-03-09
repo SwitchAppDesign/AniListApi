@@ -9,37 +9,41 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.PrebuiltQueries
 {
     partial class PreBuiltPageQueries
     {
+        private int _relationQueryExecutionCount = 0;
+
         private void FullAnimeFields(string searchPhrase)
         {
-            var fieldList = new List<GraphQueryField>();
+            var fieldList = new List<GraphQueryField>
+            {
+                _builder.OtherFields.Media.IdQueryField(),
+                _builder.OtherFields.Media.IdMalQueryField(),
+                GetTitleField(),
+                _builder.OtherFields.Media.FormatQueryField(),
+                _builder.OtherFields.Media.StatusQueryField(),
+                _builder.OtherFields.Media.DescriptionQueryField(),
+                _builder.OtherFields.Media.StartDateQueryField(),
+                _builder.OtherFields.Media.EndDateQueryField(),
+                _builder.OtherFields.Media.SeasonQueryField(),
+                _builder.OtherFields.Media.EpisodesQueryField(),
+                _builder.OtherFields.Media.DurationQueryField(),
+                _builder.OtherFields.Media.CountryOfOriginQueryField(),
+                _builder.OtherFields.Media.SourceQueryField(),
+                _builder.OtherFields.Media.UpdatedAtQueryField(),
+                GetCoverImageQueryField(),
+                _builder.OtherFields.Media.BannerImageQueryField(),
+                _builder.OtherFields.Media.GenresQueryField(),
+                _builder.OtherFields.Media.SynonymsQueryField(),
+                GetTagQueryField(),
+                GetRelationQueryField(),
+                GetCharacterQueryField(),
+                _builder.OtherFields.Media.IsAdultQueryField(),
+                GetNextAiringEpisodeQueryField(),
+                GetAiringScheduleQueryField(),
+                GetExternalLinksQueryField(),
+                GetStreamingEpisodesField(),
+                _builder.OtherFields.Media.SiteUrlQueryField()
+            };
 
-            fieldList.Add(_builder.OtherFields.Media.IdQueryField());
-            fieldList.Add(_builder.OtherFields.Media.IdMalQueryField());
-            fieldList.Add(GetTitleField());
-            fieldList.Add(_builder.OtherFields.Media.FormatQueryField());
-            fieldList.Add(_builder.OtherFields.Media.StatusQueryField());
-            fieldList.Add(_builder.OtherFields.Media.DescriptionQueryField());
-            fieldList.Add(_builder.OtherFields.Media.StartDateQueryField());
-            fieldList.Add(_builder.OtherFields.Media.EndDateQueryField());
-            fieldList.Add(_builder.OtherFields.Media.SeasonQueryField());
-            fieldList.Add(_builder.OtherFields.Media.EpisodesQueryField());
-            fieldList.Add(_builder.OtherFields.Media.DurationQueryField());
-            fieldList.Add(_builder.OtherFields.Media.CountryOfOriginQueryField());
-            fieldList.Add(_builder.OtherFields.Media.SourceQueryField());
-            fieldList.Add(_builder.OtherFields.Media.UpdatedAtQueryField());
-            fieldList.Add(GetCoverImageQueryField());
-            fieldList.Add(_builder.OtherFields.Media.BannerImageQueryField());
-            fieldList.Add(_builder.OtherFields.Media.GenresQueryField());
-            fieldList.Add(_builder.OtherFields.Media.SynonymsQueryField());
-            fieldList.Add(GetTagQueryField());
-            fieldList.Add(GetRelationQueryField());
-            fieldList.Add(GetCharacterQueryField());
-            fieldList.Add(_builder.OtherFields.Media.IsAdultQueryField());
-            fieldList.Add(GetNextAiringEpisodeQueryField());
-            fieldList.Add(GetAiringScheduleQueryField());
-            fieldList.Add(GetExternalLinksQueryField());
-            fieldList.Add(GetStreamingEpisodesField());
-            fieldList.Add(_builder.OtherFields.Media.SiteUrlQueryField());
 
             var argumentList = new List<object>
             {
@@ -54,12 +58,14 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.PrebuiltQueries
 
         private GraphQueryField GetStreamingEpisodesField()
         {
-            var streamingEpisodesFields = new List<GraphQueryField>();
+            var streamingEpisodesFields = new List<GraphQueryField>
+            {
+                _builder.OtherFields.MediaStreamingEpisode.TitleQueryField(),
+                _builder.OtherFields.MediaStreamingEpisode.ThumbnailQueryField(),
+                _builder.OtherFields.MediaStreamingEpisode.UrlQueryField(),
+                _builder.OtherFields.MediaStreamingEpisode.SiteQueryField()
+            };
 
-            streamingEpisodesFields.Add(_builder.OtherFields.MediaStreamingEpisode.TitleQueryField());
-            streamingEpisodesFields.Add(_builder.OtherFields.MediaStreamingEpisode.ThumbnailQueryField());
-            streamingEpisodesFields.Add(_builder.OtherFields.MediaStreamingEpisode.UrlQueryField());
-            streamingEpisodesFields.Add(_builder.OtherFields.MediaStreamingEpisode.SiteQueryField());
 
             return _builder.OtherFields.Media.StreamingEpisodesQueryField(streamingEpisodesFields);
         }
@@ -67,11 +73,13 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.PrebuiltQueries
         #region Fields with lists
         private GraphQueryField GetExternalLinksQueryField()
         {
-            var externalLinksFields = new List<GraphQueryField>();
+            var externalLinksFields = new List<GraphQueryField>
+            {
+                _builder.OtherFields.MediaExternalLink.IdQueryField(),
+                _builder.OtherFields.MediaExternalLink.SiteQueryField(),
+                _builder.OtherFields.MediaExternalLink.UrlQueryField()
+            };
 
-            externalLinksFields.Add(_builder.OtherFields.MediaExternalLink.IdQueryField());
-            externalLinksFields.Add(_builder.OtherFields.MediaExternalLink.SiteQueryField());
-            externalLinksFields.Add(_builder.OtherFields.MediaExternalLink.UrlQueryField());
 
             return _builder.OtherFields.Media.ExternalLinksQueryField(externalLinksFields);
         }
@@ -95,10 +103,12 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.PrebuiltQueries
 
         private GraphQueryField GetNextAiringEpisodeQueryField()
         {
-            var nextAiringEpisodeFields = new List<GraphQueryField>();
+            var nextAiringEpisodeFields = new List<GraphQueryField>
+            {
+                _builder.OtherFields.AiringSchedule.AiringAtQueryField(),
+                _builder.OtherFields.AiringSchedule.EpisodeQueryField()
+            };
 
-            nextAiringEpisodeFields.Add(_builder.OtherFields.AiringSchedule.AiringAtQueryField());
-            nextAiringEpisodeFields.Add(_builder.OtherFields.AiringSchedule.EpisodeQueryField());
 
             return _builder.OtherFields.Media.NextAiringEpisodeQueryField(nextAiringEpisodeFields);
         }
@@ -134,20 +144,37 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.PrebuiltQueries
 
         private GraphQueryField GetRelationQueryField()
         {
+            _relationQueryExecutionCount++;
+
             var relationQueryFields = new List<GraphQueryField>();
-            var edgeQueryFields = new List<GraphQueryField>();
-            var edgeNodeQueryFields = new List<GraphQueryField>();
+            var nodeFields = new List<GraphQueryField>();
 
-            edgeNodeQueryFields.Add(_builder.OtherFields.Media.IdQueryField());
-            edgeNodeQueryFields.Add(GetTitleField());
+            nodeFields.Add(_builder.OtherFields.Media.IdQueryField());
+            nodeFields.Add(_builder.OtherFields.Media.IdMalQueryField());
+            nodeFields.Add(GetTitleField());
+            nodeFields.Add(_builder.OtherFields.Media.FormatQueryField());
+            nodeFields.Add(_builder.OtherFields.Media.StatusQueryField());
+            nodeFields.Add(_builder.OtherFields.Media.DescriptionQueryField());
+            nodeFields.Add(_builder.OtherFields.Media.StartDateQueryField());
+            nodeFields.Add(_builder.OtherFields.Media.EndDateQueryField());
+            nodeFields.Add(_builder.OtherFields.Media.SeasonQueryField());
+            nodeFields.Add(_builder.OtherFields.Media.EpisodesQueryField());
+            nodeFields.Add(_builder.OtherFields.Media.DurationQueryField());
+            nodeFields.Add(_builder.OtherFields.Media.CountryOfOriginQueryField());
+            nodeFields.Add(_builder.OtherFields.Media.SourceQueryField());
+            nodeFields.Add(_builder.OtherFields.Media.UpdatedAtQueryField());
+            nodeFields.Add(GetCoverImageQueryField());
+            nodeFields.Add(_builder.OtherFields.Media.BannerImageQueryField());
+            nodeFields.Add(_builder.OtherFields.Media.GenresQueryField());
+            nodeFields.Add(_builder.OtherFields.Media.SynonymsQueryField());
+            nodeFields.Add(_builder.OtherFields.Media.IsAdultQueryField());
+            nodeFields.Add(GetNextAiringEpisodeQueryField());
+            nodeFields.Add(GetAiringScheduleQueryField());
 
-            edgeQueryFields.Add(_builder.OtherFields.MediaEdge.IdQueryField());
-            edgeQueryFields.Add(_builder.OtherFields.MediaEdge.RelationTypeQueryField());
-            edgeQueryFields.Add(_builder.OtherFields.MediaEdge.IsMainStudioQueryField());
-            edgeQueryFields.Add(_builder.OtherFields.MediaEdge.NodeQueryField(edgeNodeQueryFields));
+            if (_relationQueryExecutionCount < 2)
+                nodeFields.Add(GetRelationQueryField());
 
-            relationQueryFields.Add(_builder.OtherFields.MediaConnection.EdgesQueryField(edgeQueryFields));
-
+            relationQueryFields.Add(_builder.OtherFields.MediaConnection.NodesQueryField(nodeFields));
 
             return _builder.OtherFields.Media.RelationsQueryField(relationQueryFields);
         }

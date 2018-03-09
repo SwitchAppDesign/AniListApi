@@ -87,6 +87,7 @@ namespace SwitchAppDesign.AniListAPI.v2
             {
                 var query = new PreBuiltPageQueries().SearchFullAnimeQuery(searchPhrase);
 
+
                 var rawQuery = GetBody(query);
 
                 var result = await _proxy.GenericPostAsync<Page>(content: rawQuery, queryType: AniListQueryType.Page);

@@ -27,6 +27,23 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Common
         }
 
         /// <summary>
+        /// Initilizes an instance of a GraphQueryField.
+        /// </summary>
+        /// <param name="fieldName">Raw name of the field to be used in a graph query.</param>
+        /// <param name="parentClassType">The class this fields belongs to.</param>
+        /// <param name="allowedInQueryType">The query type this instance of graph query field is allowed to be used in.</param>
+        /// <param name="rules">The rules and contraints to be applied to this field in a graph query.</param>
+        /// <param name="childFieldParentType">The parent class of the collection of fields accepted by this query field</param>
+        public GraphQueryField(string fieldName, Type parentClassType, AniListQueryType allowedInQueryType, FieldRules rules, Type childFieldParentType)
+        {
+            FieldName = fieldName;
+            ParentClassType = parentClassType;
+            Rules = rules;
+            AllowedInQueryType = allowedInQueryType;
+            ChildFieldParentType = childFieldParentType;
+        }
+
+        /// <summary>
         /// Raw name of the field to be used in a graph query 
         /// </summary>
         public string FieldName { get; }
@@ -55,6 +72,11 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Common
         /// The query type this instance of graph query field is allowed to be used in.
         /// </summary>
         public AniListQueryType AllowedInQueryType { get; }
+
+        /// <summary>
+        /// The child field parent class.
+        /// </summary>
+        public Type ChildFieldParentType { get; }
 
         /// <summary>
         /// Gets the value of the GraphQLQueryField after setting the field arguments value.
