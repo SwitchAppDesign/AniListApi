@@ -7,31 +7,31 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class ScoreDistributionQueryFields
 	{
-		public ScoreDistributionQueryFields(AniListQueryType queryType)
-		{
-			InitializeProperties(queryType);
-		}
+	    private readonly List<AniListQueryType> _allowedQueryTypes;
+	    private readonly AniListQueryType _queryType;
 
-		public GraphQueryField ScoreQueryField()
-		{
-			return Score;
-		}
+	    public ScoreDistributionQueryFields(AniListQueryType queryType)
+	    {
+	        _queryType = queryType;
+	        _allowedQueryTypes = new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.User };
+	    }
 
-		/// <summary>
-		/// The amount of list entries with this score
-		/// </summary>
-		public GraphQueryField AmountQueryField()
-		{
-			return Amount;
-		}
+	    private FieldRules InitilizeDefaultFieldRules(bool authenticationRequired = false)
+	    {
+	        return new FieldRules(authenticationRequired, _allowedQueryTypes);
+	    }
 
-		private GraphQueryField Score { get; set; }
-		private GraphQueryField Amount { get; set; }
-
-		private void InitializeProperties(AniListQueryType queryType)
+        public GraphQueryField ScoreQueryField()
 		{
-			Score = new GraphQueryField("score", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.User }));
-			Amount = new GraphQueryField("amount", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.User }));
+		   return new GraphQueryField("score", GetType(), _queryType, InitilizeDefaultFieldRules());
+        }
+
+        /// <summary>
+        /// The amount of list entries with this score
+        /// </summary>
+        public GraphQueryField AmountQueryField()
+		{
+			return new GraphQueryField("amount", GetType(), _queryType, InitilizeDefaultFieldRules());
 		}
 	}
 }

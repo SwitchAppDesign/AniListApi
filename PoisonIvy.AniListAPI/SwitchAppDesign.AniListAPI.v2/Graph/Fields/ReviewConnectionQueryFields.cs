@@ -12,23 +12,30 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
     /// </summary>
     public class ReviewConnectionQueryFields
 	{
-		internal ReviewConnectionQueryFields(AniListQueryType queryType)
-		{
-			InitializeProperties(queryType);
-		}
+	    private readonly List<AniListQueryType> _allowedQueryTypes;
+	    private readonly AniListQueryType _queryType;
+
+	    public ReviewConnectionQueryFields(AniListQueryType queryType)
+	    {
+	        _queryType = queryType;
+	        _allowedQueryTypes = new List<AniListQueryType> { AniListQueryType.Review };
+	    }
+
+	    private FieldRules InitilizeDefaultFieldRules(bool authenticationRequired = false)
+	    {
+	        return new FieldRules(authenticationRequired, _allowedQueryTypes);
+	    }
 
         /// <summary>
         /// <param name="fields">The list of review edge query fields (found in <see cref="ReviewEdgeQueryFields"/>) to be used in the graph query (at least of review edge query field is required).</param>
         /// </summary>
         public GraphQueryField EdgesQueryField(IList<GraphQueryField> fields)
         {
-            if (fields == null || !fields.Any())
-                throw new GraphQueryFieldInvalidException($"Query field ({nameof(Edges)}) requires at least one review edge query field.");
+            var field = new GraphQueryField("edges", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(ReviewEdgeQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-            if (fields.Any(x => x.ParentClassType != typeof(ReviewEdgeQueryFields)))
-                throw new GraphQueryFieldInvalidException($"The following fields are not valid review edge query fields {fields.Where(x => x.ParentClassType != typeof(ReviewEdgeQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
-            return Edges.GetGraphFieldAndSetFieldArguments(fields);
+            return field;
         }
 
         /// <summary>
@@ -36,13 +43,11 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField NodesQueryField(IList<GraphQueryField> fields)
         {
-            if (fields == null || !fields.Any())
-                throw new GraphQueryFieldInvalidException($"Query field ({nameof(Nodes)}) requires at least one review query field.");
+            var field = new GraphQueryField("nodes", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(ReviewQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-            if (fields.Any(x => x.ParentClassType != typeof(ReviewQueryFields)))
-                throw new GraphQueryFieldInvalidException($"The following fields are not valid review query fields {fields.Where(x => x.ParentClassType != typeof(ReviewQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
-            return Nodes.GetGraphFieldAndSetFieldArguments(fields);
+            return field;
         }
 
         /// <summary>
@@ -51,24 +56,11 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField PageInfoQueryField(IList<GraphQueryField> fields)
         {
-            if (fields == null || !fields.Any())
-                throw new GraphQueryFieldInvalidException($"Query field ({nameof(PageInfo)}) requires at least one page info query field.");
+            var field = new GraphQueryField("pageInfo", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(PageInfoQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-            if (fields.Any(x => x.ParentClassType != typeof(PageInfoQueryFields)))
-                throw new GraphQueryFieldInvalidException($"The following fields are not valid page info query fields {fields.Where(x => x.ParentClassType != typeof(PageInfoQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
-            return PageInfo.GetGraphFieldAndSetFieldArguments(fields);
+            return field;
         }
-
-        private GraphQueryField Edges { get; set; }
-		private GraphQueryField Nodes { get; set; }
-		private GraphQueryField PageInfo { get; set; }
-
-		private void InitializeProperties(AniListQueryType queryType)
-		{
-			Edges = new GraphQueryField("edges", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
-			Nodes = new GraphQueryField("nodes", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
-			PageInfo = new GraphQueryField("pageInfo", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
-		}
 	}
 }

@@ -10,54 +10,53 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
     /// </summary>
 	public class MediaStreamingEpisodeQueryFields
 	{
-		internal MediaStreamingEpisodeQueryFields(AniListQueryType queryType)
-		{
-			InitializeProperties(queryType);
-		}
+	    private readonly List<AniListQueryType> _allowedQueryTypes;
+	    private readonly AniListQueryType _queryType;
 
-		/// <summary>
-		/// Title of the episode
-		/// </summary>
-		public GraphQueryField TitleQueryField()
+	    public MediaStreamingEpisodeQueryFields(AniListQueryType queryType)
+	    {
+	        _queryType = queryType;
+	        _allowedQueryTypes = new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page };
+	    }
+
+	    private FieldRules InitilizeDefaultFieldRules(bool authenticationRequired = false)
+	    {
+	        return new FieldRules(authenticationRequired, _allowedQueryTypes);
+	    }
+
+        /// <summary>
+        /// Title of the episode
+        /// </summary>
+        public GraphQueryField TitleQueryField()
 		{
-			return Title;
-		}
+		    return new GraphQueryField("title", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// Url of episode image thumbnail
 		/// </summary>
 		public GraphQueryField ThumbnailQueryField()
 		{
-			return Thumbnail;
-		}
+		    return new GraphQueryField("thumbnail", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The url of the episode
 		/// </summary>
 		public GraphQueryField UrlQueryField()
 		{
-			return Url;
-		}
+		    return new GraphQueryField("url", GetType(), _queryType, InitilizeDefaultFieldRules());
+		    
+        }
 
 		/// <summary>
 		/// The site location of the streaming episodes
 		/// </summary>
 		public GraphQueryField SiteQueryField()
 		{
-			return Site;
-		}
-
-		private GraphQueryField Title { get; set; }
-		private GraphQueryField Thumbnail { get; set; }
-		private GraphQueryField Url { get; set; }
-		private GraphQueryField Site { get; set; }
-
-		private void InitializeProperties(AniListQueryType queryType)
-		{
-			Title = new GraphQueryField("title", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
-			Thumbnail = new GraphQueryField("thumbnail", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
-			Url = new GraphQueryField("url", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
-			Site = new GraphQueryField("site", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
-		}
+			return new GraphQueryField("site", GetType(), _queryType, InitilizeDefaultFieldRules());
+        }
 	}
 }

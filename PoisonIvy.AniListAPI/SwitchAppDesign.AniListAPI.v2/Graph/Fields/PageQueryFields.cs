@@ -15,142 +15,147 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
     /// </summary>
 	public class PageQueryFields
 	{
-	    internal PageQueryFields(AniListQueryType queryType)
+	    private readonly List<AniListQueryType> _allowedQueryTypes;
+	    private readonly AniListQueryType _queryType;
+
+	    public PageQueryFields(AniListQueryType queryType)
+	    {
+	        _queryType = queryType;
+	        _allowedQueryTypes = new List<AniListQueryType> { AniListQueryType.Page };
+	    }
+
+	    private FieldRules InitilizeDefaultFieldRules(bool authenticationRequired = false)
+	    {
+	        return new FieldRules(authenticationRequired, _allowedQueryTypes);
+	    }
+
+        /// <summary>
+        /// The pagination information
+        /// </summary>
+        public GraphQueryField PageInfoQueryField(IList<GraphQueryField> fields)
 		{
-			InitializeProperties(queryType);
-		}
+		    var field = new GraphQueryField("pageInfo", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(PageInfoQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-		/// <summary>
-		/// The pagination information
-		/// </summary>
-		public GraphQueryField PageInfoQueryField(IList<GraphQueryField> fields)
-		{
-		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({nameof(PageInfo)}) requires at least one query field.");
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
-		    if (fields.Any(x => x.ParentClassType != typeof(MediaTitleQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid query fields for the field ({nameof(PageInfo)}) {fields.Where(x => x.ParentClassType != typeof(MediaTitleQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
-
-		    return PageInfo.GetGraphFieldAndSetFieldArguments(fields);
+            return field;
         }
 
-		public GraphQueryField UsersQueryField()
+		public GraphQueryField UsersQueryField(IList<GraphQueryField> fields, IList<object> arguments = null)
 		{
-			return Users;
+		    var field = new GraphQueryField("users", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(UserQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
+
+		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
+
+            return field;
 		}
 
 		public GraphQueryField MediaQueryField(IList<GraphQueryField> fields, IList<object> arguments = null)
 	    {
-	        if (fields == null || !fields.Any())
-	            throw new GraphQueryFieldInvalidException($"Query field ({nameof(Media)}) requires at least one media query field.");
+	        var field = new GraphQueryField("media", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
 
-	        if (fields.Any(x => x.ParentClassType != typeof(MediaQueryFields)))
-	            throw new GraphQueryFieldInvalidException($"The following fields are not valid media query fields {fields.Where(x => x.ParentClassType != typeof(MediaQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
+	        FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
 
-	        if (arguments != null)
-	        {
-	            if (arguments.Any(x => (Type)x.GetType().GetProperty("ParentClassType").GetValue(x) != typeof(MediaQueryArguments)))
-	            {
-	                throw new GraphQueryArgumentInvalidException($@"The following fields are not valid media query arguments {
-	                    arguments
-	                        .Where(x => (Type)x.GetType().GetProperty("ParentClassType").GetValue(x) != typeof(MediaQueryArguments))
-	                        .Select(x => nameof(x))
-	                        .Aggregate((x, y) => $"{x}, {y}")}.");
-	            }
-
-	            foreach (var argument in arguments)
-	                argument.IsValidArgumentType();
-	        }
-
-	        return Media.GetGraphFieldAndSetFieldArguments(fields, arguments);
+            return field.GetGraphFieldAndSetFieldArguments(fields, arguments);
 	    }
 
-        public GraphQueryField CharactersQueryField()
-		{
-			return Characters;
+        public GraphQueryField CharactersQueryField(IList<GraphQueryField> fields, IList<object> arguments = null)
+        {
+            var field = new GraphQueryField("characters", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(CharacterQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
+
+            FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
+
+            return field;
 		}
 
-		public GraphQueryField StaffQueryField()
+		public GraphQueryField StaffQueryField(IList<GraphQueryField> fields, IList<object> arguments = null)
 		{
-			return Staff;
+		    var field = new GraphQueryField("staff", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(StaffQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
+
+		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
+
+            return field;
 		}
 
-		public GraphQueryField StudiosQueryField()
+		public GraphQueryField StudiosQueryField(IList<GraphQueryField> fields, IList<object> arguments = null)
 		{
-			return Studios;
+		    var field = new GraphQueryField("studios", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(StudioQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
+
+		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
+
+            return field;
 		}
 
-		public GraphQueryField MediaListQueryField()
+		public GraphQueryField MediaListQueryField(IList<GraphQueryField> fields, IList<object> arguments = null)
 		{
-			return MediaList;
+		    var field = new GraphQueryField("mediaList", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaListQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
+
+		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
+
+            return field;
 		}
 
-		public GraphQueryField AiringSchedulesQueryField()
+		public GraphQueryField AiringSchedulesQueryField(IList<GraphQueryField> fields, IList<object> arguments = null)
 		{
-			return AiringSchedules;
+		    var field = new GraphQueryField("airingSchedules", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(AiringScheduleQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
+
+		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
+
+            return field;
 		}
 
-		public GraphQueryField FollowersQueryField()
+		public GraphQueryField FollowersQueryField(IList<GraphQueryField> fields, IList<object> arguments = null)
 		{
-			return Followers;
+		    var field = new GraphQueryField("followers", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(AiringScheduleQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
+
+		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
+
+            return field;
 		}
 
-		public GraphQueryField FollowingsQueryField()
+		public GraphQueryField FollowingsQueryField(IList<GraphQueryField> fields, IList<object> arguments = null)
 		{
-			return Followings;
+		    var field = new GraphQueryField("followings", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(AiringScheduleQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
+
+		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
+
+            return field;
 		}
 
-		public GraphQueryField ActivityRepliesQueryField()
+		public GraphQueryField ActivityRepliesQueryField(IList<GraphQueryField> fields, IList<object> arguments = null)
 		{
-			return ActivityReplies;
+		    var field = new GraphQueryField("activityReplies", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(ActivityReplyQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
+
+		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
+
+            return field;
 		}
 
-		public GraphQueryField ThreadsQueryField()
+		public GraphQueryField ThreadsQueryField(IList<GraphQueryField> fields, IList<object> arguments = null)
 		{
-			return Threads;
+		    var field = new GraphQueryField("threads", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(ThreadQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
+
+		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
+
+            return field;
 		}
 
-		public GraphQueryField ThreadCommentsQueryField()
+		public GraphQueryField ThreadCommentsQueryField(IList<GraphQueryField> fields, IList<object> arguments = null)
 		{
-			return ThreadComments;
+		    var field = new GraphQueryField("threadComments", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(ThreadCommentQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
+
+		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
+
+            return field;
 		}
 
-		public GraphQueryField ReviewsQueryField()
+		public GraphQueryField ReviewsQueryField(IList<GraphQueryField> fields, IList<object> arguments = null)
 		{
-			return Reviews;
-		}
+		    var field = new GraphQueryField("reviews", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(ReviewQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
 
-		private GraphQueryField PageInfo { get; set; }
-		private GraphQueryField Users { get; set; }
-		private GraphQueryField Media { get; set; }
-		private GraphQueryField Characters { get; set; }
-		private GraphQueryField Staff { get; set; }
-		private GraphQueryField Studios { get; set; }
-		private GraphQueryField MediaList { get; set; }
-		private GraphQueryField AiringSchedules { get; set; }
-		private GraphQueryField Followers { get; set; }
-		private GraphQueryField Followings { get; set; }
-		private GraphQueryField ActivityReplies { get; set; }
-		private GraphQueryField Threads { get; set; }
-		private GraphQueryField ThreadComments { get; set; }
-		private GraphQueryField Reviews { get; set; }
+		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
 
-		private void InitializeProperties(AniListQueryType queryType)
-		{
-			PageInfo = new GraphQueryField("pageInfo", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
-			Users = new GraphQueryField("users", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
-			Media = new GraphQueryField("media", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
-			Characters = new GraphQueryField("characters", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
-			Staff = new GraphQueryField("staff", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
-			Studios = new GraphQueryField("studios", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
-			MediaList = new GraphQueryField("mediaList", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
-			AiringSchedules = new GraphQueryField("airingSchedules", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
-			Followers = new GraphQueryField("followers", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
-			Followings = new GraphQueryField("followings", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
-			ActivityReplies = new GraphQueryField("activityReplies", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
-			Threads = new GraphQueryField("threads", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
-			ThreadComments = new GraphQueryField("threadComments", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
-			Reviews = new GraphQueryField("reviews", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Page }));
+            return field;
 		}
 	}
 }

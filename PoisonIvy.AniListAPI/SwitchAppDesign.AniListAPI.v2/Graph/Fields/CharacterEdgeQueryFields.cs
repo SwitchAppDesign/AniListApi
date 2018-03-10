@@ -29,7 +29,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField NodeQueryField(IList<GraphQueryField> fields)
 	    {
-	        var field = new GraphQueryField("node", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(fields);
+	        var field = new GraphQueryField("node", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(CharacterQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
             FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
@@ -59,7 +59,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField VoiceActorsQueryField(IList<GraphQueryField> fields, IList<object> arguments = null)
         {
-            var field = new GraphQueryField("voiceActors", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(fields, arguments);
+            var field = new GraphQueryField("voiceActors", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(StaffQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
 
             FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
 
@@ -71,7 +71,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField MediaQueryField(IList<GraphQueryField> fields)
         {
-            var field = new GraphQueryField("media", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(fields);
+            var field = new GraphQueryField("media", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
             
             FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 

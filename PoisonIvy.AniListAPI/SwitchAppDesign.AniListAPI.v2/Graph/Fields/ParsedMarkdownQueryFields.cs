@@ -7,21 +7,23 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class ParsedMarkdownQueryFields
 	{
-		public ParsedMarkdownQueryFields(AniListQueryType queryType)
-		{
-			InitializeProperties(queryType);
-		}
+	    private readonly List<AniListQueryType> _allowedQueryTypes;
+	    private readonly AniListQueryType _queryType;
 
-		public GraphQueryField HtmlQueryField()
-		{
-			return Html;
-		}
+	    public ParsedMarkdownQueryFields(AniListQueryType queryType)
+	    {
+	        _queryType = queryType;
+	        _allowedQueryTypes = new List<AniListQueryType> { AniListQueryType.Markdown };
+	    }
 
-		private GraphQueryField Html { get; set; }
+	    private FieldRules InitilizeDefaultFieldRules(bool authenticationRequired = false)
+	    {
+	        return new FieldRules(authenticationRequired, _allowedQueryTypes);
+	    }
 
-		private void InitializeProperties(AniListQueryType queryType)
+        public GraphQueryField HtmlQueryField()
 		{
-			Html = new GraphQueryField("html", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Markdown }));
-		}
+			return new GraphQueryField("html", GetType(), _queryType, InitilizeDefaultFieldRules());
+        }
 	}
 }

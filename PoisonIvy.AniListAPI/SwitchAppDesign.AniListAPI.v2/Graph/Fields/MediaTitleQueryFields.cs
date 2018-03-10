@@ -10,54 +10,53 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
     /// </summary>
     public class MediaTitleQueryFields
 	{
-		internal MediaTitleQueryFields(AniListQueryType queryType)
-		{
-			InitializeProperties(queryType);
-		}
+	    private readonly List<AniListQueryType> _allowedQueryTypes;
+	    private readonly AniListQueryType _queryType;
 
-		/// <summary>
-		/// The romanization of the native language title
-		/// </summary>
-		public GraphQueryField RomajiQueryField()
+	    public MediaTitleQueryFields(AniListQueryType queryType)
+	    {
+	        _queryType = queryType;
+	        _allowedQueryTypes = new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page };
+	    }
+
+	    private FieldRules InitilizeDefaultFieldRules(bool authenticationRequired = false)
+	    {
+	        return new FieldRules(authenticationRequired, _allowedQueryTypes);
+	    }
+
+        /// <summary>
+        /// The romanization of the native language title
+        /// </summary>
+        public GraphQueryField RomajiQueryField()
 		{
-			return Romaji;
-		}
+		    return new GraphQueryField("romaji", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The official english title
 		/// </summary>
 		public GraphQueryField EnglishQueryField()
 		{
-			return English;
-		}
+		    return new GraphQueryField("english", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// Official title in it's native language
 		/// </summary>
 		public GraphQueryField NativeQueryField()
 		{
-			return Native;
-		}
+		    return new GraphQueryField("native", GetType(), _queryType, InitilizeDefaultFieldRules());
+		    
+        }
 
 		/// <summary>
 		/// The currently authenticated users preferred title language. Default romaji for non-authenticaed
 		/// </summary>
 		public GraphQueryField UserPreferredQueryField()
 		{
-			return UserPreferred;
-		}
-
-		private GraphQueryField Romaji { get; set; }
-		private GraphQueryField English { get; set; }
-		private GraphQueryField Native { get; set; }
-		private GraphQueryField UserPreferred { get; set; }
-
-		private void InitializeProperties(AniListQueryType queryType)
-		{
-			Romaji = new GraphQueryField("romaji", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
-			English = new GraphQueryField("english", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
-			Native = new GraphQueryField("native", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
-			UserPreferred = new GraphQueryField("userPreferred", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
-		}
+			return new GraphQueryField("userPreferred", GetType(), _queryType, InitilizeDefaultFieldRules());
+        }
 	}
 }

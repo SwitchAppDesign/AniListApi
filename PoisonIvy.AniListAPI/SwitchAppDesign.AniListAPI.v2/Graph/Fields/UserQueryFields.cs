@@ -4,68 +4,81 @@ using System.Linq;
 using SwitchAppDesign.AniListAPI.v2.Common;
 using SwitchAppDesign.AniListAPI.v2.Graph.Common;
 using SwitchAppDesign.AniListAPI.v2.Graph.Types;
+using SwitchAppDesign.AniListAPI.v2.Models;
 
 namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class UserQueryFields
 	{
-		public UserQueryFields(AniListQueryType queryType)
-		{
-			InitializeProperties(queryType);
-		}
+	    private readonly List<AniListQueryType> _allowedQueryTypes;
+	    private readonly AniListQueryType _queryType;
 
-		/// <summary>
-		/// The id of the user
-		/// </summary>
-		public GraphQueryField IdQueryField()
+	    public UserQueryFields(AniListQueryType queryType)
+	    {
+	        _queryType = queryType;
+	        _allowedQueryTypes = new List<AniListQueryType> { AniListQueryType.User };
+	    }
+
+	    private FieldRules InitilizeDefaultFieldRules(bool authenticationRequired = false)
+	    {
+	        return new FieldRules(authenticationRequired, _allowedQueryTypes);
+	    }
+
+        /// <summary>
+        /// The id of the user
+        /// </summary>
+        public GraphQueryField IdQueryField()
 		{
-			return Id;
-		}
+		    return new GraphQueryField("id", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The name of the user
 		/// </summary>
 		public GraphQueryField NameQueryField()
 		{
-			return Name;
-		}
+		    return new GraphQueryField("name", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The bio written by user (Markdown)
 		/// </summary>
 		public GraphQueryField AboutQueryField()
 		{
-			return About;
-		}
+		    return new GraphQueryField("about", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The user's avatar images
 		/// </summary>
 		public GraphQueryField AvatarQueryField()
 		{
-			return Avatar;
-		}
+		    return new GraphQueryField("avatar", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// If the authenticated user if following this user
 		/// </summary>
 		public GraphQueryField IsFollowingQueryField()
 		{
-			return IsFollowing;
-		}
+		    return new GraphQueryField("isFollowing", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
         /// <summary>
         /// The user's general options.
         /// </summary>
         public GraphQueryField OptionsQueryField(IList<GraphQueryField> fields)
 		{
-		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({nameof(Options)}) requires at least one user options query field.");
+		    var field = new GraphQueryField("options", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(UserOptionsQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-		    if (fields.Any(x => x.ParentClassType != typeof(UserOptionsQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid user options query fields {fields.Where(x => x.ParentClassType != typeof(UserOptionsQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
-		    return Options.GetGraphFieldAndSetFieldArguments(fields);
+		    return field;
         }
 
         /// <summary>
@@ -73,13 +86,11 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField MediaListOptionsQueryField(IList<GraphQueryField> fields)
 		{
-		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({nameof(MediaListOptions)}) requires at least one media list options query field.");
+		    var field = new GraphQueryField("mediaListOptions", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaListOptionsQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-		    if (fields.Any(x => x.ParentClassType != typeof(MediaListOptionsQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid media list options query fields {fields.Where(x => x.ParentClassType != typeof(MediaListOptionsQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
+		    FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
-		    return MediaListOptions.GetGraphFieldAndSetFieldArguments(fields);
+            return field;
         }
 
         /// <summary>
@@ -87,13 +98,11 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField FavouritesQueryField(IList<GraphQueryField> fields)
 		{
-		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({nameof(Favourites)}) requires at least one favourites query field.");
+		    var field = new GraphQueryField("favourites", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(FavouritesQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-		    if (fields.Any(x => x.ParentClassType != typeof(FavouritesQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid favourites query fields {fields.Where(x => x.ParentClassType != typeof(FavouritesQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
+		    FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
-		    return Favourites.GetGraphFieldAndSetFieldArguments(fields);
+            return field;
         }
 
         /// <summary>
@@ -101,13 +110,11 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField StatsQueryField(IList<GraphQueryField> fields)
 		{
-		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({nameof(Stats)}) requires at least one user stats query field.");
+		    var field = new GraphQueryField("stats", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(UserStatsQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-		    if (fields.Any(x => x.ParentClassType != typeof(UserStatsQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid user stats query fields {fields.Where(x => x.ParentClassType != typeof(UserStatsQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
+		    FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
-		    return Stats.GetGraphFieldAndSetFieldArguments(fields);
+            return field;
         }
 
 		/// <summary>
@@ -115,62 +122,31 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// </summary>
 		public GraphQueryField UnreadNotificationCountQueryField()
 		{
-			return UnreadNotificationCount;
-		}
+		    return new GraphQueryField("unreadNotificationCount", GetType(), _queryType, InitilizeDefaultFieldRules());
+        }
 
 		/// <summary>
 		/// The url for the user page on the AniList website
 		/// </summary>
 		public GraphQueryField SiteUrlQueryField()
 		{
-			return SiteUrl;
-		}
+		    return new GraphQueryField("siteUrl", GetType(), _queryType, InitilizeDefaultFieldRules());
+        }
 
 		/// <summary>
 		/// The donation tier of the user
 		/// </summary>
 		public GraphQueryField DonatorTierQueryField()
 		{
-			return DonatorTier;
-		}
+		    return new GraphQueryField("donatorTier", GetType(), _queryType, InitilizeDefaultFieldRules());
+        }
 
 		/// <summary>
 		/// When the user's data was last updated
 		/// </summary>
 		public GraphQueryField UpdatedAtQueryField()
 		{
-			return UpdatedAt;
-		}
-
-		private GraphQueryField Id { get; set; }
-		private GraphQueryField Name { get; set; }
-		private GraphQueryField About { get; set; }
-		private GraphQueryField Avatar { get; set; }
-		private GraphQueryField IsFollowing { get; set; }
-		private GraphQueryField Options { get; set; }
-		private GraphQueryField MediaListOptions { get; set; }
-		private GraphQueryField Favourites { get; set; }
-		private GraphQueryField Stats { get; set; }
-		private GraphQueryField UnreadNotificationCount { get; set; }
-		private GraphQueryField SiteUrl { get; set; }
-		private GraphQueryField DonatorTier { get; set; }
-		private GraphQueryField UpdatedAt { get; set; }
-
-		private void InitializeProperties(AniListQueryType queryType)
-		{
-			Id = new GraphQueryField("id", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			Name = new GraphQueryField("name", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			About = new GraphQueryField("about", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			Avatar = new GraphQueryField("avatar", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			IsFollowing = new GraphQueryField("isFollowing", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			Options = new GraphQueryField("options", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			MediaListOptions = new GraphQueryField("mediaListOptions", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			Favourites = new GraphQueryField("favourites", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			Stats = new GraphQueryField("stats", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			UnreadNotificationCount = new GraphQueryField("unreadNotificationCount", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			SiteUrl = new GraphQueryField("siteUrl", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			DonatorTier = new GraphQueryField("donatorTier", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			UpdatedAt = new GraphQueryField("updatedAt", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-		}
+			return new GraphQueryField("updatedAt", GetType(), _queryType, InitilizeDefaultFieldRules());
+        }
 	}
 }

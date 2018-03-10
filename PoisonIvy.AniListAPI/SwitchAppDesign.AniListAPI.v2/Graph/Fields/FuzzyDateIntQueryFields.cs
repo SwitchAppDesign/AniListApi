@@ -16,14 +16,14 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
             _allowedQueryTypes = new List<AniListQueryType> {AniListQueryType.Media, AniListQueryType.Page};
         }
 
-		public GraphQueryField FuzzyDateQueryField()
-		{
-			return new GraphQueryField("FuzzyDate", GetType(), _queryType, InitilizeDefaultFieldRules());
-		}
-
 	    private FieldRules InitilizeDefaultFieldRules(bool authenticationRequired = false)
 	    {
 	        return new FieldRules(authenticationRequired, _allowedQueryTypes);
 	    }
+
+        public GraphQueryField FuzzyDateQueryField()
+		{
+			return new GraphQueryField("FuzzyDate", GetType(), _queryType, InitilizeDefaultFieldRules());
+		}
     }
 }

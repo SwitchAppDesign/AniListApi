@@ -12,122 +12,145 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
     /// </summary>
 	public class ReviewQueryFields
 	{
-		internal ReviewQueryFields(AniListQueryType queryType)
-		{
-			InitializeProperties(queryType);
-		}
+	    private readonly List<AniListQueryType> _allowedQueryTypes;
+	    private readonly AniListQueryType _queryType;
 
-		/// <summary>
-		/// The id of the review
-		/// </summary>
-		public GraphQueryField IdQueryField()
+	    public ReviewQueryFields(AniListQueryType queryType)
+	    {
+	        _queryType = queryType;
+	        _allowedQueryTypes = new List<AniListQueryType> { AniListQueryType.Review };
+	    }
+
+	    private FieldRules InitilizeDefaultFieldRules(bool authenticationRequired = false)
+	    {
+	        return new FieldRules(authenticationRequired, _allowedQueryTypes);
+	    }
+
+        /// <summary>
+        /// The id of the review
+        /// </summary>
+        public GraphQueryField IdQueryField()
 		{
-			return Id;
-		}
+		    return new GraphQueryField("id", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The id of the review's creator
 		/// </summary>
 		public GraphQueryField UserIdQueryField()
 		{
-			return UserId;
-		}
+		    return new GraphQueryField("userId", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The id of the review's media
 		/// </summary>
 		public GraphQueryField MediaIdQueryField()
 		{
-			return MediaId;
-		}
+		    return new GraphQueryField("mediaId", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// For which type of media the review is for
 		/// </summary>
 		public GraphQueryField MediaTypeQueryField()
 		{
-			return MediaType;
-		}
+		    return new GraphQueryField("mediaType", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// A short summary of the review
 		/// </summary>
 		public GraphQueryField SummaryQueryField()
 		{
-			return Summary;
-		}
+		    return new GraphQueryField("summary", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The main review body text
 		/// </summary>
 		public GraphQueryField BodyQueryField()
 		{
-			return Body;
-		}
+		    return new GraphQueryField("body", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The total user rating of the review
 		/// </summary>
 		public GraphQueryField RatingQueryField()
 		{
-			return Rating;
-		}
+		    return new GraphQueryField("rating", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The amount of user ratings of the review
 		/// </summary>
 		public GraphQueryField RatingAmountQueryField()
 		{
-			return RatingAmount;
-		}
+		    return new GraphQueryField("ratingAmount", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The rating of the review by currently authenticated user
 		/// </summary>
 		public GraphQueryField UserRatingQueryField()
 		{
-			return UserRating;
-		}
+		    return new GraphQueryField("userRating", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The review score of the media
 		/// </summary>
 		public GraphQueryField ScoreQueryField()
 		{
-			return Score;
-		}
+		    return new GraphQueryField("score", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// If the review is not yet publicly published and is only viewable by creator
 		/// </summary>
 		public GraphQueryField _privateQueryField()
 		{
-			return _private;
-		}
+		    return new GraphQueryField("_private", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The url for the review page on the AniList website
 		/// </summary>
 		public GraphQueryField SiteUrlQueryField()
 		{
-			return SiteUrl;
-		}
+		    return new GraphQueryField("siteUrl", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The time of the thread creation
 		/// </summary>
 		public GraphQueryField CreatedAtQueryField()
 		{
-			return CreatedAt;
-		}
+		    return new GraphQueryField("createdAt", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The time of the thread last update
 		/// </summary>
 		public GraphQueryField UpdatedAtQueryField()
 		{
-			return UpdatedAt;
-		}
+		    return new GraphQueryField("updatedAt", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
         /// <summary>
         /// The id of the review's creator.
@@ -135,13 +158,11 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField UserQueryField(IList<GraphQueryField> fields)
 		{
-		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({nameof(User)}) requires at least one user query field.");
+		    var field = new GraphQueryField("user", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(UserQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-		    if (fields.Any(x => x.ParentClassType != typeof(UserQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid user query fields {fields.Where(x => x.ParentClassType != typeof(UserQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
-
-		    return User.GetGraphFieldAndSetFieldArguments(fields);
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+            
+		    return field;
         }
 
         /// <summary>
@@ -150,50 +171,11 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField MediaQueryField(IList<GraphQueryField> fields)
         {
-            if (fields == null || !fields.Any())
-                throw new GraphQueryFieldInvalidException($"Query field ({nameof(Media)}) requires at least one media query field.");
+		    var field = new GraphQueryField("media", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-            if (fields.Any(x => x.ParentClassType != typeof(UserQueryFields)))
-                throw new GraphQueryFieldInvalidException($"The following fields are not valid media query fields {fields.Where(x => x.ParentClassType != typeof(UserQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
-            return Media.GetGraphFieldAndSetFieldArguments(fields);
+            return field;
         }
-
-		private GraphQueryField Id { get; set; }
-		private GraphQueryField UserId { get; set; }
-		private GraphQueryField MediaId { get; set; }
-		private GraphQueryField MediaType { get; set; }
-		private GraphQueryField Summary { get; set; }
-		private GraphQueryField Body { get; set; }
-		private GraphQueryField Rating { get; set; }
-		private GraphQueryField RatingAmount { get; set; }
-		private GraphQueryField UserRating { get; set; }
-		private GraphQueryField Score { get; set; }
-		private GraphQueryField _private { get; set; }
-		private GraphQueryField SiteUrl { get; set; }
-		private GraphQueryField CreatedAt { get; set; }
-		private GraphQueryField UpdatedAt { get; set; }
-		private GraphQueryField User { get; set; }
-		private GraphQueryField Media { get; set; }
-
-		private void InitializeProperties(AniListQueryType queryType)
-		{
-			Id = new GraphQueryField("id", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
-			UserId = new GraphQueryField("userId", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
-			MediaId = new GraphQueryField("mediaId", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
-			MediaType = new GraphQueryField("mediaType", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
-			Summary = new GraphQueryField("summary", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
-			Body = new GraphQueryField("body", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
-			Rating = new GraphQueryField("rating", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
-			RatingAmount = new GraphQueryField("ratingAmount", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
-			UserRating = new GraphQueryField("userRating", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
-			Score = new GraphQueryField("score", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
-			_private = new GraphQueryField("_private", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
-			SiteUrl = new GraphQueryField("siteUrl", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
-			CreatedAt = new GraphQueryField("createdAt", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
-			UpdatedAt = new GraphQueryField("updatedAt", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
-			User = new GraphQueryField("user", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
-			Media = new GraphQueryField("media", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Review }));
-		}
 	}
 }

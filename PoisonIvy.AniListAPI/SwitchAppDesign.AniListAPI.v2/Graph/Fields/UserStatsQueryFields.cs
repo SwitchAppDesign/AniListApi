@@ -9,39 +9,41 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class UserStatsQueryFields
 	{
-		public UserStatsQueryFields(AniListQueryType queryType)
-		{
-			InitializeProperties(queryType);
-		}
+	    private readonly List<AniListQueryType> _allowedQueryTypes;
+	    private readonly AniListQueryType _queryType;
 
-		/// <summary>
-		/// The amount of anime the user has watched in minutes
-		/// </summary>
-		public GraphQueryField WatchedTimeQueryField()
+	    public UserStatsQueryFields(AniListQueryType queryType)
+	    {
+	        _queryType = queryType;
+	        _allowedQueryTypes = new List<AniListQueryType> { AniListQueryType.User };
+	    }
+
+        /// <summary>
+        /// The amount of anime the user has watched in minutes
+        /// </summary>
+        public GraphQueryField WatchedTimeQueryField()
 		{
-			return WatchedTime;
-		}
+			return new GraphQueryField("watchedTime", GetType(), _queryType, InitilizeDefaultFieldRules());
+        }
 
 		/// <summary>
 		/// The amount of manga chapters the user has read
 		/// </summary>
 		public GraphQueryField ChaptersReadQueryField()
 		{
-			return ChaptersRead;
-		}
+		    return new GraphQueryField("chaptersRead", GetType(), _queryType, InitilizeDefaultFieldRules());
+        }
 
         /// <summary>
         /// <param name="fields">The list of user activity history fields (found in <see cref="UserActivityHistoryQueryFields"/>) to be used in the graph query (at least of user activity history query field is required).</param>
         /// </summary>
         public GraphQueryField ActivityHistoryQueryField(IList<GraphQueryField> fields)
 		{
-		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({nameof(ActivityHistory)}) requires at least one user activity history query field.");
+		    var field = new GraphQueryField("activityHistory", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(UserActivityHistoryQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-		    if (fields.Any(x => x.ParentClassType != typeof(UserActivityHistoryQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid user activity history query fields {fields.Where(x => x.ParentClassType != typeof(UserActivityHistoryQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
+		    FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
-		    return ActivityHistory.GetGraphFieldAndSetFieldArguments(fields);
+            return field;
         }
 
         /// <summary>
@@ -49,27 +51,23 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField AnimeStatusDistributionQueryField(IList<GraphQueryField> fields)
 		{
-		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({nameof(AnimeStatusDistribution)}) requires at least one status distribution stats query field.");
+		    var field = new GraphQueryField("animeStatusDistribution", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(StatusDistributionQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-		    if (fields.Any(x => x.ParentClassType != typeof(StatusDistributionQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid status distribution query fields {fields.Where(x => x.ParentClassType != typeof(StatusDistributionQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
+		    FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
-		    return AnimeStatusDistribution.GetGraphFieldAndSetFieldArguments(fields);
-        }
+            return field;
+		}
 
         /// <summary>
         /// <param name="fields">The list of status distribution fields (found in <see cref="StatusDistributionQueryFields"/>) to be used in the graph query (at least of status distribution query field is required).</param>
         /// </summary>
         public GraphQueryField MangaStatusDistributionQueryField(IList<GraphQueryField> fields)
 		{
-		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({nameof(MangaStatusDistribution)}) requires at least one status distribution stats query field.");
+		    var field = new GraphQueryField("mangaStatusDistribution", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(StatusDistributionQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-		    if (fields.Any(x => x.ParentClassType != typeof(StatusDistributionQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid status distribution query fields {fields.Where(x => x.ParentClassType != typeof(StatusDistributionQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
+		    FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
-		    return MangaStatusDistribution.GetGraphFieldAndSetFieldArguments(fields);
+            return field;
         }
 
         /// <summary>
@@ -77,13 +75,11 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField AnimeScoreDistributionQueryField(IList<GraphQueryField> fields)
 		{
-		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({nameof(AnimeScoreDistribution)}) requires at least one score distribution query field.");
+		    var field = new GraphQueryField("animeScoreDistribution", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(ScoreDistributionQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-		    if (fields.Any(x => x.ParentClassType != typeof(ScoreDistributionQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid score distribution query fields {fields.Where(x => x.ParentClassType != typeof(ScoreDistributionQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
-		    return AnimeScoreDistribution.GetGraphFieldAndSetFieldArguments(fields);
+		    return field;
         }
 
 	    /// <summary>
@@ -91,32 +87,16 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 	    /// </summary>
         public GraphQueryField MangaScoreDistributionQueryField(IList<GraphQueryField> fields)
 		{
-		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({nameof(MangaScoreDistribution)}) requires at least one score distribution query field.");
+		    var field = new GraphQueryField("mangaScoreDistribution", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(ScoreDistributionQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-		    if (fields.Any(x => x.ParentClassType != typeof(ScoreDistributionQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid score distribution query fields {fields.Where(x => x.ParentClassType != typeof(ScoreDistributionQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
+		    FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
-		    return MangaScoreDistribution.GetGraphFieldAndSetFieldArguments(fields);
-        }
-
-		private GraphQueryField WatchedTime { get; set; }
-		private GraphQueryField ChaptersRead { get; set; }
-		private GraphQueryField ActivityHistory { get; set; }
-		private GraphQueryField AnimeStatusDistribution { get; set; }
-		private GraphQueryField MangaStatusDistribution { get; set; }
-		private GraphQueryField AnimeScoreDistribution { get; set; }
-		private GraphQueryField MangaScoreDistribution { get; set; }
-
-		private void InitializeProperties(AniListQueryType queryType)
-		{
-			WatchedTime = new GraphQueryField("watchedTime", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			ChaptersRead = new GraphQueryField("chaptersRead", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			ActivityHistory = new GraphQueryField("activityHistory", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			AnimeStatusDistribution = new GraphQueryField("animeStatusDistribution", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			MangaStatusDistribution = new GraphQueryField("mangaStatusDistribution", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			AnimeScoreDistribution = new GraphQueryField("animeScoreDistribution", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			MangaScoreDistribution = new GraphQueryField("mangaScoreDistribution", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
+            return field;
 		}
-	}
+
+	    private FieldRules InitilizeDefaultFieldRules(bool authenticationRequired = false)
+	    {
+	        return new FieldRules(authenticationRequired, _allowedQueryTypes);
+	    }
+    }
 }

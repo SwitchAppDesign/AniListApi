@@ -54,7 +54,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField TitleQueryField(IList<GraphQueryField> fields)
         {
-            var field = new GraphQueryField("title", GetType(), _queryType, InitilizeDefaultFieldRules());
+            var field = new GraphQueryField("title", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaTitleQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
             FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
@@ -101,7 +101,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// </summary>
 		public GraphQueryField StartDateQueryField()
 		{
-		    return new GraphQueryField("startDate", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(new FuzzyDateQueryFields(AniListQueryType.Media).GetAllFields());
+		    return new GraphQueryField("startDate", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(FuzzyDateIntQueryFields)).GetGraphFieldAndSetFieldArguments(new FuzzyDateQueryFields(AniListQueryType.Media).GetAllFields());
         }
 
 		/// <summary>
@@ -109,7 +109,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// </summary>
 		public GraphQueryField EndDateQueryField()
 		{
-		    return new GraphQueryField("endDate", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(new FuzzyDateQueryFields(AniListQueryType.Media).GetAllFields());
+		    return new GraphQueryField("endDate", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(FuzzyDateIntQueryFields)).GetGraphFieldAndSetFieldArguments(new FuzzyDateQueryFields(AniListQueryType.Media).GetAllFields());
         }
 
 		/// <summary>
@@ -189,7 +189,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField TrailerQueryField(IList<GraphQueryField> fields)
 		{
-            var field = new GraphQueryField("trailer", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(fields);
+            var field = new GraphQueryField("trailer", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaTrailerQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
             FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
@@ -209,7 +209,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField CoverImageQueryField(IList<GraphQueryField> fields)
 		{
-		    var field = new GraphQueryField("coverImage", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(fields);
+		    var field = new GraphQueryField("coverImage", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(ImageDataQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
 		    FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
@@ -269,7 +269,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField TagsQueryField(IList<GraphQueryField> fields)
         {
-            var field = new GraphQueryField("tags", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(fields);
+            var field = new GraphQueryField("tags", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaTagQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
             FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
@@ -281,7 +281,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField RelationsQueryField(IList<GraphQueryField> fields)
 		{
-            var field = new GraphQueryField("relations", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(fields);
+            var field = new GraphQueryField("relations", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaConnectionQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
             FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
@@ -293,7 +293,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField CharactersQueryField(IList<GraphQueryField> fields, IList<object> arguments = null)
         {
-            var field = new GraphQueryField("characters", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(fields, arguments);
+            var field = new GraphQueryField("characters", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(CharacterConnectionQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
 
             FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
 
@@ -305,7 +305,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField StaffQueryField(IList<GraphQueryField> fields, IList<object> arguments = null)
 		{
-            var field = new GraphQueryField("staff", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(fields, arguments);
+            var field = new GraphQueryField("staff", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(StaffConnectionQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
 
             FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
 
@@ -317,7 +317,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField StudiosQueryField(IList<GraphQueryField> fields, IList<object> arguments = null)
 		{
-            var field = new GraphQueryField("studios", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(fields, arguments);
+            var field = new GraphQueryField("studios", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(StudioConnectionQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
 
             FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
 
@@ -345,7 +345,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField NextAiringEpisodeQueryField(IList<GraphQueryField> fields)
 		{
-            var field = new GraphQueryField("nextAiringEpisode", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(fields);
+            var field = new GraphQueryField("nextAiringEpisode", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(AiringScheduleQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
             FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
@@ -357,7 +357,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField AiringScheduleQueryField(IList<GraphQueryField> fields, IList<object> arguments = null)
 		{
-            var field = new GraphQueryField("airingSchedule", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(fields, arguments);
+            var field = new GraphQueryField("airingSchedule", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(AiringScheduleConnectionQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
 
             FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
 
@@ -369,7 +369,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField ExternalLinksQueryField(IList<GraphQueryField> fields)
 		{
-            var field = new GraphQueryField("externalLinks", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(fields);
+            var field = new GraphQueryField("externalLinks", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaExternalLinkQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
             FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
@@ -381,7 +381,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField StreamingEpisodesQueryField(IList<GraphQueryField> fields)
 		{
-            var field = new GraphQueryField("streamingEpisodes", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(fields);
+            var field = new GraphQueryField("streamingEpisodes", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaStreamingEpisodeQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
             FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
@@ -394,7 +394,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField RankingsQueryField(IList<GraphQueryField> fields)
 		{
-            var field = new GraphQueryField("rankings", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(fields);
+            var field = new GraphQueryField("rankings", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaRankQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
 		    FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
@@ -406,7 +406,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField MediaListEntryQueryField(IList<GraphQueryField> fields)
 		{
-            var field = new GraphQueryField("mediaListEntry", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(fields);
+            var field = new GraphQueryField("mediaListEntry", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaListQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
             FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
@@ -418,7 +418,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField ReviewsQueryField(IList<GraphQueryField> fields, IList<object> arguments = null)
 		{
-            var field = new GraphQueryField("reviews", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(fields, arguments);
+            var field = new GraphQueryField("reviews", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(ReviewConnectionQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
 
             FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
 
@@ -430,7 +430,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
 		public GraphQueryField StatsQueryField(IList<GraphQueryField> fields)
 		{
-            var field = new GraphQueryField("stats", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(fields);
+            var field = new GraphQueryField("stats", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaStatsQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
             FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 

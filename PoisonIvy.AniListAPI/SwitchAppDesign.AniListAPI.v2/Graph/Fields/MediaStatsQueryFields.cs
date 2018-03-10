@@ -10,35 +10,35 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
     /// </summary>
 	public class MediaStatsQueryFields
 	{
-	    internal MediaStatsQueryFields(AniListQueryType queryType)
-		{
-			InitializeProperties(queryType);
-		}
+	    private readonly List<AniListQueryType> _allowedQueryTypes;
+	    private readonly AniListQueryType _queryType;
 
-		public GraphQueryField ScoreDistributionQueryField()
+	    public MediaStatsQueryFields(AniListQueryType queryType)
+	    {
+	        _queryType = queryType;
+	        _allowedQueryTypes = new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page };
+	    }
+
+	    private FieldRules InitilizeDefaultFieldRules(bool authenticationRequired = false)
+	    {
+	        return new FieldRules(authenticationRequired, _allowedQueryTypes);
+	    }
+
+        public GraphQueryField ScoreDistributionQueryField()
 		{
-			return ScoreDistribution;
-		}
+		    return new GraphQueryField("scoreDistribution", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		public GraphQueryField StatusDistributionQueryField()
 		{
-			return StatusDistribution;
-		}
+		    return new GraphQueryField("statusDistribution", GetType(), _queryType, InitilizeDefaultFieldRules());
+		    
+        }
 
 		public GraphQueryField AiringProgressionQueryField()
 		{
-			return AiringProgression;
-		}
-
-		private GraphQueryField ScoreDistribution { get; set; }
-		private GraphQueryField StatusDistribution { get; set; }
-		private GraphQueryField AiringProgression { get; set; }
-
-		private void InitializeProperties(AniListQueryType queryType)
-		{
-			ScoreDistribution = new GraphQueryField("scoreDistribution", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
-			StatusDistribution = new GraphQueryField("statusDistribution", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
-			AiringProgression = new GraphQueryField("airingProgression", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
-		}
+			return new GraphQueryField("airingProgression", GetType(), _queryType, InitilizeDefaultFieldRules());
+        }
 	}
 }

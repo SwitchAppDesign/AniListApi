@@ -7,35 +7,35 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class ThreadCategoryQueryFields
 	{
-		public ThreadCategoryQueryFields(AniListQueryType queryType)
-		{
-			InitializeProperties(queryType);
-		}
+	    private readonly List<AniListQueryType> _allowedQueryTypes;
+	    private readonly AniListQueryType _queryType;
 
-		/// <summary>
-		/// The id of the category or media is of the media category.
-		/// </summary>
-		public GraphQueryField IdQueryField()
+	    public ThreadCategoryQueryFields(AniListQueryType queryType)
+	    {
+	        _queryType = queryType;
+	        _allowedQueryTypes = new List<AniListQueryType> { AniListQueryType.Thread };
+	    }
+
+	    private FieldRules InitilizeDefaultFieldRules(bool authenticationRequired = false)
+	    {
+	        return new FieldRules(authenticationRequired, _allowedQueryTypes);
+	    }
+
+        /// <summary>
+        /// The id of the category or media is of the media category.
+        /// </summary>
+        public GraphQueryField IdQueryField()
 		{
-			return Id;
-		}
+		    return new GraphQueryField("id", GetType(), _queryType, InitilizeDefaultFieldRules());
+		    
+        }
 
 		/// <summary>
 		/// The name of the category.
 		/// </summary>
 		public GraphQueryField NameQueryField()
 		{
-			return Name;
-		}
-
-		private GraphQueryField Id { get; set; }
-		private GraphQueryField Name { get; set; }
-
-		private void InitializeProperties(AniListQueryType queryType)
-		{
-			Id = new GraphQueryField("id", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-			Name = new GraphQueryField("name", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-		}
-
+			return new GraphQueryField("name", GetType(), _queryType, InitilizeDefaultFieldRules());
+        }
 	}
 }

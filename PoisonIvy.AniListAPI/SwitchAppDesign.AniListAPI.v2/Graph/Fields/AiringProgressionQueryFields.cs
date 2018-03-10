@@ -7,44 +7,43 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class AiringProgressionQueryFields
 	{
-		public AiringProgressionQueryFields(AniListQueryType queryType)
-		{
-			InitializeProperties(queryType);
-		}
+	    private readonly List<AniListQueryType> _allowedQueryTypes;
+	    private readonly AniListQueryType _queryType;
 
-		/// <summary>
-		/// The episode the stats were recorded at. .5 is the mid point between 2 episodes airing dates.
-		/// </summary>
-		public GraphQueryField EpisodeQueryField()
+	    public AiringProgressionQueryFields(AniListQueryType queryType)
+	    {
+	        _queryType = queryType;
+	        _allowedQueryTypes = new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page };
+	    }
+
+        /// <summary>
+        /// The episode the stats were recorded at. .5 is the mid point between 2 episodes airing dates.
+        /// </summary>
+        public GraphQueryField EpisodeQueryField()
 		{
-			return Episode;
-		}
+		    return new GraphQueryField("episode", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The average score for the media
 		/// </summary>
 		public GraphQueryField ScoreQueryField()
 		{
-			return Score;
-		}
+		    return new GraphQueryField("score", GetType(), _queryType, InitilizeDefaultFieldRules());
+        }
 
 		/// <summary>
 		/// The amount of users watching the anime
 		/// </summary>
 		public GraphQueryField WatchingQueryField()
 		{
-			return Watching;
-		}
+			return new GraphQueryField("watching", GetType(), _queryType, InitilizeDefaultFieldRules());
+        }
 
-		private GraphQueryField Episode { get; set; }
-		private GraphQueryField Score { get; set; }
-		private GraphQueryField Watching { get; set; }
-
-		private void InitializeProperties(AniListQueryType queryType)
-		{
-			Episode = new GraphQueryField("episode", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
-			Score = new GraphQueryField("score", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
-			Watching = new GraphQueryField("watching", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
-		}
-	}
+	    private FieldRules InitilizeDefaultFieldRules(bool authenticationRequired = false)
+	    {
+	        return new FieldRules(authenticationRequired, _allowedQueryTypes);
+	    }
+    }
 }

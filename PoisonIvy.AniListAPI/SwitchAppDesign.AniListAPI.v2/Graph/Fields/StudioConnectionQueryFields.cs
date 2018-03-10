@@ -12,23 +12,30 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
     /// </summary>
 	public class StudioConnectionQueryFields
 	{
-		internal StudioConnectionQueryFields(AniListQueryType queryType)
-		{
-			InitializeProperties(queryType);
-		}
+	    private readonly List<AniListQueryType> _allowedQueryTypes;
+	    private readonly AniListQueryType _queryType;
+
+	    public StudioConnectionQueryFields(AniListQueryType queryType)
+	    {
+	        _queryType = queryType;
+	        _allowedQueryTypes = new List<AniListQueryType> { AniListQueryType.Studio };
+	    }
+
+	    private FieldRules InitilizeDefaultFieldRules(bool authenticationRequired = false)
+	    {
+	        return new FieldRules(authenticationRequired, _allowedQueryTypes);
+	    }
 
         /// <summary>
         /// <param name="fields">The list of studio edge query fields (found in <see cref="StudioEdgeQueryFields"/>) to be used in the graph query (at least of studio edge query field is required).</param>
         /// </summary>
         public GraphQueryField EdgesQueryField(IList<GraphQueryField> fields)
 		{
-		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({nameof(Edges)}) requires at least one studio edge query field.");
+		    var field = new GraphQueryField("edges", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(StudioEdgeQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-		    if (fields.Any(x => x.ParentClassType != typeof(StudioEdgeQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid studio edge query fields {fields.Where(x => x.ParentClassType != typeof(StudioEdgeQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
+		    FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
-		    return Edges.GetGraphFieldAndSetFieldArguments(fields);
+            return field;
         }
 
         /// <summary>
@@ -36,38 +43,23 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField NodesQueryField(IList<GraphQueryField> fields)
 		{
-		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({nameof(Nodes)}) requires at least one studio query field.");
+		    var field = new GraphQueryField("nodes", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(StudioQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-		    if (fields.Any(x => x.ParentClassType != typeof(StudioQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid studio query fields {fields.Where(x => x.ParentClassType != typeof(StudioQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
-		    return Nodes.GetGraphFieldAndSetFieldArguments(fields);
-        }
+		    return field;
+		}
 
 	    /// <summary>
 	    /// The pagination information
 	    /// </summary>
 	    public GraphQueryField PageInfoQueryField(IList<GraphQueryField> fields)
 	    {
-	        if (fields == null || !fields.Any())
-	            throw new GraphQueryFieldInvalidException($"Query field ({nameof(PageInfo)}) requires at least one page info query field.");
+	        var field = new GraphQueryField("pageInfo", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(PageInfoQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-	        if (fields.Any(x => x.ParentClassType != typeof(PageInfoQueryFields)))
-	            throw new GraphQueryFieldInvalidException($"The following fields are not valid page info query fields {fields.Where(x => x.ParentClassType != typeof(PageInfoQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
+	        FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
-	        return PageInfo.GetGraphFieldAndSetFieldArguments(fields);
+            return field;
 	    }
-
-        private GraphQueryField Edges { get; set; }
-		private GraphQueryField Nodes { get; set; }
-		private GraphQueryField PageInfo { get; set; }
-
-		private void InitializeProperties(AniListQueryType queryType)
-		{
-			Edges = new GraphQueryField("edges", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Studio }));
-			Nodes = new GraphQueryField("nodes", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Studio }));
-			PageInfo = new GraphQueryField("pageInfo", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Studio }));
-		}
 	}
 }

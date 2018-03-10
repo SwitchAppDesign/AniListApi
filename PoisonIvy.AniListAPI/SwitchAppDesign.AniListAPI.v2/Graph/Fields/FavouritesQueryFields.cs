@@ -19,60 +19,45 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
             _allowedQueryTypes = new List<AniListQueryType> {AniListQueryType.User};
         }
 
-        /// <summary>
-        /// <param name="fields">The list of media connection fields (found in <see cref="MediaConnectionQueryFields"/>) to be used in the graph query (at least of media connection query field is required).</param>
-        /// </summary>
         public GraphQueryField AnimeQueryField(IList<GraphQueryField> fields)
 		{
-		    var field = new GraphQueryField("anime", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(fields);
+		    var field = new GraphQueryField("anime", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaConnectionQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
             FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
 		    return field;
         }
 
-	    /// <summary>
-	    /// <param name="fields">The list of media connection fields (found in <see cref="MediaListOptionsQueryFields"/>) to be used in the graph query (at least of media connection query field is required).</param>
-	    /// </summary>
         public GraphQueryField MangaQueryField(IList<GraphQueryField> fields)
 		{
-		    var field = new GraphQueryField("manga", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(fields);
+		    var field = new GraphQueryField("manga", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaConnectionQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
 		    FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
             return field;
         }
 
-        /// <summary>
-        /// <param name="fields">The list of character connection fields (found in <see cref="CharacterConnectionQueryFields"/>) to be used in the graph query (at least of character connection query field is required).</param>
-        /// </summary>
         public GraphQueryField CharactersQueryField(IList<GraphQueryField> fields)
 		{
-		    var field = new GraphQueryField("characters", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(fields);
+		    var field = new GraphQueryField("characters", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(CharacterConnectionQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
 		    FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
 		    return field;
 		}
 
-        /// <summary>
-        /// <param name="fields">The list of staff connection fields (found in <see cref="StaffConnectionQueryFields"/>) to be used in the graph query (at least of staff connection query field is required).</param>
-        /// </summary>
         public GraphQueryField StaffQueryField(IList<GraphQueryField> fields)
 		{
-		    var field = new GraphQueryField("staff", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(fields);
+		    var field = new GraphQueryField("staff", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(StaffConnectionQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
 		    FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
             return field.GetGraphFieldAndSetFieldArguments(fields);
         }
 
-        /// <summary>
-        /// <param name="fields">The list of staff connection fields (found in <see cref="StaffConnectionQueryFields"/>) to be used in the graph query (at least of staff connection query field is required).</param>
-        /// </summary>
         public GraphQueryField StudiosQueryField(IList<GraphQueryField> fields)
 		{
-		    var field = new GraphQueryField("studios", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(fields);
+		    var field = new GraphQueryField("studios", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(StudioConnectionQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
 		    FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 

@@ -12,23 +12,25 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
     /// </summary>
 	public class AiringScheduleEdgeQueryFields
 	{
-		internal AiringScheduleEdgeQueryFields(AniListQueryType queryType)
-		{
-			InitializeProperties(queryType);
-		}
+	    private readonly List<AniListQueryType> _allowedQueryTypes;
+	    private readonly AniListQueryType _queryType;
+
+	    public AiringScheduleEdgeQueryFields(AniListQueryType queryType)
+	    {
+	        _queryType = queryType;
+	        _allowedQueryTypes = new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page };
+	    }
 
         /// <summary>
         /// <param name="fields">The list of airing schedule query fields (found in <see cref="AiringScheduleQueryFields"/>) to be used in the graph query (at least of airing schedule query field is required).</param>
         /// </summary>
         public GraphQueryField NodeQueryField(IList<GraphQueryField> fields)
 	    {
-	        if (fields == null || !fields.Any())
-	            throw new GraphQueryFieldInvalidException($"Query field ({nameof(Node)}) requires at least one airing schedule query field.");
+	        var field = new GraphQueryField("node", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(AiringScheduleQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
+	        
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
-	        if (fields.Any(x => x.ParentClassType != typeof(AiringScheduleQueryFields)))
-	            throw new GraphQueryFieldInvalidException($"The following fields are not valid airing schedule query fields {fields.Where(x => x.ParentClassType != typeof(AiringScheduleQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
-
-	        return Node.GetGraphFieldAndSetFieldArguments(fields);
+	        return field;
 	    }
 
         /// <summary>
@@ -36,16 +38,12 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField IdQueryField()
 		{
-			return Id;
+			return new GraphQueryField("id", GetType(), _queryType, InitilizeDefaultFieldRules());
 		}
 
-		private GraphQueryField Node { get; set; }
-		private GraphQueryField Id { get; set; }
-
-		private void InitializeProperties(AniListQueryType queryType)
-		{
-			Node = new GraphQueryField("node", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
-			Id = new GraphQueryField("id", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
-		}
-	}
+	    private FieldRules InitilizeDefaultFieldRules(bool authenticationRequired = false)
+	    {
+	        return new FieldRules(authenticationRequired, _allowedQueryTypes);
+	    }
+    }
 }

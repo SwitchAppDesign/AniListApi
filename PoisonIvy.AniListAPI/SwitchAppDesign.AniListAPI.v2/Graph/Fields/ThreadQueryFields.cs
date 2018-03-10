@@ -7,9 +7,18 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
     internal class ThreadQueryFields
     {
+        private readonly List<AniListQueryType> _allowedQueryTypes;
+        private readonly AniListQueryType _queryType;
+
         public ThreadQueryFields(AniListQueryType queryType)
         {
-            InitializeProperties(queryType);
+            _queryType = queryType;
+            _allowedQueryTypes = new List<AniListQueryType> { AniListQueryType.Thread };
+        }
+
+        private FieldRules InitilizeDefaultFieldRules(bool authenticationRequired = false)
+        {
+            return new FieldRules(authenticationRequired, _allowedQueryTypes);
         }
 
         /// <summary>
@@ -17,7 +26,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField IdQueryField()
         {
-            return Id;
+            return new GraphQueryField("id", GetType(), _queryType, InitilizeDefaultFieldRules());
+
         }
 
         /// <summary>
@@ -25,7 +35,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField TitleQueryField()
         {
-            return Title;
+            return new GraphQueryField("title", GetType(), _queryType, InitilizeDefaultFieldRules());
+
         }
 
         /// <summary>
@@ -33,7 +44,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField BodyQueryField()
         {
-            return Body;
+            return new GraphQueryField("body", GetType(), _queryType, InitilizeDefaultFieldRules());
+
         }
 
         /// <summary>
@@ -41,7 +53,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField UserIdQueryField()
         {
-            return UserId;
+            return new GraphQueryField("userId", GetType(), _queryType, InitilizeDefaultFieldRules());
+
         }
 
         /// <summary>
@@ -49,7 +62,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField ReplyUserIdQueryField()
         {
-            return ReplyUserId;
+            return new GraphQueryField("replyUserId", GetType(), _queryType, InitilizeDefaultFieldRules());
+
         }
 
         /// <summary>
@@ -57,7 +71,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField ReplyCommentIdQueryField()
         {
-            return ReplyCommentId;
+            return new GraphQueryField("replyCommentId", GetType(), _queryType, InitilizeDefaultFieldRules());
+
         }
 
         /// <summary>
@@ -65,7 +80,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField ReplyCountQueryField()
         {
-            return ReplyCount;
+            return new GraphQueryField("replyCount", GetType(), _queryType, InitilizeDefaultFieldRules());
+
         }
 
         /// <summary>
@@ -73,7 +89,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField ViewCountQueryField()
         {
-            return ViewCount;
+            return new GraphQueryField("viewCount", GetType(), _queryType, InitilizeDefaultFieldRules());
+
         }
 
         /// <summary>
@@ -81,7 +98,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField IsLockedQueryField()
         {
-            return IsLocked;
+            return new GraphQueryField("isLocked", GetType(), _queryType, InitilizeDefaultFieldRules());
+
         }
 
         /// <summary>
@@ -89,7 +107,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField IsStickyQueryField()
         {
-            return IsSticky;
+            return new GraphQueryField("isSticky", GetType(), _queryType, InitilizeDefaultFieldRules());
+
         }
 
         /// <summary>
@@ -97,7 +116,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField IsSubscribedQueryField()
         {
-            return IsSubscribed;
+            return new GraphQueryField("isSubscribed", GetType(), _queryType, InitilizeDefaultFieldRules());
+
         }
 
         /// <summary>
@@ -105,7 +125,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField RepliedAtQueryField()
         {
-            return RepliedAt;
+            return new GraphQueryField("repliedAt", GetType(), _queryType, InitilizeDefaultFieldRules());
+
         }
 
         /// <summary>
@@ -113,7 +134,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField CreatedAtQueryField()
         {
-            return CreatedAt;
+            return new GraphQueryField("createdAt", GetType(), _queryType, InitilizeDefaultFieldRules());
+
         }
 
         /// <summary>
@@ -121,7 +143,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField UpdatedAtQueryField()
         {
-            return UpdatedAt;
+            return new GraphQueryField("updatedAt", GetType(), _queryType, InitilizeDefaultFieldRules());
+
         }
 
         /// <summary>
@@ -129,7 +152,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField UserQueryField()
         {
-            return User;
+            return new GraphQueryField("user", GetType(), _queryType, InitilizeDefaultFieldRules());
+
         }
 
         /// <summary>
@@ -137,7 +161,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField ReplyUserQueryField()
         {
-            return ReplyUser;
+            return new GraphQueryField("replyUser", GetType(), _queryType, InitilizeDefaultFieldRules());
+
         }
 
         /// <summary>
@@ -145,7 +170,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField LikesQueryField()
         {
-            return Likes;
+            return new GraphQueryField("likes", GetType(), _queryType, InitilizeDefaultFieldRules());
+
         }
 
         /// <summary>
@@ -153,7 +179,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField SiteUrlQueryField()
         {
-            return SiteUrl;
+            return new GraphQueryField("siteUrl", GetType(), _queryType, InitilizeDefaultFieldRules());
+
         }
 
         /// <summary>
@@ -161,7 +188,8 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField CategoriesQueryField()
         {
-            return Categories;
+            return new GraphQueryField("categories", GetType(), _queryType, InitilizeDefaultFieldRules());
+            
         }
 
         /// <summary>
@@ -169,52 +197,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField MediaCategoriesQueryField()
         {
-            return MediaCategories;
-        }
-
-        private GraphQueryField Id { get; set; }
-        private GraphQueryField Title { get; set; }
-        private GraphQueryField Body { get; set; }
-        private GraphQueryField UserId { get; set; }
-        private GraphQueryField ReplyUserId { get; set; }
-        private GraphQueryField ReplyCommentId { get; set; }
-        private GraphQueryField ReplyCount { get; set; }
-        private GraphQueryField ViewCount { get; set; }
-        private GraphQueryField IsLocked { get; set; }
-        private GraphQueryField IsSticky { get; set; }
-        private GraphQueryField IsSubscribed { get; set; }
-        private GraphQueryField RepliedAt { get; set; }
-        private GraphQueryField CreatedAt { get; set; }
-        private GraphQueryField UpdatedAt { get; set; }
-        private GraphQueryField User { get; set; }
-        private GraphQueryField ReplyUser { get; set; }
-        private GraphQueryField Likes { get; set; }
-        private GraphQueryField SiteUrl { get; set; }
-        private GraphQueryField Categories { get; set; }
-        private GraphQueryField MediaCategories { get; set; }
-
-        private void InitializeProperties(AniListQueryType queryType)
-        {
-            Id = new GraphQueryField("id", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            Title = new GraphQueryField("title", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            Body = new GraphQueryField("body", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            UserId = new GraphQueryField("userId", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            ReplyUserId = new GraphQueryField("replyUserId", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            ReplyCommentId = new GraphQueryField("replyCommentId", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            ReplyCount = new GraphQueryField("replyCount", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            ViewCount = new GraphQueryField("viewCount", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            IsLocked = new GraphQueryField("isLocked", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            IsSticky = new GraphQueryField("isSticky", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            IsSubscribed = new GraphQueryField("isSubscribed", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            RepliedAt = new GraphQueryField("repliedAt", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            CreatedAt = new GraphQueryField("createdAt", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            UpdatedAt = new GraphQueryField("updatedAt", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            User = new GraphQueryField("user", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            ReplyUser = new GraphQueryField("replyUser", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            Likes = new GraphQueryField("likes", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            SiteUrl = new GraphQueryField("siteUrl", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            Categories = new GraphQueryField("categories", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
-            MediaCategories = new GraphQueryField("mediaCategories", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Thread }));
+            return new GraphQueryField("mediaCategories", GetType(), _queryType, InitilizeDefaultFieldRules());
         }
     }
 }

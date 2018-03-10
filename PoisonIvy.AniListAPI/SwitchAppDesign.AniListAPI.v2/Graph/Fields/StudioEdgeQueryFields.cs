@@ -12,23 +12,30 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
     /// </summary>
 	public class StudioEdgeQueryFields
 	{
-		internal StudioEdgeQueryFields(AniListQueryType queryType)
-		{
-			InitializeProperties(queryType);
-		}
+	    private readonly List<AniListQueryType> _allowedQueryTypes;
+	    private readonly AniListQueryType _queryType;
+
+	    public StudioEdgeQueryFields(AniListQueryType queryType)
+	    {
+	        _queryType = queryType;
+	        _allowedQueryTypes = new List<AniListQueryType> { AniListQueryType.Studio };
+	    }
+
+	    private FieldRules InitilizeDefaultFieldRules(bool authenticationRequired = false)
+	    {
+	        return new FieldRules(authenticationRequired, _allowedQueryTypes);
+	    }
 
         /// <summary>
         /// <param name="fields">The list of studio query fields (found in <see cref="StudioQueryFields"/>) to be used in the graph query (at least of studio query field is required).</param>
         /// </summary>
         public GraphQueryField NodeQueryField(IList<GraphQueryField> fields)
 		{
-		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({nameof(Node)}) requires at least one studio query field.");
+		    var field = new GraphQueryField("node", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(StudioQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-		    if (fields.Any(x => x.ParentClassType != typeof(StudioQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid studio query fields {fields.Where(x => x.ParentClassType != typeof(StudioQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
-		    return Node.GetGraphFieldAndSetFieldArguments(fields);
+		    return field;
         }
 
 		/// <summary>
@@ -36,36 +43,25 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// </summary>
 		public GraphQueryField IdQueryField()
 		{
-			return Id;
-		}
+		    return new GraphQueryField("id", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// If the studio is the main animation studio of the anime
 		/// </summary>
 		public GraphQueryField IsMainQueryField()
 		{
-			return IsMain;
-		}
+		    return new GraphQueryField("isMain", GetType(), _queryType, InitilizeDefaultFieldRules());
+		    
+        }
 
 		/// <summary>
 		/// The order the character should be displayed from the users favourites
 		/// </summary>
 		public GraphQueryField FavouriteOrderQueryField()
 		{
-			return FavouriteOrder;
-		}
-
-		private GraphQueryField Node { get; set; }
-		private GraphQueryField Id { get; set; }
-		private GraphQueryField IsMain { get; set; }
-		private GraphQueryField FavouriteOrder { get; set; }
-
-		private void InitializeProperties(AniListQueryType queryType)
-		{
-			Node = new GraphQueryField("node", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Studio }));
-			Id = new GraphQueryField("id", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Studio }));
-			IsMain = new GraphQueryField("isMain", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Studio }));
-			FavouriteOrder = new GraphQueryField("favouriteOrder", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Studio }));
-		}
+			return new GraphQueryField("favouriteOrder", GetType(), _queryType, InitilizeDefaultFieldRules());
+        }
 	}
 }

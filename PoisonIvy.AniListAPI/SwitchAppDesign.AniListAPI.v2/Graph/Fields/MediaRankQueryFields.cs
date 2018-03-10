@@ -10,94 +10,89 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
     /// </summary>
 	public class MediaRankQueryFields
 	{
-		internal MediaRankQueryFields(AniListQueryType queryType)
-		{
-			InitializeProperties(queryType);
-		}
+	    private readonly List<AniListQueryType> _allowedQueryTypes;
+	    private readonly AniListQueryType _queryType;
 
-		/// <summary>
-		/// The id of the rank
-		/// </summary>
-		public GraphQueryField IdQueryField()
+	    public MediaRankQueryFields(AniListQueryType queryType)
+	    {
+	        _queryType = queryType;
+	        _allowedQueryTypes = new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page };
+	    }
+
+	    private FieldRules InitilizeDefaultFieldRules(bool authenticationRequired = false)
+	    {
+	        return new FieldRules(authenticationRequired, _allowedQueryTypes);
+	    }
+
+        /// <summary>
+        /// The id of the rank
+        /// </summary>
+        public GraphQueryField IdQueryField()
 		{
-			return Id;
-		}
+		    return new GraphQueryField("id", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The numerical rank of the media
 		/// </summary>
 		public GraphQueryField RankQueryField()
 		{
-			return Rank;
-		}
+		    return new GraphQueryField("rank", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The type of ranking
 		/// </summary>
 		public GraphQueryField TypeQueryField()
 		{
-			return Type;
-		}
+		    return new GraphQueryField("type", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The format the media is ranked within
 		/// </summary>
 		public GraphQueryField FormatQueryField()
 		{
-			return Format;
-		}
+			return new GraphQueryField("format", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The year the media is ranked within
 		/// </summary>
 		public GraphQueryField YearQueryField()
 		{
-			return Year;
-		}
+		    return new GraphQueryField("year", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The season the media is ranked within
 		/// </summary>
 		public GraphQueryField SeasonQueryField()
 		{
-			return Season;
-		}
+		    return new GraphQueryField("season", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// If the ranking is based on all time instead of a season/year
 		/// </summary>
 		public GraphQueryField AllTimeQueryField()
 		{
-			return AllTime;
-		}
+		    return new GraphQueryField("allTime", GetType(), _queryType, InitilizeDefaultFieldRules());
+		    
+        }
 
 		/// <summary>
 		/// String that gives context to the ranking type and time span
 		/// </summary>
 		public GraphQueryField ContextQueryField()
 		{
-			return Context;
-		}
-
-		private GraphQueryField Id { get; set; }
-		private GraphQueryField Rank { get; set; }
-		private GraphQueryField Type { get; set; }
-		private GraphQueryField Format { get; set; }
-		private GraphQueryField Year { get; set; }
-		private GraphQueryField Season { get; set; }
-		private GraphQueryField AllTime { get; set; }
-		private GraphQueryField Context { get; set; }
-
-		private void InitializeProperties(AniListQueryType queryType)
-		{
-			Id = new GraphQueryField("id", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
-			Rank = new GraphQueryField("rank", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
-			Type = new GraphQueryField("type", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
-			Format = new GraphQueryField("format", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
-			Year = new GraphQueryField("year", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
-			Season = new GraphQueryField("season", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
-			AllTime = new GraphQueryField("allTime", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
-			Context = new GraphQueryField("context", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page }));
-		}
+			return new GraphQueryField("context", GetType(), _queryType, InitilizeDefaultFieldRules());
+        }
 	}
 }

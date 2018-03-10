@@ -10,42 +10,41 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
     /// </summary>
 	public class NameQueryFields
 	{
-		internal NameQueryFields(AniListQueryType queryType)
-		{
-			InitializeProperties(queryType);
-		}
+	    private readonly List<AniListQueryType> _allowedQueryTypes;
+	    private readonly AniListQueryType _queryType;
 
-		public GraphQueryField FirstQueryField()
+	    public NameQueryFields(AniListQueryType queryType)
+	    {
+	        _queryType = queryType;
+	        _allowedQueryTypes = new List<AniListQueryType> { AniListQueryType.Staff, AniListQueryType.Page };
+	    }
+
+	    private FieldRules InitilizeDefaultFieldRules(bool authenticationRequired = false)
+	    {
+	        return new FieldRules(authenticationRequired, _allowedQueryTypes);
+	    }
+
+        public GraphQueryField FirstQueryField()
 		{
-			return First;
-		}
+			return new GraphQueryField("first", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		public GraphQueryField LastQueryField()
 		{
-			return Last;
-		}
+		    return new GraphQueryField("last", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		public GraphQueryField NativeQueryField()
 		{
-			return Native;
-		}
+		    return new GraphQueryField("native", GetType(), _queryType, InitilizeDefaultFieldRules());
+		    
+        }
 
 		public GraphQueryField AlternativeQueryField()
 		{
-			return Alternative;
-		}
-
-		private GraphQueryField First { get; set; }
-		private GraphQueryField Last { get; set; }
-		private GraphQueryField Native { get; set; }
-		private GraphQueryField Alternative { get; set; }
-
-		private void InitializeProperties(AniListQueryType queryType)
-		{
-			First = new GraphQueryField("first", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Staff }));
-			Last = new GraphQueryField("last", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Staff }));
-			Native = new GraphQueryField("native", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Staff }));
-			Alternative = new GraphQueryField("alternative", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Staff }));
-		}
+			return new GraphQueryField("alternative", GetType(), _queryType, InitilizeDefaultFieldRules());
+        }
 	}
 }

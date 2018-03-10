@@ -198,13 +198,6 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 			return new GraphQueryField("user", GetType(), _queryType, InitilizeDefaultFieldRules());
         }
 
-
-
-		private void InitializeProperties(AniListQueryType queryType)
-		{
-
-		}
-
 	    private FieldRules InitilizeDefaultFieldRules(bool authenticationRequired = false)
 	    {
 	        return new FieldRules(authenticationRequired, _allowedQueryTypes);

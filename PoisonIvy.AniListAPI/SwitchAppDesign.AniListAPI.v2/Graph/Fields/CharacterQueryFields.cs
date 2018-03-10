@@ -37,7 +37,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField NameQueryField(IList<GraphQueryField> fields)
         {
-            var field = new GraphQueryField("name", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(fields);
+            var field = new GraphQueryField("name", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(NameQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
             FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
@@ -49,7 +49,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField ImageQueryField(IList<GraphQueryField> fields)
         {
-            var field = new GraphQueryField("image", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(fields);
+            var field = new GraphQueryField("image", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(ImageDataQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
             FieldAndArgumentHelper.ValidateQueryFields(field, fields);
 
@@ -85,7 +85,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// </summary>
 		public GraphQueryField MediaQueryField(IList<GraphQueryField> fields, IList<object> arguments = null)
 		{
-		    var field = new GraphQueryField("media", GetType(), _queryType, InitilizeDefaultFieldRules()).GetGraphFieldAndSetFieldArguments(fields, arguments);
+		    var field = new GraphQueryField("media", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaConnectionQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
 
             FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
 

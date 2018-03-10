@@ -7,28 +7,29 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 {
 	internal class UserOptionsQueryFields
 	{
-		public UserOptionsQueryFields(AniListQueryType queryType)
-		{
-			InitializeProperties(queryType);
-		}
+	    private readonly List<AniListQueryType> _allowedQueryTypes;
+	    private readonly AniListQueryType _queryType;
 
-		public GraphQueryField TitleLanguageQueryField()
+	    public UserOptionsQueryFields(AniListQueryType queryType)
+	    {
+	        _queryType = queryType;
+	        _allowedQueryTypes = new List<AniListQueryType> { AniListQueryType.User };
+	    }
+
+	    private FieldRules InitilizeDefaultFieldRules(bool authenticationRequired = false)
+	    {
+	        return new FieldRules(authenticationRequired, _allowedQueryTypes);
+	    }
+
+        public GraphQueryField TitleLanguageQueryField()
 		{
-			return TitleLanguage;
-		}
+		    return new GraphQueryField("titleLanguage", GetType(), _queryType, InitilizeDefaultFieldRules());
+		    
+        }
 
 		public GraphQueryField DisplayAdultContentQueryField()
 		{
-			return DisplayAdultContent;
-		}
-
-		private GraphQueryField TitleLanguage { get; set; }
-		private GraphQueryField DisplayAdultContent { get; set; }
-
-		private void InitializeProperties(AniListQueryType queryType)
-		{
-			TitleLanguage = new GraphQueryField("titleLanguage", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-			DisplayAdultContent = new GraphQueryField("displayAdultContent", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.User }));
-		}
+			return new GraphQueryField("displayAdultContent", GetType(), _queryType, InitilizeDefaultFieldRules());
+        }
 	}
 }

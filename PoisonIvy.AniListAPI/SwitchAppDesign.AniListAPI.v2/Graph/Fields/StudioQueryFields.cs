@@ -15,54 +15,48 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
     /// </summary>
 	public class StudioQueryFields
 	{
-		internal StudioQueryFields(AniListQueryType queryType)
-		{
-			InitializeProperties(queryType);
-		}
+	    private readonly List<AniListQueryType> _allowedQueryTypes;
+	    private readonly AniListQueryType _queryType;
 
-		/// <summary>
-		/// The id of the studio
-		/// </summary>
-		public GraphQueryField IdQueryField()
+	    public StudioQueryFields(AniListQueryType queryType)
+	    {
+	        _queryType = queryType;
+	        _allowedQueryTypes = new List<AniListQueryType> { AniListQueryType.Media, AniListQueryType.Page };
+	    }
+
+	    private FieldRules InitilizeDefaultFieldRules(bool authenticationRequired = false)
+	    {
+	        return new FieldRules(authenticationRequired, _allowedQueryTypes);
+	    }
+
+        /// <summary>
+        /// The id of the studio
+        /// </summary>
+        public GraphQueryField IdQueryField()
 		{
-			return Id;
-		}
+		    return new GraphQueryField("id", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
 		/// <summary>
 		/// The name of the studio
 		/// </summary>
 		public GraphQueryField NameQueryField()
 		{
-			return Name;
-		}
+		    return new GraphQueryField("name", GetType(), _queryType, InitilizeDefaultFieldRules());
+
+        }
 
         /// <summary>
         /// The media the studio has worked on
         /// </summary>
-        public GraphQueryField MediaQueryField(IList<GraphQueryField> fields, IList<GraphQueryArgument<object>> arguments = null)
+        public GraphQueryField MediaQueryField(IList<GraphQueryField> fields, IList<object> arguments = null)
 		{
-		    if (fields == null || !fields.Any())
-		        throw new GraphQueryFieldInvalidException($"Query field ({nameof(Media)}) requires at least one media connection query field.");
+		    var field = new GraphQueryField("media", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaConnectionQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
 
-		    if (fields.Any(x => x.ParentClassType != typeof(MediaConnectionQueryFields)))
-		        throw new GraphQueryFieldInvalidException($"The following fields are not valid media connection query fields {fields.Where(x => x.ParentClassType != typeof(MediaConnectionQueryFields)).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
+            FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
 
-		    if (arguments != null)
-		    {
-		        if (arguments.Any(x => (Type)x.GetType().GetProperty("ParentClassType").GetValue(x) != typeof(MediaConnectionQueryArguments)))
-		        {
-		            throw new GraphQueryArgumentInvalidException($@"The following fields are not valid query arguments for the field ({Media.GetType().Name}): {
-		                arguments
-		                    .Where(x => (Type)x.GetType().GetProperty("ParentClassType").GetValue(x) != typeof(MediaConnectionQueryArguments))
-		                    .Select(x => x.FieldName)
-		                    .Aggregate((x, y) => $"{x}, {y}")}.");
-		        }
-
-		        foreach (var argument in arguments)
-		            argument.IsValidArgumentType();
-		    }
-
-		    return Media.GetGraphFieldAndSetFieldArguments(fields, arguments);
+		    return field;
         }
 
 		/// <summary>
@@ -70,30 +64,16 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		/// </summary>
 		public GraphQueryField SiteUrlQueryField()
 		{
-			return SiteUrl;
-		}
+		    return new GraphQueryField("siteUrl", GetType(), _queryType, InitilizeDefaultFieldRules());
+		    
+        }
 
 		/// <summary>
 		/// If the studio is marked as favourite by the currently authenticated user
 		/// </summary>
 		public GraphQueryField IsFavouriteQueryField()
 		{
-			return IsFavourite;
-		}
-
-		private GraphQueryField Id { get; set; }
-		private GraphQueryField Name { get; set; }
-		private GraphQueryField Media { get; set; }
-		private GraphQueryField SiteUrl { get; set; }
-		private GraphQueryField IsFavourite { get; set; }
-
-		private void InitializeProperties(AniListQueryType queryType)
-		{
-			Id = new GraphQueryField("id", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Studio }));
-			Name = new GraphQueryField("name", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Studio }));
-			Media = new GraphQueryField("media", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Studio }));
-			SiteUrl = new GraphQueryField("siteUrl", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Studio }));
-			IsFavourite = new GraphQueryField("isFavourite", GetType(), queryType, new FieldRules(false, new List<AniListQueryType> { AniListQueryType.Studio }));
-		}
+			return new GraphQueryField("isFavourite", GetType(), _queryType, InitilizeDefaultFieldRules());
+        }
 	}
 }
