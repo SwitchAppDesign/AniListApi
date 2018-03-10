@@ -11,35 +11,37 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Common
 {
     internal static class FieldAndArgumentHelper
     {
-        public static void ValidateQueryFieldsAndArguments(GraphQueryField field, IList<GraphQueryField> fields, IList<object> arguments)
+        public static void ValidateQueryFieldsAndArguments(GraphQueryField field, IList<GraphQueryField> fields, IList<object> arguments, Type expectedFieldType, Type expectedArgumentType)
         {
-            ValidateFields(field, fields);
-            ValidateArguments(field, arguments);
+            ValidateFields(field, fields, expectedFieldType);
+            ValidateArguments(field, arguments, expectedArgumentType);
         }
 
-        public static void ValidateQueryFields(GraphQueryField field, IList<GraphQueryField> fields)
+        public static void ValidateQueryFields(GraphQueryField field, IList<GraphQueryField> fields, Type expectedFieldType)
         {
-            ValidateFields(field, fields);
+            ValidateFields(field, fields, expectedFieldType);
         }
 
-        private static void ValidateFields(GraphQueryField field, IList<GraphQueryField> fields)
+        private static void ValidateFields(GraphQueryField field, IList<GraphQueryField> fields, Type expectedFieldType)
         {
             if (fields == null || !fields.Any())
                 throw new GraphQueryFieldInvalidException($"Query field '{field.FieldName}' requires at least one query field.");
 
-            if (fields.Any(x => x.ParentClassType != typeof(CharacterConnectionQueryFields)))
+            if (fields.Any(x => x.ParentClassType != expectedFieldType))
+            {
                 throw new GraphQueryFieldInvalidException($"The following fields are not valid fields for '{field.FieldName}' {fields.Where(x => x.ParentClassType != field.ChildFieldParentType).Select(x => x.FieldName).Aggregate((x, y) => $"{x}, {y}")}.");
+            }
         }
 
-        private static void ValidateArguments(GraphQueryField field, IList<object> arguments)
+        private static void ValidateArguments(GraphQueryField field, IList<object> arguments, Type expectedArgumentType)
         {
             if (arguments != null)
             {
-                if (arguments.Any(x => (Type)x.GetType().GetProperty("ParentClassType").GetValue(x) != field.ChildFieldParentType))
+                if (arguments.Any(x => (Type)x.GetType().GetProperty("ParentClassType").GetValue(x) != expectedArgumentType))
                 {
                     throw new GraphQueryArgumentInvalidException($@"The following fields are not valid query arguments for the field '{field.FieldName}': {
                         arguments
-                            .Where(x => (Type)x.GetType().GetProperty("ParentClassType").GetValue(x) != field.ChildFieldParentType)
+                            .Where(x => (Type)x.GetType().GetProperty("ParentClassType").GetValue(x) != expectedArgumentType)
                             .Select(x => nameof(x))
                             .Aggregate((x, y) => $"{x}, {y}")}.");
                 }

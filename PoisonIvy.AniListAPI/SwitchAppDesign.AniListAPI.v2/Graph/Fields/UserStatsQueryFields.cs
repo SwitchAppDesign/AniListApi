@@ -41,7 +41,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    var field = new GraphQueryField("activityHistory", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(UserActivityHistoryQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-		    FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+		    FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(UserActivityHistoryQueryFields));
 
             return field;
         }
@@ -53,7 +53,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    var field = new GraphQueryField("animeStatusDistribution", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(StatusDistributionQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-		    FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+		    FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(StatusDistributionQueryFields));
 
             return field;
 		}
@@ -65,7 +65,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    var field = new GraphQueryField("mangaStatusDistribution", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(StatusDistributionQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-		    FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+		    FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(StatusDistributionQueryFields));
 
             return field;
         }
@@ -77,7 +77,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    var field = new GraphQueryField("animeScoreDistribution", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(ScoreDistributionQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(ScoreDistributionQueryFields));
 
 		    return field;
         }
@@ -89,7 +89,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    var field = new GraphQueryField("mangaScoreDistribution", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(ScoreDistributionQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-		    FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+		    FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(ScoreDistributionQueryFields));
 
             return field;
 		}

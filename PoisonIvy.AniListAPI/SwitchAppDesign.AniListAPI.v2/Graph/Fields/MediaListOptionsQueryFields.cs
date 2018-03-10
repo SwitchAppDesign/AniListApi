@@ -56,7 +56,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
             var field = new GraphQueryField("animeList", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaListOptionsQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-		    FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+		    FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(MediaListOptionsQueryFields));
 
             return field;
         }
@@ -68,7 +68,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 	    {
 	        var field = new GraphQueryField("mangaList", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaListOptionsQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(MediaListOptionsQueryFields));
 
             return field;
         }

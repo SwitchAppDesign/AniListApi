@@ -54,7 +54,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    var field = new GraphQueryField("media", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaConnectionQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
 
-            FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
+            FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments, typeof(MediaConnectionQueryFields), typeof(MediaConnectionQueryArguments));
 
 		    return field;
         }

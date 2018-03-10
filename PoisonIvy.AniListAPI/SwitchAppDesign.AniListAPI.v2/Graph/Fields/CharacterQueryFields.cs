@@ -39,7 +39,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         {
             var field = new GraphQueryField("name", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(NameQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(NameQueryFields));
 
             return field;
         }
@@ -51,7 +51,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         {
             var field = new GraphQueryField("image", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(ImageDataQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(ImageDataQueryFields));
 
             return field;
         }
@@ -87,7 +87,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    var field = new GraphQueryField("media", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaConnectionQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
 
-            FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
+            FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments, typeof(MediaConnectionQueryFields), typeof(MediaConnectionQueryArguments));
 
             return field;
         }

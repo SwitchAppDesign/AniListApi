@@ -9,7 +9,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.PrebuiltQueries
 {
     partial class PreBuiltPageQueries
     {
-        private int _relationQueryExecutionCount = 0;
+        //private int _relationQueryExecutionCount = 0;
 
         private void FullAnimeFields(string searchPhrase)
         {
@@ -45,7 +45,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.PrebuiltQueries
             };
 
 
-            var argumentList = new List<object>
+        var argumentList = new List<object>
             {
                 _builder.OtherArguments.Media.SearchArgument(searchPhrase),
                 _builder.OtherArguments.Media.TypeArgument(MediaType.Anime)
@@ -144,37 +144,18 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.QueryBuilders.PrebuiltQueries
 
         private GraphQueryField GetRelationQueryField()
         {
-            _relationQueryExecutionCount++;
+            //_relationQueryExecutionCount++;
 
             var relationQueryFields = new List<GraphQueryField>();
-            var nodeFields = new List<GraphQueryField>();
+            var relationEdges = new List<GraphQueryField>();
 
-            nodeFields.Add(_builder.OtherFields.Media.IdQueryField());
-            nodeFields.Add(_builder.OtherFields.Media.IdMalQueryField());
-            nodeFields.Add(GetTitleField());
-            nodeFields.Add(_builder.OtherFields.Media.FormatQueryField());
-            nodeFields.Add(_builder.OtherFields.Media.StatusQueryField());
-            nodeFields.Add(_builder.OtherFields.Media.DescriptionQueryField());
-            nodeFields.Add(_builder.OtherFields.Media.StartDateQueryField());
-            nodeFields.Add(_builder.OtherFields.Media.EndDateQueryField());
-            nodeFields.Add(_builder.OtherFields.Media.SeasonQueryField());
-            nodeFields.Add(_builder.OtherFields.Media.EpisodesQueryField());
-            nodeFields.Add(_builder.OtherFields.Media.DurationQueryField());
-            nodeFields.Add(_builder.OtherFields.Media.CountryOfOriginQueryField());
-            nodeFields.Add(_builder.OtherFields.Media.SourceQueryField());
-            nodeFields.Add(_builder.OtherFields.Media.UpdatedAtQueryField());
-            nodeFields.Add(GetCoverImageQueryField());
-            nodeFields.Add(_builder.OtherFields.Media.BannerImageQueryField());
-            nodeFields.Add(_builder.OtherFields.Media.GenresQueryField());
-            nodeFields.Add(_builder.OtherFields.Media.SynonymsQueryField());
-            nodeFields.Add(_builder.OtherFields.Media.IsAdultQueryField());
-            nodeFields.Add(GetNextAiringEpisodeQueryField());
-            nodeFields.Add(GetAiringScheduleQueryField());
+            relationEdges.Add(_builder.OtherFields.MediaEdge.IdQueryField());
+            relationEdges.Add(_builder.OtherFields.MediaEdge.RelationTypeQueryField());
 
-            if (_relationQueryExecutionCount < 2)
-                nodeFields.Add(GetRelationQueryField());
+            //if (_relationQueryExecutionCount < 2)
+            //    nodeFields.Add(GetRelationQueryField());
 
-            relationQueryFields.Add(_builder.OtherFields.MediaConnection.NodesQueryField(nodeFields));
+            relationQueryFields.Add(_builder.OtherFields.MediaConnection.EdgesQueryField(relationEdges));
 
             return _builder.OtherFields.Media.RelationsQueryField(relationQueryFields);
         }

@@ -26,9 +26,9 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         /// </summary>
         public GraphQueryField EdgesQueryField(IList<GraphQueryField> fields)
 	    {
-	        var field = new GraphQueryField("pageInfo", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(AiringScheduleEdgeQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
+	        var field = new GraphQueryField("edges", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(PageInfoQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(AiringScheduleEdgeQueryFields));
 
 	        return field;
 	    }
@@ -40,7 +40,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 	    {
 	        var field = new GraphQueryField("nodes", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(AiringScheduleQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-	        FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+	        FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(AiringScheduleQueryFields));
 
             return field;
 	    }
@@ -50,9 +50,9 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 	    /// </summary>
 	    public GraphQueryField PageInfoQueryField(IList<GraphQueryField> fields)
 	    {
-	        var field = new GraphQueryField("edges", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(PageInfoQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
+	        var field = new GraphQueryField("pageInfo", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(AiringScheduleEdgeQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-	        FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(PageInfoQueryFields));
 
             return field;
 	    }

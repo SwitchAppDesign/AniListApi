@@ -28,7 +28,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    var field = new GraphQueryField("edges", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaEdgeQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(MediaEdgeQueryFields));
 
 		    return field;
         }
@@ -40,7 +40,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    var field = new GraphQueryField("nodes", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(MediaQueryFields));
 
             return field;
         }
@@ -52,7 +52,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 	    {
 	        var field = new GraphQueryField("pageInfo", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(PageInfoQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-	        FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+	        FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(PageInfoQueryFields));
 
             return field;
 	    }

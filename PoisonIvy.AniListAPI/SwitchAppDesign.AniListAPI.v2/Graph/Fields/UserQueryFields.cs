@@ -76,7 +76,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    var field = new GraphQueryField("options", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(UserOptionsQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(UserOptionsQueryFields));
 
 		    return field;
         }
@@ -88,7 +88,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    var field = new GraphQueryField("mediaListOptions", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaListOptionsQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-		    FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+		    FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(MediaListOptionsQueryFields));
 
             return field;
         }
@@ -100,7 +100,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    var field = new GraphQueryField("favourites", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(FavouritesQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-		    FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+		    FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(FavouritesQueryFields));
 
             return field;
         }
@@ -112,7 +112,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    var field = new GraphQueryField("stats", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(UserStatsQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-		    FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+		    FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(UserStatsQueryFields));
 
             return field;
         }

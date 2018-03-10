@@ -28,7 +28,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 	    {
 	        var field = new GraphQueryField("node", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(AiringScheduleQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 	        
-            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(AiringScheduleQueryFields));
 
 	        return field;
 	    }

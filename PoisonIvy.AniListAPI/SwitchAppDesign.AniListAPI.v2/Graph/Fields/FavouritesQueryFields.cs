@@ -23,7 +23,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    var field = new GraphQueryField("anime", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaConnectionQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(MediaConnectionQueryFields));
 
 		    return field;
         }
@@ -32,7 +32,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    var field = new GraphQueryField("manga", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaConnectionQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-		    FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+		    FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(MediaConnectionQueryFields));
 
             return field;
         }
@@ -41,7 +41,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    var field = new GraphQueryField("characters", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(CharacterConnectionQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-		    FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+		    FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(CharacterConnectionQueryFields));
 
 		    return field;
 		}
@@ -50,7 +50,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    var field = new GraphQueryField("staff", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(StaffConnectionQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-		    FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+		    FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(StaffConnectionQueryFields));
 
             return field.GetGraphFieldAndSetFieldArguments(fields);
         }
@@ -59,7 +59,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    var field = new GraphQueryField("studios", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(StudioConnectionQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-		    FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+		    FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(StaffConnectionQueryFields));
 
             return field;
         }

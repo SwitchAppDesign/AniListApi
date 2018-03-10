@@ -13,13 +13,11 @@ namespace ApiTestConsoleApp_Core
     {
         static void Main(string[] args)
         {
-            //ClassBuilder.ArgumentFieldClassBuilder.BuildGraphFieldClassesForModels();
+            var api = new AniListApi();
 
+            //var output = api.GetBasicAnimeByAniListId(21).Result;
 
-            //var test = MediaQueryBuilder.CreateCustomQueryBuilder();
-            var mediaTest = new MediaQueryTests();
-
-            mediaTest.Test();
+            var scum = api.SearchFullAnime("Attack on Titan").Result;
 
 
             Console.ReadKey();

@@ -36,7 +36,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    var field = new GraphQueryField("pageInfo", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(PageInfoQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(PageInfoQueryFields));
 
             return field;
         }
@@ -45,7 +45,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    var field = new GraphQueryField("users", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(UserQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
 
-		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
+		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments, typeof(UserQueryFields), typeof(UserQueryArguments));
 
             return field;
 		}
@@ -54,7 +54,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 	    {
 	        var field = new GraphQueryField("media", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
 
-	        FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
+	        FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments, typeof(MediaQueryFields), typeof(MediaQueryArguments));
 
             return field.GetGraphFieldAndSetFieldArguments(fields, arguments);
 	    }
@@ -63,7 +63,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         {
             var field = new GraphQueryField("characters", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(CharacterQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
 
-            FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
+            FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments, typeof(CharacterQueryFields), typeof(CharacterQueryArguments));
 
             return field;
 		}
@@ -72,7 +72,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    var field = new GraphQueryField("staff", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(StaffQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
 
-		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
+		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments, typeof(StaffQueryFields), typeof(StaffQueryArguments));
 
             return field;
 		}
@@ -81,7 +81,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    var field = new GraphQueryField("studios", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(StudioQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
 
-		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
+		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments, typeof(StudioQueryFields), typeof(StudioQueryArguments));
 
             return field;
 		}
@@ -90,7 +90,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    var field = new GraphQueryField("mediaList", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaListQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
 
-		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
+		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments, typeof(MediaListQueryFields), typeof(MediaListQueryArguments));
 
             return field;
 		}
@@ -99,7 +99,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    var field = new GraphQueryField("airingSchedules", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(AiringScheduleQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
 
-		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
+		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments, typeof(AiringScheduleQueryFields), typeof(AiringScheduleQueryArguments));
 
             return field;
 		}
@@ -108,7 +108,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    var field = new GraphQueryField("followers", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(AiringScheduleQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
 
-		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
+		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments, typeof(AiringScheduleQueryFields), typeof(AiringScheduleQueryArguments));
 
             return field;
 		}
@@ -117,7 +117,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    var field = new GraphQueryField("followings", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(AiringScheduleQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
 
-		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
+		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments, typeof(AiringScheduleQueryFields), typeof(AiringScheduleQueryArguments));
 
             return field;
 		}
@@ -126,7 +126,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    var field = new GraphQueryField("activityReplies", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(ActivityReplyQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
 
-		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
+		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments, typeof(ActivityReplyQueryFields), typeof(ActivityReplyQueryArguments));
 
             return field;
 		}
@@ -135,7 +135,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    var field = new GraphQueryField("threads", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(ThreadQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
 
-		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
+		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments, typeof(ThreadQueryFields), typeof(ThreadQueryArguments));
 
             return field;
 		}
@@ -144,7 +144,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    var field = new GraphQueryField("threadComments", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(ThreadCommentQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
 
-		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
+		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments, typeof(ThreadCommentQueryFields), typeof(ThreadCommentQueryArgument));
 
             return field;
 		}
@@ -153,7 +153,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    var field = new GraphQueryField("reviews", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(ReviewQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
 
-		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
+		    FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments, typeof(ReviewQueryFields), typeof(ReviewQueryArguments));
 
             return field;
 		}

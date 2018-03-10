@@ -56,7 +56,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         {
             var field = new GraphQueryField("title", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaTitleQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(MediaTitleQueryFields));
 
             return field;
         }
@@ -191,7 +191,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
             var field = new GraphQueryField("trailer", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaTrailerQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(MediaTrailerQueryFields));
 
             return field;
         }
@@ -211,7 +211,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
 		    var field = new GraphQueryField("coverImage", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(ImageDataQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-		    FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+		    FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(ImageDataQueryFields));
 
             return field;
         }
@@ -271,7 +271,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         {
             var field = new GraphQueryField("tags", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaTagQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(MediaTagQueryFields));
 
             return field;
         }
@@ -283,7 +283,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
             var field = new GraphQueryField("relations", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaConnectionQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(MediaConnectionQueryFields));
 
             return field;
         }
@@ -295,7 +295,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
         {
             var field = new GraphQueryField("characters", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(CharacterConnectionQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
 
-            FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
+            FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments, typeof(CharacterConnectionQueryFields), typeof(CharacterConnectionQueryArguments));
 
             return field;
         }
@@ -307,7 +307,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
             var field = new GraphQueryField("staff", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(StaffConnectionQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
 
-            FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
+            FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments, typeof(StaffConnectionQueryFields), typeof(StaffConnectionQueryArguments));
 
             return field;
         }
@@ -319,7 +319,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
             var field = new GraphQueryField("studios", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(StudioConnectionQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
 
-            FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
+            FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments, typeof(StaffConnectionQueryFields), typeof(StaffConnectionQueryArguments));
 
             return field;
         }
@@ -347,7 +347,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
             var field = new GraphQueryField("nextAiringEpisode", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(AiringScheduleQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(AiringScheduleQueryFields));
 
             return field;
         }
@@ -359,7 +359,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
             var field = new GraphQueryField("airingSchedule", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(AiringScheduleConnectionQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
 
-            FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
+            FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments, typeof(AiringScheduleConnectionQueryFields), typeof(AiringScheduleConnectionQueryArguments));
 
             return field;
         }
@@ -371,7 +371,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
             var field = new GraphQueryField("externalLinks", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaExternalLinkQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(MediaExternalLinkQueryFields));
 
             return field;
         }
@@ -383,7 +383,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
             var field = new GraphQueryField("streamingEpisodes", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaStreamingEpisodeQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(MediaStreamingEpisodeQueryFields));
 
             return field;
 
@@ -396,7 +396,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
             var field = new GraphQueryField("rankings", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaRankQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-		    FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+		    FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(MediaRankQueryFields));
 
             return field;
         }
@@ -408,7 +408,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
             var field = new GraphQueryField("mediaListEntry", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaListQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(MediaListQueryFields));
 
             return field;
         }
@@ -420,7 +420,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
             var field = new GraphQueryField("reviews", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(ReviewConnectionQueryFields)).GetGraphFieldAndSetFieldArguments(fields, arguments);
 
-            FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments);
+            FieldAndArgumentHelper.ValidateQueryFieldsAndArguments(field, fields, arguments, typeof(ReviewConnectionQueryFields), typeof(ReviewConnectionQueryArguments));
 
             return field;
         }
@@ -432,7 +432,7 @@ namespace SwitchAppDesign.AniListAPI.v2.Graph.Fields
 		{
             var field = new GraphQueryField("stats", GetType(), _queryType, InitilizeDefaultFieldRules(), typeof(MediaStatsQueryFields)).GetGraphFieldAndSetFieldArguments(fields);
 
-            FieldAndArgumentHelper.ValidateQueryFields(field, fields);
+            FieldAndArgumentHelper.ValidateQueryFields(field, fields, typeof(MediaStatsQueryFields));
 
             return field;
         }
